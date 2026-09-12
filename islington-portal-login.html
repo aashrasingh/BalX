@@ -488,6 +488,16 @@
   .remember input{width:15px; height:15px; accent-color:var(--accent);}
   .row-between a{color:var(--accent); text-decoration:none; font-weight:500;}
   .row-between a:hover{text-decoration:underline;}
+  .code-link{
+    padding:0;
+    border:none;
+    background:none;
+    color:var(--accent);
+    font:inherit;
+    font-weight:500;
+    cursor:pointer;
+  }
+  .code-link:hover{text-decoration:underline;}
 
   .btn-primary{
     width:100%;
@@ -647,7 +657,7 @@
           <h2 id="loginTitle">Log in to your account</h2>
           <p class="sub" id="loginSub">Use the details provided by your school.</p>
 
-          <form onsubmit="return false;">
+          <form id="loginForm" novalidate>
             <div class="field">
               <label for="email" id="emailLabel">Email address</label>
               <div class="field-input">
@@ -667,10 +677,10 @@
                 <input type="checkbox">
                 Stay logged in
               </label>
-              <a href="#">Need a new code?</a>
+              <button type="button" class="code-link" id="resendCode" hidden>Resend code</button>
             </div>
 
-            <button type="submit" class="btn-primary" id="submitBtn">Log in</button>
+            <button type="submit" class="btn-primary" id="submitBtn">Send code</button>
           </form>
 
           <p class="help-note" id="helpNote">Need help logging in? <a href="#">Contact your school office</a>.</p>
@@ -697,7 +707,10 @@
   const emailInput = document.getElementById('email');
   const helpNote = document.getElementById('helpNote');
   const liveRegion = document.getElementById('liveRegion');
+  const loginForm = document.getElementById('loginForm');
   const submitBtn = document.getElementById('submitBtn');
+  const resendCode = document.getElementById('resendCode');
+  let codeSent = false;
 
   function enterPortal(){
     frame.setAttribute('data-welcome', 'false');
@@ -742,7 +755,9 @@
     helpNote.innerHTML = c.help;
     const authVerb = 'Log in';
     loginTitle.textContent = c.title.replace('Log in', authVerb);
-    submitBtn.textContent = authVerb;
+    codeSent = false;
+    submitBtn.textContent = 'Send code';
+    resendCode.hidden = true;
 
     if(!opts.silent){
       liveRegion.textContent = authVerb + ' view set to ' + c.tag + '. Enter your details below.';
@@ -767,10 +782,42 @@
 
   document.getElementById('welcomeSignIn').addEventListener('click', enterPortal);
 
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    if(!codeSent){
+      if(!emailInput.checkValidity()){
+        emailInput.reportValidity();
+        return;
+      }
+
+      codeSent = true;
+      submitBtn.textContent = 'Log in';
+      resendCode.hidden = false;
+      liveRegion.textContent = 'A one-time passcode has been sent to your email.';
+      document.getElementById('otp').focus();
+      return;
+    }
+
+    if(!loginForm.checkValidity()){
+      loginForm.reportValidity();
+      return;
+    }
+
+    liveRegion.textContent = 'Your details are ready to be verified.';
+  });
+
+  resendCode.addEventListener('click', () => {
+    liveRegion.textContent = 'A new one-time passcode has been sent to your email.';
+  });
+
   backBtn.addEventListener('click', () => {
     stage.setAttribute('data-picked', 'false');
     document.body.setAttribute('data-role', '');
     try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+    codeSent = false;
+    submitBtn.textContent = 'Send code';
+    resendCode.hidden = true;
     liveRegion.textContent = 'Role selection reset.';
     setTimeout(() => cards[0].focus(), 50);
   });
