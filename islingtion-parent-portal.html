@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Islington College — Parent Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F5EF;
+  --paper:#FBFAF6;
+  --surface:#FFFFFF;
+  --tab:#E9E4D3;
+  --ink:#223027;
+  --ink-soft:#5B675C;
+  --ink-faint:#8A9389;
+  --line:#DBD8C9;
+  --teal:#34614F;
+  --teal-deep:#1F4438;
+  --teal-tint:#E4EEE7;
+  --marigold:#E2A44E;
+  --marigold-tint:#FBEEDA;
+  --brick:#BE5039;
+  --brick-tint:#F7E4DE;
+  --azure:#3B6E91;
+  --azure-tint:#E3EDF2;
+  --radius-card:18px;
+  --radius-tab:10px;
+  --shadow-card:0 1px 2px rgba(34,48,39,.06), 0 8px 20px -12px rgba(34,48,39,.15);
+  --shadow-lift:0 14px 34px -14px rgba(34,48,39,.28);
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; line-height:1.5;
+}
+h1,h2,h3,.display{ font-family:'Fraunces',serif; font-weight:500; letter-spacing:-.01em; color:var(--ink); margin:0; }
+button{ font-family:inherit; }
+a{ color:inherit; text-decoration:none; }
+::-webkit-scrollbar{ width:9px; height:9px; }
+::-webkit-scrollbar-thumb{ background:#CFCABA; border-radius:8px; }
+
+/* ---------- Shell ---------- */
+.app{ display:grid; grid-template-columns:250px 1fr; min-height:100vh; }
+
+/* ---------- Sidebar ---------- */
+.sidebar{
+  background:var(--teal-deep); color:#EAF1EC;
+  padding:28px 0 20px; display:flex; flex-direction:column;
+  position:sticky; top:0; height:100vh;
+}
+.brand{
+  display:flex; align-items:center; gap:11px;
+  padding:0 22px 24px; border-bottom:1px solid rgba(255,255,255,.12); margin-bottom:14px;
+}
+.brand-mark{
+  width:36px; height:36px; flex:0 0 36px; border-radius:9px;
+  background:var(--marigold); display:flex; align-items:center; justify-content:center;
+  font-family:'Fraunces',serif; font-weight:700; color:var(--teal-deep); font-size:16px;
+}
+.brand-name{ font-family:'Fraunces',serif; font-size:15.5px; line-height:1.25; }
+.brand-name span{ display:block; font-family:'Inter',sans-serif; font-size:11px; color:#AFC4B7; margin-top:2px; }
+
+.nav-label{
+  padding:16px 22px 8px; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+  color:#7FA08D; font-weight:700;
+}
+.nav{ display:flex; flex-direction:column; gap:2px; padding:0 12px; }
+.nav-item{
+  display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+  padding:10px 12px; border-radius:var(--radius-tab);
+  color:#CBDACF; font-size:14px; font-weight:500; border:none; background:transparent;
+  position:relative; transition:background .22s var(--ease), color .22s var(--ease), transform .22s var(--ease);
+}
+.nav-item svg{ flex:0 0 18px; width:18px; height:18px; opacity:.85; transition:opacity .22s var(--ease), transform .3s var(--ease); }
+.nav-item:hover{ background:rgba(255,255,255,.07); color:#fff; transform:translateX(2px); }
+.nav-item:hover svg{ opacity:1; transform:scale(1.08); }
+.nav-item.active{ background:var(--marigold); color:var(--teal-deep); font-weight:700; }
+.nav-item.active svg{ opacity:1; }
+.nav-badge{
+  margin-left:auto; font-size:10.5px; font-weight:700; background:rgba(190,80,57,.9); color:#fff;
+  padding:1.5px 7px; border-radius:20px;
+}
+.nav-item.active .nav-badge{ background:var(--brick); }
+
+.sidebar-foot{
+  padding:16px 22px 0; margin-top:auto; border-top:1px solid rgba(255,255,255,.12);
+  font-size:12px; color:#9FB6A6; line-height:1.5;
+}
+
+/* ---------- Main ---------- */
+.main{ padding:32px 44px 80px; max-width:1360px; }
+
+.topbar{
+  display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:30px; flex-wrap:wrap;
+}
+.topbar-left .eyebrow{ font-size:13px; color:var(--ink-soft); }
+.topbar-left h1{ font-size:27px; margin-top:3px; }
+
+.search-pill{
+  display:flex; align-items:center; gap:9px; background:var(--surface);
+  border:1px solid var(--line); border-radius:999px; padding:10px 16px;
+  min-width:280px; transition:border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.search-pill:focus-within{ border-color:var(--teal); box-shadow:0 0 0 4px var(--teal-tint); }
+.search-pill svg{ color:var(--ink-faint); flex:0 0 auto; }
+.search-pill input{ border:none; outline:none; background:transparent; font-size:13.5px; width:100%; color:var(--ink); }
+.search-pill input::placeholder{ color:var(--ink-faint); }
+
+.topbar-right{ display:flex; align-items:center; gap:14px; }
+.bell-btn{
+  position:relative; width:42px; height:42px; border-radius:50%; border:1px solid var(--line);
+  background:var(--surface); display:flex; align-items:center; justify-content:center; color:var(--ink-soft);
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+}
+.bell-btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-lift); border-color:var(--marigold); }
+.bell-dot{
+  position:absolute; top:-2px; right:-2px; width:16px; height:16px; border-radius:50%;
+  background:var(--brick); color:#fff; font-size:9.5px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; border:2px solid var(--bg);
+}
+
+/* Log in button (replaces the old account/profile pill) */
+.login-btn{
+  display:flex; align-items:center; gap:9px; background:var(--teal); color:#fff; border:none;
+  border-radius:999px; padding:11px 22px 11px 20px; font-size:13.5px; font-weight:700; cursor:pointer;
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
+}
+.login-btn svg{ flex:0 0 auto; }
+.login-btn:hover{ background:var(--teal-deep); transform:translateY(-2px); box-shadow:var(--shadow-lift); }
+
+/* ---------- Hero ---------- */
+.hero{
+  background:var(--teal);
+  background-image:radial-gradient(circle at 88% -10%, rgba(255,255,255,.10), transparent 55%);
+  border-radius:24px; padding:32px 36px; color:#EAF1EC;
+  display:grid; grid-template-columns:1.3fr auto auto auto; gap:30px; align-items:center;
+  margin-bottom:34px; opacity:0; transform:translateY(12px); animation:rise .65s var(--ease) forwards;
+  scroll-margin-top:100px;
+}
+@keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+.hero-greeting .display{ font-size:23px; color:#fff; }
+.hero-greeting p{ margin:9px 0 0; font-size:13.5px; color:#C7DBCC; max-width:44ch; }
+.hero-quote{
+  margin-top:16px; font-family:'Fraunces',serif; font-style:italic; font-size:13.5px; color:#DCE9DF;
+  border-left:2px solid var(--marigold); padding-left:12px;
+}
+.ring-stat{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+.ring{
+  width:92px; height:92px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:conic-gradient(var(--marigold) calc(var(--pct) * 1%), rgba(255,255,255,.18) 0);
+  position:relative;
+}
+.ring::before{ content:""; position:absolute; inset:8px; border-radius:50%; background:var(--teal-deep); }
+.ring-value{ position:relative; font-family:'Fraunces',serif; font-size:19px; font-weight:600; color:#fff; }
+.ring-label{ font-size:11.5px; color:#C7DBCC; text-align:center; }
+.streak{
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:16px;
+  padding:16px 18px; text-align:center; min-width:108px;
+}
+.streak .num{ font-family:'Fraunces',serif; font-size:28px; color:var(--marigold); line-height:1; }
+.streak .lbl{ font-size:11.5px; color:#C7DBCC; margin-top:6px; }
+
+/* ---------- Sections & cards ---------- */
+.section{ margin-bottom:38px; scroll-margin-top:100px; }
+.section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
+.section-head h2{ font-size:20px; }
+.section-head .meta{ font-size:12.5px; color:var(--ink-faint); }
+.view-toggle{ display:flex; background:var(--tab); border-radius:999px; padding:4px; gap:2px; }
+.view-toggle button{
+  border:none; background:transparent; padding:8px 15px; border-radius:999px; font-size:12.5px; font-weight:600;
+  color:var(--ink-soft); cursor:pointer; transition:background .25s var(--ease), color .25s var(--ease);
+}
+.view-toggle button.active{ background:var(--teal); color:#fff; }
+
+.grid{ display:grid; grid-template-columns:1.2fr 1fr; gap:24px; align-items:start; }
+.grid-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+
+/* Every card (stats, tables, appointments, alerts, grades, activity, contacts, staff)
+   shares this .card class, so giving it a hover lift here makes the pop-out effect
+   consistent across every block on the page. */
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+  padding:24px 26px; box-shadow:var(--shadow-card);
+  opacity:0; transform:translateY(14px); transition:opacity .55s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+.card.in-view{ opacity:1; transform:none; }
+.card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lift); border-color:var(--marigold); }
+.card-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px; gap:10px; }
+.card-head h3{ font-size:16.5px; }
+.card-head .meta{ font-size:12.5px; color:var(--ink-faint); }
+
+/* stat cards */
+.stat-card{ padding:22px 24px; }
+.stat-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.stat-icon{
+  width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+  background:var(--s-bg); color:var(--s-fg); transition:transform .3s var(--ease);
+}
+.card:hover .stat-icon{ transform:scale(1.1) rotate(-4deg); }
+.stat-trend{ font-size:11.5px; font-weight:700; }
+.trend-up{ color:var(--teal); }
+.trend-down{ color:var(--brick); }
+.stat-value{ font-family:'Fraunces',serif; font-size:28px; font-weight:600; }
+.stat-label{ color:var(--ink-soft); font-size:12.5px; margin-top:3px; }
+
+/* Table */
+.table-scroll{ overflow-x:auto; }
+.req-table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px; }
+.req-table th{
+  text-align:left; font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-faint);
+  font-weight:700; padding:10px 14px; border-bottom:1px solid var(--line);
+}
+.req-table td{ padding:14px; border-bottom:1px dashed var(--line); vertical-align:middle; }
+.req-table tbody tr{ transition:background .2s var(--ease); }
+.req-table tbody tr:hover{ background:var(--teal-tint); }
+.req-table tbody tr:last-child td{ border-bottom:none; }
+.student-cell{ display:flex; align-items:center; gap:11px; }
+.mini-avatar{
+  width:32px; height:32px; border-radius:9px; flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+  font-size:11.5px; font-weight:700; color:#fff;
+}
+.student-name{ font-weight:600; }
+.student-id{ font-size:11px; color:var(--ink-faint); }
+.tag{ display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; white-space:nowrap; }
+.tag.ok{ background:var(--teal-tint); color:var(--teal-deep); }
+.tag.due-soon{ background:var(--azure-tint); color:var(--azure); }
+.tag.overdue{ background:var(--brick-tint); color:var(--brick); }
+.tag.pending{ background:var(--marigold-tint); color:#8a5f1e; }
+.priority-dot{ display:inline-flex; align-items:center; gap:6px; color:var(--ink-soft); }
+.priority-dot span{ width:7px; height:7px; border-radius:50%; }
+.row-action{
+  width:30px; height:30px; border-radius:8px; border:1px solid var(--line); background:var(--surface);
+  color:var(--ink-soft); display:inline-flex; align-items:center; justify-content:center; transition:all .2s var(--ease);
+}
+.row-action:hover{ background:var(--teal-deep); color:#fff; border-color:var(--teal-deep); }
+.pill-filters{ display:flex; gap:6px; flex-wrap:wrap; }
+.pill{ font-size:11.5px; font-weight:600; padding:6px 13px; border-radius:999px; border:1px solid var(--line); color:var(--ink-soft); background:var(--surface); transition:all .2s var(--ease); }
+.pill:hover{ border-color:var(--teal); color:var(--teal-deep); }
+.pill.active{ background:var(--teal); color:#fff; border-color:var(--teal); }
+
+/* Pay / receipt buttons */
+.pay-btn{
+  font-size:11.5px; font-weight:700; padding:8px 15px; border-radius:999px; border:1px solid var(--teal);
+  background:var(--teal); color:#fff; cursor:pointer; transition:all .2s var(--ease); white-space:nowrap;
+}
+.pay-btn:hover{ background:var(--teal-deep); border-color:var(--teal-deep); }
+.pay-btn.outline{ background:transparent; color:var(--teal-deep); }
+.pay-btn.outline:hover{ background:var(--teal-tint); }
+
+/* appointments / alerts */
+.appt-row{ display:grid; grid-template-columns:56px 22px 1fr auto; align-items:center; gap:12px; padding:11px 0; border-bottom:1px dashed var(--line); }
+.appt-row:last-child{ border-bottom:none; }
+.appt-time{ text-align:center; }
+.appt-time .t{ font-family:'Fraunces',serif; font-size:14px; font-weight:600; }
+.appt-time .m{ font-size:9.5px; color:var(--ink-faint); text-transform:uppercase; }
+.appt-rail{ width:2px; height:100%; background:var(--line); position:relative; justify-self:center; }
+.appt-rail::before{ content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:9px; height:9px; border-radius:50%; background:var(--marigold); box-shadow:0 0 0 3px var(--marigold-tint); }
+.appt-name{ font-weight:600; font-size:13.5px; }
+.appt-type{ font-size:12px; color:var(--ink-faint); margin-top:1px; }
+
+.alert-row{ display:flex; gap:12px; padding:12px 0; border-bottom:1px dashed var(--line); }
+.alert-row:last-child{ border-bottom:none; }
+.alert-icon{ width:34px; height:34px; border-radius:9px; flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
+.alert-icon.high{ background:var(--brick-tint); color:var(--brick); }
+.alert-icon.med{ background:var(--marigold-tint); color:#8a5f1e; }
+.alert-icon.low{ background:var(--azure-tint); color:var(--azure); }
+.alert-title{ font-size:13px; font-weight:600; }
+.alert-desc{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+.alert-time{ font-size:11px; color:var(--ink-faint); margin-top:4px; }
+
+/* quick actions */
+.qa-card{
+  display:flex; flex-direction:column; gap:10px; text-align:left; cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:22px;
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+  opacity:0; transform:translateY(14px);
+}
+.qa-card.in-view{ opacity:1; transform:none; }
+.qa-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lift); border-color:var(--marigold); }
+.qa-icon{ width:42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; background:var(--q-bg); color:var(--q-fg); transition:transform .3s var(--ease); }
+.qa-card:hover .qa-icon{ transform:scale(1.12) rotate(6deg); }
+.qa-card .qt{ font-size:14px; font-weight:700; font-family:'Fraunces',serif; }
+.qa-card .qd{ font-size:12px; color:var(--ink-faint); }
+
+/* grades / progress */
+.cat-row{ display:grid; grid-template-columns:128px 1fr 36px; align-items:center; gap:12px; font-size:13px; margin-bottom:13px; }
+.cat-row .name{ color:var(--ink-soft); font-weight:500; }
+.bar-track{ height:8px; background:var(--tab); border-radius:6px; overflow:hidden; }
+.bar-fill{ height:100%; border-radius:6px; background:var(--teal); width:0; transition:width 1.1s var(--ease); }
+.cat-row .score{ text-align:right; font-weight:700; font-family:'Fraunces',serif; }
+.chart-legend{ display:flex; gap:16px; }
+.legend-item{ display:flex; align-items:center; gap:7px; font-size:12px; color:var(--ink-soft); }
+.legend-dot{ width:9px; height:9px; border-radius:3px; }
+.bar-col{ transition:transform .3s var(--ease); transform-origin:bottom; }
+.bar-col:hover{ filter:brightness(1.08); }
+
+/* updates feed */
+.activity-row{ display:flex; gap:12px; padding:11px 0; border-bottom:1px dashed var(--line); }
+.activity-row:last-child{ border-bottom:none; }
+.act-avatar{ width:32px; height:32px; border-radius:9px; flex:0 0 auto; color:#fff; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
+.act-text{ font-size:13px; line-height:1.5; }
+.act-text b{ font-weight:700; }
+.act-stamp{ font-size:11px; color:var(--ink-faint); margin-top:3px; }
+
+/* contacts */
+.grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.staff-card{ text-align:center; padding:24px 18px; }
+.staff-avatar{
+  width:56px; height:56px; border-radius:50%; margin:0 auto 12px; display:flex; align-items:center; justify-content:center;
+  font-family:'Fraunces',serif; font-weight:700; font-size:18px; color:#fff;
+}
+.staff-name{ font-weight:700; font-size:14px; }
+.staff-role{ font-size:12px; color:var(--ink-faint); margin-top:2px; }
+.staff-stat{ margin-top:12px; font-size:11.5px; color:var(--ink-soft); background:var(--teal-tint); border-radius:999px; padding:5px 12px; display:inline-block; }
+.staff-msg-btn{
+  margin-top:12px; font-size:12px; font-weight:700; color:#fff; background:var(--teal); border:none;
+  border-radius:999px; padding:8px 18px; cursor:pointer; transition:background .2s var(--ease);
+}
+.staff-msg-btn:hover{ background:var(--teal-deep); }
+
+/* settings */
+.setting-row{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px dashed var(--line); gap:16px; }
+.setting-row:last-child{ border-bottom:none; }
+.setting-title{ font-size:13.5px; font-weight:600; }
+.setting-desc{ font-size:12px; color:var(--ink-faint); margin-top:2px; }
+.switch{ position:relative; width:42px; height:24px; border-radius:999px; background:var(--tab); flex:0 0 auto; cursor:pointer; transition:background .25s var(--ease); }
+.switch::after{ content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.25); transition:transform .25s var(--ease); }
+.switch.on{ background:var(--teal); }
+.switch.on::after{ transform:translateX(18px); }
+
+/* closing strip */
+.review-strip{
+  background:var(--ink); color:#EDEEE7; border-radius:var(--radius-card); padding:26px 32px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.review-strip .display{ color:#fff; font-size:19px; }
+.review-strip p{ margin:5px 0 0; font-size:13px; color:#B9C2B6; }
+.countdown{ display:flex; gap:10px; }
+.cd-box{ background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:11px 16px; text-align:center; min-width:64px; }
+.cd-num{ font-family:'Fraunces',serif; font-size:20px; color:var(--marigold); }
+.cd-lbl{ font-size:10.5px; color:#B9C2B6; margin-top:2px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width:1180px){
+  .grid{ grid-template-columns:1fr; }
+  .grid-4{ grid-template-columns:repeat(2,1fr); }
+  .grid-3{ grid-template-columns:repeat(2,1fr); }
+  .hero{ grid-template-columns:1fr 1fr; }
+  .streak{ grid-column:1/-1; justify-self:start; }
+}
+@media (max-width:900px){
+  .main{ padding:28px 26px 90px; }
+  .hero{ grid-template-columns:1fr; text-align:left; }
+  .streak{ justify-self:start; }
+}
+@media (max-width:720px){
+  .app{ grid-template-columns:1fr; }
+  .sidebar{
+    position:fixed; bottom:0; left:0; right:0; top:auto; height:auto; z-index:30;
+    flex-direction:row; padding:8px 4px; border-top:1px solid rgba(255,255,255,.12);
+  }
+  .brand,.nav-label,.sidebar-foot{ display:none; }
+  .nav{ flex-direction:row; justify-content:space-around; padding:0; width:100%; overflow-x:auto; }
+  .nav-item{ flex-direction:column; gap:4px; font-size:9.5px; padding:7px 4px; }
+  .nav-badge{ position:absolute; top:2px; right:8px; margin:0; }
+  .main{ padding:22px 18px 96px; }
+  .topbar{ flex-direction:column; align-items:flex-start; }
+  .search-pill{ width:100%; min-width:0; }
+  .grid-4{ grid-template-columns:1fr 1fr; }
+  .grid-3{ grid-template-columns:1fr; }
+  .cat-row{ grid-template-columns:96px 1fr 30px; }
+}
+@media (max-width:480px){
+  .grid-4{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .hero{ animation:none; opacity:1; transform:none; }
+  .card,.qa-card{ opacity:1; transform:none; transition:none; }
+  .bar-fill{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">I</div>
+      <div class="brand-name">Islington<span>Parent Portal</span></div>
+    </div>
+
+    <div class="nav-label">Maya's Progress</div>
+    <nav class="nav" id="sideNav">
+      <a class="nav-item" data-target="overview" href="#overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12l8-8 8 8M6 10v10h12V10"/></svg>
+        Overview
+      </a>
+      <a class="nav-item" data-target="attendance" href="#attendance">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+        Attendance
+        <span class="nav-badge">2</span>
+      </a>
+      <a class="nav-item" data-target="fees" href="#fees">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Fees & Payments
+        <span class="nav-badge">1</span>
+      </a>
+      <a class="nav-item" data-target="grades" href="#grades">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg>
+        Grades & Progress
+      </a>
+      <a class="nav-item" data-target="appointments" href="#appointments">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+        Appointments
+      </a>
+      <a class="nav-item" data-target="alerts" href="#alerts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg>
+        Alerts
+        <span class="nav-badge">3</span>
+      </a>
+      <a class="nav-item" data-target="quick-actions" href="#quick-actions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
+        Quick Actions
+      </a>
+      <a class="nav-item" data-target="updates" href="#updates">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        Recent Updates
+      </a>
+      <a class="nav-item" data-target="contacts" href="#contacts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.2"/><path d="M4.5 20c1.2-4 4-6 7.5-6s6.3 2 7.5 6"/></svg>
+        Teachers & Advisors
+      </a>
+      <a class="nav-item" data-target="settings" href="#settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.65 1.65 0 0 0-1.8-.3 1.65 1.65 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.65 1.65 0 0 0-1-1.5 1.65 1.65 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.65 1.65 0 0 0 .3-1.8 1.65 1.65 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.65 1.65 0 0 0 1.5-1 1.65 1.65 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.65 1.65 0 0 0 1.8.3H9a1.65 1.65 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.65 1.65 0 0 0 1 1.5 1.65 1.65 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.65 1.65 0 0 0-.3 1.8V9a1.65 1.65 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.65 1.65 0 0 0-1.5 1z"/></svg>
+        Settings
+      </a>
+    </nav>
+    <div class="sidebar-foot">Parent Services Office<br>Islington College</div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="eyebrow">Saturday, September 12</div>
+        <h1>How Maya is doing</h1>
+      </div>
+
+      <div class="search-pill">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search grades, attendance, fees…">
+      </div>
+
+      <div class="topbar-right">
+        <button class="bell-btn" aria-label="Notifications">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="bell-dot">3</span>
+        </button>
+        <button class="login-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+          Log In
+        </button>
+      </div>
+    </div>
+
+    <!-- ============ HERO / OVERVIEW ============ -->
+    <section class="hero" id="overview">
+      <div class="hero-greeting">
+        <div class="display">Maya Ibarra · Sophomore Year</div>
+        <p>Attendance and grades are strong this term. One fee payment is due before Sept 20, and a parent-teacher conference is coming up Friday.</p>
+        <div class="hero-quote">"Islington College partners with families every step of the way — the more you know, the more you can support Maya's journey."</div>
+      </div>
+      <div class="ring-stat">
+        <div class="ring" style="--pct:94"><span class="ring-value">94%</span></div>
+        <div class="ring-label">Attendance<br>this term</div>
+      </div>
+      <div class="ring-stat">
+        <div class="ring" style="--pct:88"><span class="ring-value">88%</span></div>
+        <div class="ring-label">Overall<br>average grade</div>
+      </div>
+      <div class="streak">
+        <div class="num">18</div>
+        <div class="lbl">days present<br>this month</div>
+      </div>
+    </section>
+
+    <!-- STAT CARDS -->
+    <section class="section">
+      <div class="grid-4" id="statsGrid">
+        <div class="card stat-card" style="--s-bg:var(--azure-tint); --s-fg:var(--azure);">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></div>
+            <span class="stat-trend trend-up">▲ 2.1%</span>
+          </div>
+          <div class="stat-value">94%</div>
+          <div class="stat-label">Attendance rate this term</div>
+        </div>
+        <div class="card stat-card" style="--s-bg:var(--brick-tint); --s-fg:var(--brick);">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <span class="stat-trend trend-down">8 days left</span>
+          </div>
+          <div class="stat-value">$650</div>
+          <div class="stat-label">Fee balance due Sept 20</div>
+        </div>
+        <div class="card stat-card" style="--s-bg:var(--teal-tint); --s-fg:var(--teal-deep);">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg></div>
+            <span class="stat-trend trend-up">▲ 3%</span>
+          </div>
+          <div class="stat-value">88%</div>
+          <div class="stat-label">Overall average grade</div>
+        </div>
+        <div class="card stat-card" style="--s-bg:var(--marigold-tint); --s-fg:#8a5f1e;">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+            <span class="stat-trend trend-down">▲ 1 new</span>
+          </div>
+          <div class="stat-value">3</div>
+          <div class="stat-label">Active alerts for Maya</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ATTENDANCE ============ -->
+    <section class="section" id="attendance">
+      <div class="section-head">
+        <div>
+          <h2>Attendance record</h2>
+          <div class="meta">Last updated today at 8:10 AM</div>
+        </div>
+        <div class="pill-filters">
+          <button class="pill active">All</button>
+          <button class="pill">Present</button>
+          <button class="pill">Absent</button>
+          <button class="pill">Late</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll">
+        <table class="req-table">
+          <thead>
+            <tr><th>Class</th><th>Date</th><th>Status</th><th>Instructor</th><th>Note</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="student-name">Calculus II</div></td>
+              <td>Sept 11, 2026</td>
+              <td><span class="tag due-soon">Late (12 min)</span></td>
+              <td>Prof. R. Marlow</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><div class="student-name">World Literature</div></td>
+              <td>Sept 11, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Prof. N. Alvarez</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><div class="student-name">Organic Chemistry Lab</div></td>
+              <td>Sept 10, 2026</td>
+              <td><span class="tag overdue">Absent</span></td>
+              <td>Prof. D. Cole</td>
+              <td>Flagged for follow-up</td>
+            </tr>
+            <tr>
+              <td><div class="student-name">Calculus II</div></td>
+              <td>Sept 10, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Prof. R. Marlow</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><div class="student-name">World Literature</div></td>
+              <td>Sept 9, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Prof. N. Alvarez</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><div class="student-name">Organic Chemistry Lab</div></td>
+              <td>Sept 9, 2026</td>
+              <td><span class="tag overdue">Absent</span></td>
+              <td>Prof. D. Cole</td>
+              <td>Second missed lab this month</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEES & PAYMENTS ============ -->
+    <section class="section" id="fees">
+      <div class="section-head">
+        <div>
+          <h2>Fees & payments</h2>
+          <div class="meta">Balance due: $650.00</div>
+        </div>
+        <div class="pill-filters">
+          <button class="pill active">All</button>
+          <button class="pill">Due</button>
+          <button class="pill">Overdue</button>
+          <button class="pill">Paid</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll">
+        <table class="req-table">
+          <thead>
+            <tr><th>Item</th><th>Amount</th><th>Due date</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="student-name">Tuition Installment 2</div></td>
+              <td>$2,400.00</td>
+              <td>Sept 20, 2026</td>
+              <td><span class="tag due-soon">Due</span></td>
+              <td><button class="pay-btn">Pay Now</button></td>
+            </tr>
+            <tr>
+              <td><div class="student-name">Chemistry Lab Fee</div></td>
+              <td>$180.00</td>
+              <td>Sept 20, 2026</td>
+              <td><span class="tag due-soon">Due</span></td>
+              <td><button class="pay-btn">Pay Now</button></td>
+            </tr>
+            <tr>
+              <td><div class="student-name">Library Fine</div></td>
+              <td>$12.00</td>
+              <td>Sept 5, 2026</td>
+              <td><span class="tag overdue">Overdue</span></td>
+              <td><button class="pay-btn">Pay Now</button></td>
+            </tr>
+            <tr>
+              <td><div class="student-name">Tuition Installment 1</div></td>
+              <td>$2,400.00</td>
+              <td>Aug 15, 2026</td>
+              <td><span class="tag ok">Paid</span></td>
+              <td><button class="pay-btn outline">Receipt</button></td>
+            </tr>
+            <tr>
+              <td><div class="student-name">Student Activity Fee</div></td>
+              <td>$75.00</td>
+              <td>Aug 15, 2026</td>
+              <td><span class="tag ok">Paid</span></td>
+              <td><button class="pay-btn outline">Receipt</button></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ APPOINTMENTS + ALERTS ============ -->
+    <div class="grid">
+      <section class="section" id="appointments" style="margin-bottom:0;">
+        <div class="section-head"><h2>Upcoming meetings</h2><div class="meta">2 scheduled</div></div>
+        <div class="card">
+          <div class="appt-row">
+            <div class="appt-time"><div class="t">3:00</div><div class="m">FRI</div></div>
+            <div class="appt-rail"></div>
+            <div><div class="appt-name">Parent-Teacher Conference</div><div class="appt-type">Prof. R. Marlow · Calculus II</div></div>
+            <span class="tag ok">In-person</span>
+          </div>
+          <div class="appt-row">
+            <div class="appt-time"><div class="t">10:00</div><div class="m">MON</div></div>
+            <div class="appt-rail"></div>
+            <div><div class="appt-name">Academic Advising Check-in</div><div class="appt-type">Ms. D. Cole</div></div>
+            <span class="tag due-soon">Video</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="alerts" style="margin-bottom:0;">
+        <div class="section-head"><h2>Alerts for Maya</h2><div class="meta">3 need your attention</div></div>
+        <div class="card">
+          <div class="alert-row">
+            <div class="alert-icon high"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+            <div><div class="alert-title">Missed lab session</div><div class="alert-desc">Maya missed Organic Chemistry Lab for the second time this month.</div><div class="alert-time">Today</div></div>
+          </div>
+          <div class="alert-row">
+            <div class="alert-icon med"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+            <div><div class="alert-title">Fee payment due</div><div class="alert-desc">Tuition installment 2 and the lab fee are due Sept 20.</div><div class="alert-time">2 days ago</div></div>
+          </div>
+          <div class="alert-row">
+            <div class="alert-icon low"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
+            <div><div class="alert-title">Upcoming conference</div><div class="alert-desc">Parent-teacher conference scheduled for Friday at 3:00 PM.</div><div class="alert-time">3 days ago</div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ QUICK ACTIONS ============ -->
+    <section class="section" id="quick-actions">
+      <div class="section-head"><h2>Quick actions</h2></div>
+      <div class="grid-4" id="qaGrid">
+        <button class="qa-card" style="--q-bg:var(--azure-tint); --q-fg:var(--azure);">
+          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="qt">Pay fees now</div>
+          <div class="qd">Settle Maya's outstanding balance</div>
+        </button>
+        <button class="qa-card" style="--q-bg:var(--marigold-tint); --q-fg:#8a5f1e;">
+          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+          <div class="qt">View attendance report</div>
+          <div class="qd">See Maya's full attendance history</div>
+        </button>
+        <button class="qa-card" style="--q-bg:var(--brick-tint); --q-fg:var(--brick);">
+          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="qt">Message a teacher</div>
+          <div class="qd">Reach out to Maya's instructors directly</div>
+        </button>
+        <button class="qa-card" style="--q-bg:var(--teal-tint); --q-fg:var(--teal-deep);">
+          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 14v4M10 16h4"/></svg></div>
+          <div class="qt">Schedule a meeting</div>
+          <div class="qd">Book time with an advisor or teacher</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ GRADES & PROGRESS ============ -->
+    <section class="section" id="grades">
+      <div class="section-head">
+        <h2>Academic progress</h2>
+        <div class="view-toggle">
+          <button class="active">This term</button>
+          <button>Last term</button>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-head">
+            <h3>Grade trend by week</h3>
+            <div class="chart-legend">
+              <div class="legend-item"><span class="legend-dot" style="background:var(--teal)"></span>Maya's average</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--marigold)"></span>Class average</div>
+            </div>
+          </div>
+          <svg id="perfChart" viewBox="0 0 540 220" width="100%" height="220"></svg>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Grades by subject</h3><div class="meta">Current term</div></div>
+          <div class="cat-row"><span class="name">Calculus II</span><div class="bar-track"><div class="bar-fill" data-w="82" style="background:var(--teal)"></div></div><span class="score">82</span></div>
+          <div class="cat-row"><span class="name">World Literature</span><div class="bar-track"><div class="bar-fill" data-w="91" style="background:var(--teal)"></div></div><span class="score">91</span></div>
+          <div class="cat-row"><span class="name">Organic Chemistry</span><div class="bar-track"><div class="bar-fill" data-w="85" style="background:var(--teal)"></div></div><span class="score">85</span></div>
+          <div class="cat-row"><span class="name">Studio Art</span><div class="bar-track"><div class="bar-fill" data-w="94" style="background:var(--teal)"></div></div><span class="score">94</span></div>
+          <div class="cat-row"><span class="name">Intro Psychology</span><div class="bar-track"><div class="bar-fill" data-w="89" style="background:var(--teal)"></div></div><span class="score">89</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RECENT UPDATES ============ -->
+    <section class="section" id="updates">
+      <div class="section-head"><h2>Recent updates</h2></div>
+      <div class="card">
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">RM</div>
+          <div><div class="act-text"><b>Prof. Marlow</b> recorded Maya as late to Calculus II</div><div class="act-stamp">8 minutes ago</div></div>
+        </div>
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">DC</div>
+          <div><div class="act-text">Chemistry Lab test graded: <b>85%</b></div><div class="act-stamp">41 minutes ago</div></div>
+        </div>
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">$</div>
+          <div><div class="act-text">Tuition Installment 1 payment confirmed</div><div class="act-stamp">1 hour ago</div></div>
+        </div>
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#BE5039,#8C3A28)">DC</div>
+          <div><div class="act-text"><b>Prof. Cole</b> flagged a missed lab session</div><div class="act-stamp">2 hours ago</div></div>
+        </div>
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">NA</div>
+          <div><div class="act-text">Midterm report card is now available</div><div class="act-stamp">3 hours ago</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEACHERS & ADVISORS ============ -->
+    <section class="section" id="contacts">
+      <div class="section-head"><h2>Maya's teachers & advisors</h2><div class="meta">3 instructors this term</div></div>
+      <div class="grid-3">
+        <div class="card staff-card">
+          <div class="staff-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">RM</div>
+          <div class="staff-name">Prof. Rina Marlow</div>
+          <div class="staff-role">Calculus II</div>
+          <div class="staff-stat">Office hours Tue/Thu 2–4 PM</div>
+          <div><button class="staff-msg-btn">Message</button></div>
+        </div>
+        <div class="card staff-card">
+          <div class="staff-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">DC</div>
+          <div class="staff-name">Prof. Dana Cole</div>
+          <div class="staff-role">Organic Chemistry</div>
+          <div class="staff-stat">Office hours Mon/Wed 10–12 PM</div>
+          <div><button class="staff-msg-btn">Message</button></div>
+        </div>
+        <div class="card staff-card">
+          <div class="staff-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">NA</div>
+          <div class="staff-name">Prof. Noah Alvarez</div>
+          <div class="staff-role">World Literature</div>
+          <div class="staff-stat">Office hours Fri 1–3 PM</div>
+          <div><button class="staff-msg-btn">Message</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SETTINGS ============ -->
+    <section class="section" id="settings">
+      <div class="section-head"><h2>Notifications & preferences</h2></div>
+      <div class="card">
+        <div class="setting-row">
+          <div><div class="setting-title">Email me about attendance issues</div><div class="setting-desc">Alert when Maya is marked absent or late</div></div>
+          <div class="switch on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-title">Weekly grade summary</div><div class="setting-desc">Roundup of grades and assignments each Friday</div></div>
+          <div class="switch on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-title">Fee due-date reminders</div><div class="setting-desc">Ping a few days before any payment is due</div></div>
+          <div class="switch on" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-title">Messages from teachers</div><div class="setting-desc">Notify me when an instructor sends a message</div></div>
+          <div class="switch" onclick="this.classList.toggle('on')"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING STRIP ============ -->
+    <div class="review-strip">
+      <div>
+        <div class="display">Parent-Teacher Conference</div>
+        <p>Friday, 3:00 PM · Room 204 · Bring Maya's midterm report card</p>
+      </div>
+      <div class="countdown">
+        <div class="cd-box"><div class="cd-num">94%</div><div class="cd-lbl">attendance</div></div>
+        <div class="cd-box"><div class="cd-num">$650</div><div class="cd-lbl">fees due</div></div>
+        <div class="cd-box"><div class="cd-num">88%</div><div class="cd-lbl">avg. grade</div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* Scroll-spy + click-to-scroll sidebar */
+const navItems = Array.from(document.querySelectorAll('#sideNav .nav-item'));
+const sections = navItems.map(n => document.getElementById(n.dataset.target)).filter(Boolean);
+
+function setActive(id){
+  navItems.forEach(n => n.classList.toggle('active', n.dataset.target === id));
+}
+navItems.forEach(item => {
+  item.addEventListener('click', () => setActive(item.dataset.target));
+});
+
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) setActive(entry.target.id);
+  });
+}, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+sections.forEach(sec => spy.observe(sec));
+setActive('overview');
+
+/* Reveal cards on scroll */
+const revealEls = document.querySelectorAll('.card, .qa-card');
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      revealIO.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+revealEls.forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 60 + 'ms';
+  revealIO.observe(el);
+});
+
+/* Animate performance bars in when visible */
+const bars = document.querySelectorAll('.bar-fill');
+const barIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.style.width = entry.target.getAttribute('data-w') + '%';
+      barIO.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+bars.forEach(b => barIO.observe(b));
+
+/* Table filter pills (visual only) */
+document.querySelectorAll('.pill-filters .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    document.querySelectorAll('.pill-filters .pill').forEach(x => x.classList.remove('active'));
+    p.classList.add('active');
+  });
+});
+document.querySelectorAll('.view-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+/* Animated SVG bar chart: Maya's average vs class average */
+const chartData = [
+  { label:'Wk 1', maya:78, classAvg:74 },
+  { label:'Wk 2', maya:82, classAvg:76 },
+  { label:'Wk 3', maya:85, classAvg:78 },
+  { label:'Wk 4', maya:88, classAvg:80 },
+  { label:'Wk 5', maya:90, classAvg:81 },
+  { label:'Wk 6', maya:91, classAvg:83 },
+];
+const svgNS = 'http://www.w3.org/2000/svg';
+const chartEl = document.getElementById('perfChart');
+const W=540,H=220,padL=26,padB=26,padT=10,padR=6;
+const chartW=W-padL-padR, chartH=H-padT-padB;
+const maxVal = Math.max(...chartData.map(d=>Math.max(d.maya,d.classAvg)))*1.15;
+const groupW = chartW/chartData.length;
+const barW = 15;
+function y(v){ return padT + chartH - (v/maxVal)*chartH; }
+
+[0,0.25,0.5,0.75,1].forEach(f=>{
+  const gy = padT + chartH*f;
+  const line = document.createElementNS(svgNS,'line');
+  line.setAttribute('x1',padL); line.setAttribute('x2',W-padR);
+  line.setAttribute('y1',gy); line.setAttribute('y2',gy);
+  line.setAttribute('stroke','#E9E4D3'); line.setAttribute('stroke-width','1');
+  chartEl.appendChild(line);
+});
+
+chartData.forEach((d,i)=>{
+  const cx = padL + groupW*i + groupW/2;
+  [{val:d.maya,color:'#34614F',dx:-barW/2-3},{val:d.classAvg,color:'#E2A44E',dx:3}].forEach(b=>{
+    const rect = document.createElementNS(svgNS,'rect');
+    const fullY = y(b.val), fullH = padT+chartH-fullY;
+    rect.setAttribute('x', cx+b.dx);
+    rect.setAttribute('width', barW);
+    rect.setAttribute('rx', 4);
+    rect.setAttribute('fill', b.color);
+    rect.setAttribute('class','bar-col');
+    rect.setAttribute('y', padT+chartH);
+    rect.setAttribute('height', 0);
+    chartEl.appendChild(rect);
+    const title = document.createElementNS(svgNS,'title');
+    title.textContent = d.label + ': ' + b.val;
+    rect.appendChild(title);
+  });
+  const label = document.createElementNS(svgNS,'text');
+  label.setAttribute('x',cx); label.setAttribute('y',H-6); label.setAttribute('text-anchor','middle');
+  label.setAttribute('font-size','10.5'); label.setAttribute('fill','#8A9389'); label.setAttribute('font-family','Inter, sans-serif');
+  label.textContent = d.label;
+  chartEl.appendChild(label);
+});
+
+const chartIO = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if (entry.isIntersecting){
+      let idx=0;
+      chartData.forEach((d,i)=>{
+        [d.maya,d.classAvg].forEach(val=>{
+          const rect = chartEl.querySelectorAll('rect')[idx];
+          const fullY = y(val), fullH = padT+chartH-fullY;
+          rect.style.transition = `y .8s var(--ease) ${i*70}ms, height .8s var(--ease) ${i*70}ms`;
+          rect.setAttribute('y', fullY);
+          rect.setAttribute('height', fullH);
+          idx++;
+        });
+      });
+      chartIO.disconnect();
+    }
+  });
+}, { threshold:0.2 });
+chartIO.observe(chartEl);
+</script>
+</body>
+</html>
