@@ -28,6 +28,8 @@
   --azure-tint:#E4EBF5;
   --chart-1:#5B6BC0;
   --chart-2:#4E93C7;
+  --amber:#C9971F;
+  --amber-tint:#FDF3D8;
   --radius-card:18px;
   --radius-tab:10px;
   --shadow-card:0 1px 2px rgba(30,36,48,.06), 0 8px 20px -12px rgba(30,36,48,.15);
@@ -397,6 +399,101 @@ a{ color:inherit; text-decoration:none; }
 .attendance-legend .lg-item{ display:flex; align-items:center; gap:6px; }
 .attendance-legend .lg-dot{ width:10px; height:10px; border-radius:3px; display:inline-block; }
 
+/* ---------- Fee log lookup ---------- */
+.fee-log-section{ scroll-margin-top:100px; }
+.fee-log-card{ min-height:78vh; display:flex; flex-direction:column; gap:22px; }
+.fee-search-wrap{ position:relative; max-width:440px; }
+.fee-search{ max-width:440px; }
+.fee-suggest{
+  position:absolute; top:calc(100% + 6px); left:0; right:0; background:var(--surface);
+  border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow-lift);
+  overflow:hidden; z-index:30; max-height:280px; overflow-y:auto;
+}
+.fee-suggest-item{
+  display:flex; align-items:center; gap:11px; width:100%; text-align:left; padding:10px 14px;
+  border:none; background:transparent; cursor:pointer; border-bottom:1px solid var(--line);
+  font-size:13.5px; color:var(--ink); transition:background .15s var(--ease);
+}
+.fee-suggest-item:last-child{ border-bottom:none; }
+.fee-suggest-item:hover, .fee-suggest-item.hi{ background:var(--teal-tint); }
+.fee-suggest-item .sg-avatar{
+  width:28px; height:28px; border-radius:8px; flex:0 0 28px; display:flex; align-items:center;
+  justify-content:center; color:#fff; font-weight:700; font-size:10.5px;
+}
+.fee-suggest-item .sg-meta{ display:flex; flex-direction:column; line-height:1.3; min-width:0; }
+.fee-suggest-item .sg-id{ font-size:11px; color:var(--ink-faint); }
+.fee-suggest-empty{ padding:12px 14px; font-size:12.5px; color:var(--ink-faint); }
+
+/* Reuses .fee-suggest's dropdown look for the parent/student combo fields in
+   the compose-message and schedule-appointment modals. */
+.modal-combo{ position:relative; margin-bottom:14px; }
+.modal-combo .modal-input{ margin-bottom:0; }
+.modal-combo .fee-suggest{ top:calc(100% + 4px); }
+
+.fee-result{ flex:1; display:flex; flex-direction:column; }
+.fee-empty{ margin:auto; text-align:center; color:var(--ink-faint); font-size:13.5px; max-width:38ch; line-height:1.6; }
+.fee-head-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:18px; }
+.fee-student-head{ display:flex; align-items:center; gap:14px; }
+.fee-summary{ display:flex; gap:10px; flex-wrap:wrap; margin:0 0 0 auto; }
+.fee-summary .chip{ background:#E3F3EA; color:#1E7A46; font-weight:700; font-size:12px; padding:7px 14px; border-radius:999px; white-space:nowrap; }
+.fee-summary .chip.due{ background:#FDF3D8; color:#8a5f1e; }
+.fee-summary .chip.overdue{ background:#FBE4E1; color:#B3261E; }
+
+.fee-status{ font-weight:700; font-size:11.5px; padding:4px 11px; border-radius:999px; white-space:nowrap; display:inline-block; }
+.fee-status.paid{ background:#E3F3EA; color:#1E7A46; }
+.fee-status.partial{ background:#FDF3D8; color:#8a5f1e; }
+.fee-status.overdue{ background:#FBE4E1; color:#B3261E; }
+
+.fee-subhead{ font-size:13px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em; margin:22px 0 10px; }
+.fee-subhead:first-of-type{ margin-top:0; }
+.fee-table-scroll{ overflow:auto; max-height:320px; border:1px solid var(--line); border-radius:14px; }
+.fee-table{ width:100%; border-collapse:collapse; font-size:13px; min-width:620px; }
+.fee-table th{
+  background:var(--paper); text-align:left; padding:11px 14px; border-bottom:2px solid var(--line);
+  font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--ink-soft); position:sticky; top:0;
+}
+.fee-table td{ padding:12px 14px; border-bottom:1px dashed var(--line); vertical-align:middle; }
+.fee-table tbody tr:last-child td{ border-bottom:none; }
+.fee-table tbody tr:hover{ background:var(--paper); }
+.fee-table td.amt{ font-weight:700; font-variant-numeric:tabular-nums; }
+
+.fee-actions{
+  display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; padding-top:18px; border-top:1px solid var(--line);
+  align-items:center;
+}
+.fee-actions .fee-parent-line{ margin-right:auto; font-size:12.5px; color:var(--ink-soft); }
+.fee-actions .fee-parent-line b{ color:var(--ink); }
+
+/* ---------- Fee leaderboard ---------- */
+.fee-leaderboard{ display:flex; flex-direction:column; }
+.lb-row{
+  display:grid; grid-template-columns:32px 38px 1fr 130px 100px auto;
+  align-items:center; gap:13px; padding:12px 6px; border-bottom:1px dashed var(--line);
+  cursor:pointer; border-radius:10px; transition:background .2s var(--ease), transform .2s var(--ease);
+}
+.lb-row:last-child{ border-bottom:none; }
+.lb-row:hover, .lb-row:focus-visible{ background:var(--paper); transform:translateX(2px); outline:none; }
+.lb-row-paid{ cursor:default; opacity:.72; }
+.lb-row-paid:hover{ background:none; transform:none; }
+.lb-row-paid .lb-name{ font-style:italic; color:var(--ink-faint); font-weight:500; }
+.lb-rank{
+  width:26px; height:26px; border-radius:50%; background:var(--tab); color:var(--ink-soft);
+  font-family:'Fraunces',serif; font-weight:600; font-size:12.5px;
+  display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+}
+.lb-row.top-1 .lb-rank{ background:var(--brick); color:#fff; }
+.lb-row.top-2 .lb-rank{ background:var(--amber); color:#fff; }
+.lb-row.top-3 .lb-rank{ background:var(--azure); color:#fff; }
+.lb-info{ min-width:0; }
+.lb-name{ font-weight:600; font-size:13.5px; }
+.lb-sub{ font-size:11.5px; color:var(--ink-faint); margin-top:1px; }
+.lb-bar-wrap{ min-width:80px; }
+.lb-amount{ font-weight:700; font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap; }
+@media (max-width:720px){
+  .lb-row{ grid-template-columns:26px 34px 1fr auto; }
+  .lb-bar-wrap{ display:none; }
+}
+
 /* Reply / resolve buttons */
 .act-btn{
   font-size:11.5px; font-weight:700; padding:8px 15px; border-radius:999px; border:1px solid var(--teal);
@@ -412,6 +509,7 @@ a{ color:inherit; text-decoration:none; }
 .appt-time{ text-align:center; }
 .appt-time .t{ font-family:'Fraunces',serif; font-size:14px; font-weight:600; }
 .appt-time .m{ font-size:9.5px; color:var(--ink-faint); text-transform:uppercase; }
+.appt-time .d{ font-size:9.5px; color:var(--ink-faint); margin-top:3px; white-space:nowrap; }
 .appt-rail{ width:2px; height:100%; background:var(--line); position:relative; justify-self:center; }
 .appt-rail::before{ content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:9px; height:9px; border-radius:50%; background:var(--marigold); box-shadow:0 0 0 3px var(--marigold-tint); }
 .appt-name{ font-weight:600; font-size:13.5px; }
@@ -420,9 +518,9 @@ a{ color:inherit; text-decoration:none; }
 .alert-row{ display:flex; gap:12px; padding:12px 0; border-bottom:1px dashed var(--line); }
 .alert-row:last-child{ border-bottom:none; }
 .alert-icon{ width:34px; height:34px; border-radius:9px; flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
-.alert-icon.high{ background:var(--brick-tint); color:var(--brick); }
-.alert-icon.med{ background:var(--marigold-tint); color:#8a5f1e; }
-.alert-icon.low{ background:var(--azure-tint); color:var(--azure); }
+.alert-icon.crit{ background:var(--brick-tint); color:var(--brick); }
+.alert-icon.warn{ background:var(--amber-tint); color:#8a5f1e; }
+.alert-icon.info{ background:var(--azure-tint); color:var(--azure); }
 .alert-title{ font-size:13px; font-weight:600; }
 .alert-desc{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
 .alert-time{ font-size:11px; color:var(--ink-faint); margin-top:4px; }
@@ -441,6 +539,17 @@ a{ color:inherit; text-decoration:none; }
   box-shadow:0 0 0 4px var(--teal-tint); align-self:center;
 }
 .appt-day.appt-day-past .card{ opacity:.92; }
+.appt-day-rescheduled .appt-day-head h3{ color:var(--brick); }
+.appt-day-rescheduled .appt-day-head::before{
+  content:""; width:8px; height:8px; border-radius:50%; background:var(--brick);
+  box-shadow:0 0 0 4px var(--brick-tint); align-self:center;
+}
+.reschedule-btn{
+  font-size:11px; font-weight:700; padding:5px 13px; border-radius:999px;
+  border:1px solid var(--teal); color:var(--teal-deep); background:var(--surface);
+  white-space:nowrap; transition:all .2s var(--ease);
+}
+.reschedule-btn:hover{ background:var(--teal-deep); color:#fff; border-color:var(--teal-deep); }
 
 .appt-item{
   border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
@@ -467,17 +576,36 @@ a{ color:inherit; text-decoration:none; }
 .appt-item:hover .appt-more{ max-height:140px; opacity:1; padding-bottom:16px; }
 .appt-more b{ color:var(--ink); font-weight:600; }
 .tag.done{ background:#EAEBEF; color:var(--ink-faint); }
+.tag.missed{ background:var(--brick-tint); color:var(--brick); }
 
-/* ---------- Expanded Alerts (Urgent / Unchecked / Pending) ---------- */
+/* ---------- Expanded Alerts, grouped by category ----------
+   Category (Attendance / Financial / Family engagement) decides
+   which section an alert sits in; severity (Critical / Warning / Info) is a
+   per-item tag, so the two dimensions never fight for the same color. */
 .alert-groups{ display:flex; flex-direction:column; gap:26px; width:100%; }
 .alert-group .card{ padding:28px 30px; }
-.alert-group-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
-.alert-group-head h3{ font-size:19px; }
-.alert-group-head .dot{ width:9px; height:9px; border-radius:50%; }
-.alert-group-head.urgent .dot{ background:var(--brick); box-shadow:0 0 0 4px var(--brick-tint); }
-.alert-group-head.unchecked .dot{ background:#C9971F; box-shadow:0 0 0 4px #FDF3D8; }
-.alert-group-head.pending .dot{ background:var(--azure); box-shadow:0 0 0 4px var(--azure-tint); }
+.alert-cat-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.alert-cat-head h3{ font-size:19px; }
+.alert-cat-icon{
+  width:26px; height:26px; border-radius:8px; flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--teal-tint); color:var(--teal-deep);
+}
 .alert-group-count{ margin-left:auto; font-size:12px; color:var(--ink-faint); }
+
+/* Severity tag — the one place color maps to urgency, consistently
+   across every category. */
+.sev-tag{
+  font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  padding:2px 8px; border-radius:999px; margin-left:8px; display:inline-block; vertical-align:middle;
+}
+.sev-tag.crit{ background:var(--brick-tint); color:var(--brick); }
+.sev-tag.warn{ background:var(--amber-tint); color:#8a5f1e; }
+.sev-tag.info{ background:var(--azure-tint); color:var(--azure); }
+
+.sev-legend{ display:flex; gap:16px; flex-wrap:wrap; margin-top:10px; font-size:12px; color:var(--ink-soft); }
+.sev-legend .lg-item{ display:flex; align-items:center; gap:6px; }
+.sev-legend .lg-dot{ width:9px; height:9px; border-radius:3px; display:inline-block; }
 
 .alert-item{
   border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
@@ -498,7 +626,7 @@ a{ color:inherit; text-decoration:none; }
 .alert-item:hover .alert-row{ border-bottom-color:transparent; }
 .alert-new-badge{
   font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
-  background:#C9971F; color:#fff; padding:2px 8px; border-radius:999px; margin-left:8px;
+  background:var(--amber); color:#fff; padding:2px 8px; border-radius:999px; margin-left:8px;
 }
 .alert-more{
   max-height:0; opacity:0; overflow:hidden; padding-left:46px;
@@ -684,6 +812,8 @@ a{ color:inherit; text-decoration:none; }
 .site-footer a:hover{ color:var(--teal-deep); }
 .countdown{ display:flex; gap:10px; }
 .cd-box{ background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:11px 16px; text-align:center; min-width:64px; }
+.cd-box[data-nav]{ cursor:pointer; transition:background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease); }
+.cd-box[data-nav]:hover{ background:rgba(255,255,255,.16); border-color:#F5C451; transform:translateY(-2px); }
 .cd-num{ font-family:'Fraunces',serif; font-size:22px; font-weight:700; color:#F5C451; text-shadow:0 0 14px rgba(245,196,81,.45); }
 .cd-lbl{ font-size:10.5px; color:#B9C2B6; margin-top:2px; }
 
@@ -793,6 +923,7 @@ a{ color:inherit; text-decoration:none; }
   z-index:71; max-height:86vh; overflow-y:auto;
 }
 .modal.open{ opacity:1; pointer-events:auto; transform:translate(-50%,-50%); }
+.modal.modal-wide{ width:760px; }
 .modal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
 .modal-head h3{ font-size:17px; }
 .modal-label{ display:block; font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--ink-faint); margin:14px 0 6px; }
@@ -889,6 +1020,11 @@ select.modal-input{
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="M8 14h2M8 17h5"/></svg>
         Attendance Log
       </a>
+      <a class="nav-item" data-page="page-fees" href="#fee-log">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 8.5c0-1 1-1.8 2.5-1.8s2.5.8 2.5 1.8c0 2.4-5 1.6-5 4 0 1 1 1.8 2.5 1.8s2.5-.8 2.5-1.8"/><path d="M12 5.5v1.2M12 17.3v1.2"/></svg>
+        Fee Log
+        <span class="nav-badge">3</span>
+      </a>
       <a class="nav-item" data-page="page-messages" href="#parent-messages">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         Parent Messages
@@ -934,7 +1070,7 @@ select.modal-input{
     <section class="hero" id="overview">
       <div class="hero-greeting">
         <div class="display">Student Services · Fall Term Operations</div>
-        <p>Case load is steady this week — response times are ahead of target. Five parent messages and four student alerts still need a follow-up before Friday's review.</p>
+        <p>Case load is steady this week — response times are ahead of target. Five parent messages and three student alerts still need a follow-up.</p>
         <div class="hero-quote">"Every case is a student and a family waiting on an answer — the faster we're clear, the faster they can move forward."</div>
       </div>
       <div class="ring-stat">
@@ -1036,9 +1172,9 @@ select.modal-input{
     <section class="section" id="performance">
       <div class="section-head">
         <h2>Service performance</h2>
-        <div class="view-toggle">
-          <button class="active">This term</button>
-          <button>Last term</button>
+        <div class="view-toggle" id="perfTermToggle">
+          <button class="active" data-term="thisTerm">This term</button>
+          <button data-term="lastTerm">Last term</button>
         </div>
       </div>
       <div class="grid">
@@ -1055,12 +1191,14 @@ select.modal-input{
           <div class="card-tooltip" id="cardTooltip"></div>
         </div>
         <div class="card">
-          <div class="card-head"><h3>Resolution rate by category</h3><div class="meta">Last 30 days</div></div>
+          <div class="card-head"><h3>Resolution rate by category</h3><div class="meta" id="categoryPeriod">Last 30 days</div></div>
+          <div id="categoryRows">
           <div class="cat-row"><span class="name">Attendance</span><div class="bar-track"><div class="bar-fill" data-w="91" style="background:var(--chart-1)"></div></div><span class="score">91</span></div>
           <div class="cat-row"><span class="name">Fees & Billing</span><div class="bar-track"><div class="bar-fill" data-w="84" style="background:var(--chart-1)"></div></div><span class="score">84</span></div>
           <div class="cat-row"><span class="name">Academic Advising</span><div class="bar-track"><div class="bar-fill" data-w="88" style="background:var(--chart-1)"></div></div><span class="score">88</span></div>
           <div class="cat-row"><span class="name">Parent Inquiries</span><div class="bar-track"><div class="bar-fill" data-w="79" style="background:var(--chart-1)"></div></div><span class="score">79</span></div>
           <div class="cat-row"><span class="name">Records & IT</span><div class="bar-track"><div class="bar-fill" data-w="95" style="background:var(--chart-1)"></div></div><span class="score">95</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -1142,9 +1280,8 @@ select.modal-input{
         <p>Friday, 2:00 PM · Conference Room B · Bring open-case and parent-message summaries</p>
       </div>
       <div class="countdown">
-        <div class="cd-box"><div class="cd-num">128</div><div class="cd-lbl">open cases</div></div>
-        <div class="cd-box"><div class="cd-num">42</div><div class="cd-lbl">parent msgs</div></div>
-        <div class="cd-box"><div class="cd-num">5</div><div class="cd-lbl">staff on duty</div></div>
+        <div class="cd-box" data-nav="page-alerts"><div class="cd-num">128</div><div class="cd-lbl">open cases</div></div>
+        <div class="cd-box" data-nav="page-messages"><div class="cd-num">42</div><div class="cd-lbl">parent msgs</div></div>
       </div>
     </div>
 
@@ -1307,6 +1444,41 @@ select.modal-input{
     </section>
     </div><!-- /page-attendance -->
 
+    <!-- ============ PAGE: FEE LOG ============ -->
+    <div class="page-view" id="page-fees" hidden>
+    <section class="section fee-log-section" id="fee-leaderboard-section">
+      <div class="section-head">
+        <div>
+          <h2>Unpaid balance leaderboard</h2>
+          <div class="meta">Every registered student, ranked by outstanding balance — highest first. Click a student for their full record.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="fee-leaderboard" id="feeLeaderboard"></div>
+      </div>
+    </section>
+    <section class="section fee-log-section" id="fee-log">
+      <div class="section-head">
+        <div>
+          <h2>Fee log lookup</h2>
+          <div class="meta">Search any registered student to pull up their full fee record, payment history, and reach their parent directly</div>
+        </div>
+      </div>
+      <div class="card fee-log-card">
+        <div class="fee-search-wrap">
+          <div class="search-pill fee-search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="feeSearch" placeholder="Type a student's full name…" autocomplete="off">
+          </div>
+          <div id="feeSuggest" class="fee-suggest" hidden></div>
+        </div>
+        <div id="feeResult" class="fee-result">
+          <div class="fee-empty">Start typing a registered student's name above — pick them from the list to open their fee record.</div>
+        </div>
+      </div>
+    </section>
+    </div><!-- /page-fees -->
+
     <!-- ============ PAGE: PARENT MESSAGES ============ -->
     <div class="page-view" id="page-messages" hidden>
     <section class="section" id="parent-messages">
@@ -1423,7 +1595,7 @@ select.modal-input{
     <div class="section-head">
       <div>
         <h2>Appointments</h2>
-        <div class="meta">Yesterday, today, and tomorrow's scheduled meetings with parents and students</div>
+        <div class="meta">Tomorrow, today, this week, plus your appointment history and anything waiting to be rescheduled</div>
       </div>
       <div class="page-head-actions">
         <button class="act-btn" onclick="openApptModal()">+ Schedule appointment</button>
@@ -1432,38 +1604,44 @@ select.modal-input{
 
     <div class="appt-timeline">
 
-      <section class="appt-day appt-day-past">
-        <div class="appt-day-head"><h3>Yesterday</h3><span class="appt-day-date">Fri, Sept 11</span><span class="appt-day-count">3 appointments</span></div>
-        <div class="card">
+      <section class="appt-day">
+        <div class="appt-day-head"><h3>Tomorrow</h3><span class="appt-day-date">Sun, Sept 13</span><span class="appt-day-count">2 appointments</span></div>
+        <div class="card" id="tomorrow-appt-card">
           <div class="appt-item">
             <div class="appt-row">
-              <div class="appt-time"><div class="t">10:00</div><div class="m">AM</div></div>
+              <div class="appt-time"><div class="t">9:00</div><div class="m">AM</div><div class="d">Sept 13</div></div>
               <div class="appt-rail"></div>
-              <div><div class="appt-name">Farah Karimi</div><div class="appt-type">Advising follow-up · Sana Karimi</div></div>
-              <span class="tag done">Completed</span>
+              <div><div class="appt-name">Liam Turner</div><div class="appt-type">Financial aid follow-up · Jonah Turner</div></div>
+              <span class="tag due-soon">Video</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('jonah turner')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Video call &nbsp;·&nbsp; <b>Notes:</b> Follow-up to today's consult; bring the updated aid offer.</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">11:30</div><div class="m">AM</div><div class="d">Sept 13</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Sunil Bhatt</div><div class="appt-type">Scholarship interview, part 2 · Priya Bhatt</div></div>
+              <span class="tag ok">In-person</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('priya bhatt')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Student Affairs, Room 204 &nbsp;·&nbsp; <b>Notes:</b> Final round — panel decision expected by end of week.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="appt-day">
+        <div class="appt-day-head"><h3>This week</h3><span class="appt-day-date">Fri, Sept 18</span><span class="appt-day-count">1 appointment</span></div>
+        <div class="card" id="thisweek-appt-card">
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">—</div><div class="m">TBD</div><div class="d">Sept 18</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Farah Karimi</div><div class="appt-type">Advising check-in confirmation · Sana Karimi</div></div>
+              <span class="tag due-soon">Follow-up</span>
               <button class="row-action" title="Parent contact" onclick="openParentPanel('sana karimi')">☎</button>
             </div>
-            <div class="appt-more"><b>Location:</b> Advising Office, Room 112 &nbsp;·&nbsp; <b>Notes:</b> First-term check-in went well; no further action needed this month.</div>
-          </div>
-          <div class="appt-item">
-            <div class="appt-row">
-              <div class="appt-time"><div class="t">1:30</div><div class="m">PM</div></div>
-              <div class="appt-rail"></div>
-              <div><div class="appt-name">Adaeze Weiss</div><div class="appt-type">Course withdrawal discussion · Hana Weiss</div></div>
-              <span class="tag done">Completed</span>
-              <button class="row-action" title="Parent contact" onclick="openParentPanel('hana weiss')">☎</button>
-            </div>
-            <div class="appt-more"><b>Location:</b> Video call &nbsp;·&nbsp; <b>Notes:</b> Withdrawal form signed; registrar copied on the summary email.</div>
-          </div>
-          <div class="appt-item">
-            <div class="appt-row">
-              <div class="appt-time"><div class="t">4:00</div><div class="m">PM</div></div>
-              <div class="appt-rail"></div>
-              <div><div class="appt-name">Grace Ibarra</div><div class="appt-type">Fee dispute follow-up · Maya Ibarra</div></div>
-              <span class="tag done">Completed</span>
-              <button class="row-action" title="Parent contact" onclick="openParentPanel('maya ibarra')">☎</button>
-            </div>
-            <div class="appt-more"><b>Location:</b> Student Affairs, Room 204 &nbsp;·&nbsp; <b>Notes:</b> Partial refund approved; finance office processing this week.</div>
+            <div class="appt-more"><b>Notes:</b> Confirm the written summary from Tuesday's first-term advising follow-up before Friday.</div>
           </div>
         </div>
       </section>
@@ -1473,7 +1651,7 @@ select.modal-input{
         <div class="card" id="today-appt-card">
           <div class="appt-item">
             <div class="appt-row">
-              <div class="appt-time"><div class="t">9:30</div><div class="m">AM</div></div>
+              <div class="appt-time"><div class="t">9:30</div><div class="m">AM</div><div class="d">Sept 12</div></div>
               <div class="appt-rail"></div>
               <div><div class="appt-name">Grace Ibarra</div><div class="appt-type">Parent meeting · fee dispute · Maya Ibarra</div></div>
               <span class="tag ok">In-person</span>
@@ -1483,7 +1661,7 @@ select.modal-input{
           </div>
           <div class="appt-item">
             <div class="appt-row">
-              <div class="appt-time"><div class="t">11:00</div><div class="m">AM</div></div>
+              <div class="appt-time"><div class="t">11:00</div><div class="m">AM</div><div class="d">Sept 12</div></div>
               <div class="appt-rail"></div>
               <div><div class="appt-name">Liam Turner</div><div class="appt-type">Financial aid consult · Jonah Turner</div></div>
               <span class="tag due-soon">Video</span>
@@ -1493,7 +1671,7 @@ select.modal-input{
           </div>
           <div class="appt-item">
             <div class="appt-row">
-              <div class="appt-time"><div class="t">1:15</div><div class="m">PM</div></div>
+              <div class="appt-time"><div class="t">1:15</div><div class="m">PM</div><div class="d">Sept 12</div></div>
               <div class="appt-rail"></div>
               <div><div class="appt-name">Adjoa Osei</div><div class="appt-type">Parent-teacher conference · Leo Osei</div></div>
               <span class="tag ok">In-person</span>
@@ -1503,7 +1681,7 @@ select.modal-input{
           </div>
           <div class="appt-item">
             <div class="appt-row">
-              <div class="appt-time"><div class="t">3:45</div><div class="m">PM</div></div>
+              <div class="appt-time"><div class="t">3:45</div><div class="m">PM</div><div class="d">Sept 12</div></div>
               <div class="appt-rail"></div>
               <div><div class="appt-name">Sunil Bhatt</div><div class="appt-type">Scholarship interview · Priya Bhatt</div></div>
               <span class="tag due-soon">Video</span>
@@ -1514,28 +1692,45 @@ select.modal-input{
         </div>
       </section>
 
-      <section class="appt-day">
-        <div class="appt-day-head"><h3>Tomorrow</h3><span class="appt-day-date">Sun, Sept 13</span><span class="appt-day-count">2 appointments</span></div>
-        <div class="card">
+      <section class="appt-day appt-day-past">
+        <div class="appt-day-head"><h3>History</h3><span class="appt-day-date">Completed appointments</span><span class="appt-day-count">2 completed</span></div>
+        <div class="card" id="history-appt-card">
           <div class="appt-item">
             <div class="appt-row">
-              <div class="appt-time"><div class="t">9:00</div><div class="m">AM</div></div>
+              <div class="appt-time"><div class="t">10:00</div><div class="m">AM</div><div class="d">Sept 11</div></div>
               <div class="appt-rail"></div>
-              <div><div class="appt-name">Liam Turner</div><div class="appt-type">Financial aid follow-up · Jonah Turner</div></div>
-              <span class="tag due-soon">Video</span>
-              <button class="row-action" title="Parent contact" onclick="openParentPanel('jonah turner')">☎</button>
+              <div><div class="appt-name">Farah Karimi</div><div class="appt-type">Advising follow-up · Sana Karimi</div></div>
+              <span class="tag done">Completed</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('sana karimi')">☎</button>
             </div>
-            <div class="appt-more"><b>Location:</b> Video call &nbsp;·&nbsp; <b>Notes:</b> Follow-up to today's consult; bring the updated aid offer.</div>
+            <div class="appt-more"><b>Location:</b> Advising Office, Room 112 &nbsp;·&nbsp; <b>Notes:</b> First-term check-in went well; no further action needed this month.</div>
           </div>
           <div class="appt-item">
             <div class="appt-row">
-              <div class="appt-time"><div class="t">11:30</div><div class="m">AM</div></div>
+              <div class="appt-time"><div class="t">4:00</div><div class="m">PM</div><div class="d">Sept 11</div></div>
               <div class="appt-rail"></div>
-              <div><div class="appt-name">Sunil Bhatt</div><div class="appt-type">Scholarship interview, part 2 · Priya Bhatt</div></div>
-              <span class="tag ok">In-person</span>
-              <button class="row-action" title="Parent contact" onclick="openParentPanel('priya bhatt')">☎</button>
+              <div><div class="appt-name">Grace Ibarra</div><div class="appt-type">Fee dispute follow-up · Maya Ibarra</div></div>
+              <span class="tag done">Completed</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('maya ibarra')">☎</button>
             </div>
-            <div class="appt-more"><b>Location:</b> Student Affairs, Room 204 &nbsp;·&nbsp; <b>Notes:</b> Final round — panel decision expected by end of week.</div>
+            <div class="appt-more"><b>Location:</b> Student Affairs, Room 204 &nbsp;·&nbsp; <b>Notes:</b> Partial refund approved; finance office processing this week.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="appt-day appt-day-rescheduled">
+        <div class="appt-day-head"><h3>Rescheduled</h3><span class="appt-day-date">Missed — needs a new time</span><span class="appt-day-count">1 appointment</span></div>
+        <div class="card" id="rescheduled-appt-card">
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">1:30</div><div class="m">PM</div><div class="d">Sept 11</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Adaeze Weiss</div><div class="appt-type">Course withdrawal discussion · Hana Weiss</div></div>
+              <span class="tag missed">Missed</span>
+              <button class="reschedule-btn" onclick="openApptModal('hana weiss','Course withdrawal discussion — rebooked after a missed appointment.', this.closest('.appt-item'))">Reschedule</button>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('hana weiss')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Video call &nbsp;·&nbsp; <b>Notes:</b> Parent didn't join the call — needs to be rebooked for a new day.</div>
           </div>
         </div>
       </section>
@@ -1548,19 +1743,26 @@ select.modal-input{
     <div class="section-head">
       <div>
         <h2>Student alerts</h2>
-        <div class="meta">Urgent items first, then unchecked, then pending follow-ups</div>
+        <div class="meta">Grouped by category — how urgent each one is shows as a tag on the item</div>
+        <div class="sev-legend">
+          <span class="lg-item"><span class="lg-dot" style="background:var(--brick-tint);border:1px solid var(--brick)"></span>Critical</span>
+          <span class="lg-item"><span class="lg-dot" style="background:var(--amber-tint);border:1px solid var(--amber)"></span>Warning</span>
+        </div>
       </div>
     </div>
 
     <div class="alert-groups">
 
       <section class="alert-group">
-        <div class="alert-group-head urgent"><span class="dot"></span><h3>Urgent</h3><span class="alert-group-count">1 needs immediate action</span></div>
+        <div class="alert-cat-head">
+          <span class="alert-cat-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+          <h3>Attendance</h3><span class="alert-group-count">1 alert</span>
+        </div>
         <div class="card">
           <div class="alert-item">
             <div class="alert-row">
-              <div class="alert-icon high"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
-              <div><div class="alert-title">Attendance threshold reached</div><div class="alert-desc">Leo Osei has missed 4 consecutive sessions — parent notified.</div><div class="alert-time time-ago" data-ago-minutes="32">32 minutes ago</div></div>
+              <div class="alert-icon crit"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+              <div><div class="alert-title">Attendance threshold reached<span class="sev-tag crit">Critical</span></div><div class="alert-desc">Leo Osei has missed 4 consecutive sessions — parent notified.</div><div class="alert-time time-ago" data-ago-minutes="32">32 minutes ago</div></div>
               <button class="act-btn outline alert-msg-btn" onclick="openComposeModal('Adjoa Osei','Re: Attendance threshold reached')">Message parent</button>
             </div>
             <div class="alert-more"><b>Recommended action:</b> Confirm with the parent-teacher conference at 1:15 PM today; escalate to advising if attendance doesn't improve by Friday.</div>
@@ -1569,37 +1771,35 @@ select.modal-input{
       </section>
 
       <section class="alert-group">
-        <div class="alert-group-head unchecked"><span class="dot"></span><h3>Unchecked</h3><span class="alert-group-count">2 not yet reviewed</span></div>
+        <div class="alert-cat-head">
+          <span class="alert-cat-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M16.5 6.5a3.5 3.5 0 0 0-3.5-2h-1a3 3 0 0 0 0 6h1a3 3 0 0 1 0 6h-1a3.5 3.5 0 0 1-3.5-2"/></svg></span>
+          <h3>Financial</h3><span class="alert-group-count">1 alert</span>
+        </div>
         <div class="card">
           <div class="alert-item">
             <div class="alert-row">
-              <div class="alert-icon med"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
-              <div><div class="alert-title">Financial hold pending<span class="alert-new-badge">New</span></div><div class="alert-desc">Priya Bhatt's account has an unresolved balance; parent inquiring.</div><div class="alert-time time-ago" data-ago-minutes="60">1 hour ago</div></div>
+              <div class="alert-icon warn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+              <div><div class="alert-title">Financial hold pending<span class="sev-tag warn">Warning</span><span class="alert-new-badge">New</span></div><div class="alert-desc">Priya Bhatt's account has an unresolved balance; parent inquiring.</div><div class="alert-time time-ago" data-ago-minutes="60">1 hour ago</div></div>
               <button class="act-btn outline alert-msg-btn" onclick="openComposeModal('Sunil Bhatt','Re: Financial hold on account')">Message parent</button>
             </div>
             <div class="alert-more"><b>Recommended action:</b> Verify the hold with finance before the 3:45 PM scholarship interview today.</div>
-          </div>
-          <div class="alert-item">
-            <div class="alert-row">
-              <div class="alert-icon med"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
-              <div><div class="alert-title">Repeat parent contact flag<span class="alert-new-badge">New</span></div><div class="alert-desc">Jonah Turner's family has opened 3 requests this month.</div><div class="alert-time time-ago" data-ago-minutes="1560">Yesterday</div></div>
-              <button class="act-btn outline alert-msg-btn" onclick="openComposeModal('Liam Turner','Re: Recent requests this month')">Message parent</button>
-            </div>
-            <div class="alert-more"><b>Recommended action:</b> Review the request history before today's 11:00 AM financial aid consult to avoid repeating past answers.</div>
           </div>
         </div>
       </section>
 
       <section class="alert-group">
-        <div class="alert-group-head pending"><span class="dot"></span><h3>Pending</h3><span class="alert-group-count">1 awaiting follow-up</span></div>
+        <div class="alert-cat-head">
+          <span class="alert-cat-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.4 8.5 8.5 0 0 1-4-1L3 21l1.3-3.9a8.5 8.5 0 1 1 16.7-5.6z"/></svg></span>
+          <h3>Family engagement</h3><span class="alert-group-count">1 alert</span>
+        </div>
         <div class="card">
           <div class="alert-item">
             <div class="alert-row">
-              <div class="alert-icon low"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
-              <div><div class="alert-title">Advising check-in due</div><div class="alert-desc">Sana Karimi's first-term review is due Friday.</div><div class="alert-time time-ago" data-ago-minutes="180">3 hours ago</div></div>
-              <button class="act-btn outline alert-msg-btn" onclick="openComposeModal('Farah Karimi','Re: First-term advising check-in')">Message parent</button>
+              <div class="alert-icon warn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+              <div><div class="alert-title">Repeat parent contact flag<span class="sev-tag warn">Warning</span><span class="alert-new-badge">New</span></div><div class="alert-desc">Jonah Turner's family has opened 3 requests this month.</div><div class="alert-time time-ago" data-ago-minutes="1560">Yesterday</div></div>
+              <button class="act-btn outline alert-msg-btn" onclick="openComposeModal('Liam Turner','Re: Recent requests this month')">Message parent</button>
             </div>
-            <div class="alert-more"><b>Recommended action:</b> Yesterday's advising follow-up covered the basics — just confirm the written summary before Friday.</div>
+            <div class="alert-more"><b>Recommended action:</b> Review the request history before today's 11:00 AM financial aid consult to avoid repeating past answers.</div>
           </div>
         </div>
       </section>
@@ -1626,7 +1826,11 @@ select.modal-input{
   <div class="modal-head"><h3>New message to parent</h3><button class="panel-close" id="composeClose">✕</button></div>
   <div class="modal-body">
     <label class="modal-label">Parent</label>
-    <select class="modal-input" id="composeParent"></select>
+    <div class="modal-combo">
+      <input type="text" class="modal-input" id="composeParentInput" placeholder="Type a parent or student's name…" autocomplete="off">
+      <input type="hidden" id="composeParent">
+      <div class="fee-suggest" id="composeParentSuggest" hidden></div>
+    </div>
     <label class="modal-label">Subject</label>
     <input class="modal-input" id="composeSubject" type="text" placeholder="e.g. Attendance update">
     <label class="modal-label">Message</label>
@@ -1644,7 +1848,11 @@ select.modal-input{
   <div class="modal-head"><h3>Schedule appointment</h3><button class="panel-close" id="apptClose">✕</button></div>
   <div class="modal-body">
     <label class="modal-label">Parent / student</label>
-    <select class="modal-input" id="apptParent"></select>
+    <div class="modal-combo">
+      <input type="text" class="modal-input" id="apptParentInput" placeholder="Type a parent or student's name…" autocomplete="off">
+      <input type="hidden" id="apptParent">
+      <div class="fee-suggest" id="apptParentSuggest" hidden></div>
+    </div>
     <label class="modal-label">Type</label>
     <select class="modal-input" id="apptType"><option>In-person</option><option>Video</option></select>
     <label class="modal-label">Date</label>
@@ -1658,6 +1866,12 @@ select.modal-input{
     <button class="act-btn outline" id="apptCancel">Cancel</button>
     <button class="act-btn" id="apptSave">Save appointment</button>
   </div>
+</div>
+
+<div class="modal-backdrop" id="feeDetailBackdrop"></div>
+<div class="modal modal-wide" id="feeDetailModal">
+  <div class="modal-head"><h3 id="feeDetailTitle">Student fee record</h3><button class="panel-close" id="feeDetailClose">✕</button></div>
+  <div class="modal-body" id="feeDetailBody"></div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1778,6 +1992,14 @@ document.querySelectorAll('.stat-card[data-nav]').forEach(card => {
   });
 });
 
+/* Weekly Service Review strip: open cases -> Alerts, parent msgs -> Parent Messages */
+document.querySelectorAll('.cd-box[data-nav]').forEach(box => {
+  box.addEventListener('click', () => {
+    hideSiteLoaderNow();
+    goToPage(box.dataset.nav);
+  });
+});
+
 /* Scroll-spy: while on the Overview page, highlight the sub-nav item
    for whichever section (Quick Actions / Performance / Staff Activity /
    Staff Directory / the hero itself) is currently in view. */
@@ -1820,12 +2042,69 @@ const parentDirectory = {
 function studentDisplayName(key){
   return key.replace(/\b\w/g, c => c.toUpperCase());
 }
+function personComboLabel(key){
+  const info = parentDirectory[key];
+  return info ? `${info.parent} — parent of ${studentDisplayName(key)}` : '';
+}
 
-const parentOptionsHtml = Object.entries(parentDirectory).map(([key, info]) =>
-  `<option value="${key}">${info.parent} — parent of ${studentDisplayName(key)}</option>`
-).join('');
-document.getElementById('composeParent').innerHTML = parentOptionsHtml;
-document.getElementById('apptParent').innerHTML = parentOptionsHtml;
+/* ---------- Reusable parent/student typeahead for the Compose and Appointment
+   modals: type a name and matching registered students appear as options
+   underneath the field (replaces the old plain dropdown <select>). ---------- */
+function setPersonCombo(inputId, hiddenId, key){
+  document.getElementById(hiddenId).value = key || '';
+  document.getElementById(inputId).value = key ? personComboLabel(key) : '';
+}
+function initPersonCombo(inputId, hiddenId, suggestId){
+  const input = document.getElementById(inputId);
+  const hidden = document.getElementById(hiddenId);
+  const suggest = document.getElementById(suggestId);
+
+  function matchesFor(query){
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return Object.keys(parentDirectory).filter(key => {
+      const info = parentDirectory[key];
+      return key.includes(q) || info.parent.toLowerCase().includes(q) || studentDisplayName(key).toLowerCase().includes(q);
+    });
+  }
+  function close(){ suggest.hidden = true; suggest.innerHTML = ''; }
+  function pick(key){ setPersonCombo(inputId, hiddenId, key); close(); }
+  function open(query){
+    const matches = matchesFor(query);
+    if (!matches.length){
+      suggest.innerHTML = `<div class="fee-suggest-empty">No parent or student found matching "${query}".</div>`;
+      suggest.hidden = false;
+      return;
+    }
+    suggest.innerHTML = matches.map(key => `
+      <button type="button" class="fee-suggest-item" data-key="${key}">
+        <span class="sg-meta"><span>${parentDirectory[key].parent}</span><span class="sg-id">Parent of ${studentDisplayName(key)}</span></span>
+      </button>`).join('');
+    suggest.hidden = false;
+  }
+
+  input.addEventListener('input', (e) => {
+    hidden.value = '';
+    const q = e.target.value;
+    if (!q.trim()) { close(); return; }
+    open(q);
+  });
+  input.addEventListener('focus', (e) => { if (e.target.value.trim() && !hidden.value) open(e.target.value); });
+  input.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    const matches = matchesFor(e.target.value);
+    if (matches.length === 1){ e.preventDefault(); pick(matches[0]); }
+  });
+  suggest.addEventListener('click', (e) => {
+    const btn = e.target.closest('.fee-suggest-item[data-key]');
+    if (btn) pick(btn.dataset.key);
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest(`#${inputId}`) && !e.target.closest(`#${suggestId}`)) close();
+  });
+}
+initPersonCombo('composeParentInput', 'composeParent', 'composeParentSuggest');
+initPersonCombo('apptParentInput', 'apptParent', 'apptParentSuggest');
 
 /* ---------- Parent contact slide-over panel ---------- */
 function openParentPanel(studentKey){
@@ -1868,8 +2147,11 @@ function showToast(msg){
 function openComposeModal(parentName, subject){
   if (parentName){
     const key = Object.keys(parentDirectory).find(k => parentDirectory[k].parent === parentName);
-    if (key) document.getElementById('composeParent').value = key;
+    setPersonCombo('composeParentInput', 'composeParent', key || '');
+  } else {
+    setPersonCombo('composeParentInput', 'composeParent', '');
   }
+  document.getElementById('composeParentSuggest').hidden = true;
   document.getElementById('composeSubject').value = subject || '';
   document.getElementById('composeMessage').value = '';
   document.getElementById('composeModal').classList.add('open');
@@ -1890,10 +2172,24 @@ document.getElementById('composeSend').addEventListener('click', () => {
 });
 
 /* ---------- Schedule appointment modal ---------- */
-function openApptModal(){
+const APPT_WEEKDAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const APPT_MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+// Reference "today" used by this page's own mock data (the Today section above is Sat, Sept 12).
+const APPT_TODAY = new Date('2026-09-12T00:00:00');
+function apptShortDate(d){ return `${APPT_MONTHS[d.getMonth()]} ${d.getDate()}`; }
+
+// When set, we're rescheduling an existing missed appointment rather than booking a fresh one —
+// apptSave will remove this row from the Rescheduled list once the new slot is saved.
+let apptRescheduleEl = null;
+
+function openApptModal(studentKey, notes, rescheduleEl){
+  apptRescheduleEl = rescheduleEl || null;
+  setPersonCombo('apptParentInput', 'apptParent', studentKey || '');
+  document.getElementById('apptParentSuggest').hidden = true;
+  document.getElementById('apptType').value = 'In-person';
   document.getElementById('apptDate').value = '';
   document.getElementById('apptTime').value = '';
-  document.getElementById('apptNotes').value = '';
+  document.getElementById('apptNotes').value = notes || '';
   document.getElementById('apptModal').classList.add('open');
   document.getElementById('apptBackdrop').classList.add('open');
 }
@@ -1916,21 +2212,57 @@ document.getElementById('apptSave').addEventListener('click', () => {
   let hour = parseInt(h, 10);
   const ampm = hour >= 12 ? 'PM' : 'AM';
   hour = hour % 12; if (hour === 0) hour = 12;
-  const list = document.getElementById('today-appt-card');
+
+  // Figure out which day-section this belongs in, based on the date actually chosen.
+  const chosenDate = new Date(date + 'T00:00:00');
+  const diffDays = Math.round((chosenDate - APPT_TODAY) / 86400000);
+  const dateLabel = apptShortDate(chosenDate);
+  let listId = 'thisweek-appt-card';
+  if (diffDays === 0) listId = 'today-appt-card';
+  else if (diffDays === 1) listId = 'tomorrow-appt-card';
+  const list = document.getElementById(listId);
+
+  const isReschedule = !!apptRescheduleEl;
   const item = document.createElement('div');
   item.className = 'appt-item';
   item.innerHTML = `
     <div class="appt-row">
-      <div class="appt-time"><div class="t">${hour}:${m}</div><div class="m">${ampm}</div></div>
+      <div class="appt-time"><div class="t">${hour}:${m}</div><div class="m">${ampm}</div><div class="d">${dateLabel}</div></div>
       <div class="appt-rail"></div>
       <div><div class="appt-name">${info.parent}</div><div class="appt-type">${type} · ${displayName}</div></div>
       <span class="tag ${type === 'Video' ? 'due-soon' : 'ok'}">${type}</span>
+      ${isReschedule ? '<span class="tag pending">Rescheduled</span>' : ''}
       <button class="row-action" title="Parent contact" onclick="openParentPanel('${key}')">☎</button>
     </div>
-    <div class="appt-more"><b>Notes:</b> Newly scheduled — add location and prep notes once confirmed.</div>`;
-  if (list) list.prepend(item);
+    <div class="appt-more"><b>Notes:</b> ${isReschedule ? 'Rebooked after a missed appointment.' : 'Newly scheduled — add location and prep notes once confirmed.'}</div>`;
+  if (list){
+    list.prepend(item);
+    const dayCountEl = list.closest('.appt-day')?.querySelector('.appt-day-count');
+    if (dayCountEl){
+      const n = list.querySelectorAll('.appt-item').length;
+      dayCountEl.textContent = `${n} appointment${n === 1 ? '' : 's'}`;
+    }
+  }
+
+  // If this booking came from the Rescheduled list, remove the old missed row.
+  if (isReschedule && apptRescheduleEl.isConnected){
+    const reschedCard = document.getElementById('rescheduled-appt-card');
+    apptRescheduleEl.remove();
+    if (reschedCard){
+      const remaining = reschedCard.querySelectorAll('.appt-item').length;
+      const reschedSection = reschedCard.closest('.appt-day-rescheduled');
+      if (remaining === 0 && reschedSection){
+        reschedSection.style.display = 'none';
+      } else {
+        const countEl = reschedSection?.querySelector('.appt-day-count');
+        if (countEl) countEl.textContent = `${remaining} appointment${remaining === 1 ? '' : 's'}`;
+      }
+    }
+  }
+  apptRescheduleEl = null;
+
   closeApptModal();
-  showToast(`Appointment scheduled with ${info.parent}`);
+  showToast(isReschedule ? `Appointment rescheduled with ${info.parent}` : `Appointment scheduled with ${info.parent}`);
 });
 
 /* ---------- Student requests: working filters ---------- */
@@ -2281,6 +2613,358 @@ document.addEventListener('click', (e) => {
   e.stopPropagation();
 });
 
+/* ---------- Fee log lookup: every registered student, detailed ---------- */
+const feeLog = {
+  'maya ibarra': {
+    id: 'ID 20394', year: 'Sophomore', avatar: 'MI', color: 'linear-gradient(135deg,#3B6E91,#294E68)',
+    items: [
+      { term:'Fall 2026', label:'Tuition fee',      amount:185000, paid:185000, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Library fee',       amount:4500,   paid:4500,   due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Lab fee',           amount:9000,   paid:4500,   due:'Sept 20, 2026' },
+      { term:'Fall 2026', label:'Examination fee',   amount:6000,   paid:0,      due:'Oct 5, 2026' },
+    ],
+    payments: [
+      { date:'Aug 12, 2026', desc:'Tuition fee — Fall 2026', amount:185000, method:'Bank transfer', receipt:'RCT-40211' },
+      { date:'Aug 12, 2026', desc:'Library fee — Fall 2026', amount:4500,   method:'Bank transfer', receipt:'RCT-40212' },
+      { date:'Sept 2, 2026', desc:'Lab fee — partial',       amount:4500,   method:'eSewa',         receipt:'RCT-41087' },
+    ],
+  },
+  'jonah turner': {
+    id: 'ID 18827', year: 'Senior', avatar: 'JT', color: 'linear-gradient(135deg,#E2A44E,#A6753A)',
+    items: [
+      { term:'Fall 2026', label:'Tuition fee',      amount:198000, paid:198000, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Capstone project fee', amount:12000, paid:12000, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Examination fee',  amount:6000,   paid:6000,   due:'Oct 5, 2026' },
+    ],
+    payments: [
+      { date:'Aug 9, 2026', desc:'Tuition fee — Fall 2026', amount:198000, method:'Bank transfer', receipt:'RCT-39980' },
+      { date:'Aug 9, 2026', desc:'Capstone project fee',    amount:12000,  method:'Bank transfer', receipt:'RCT-39981' },
+      { date:'Sept 1, 2026', desc:'Examination fee',        amount:6000,   method:'Cash',          receipt:'RCT-40903' },
+    ],
+  },
+  'sana karimi': {
+    id: 'ID 20981', year: 'Freshman', avatar: 'SK', color: 'linear-gradient(135deg,#34614F,#1F4438)',
+    items: [
+      { term:'Fall 2026', label:'Tuition fee',      amount:172000, paid:86000, due:'Sept 15, 2026' },
+      { term:'Fall 2026', label:'Library fee',       amount:4500,  paid:4500,  due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Lab fee',           amount:9000,  paid:0,     due:'Sept 20, 2026' },
+      { term:'Fall 2026', label:'Hostel fee',        amount:65000, paid:0,     due:'Sept 15, 2026' },
+    ],
+    payments: [
+      { date:'Aug 14, 2026', desc:'Library fee — Fall 2026',    amount:4500,  method:'Bank transfer', receipt:'RCT-40350' },
+      { date:'Sept 5, 2026', desc:'Tuition fee — first installment', amount:86000, method:'Bank transfer', receipt:'RCT-41205' },
+    ],
+  },
+  'leo osei': {
+    id: 'ID 19502', year: 'Junior', avatar: 'LO', color: 'linear-gradient(135deg,#BE5039,#8C3A28)',
+    items: [
+      { term:'Fall 2026', label:'Tuition fee',      amount:181000, paid:0, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Library fee',       amount:4500,  paid:0, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Lab fee',           amount:9000,  paid:0, due:'Aug 20, 2026' },
+    ],
+    payments: [],
+  },
+  'hana weiss': {
+    id: 'ID 21044', year: 'Sophomore', avatar: 'HW', color: 'linear-gradient(135deg,#3B6E91,#294E68)',
+    items: [
+      { term:'Fall 2026', label:'Tuition fee',      amount:185000, paid:185000, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Library fee',       amount:4500,  paid:4500,   due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Lab fee',           amount:9000,  paid:9000,   due:'Sept 20, 2026' },
+      { term:'Fall 2026', label:'Examination fee',   amount:6000,  paid:6000,   due:'Oct 5, 2026' },
+    ],
+    payments: [
+      { date:'Aug 10, 2026', desc:'Tuition fee — Fall 2026', amount:185000, method:'Bank transfer', receipt:'RCT-40062' },
+      { date:'Aug 10, 2026', desc:'Library fee — Fall 2026', amount:4500,   method:'Bank transfer', receipt:'RCT-40063' },
+      { date:'Sept 3, 2026', desc:'Lab fee — Fall 2026',     amount:9000,   method:'eSewa',         receipt:'RCT-41140' },
+      { date:'Sept 3, 2026', desc:'Examination fee',         amount:6000,   method:'eSewa',         receipt:'RCT-41141' },
+    ],
+  },
+  'priya bhatt': {
+    id: 'ID 20117', year: 'Senior', avatar: 'PB', color: 'linear-gradient(135deg,#E2A44E,#A6753A)',
+    items: [
+      { term:'Fall 2026', label:'Tuition fee',      amount:198000, paid:198000, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Capstone project fee', amount:12000, paid:6000, due:'Sept 25, 2026' },
+      { term:'Fall 2026', label:'Examination fee',  amount:6000,   paid:0,      due:'Oct 5, 2026' },
+    ],
+    payments: [
+      { date:'Aug 11, 2026', desc:'Tuition fee — Fall 2026',     amount:198000, method:'Bank transfer', receipt:'RCT-40190' },
+      { date:'Sept 6, 2026', desc:'Capstone project fee — partial', amount:6000, method:'Cash',        receipt:'RCT-41310' },
+    ],
+  },
+  'omar haddad': {
+    id: 'ID 19765', year: 'Junior', avatar: 'OH', color: 'linear-gradient(135deg,#5B6BC0,#39408A)',
+    items: [
+      { term:'Fall 2026', label:'Tuition fee',      amount:181000, paid:181000, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Library fee',       amount:4500,  paid:4500,   due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Lab fee',           amount:9000,  paid:0,      due:'Sept 20, 2026' },
+    ],
+    payments: [
+      { date:'Aug 13, 2026', desc:'Tuition fee — Fall 2026', amount:181000, method:'Bank transfer', receipt:'RCT-40277' },
+      { date:'Aug 13, 2026', desc:'Library fee — Fall 2026', amount:4500,   method:'Bank transfer', receipt:'RCT-40278' },
+    ],
+  },
+  'ines dubois': {
+    id: 'ID 20560', year: 'Sophomore', avatar: 'ID', color: 'linear-gradient(135deg,#8C6BAF,#5B3E80)',
+    items: [
+      { term:'Fall 2026', label:'Tuition fee',      amount:185000, paid:92500, due:'Sept 15, 2026' },
+      { term:'Fall 2026', label:'Library fee',       amount:4500,  paid:4500,  due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Lab fee',           amount:9000,  paid:9000,  due:'Sept 20, 2026' },
+    ],
+    payments: [
+      { date:'Aug 15, 2026', desc:'Library fee — Fall 2026', amount:4500,  method:'Bank transfer', receipt:'RCT-40410' },
+      { date:'Aug 20, 2026', desc:'Lab fee — Fall 2026',     amount:9000,  method:'Bank transfer', receipt:'RCT-40455' },
+      { date:'Sept 4, 2026', desc:'Tuition fee — first installment', amount:92500, method:'eSewa',  receipt:'RCT-41190' },
+    ],
+  },
+  'ravi shah': {
+    id: 'ID 18994', year: 'Senior', avatar: 'RS', color: 'linear-gradient(135deg,#BE5039,#8C3A28)',
+    items: [
+      { term:'Fall 2026', label:'Tuition fee',      amount:198000, paid:198000, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Capstone project fee', amount:12000, paid:12000, due:'Aug 15, 2026' },
+      { term:'Fall 2026', label:'Examination fee',  amount:6000,  paid:6000,  due:'Oct 5, 2026' },
+    ],
+    payments: [
+      { date:'Aug 8, 2026', desc:'Tuition fee — Fall 2026', amount:198000, method:'Bank transfer', receipt:'RCT-39902' },
+      { date:'Aug 8, 2026', desc:'Capstone project fee',    amount:12000,  method:'Bank transfer', receipt:'RCT-39903' },
+      { date:'Sept 1, 2026', desc:'Examination fee',        amount:6000,   method:'Cash',          receipt:'RCT-40890' },
+    ],
+  },
+};
+
+function formatRs(n){ return 'Rs ' + n.toLocaleString('en-IN'); }
+
+const feeSearchInput = document.getElementById('feeSearch');
+const feeSuggestEl = document.getElementById('feeSuggest');
+const feeResultEl = document.getElementById('feeResult');
+
+function setFeeResult(html){
+  feeResultEl.innerHTML = html;
+  feeResultEl.classList.remove('result-in');
+  void feeResultEl.offsetWidth;
+  feeResultEl.classList.add('result-in');
+}
+
+function closeFeeSuggest(){
+  feeSuggestEl.hidden = true;
+  feeSuggestEl.innerHTML = '';
+}
+
+/* Typing a name lists every matching registered student as a clickable option underneath the field */
+function renderFeeSuggestions(query){
+  const q = query.trim().toLowerCase();
+  if (!q){ closeFeeSuggest(); return; }
+  const matches = Object.keys(feeLog).filter(key => key.includes(q) || studentDisplayName(key).toLowerCase().includes(q));
+  if (!matches.length){
+    feeSuggestEl.innerHTML = `<div class="fee-suggest-empty">No registered student found matching "${query}".</div>`;
+    feeSuggestEl.hidden = false;
+    return;
+  }
+  feeSuggestEl.innerHTML = matches.map(key => {
+    const s = feeLog[key];
+    const name = studentDisplayName(key);
+    return `<button type="button" class="fee-suggest-item" data-key="${key}">
+      <span class="sg-avatar" style="background:${s.color}">${s.avatar}</span>
+      <span class="sg-meta"><span>${name}</span><span class="sg-id">${s.id} · ${s.year}</span></span>
+    </button>`;
+  }).join('');
+  feeSuggestEl.hidden = false;
+}
+
+function selectFeeStudent(key){
+  feeSearchInput.value = studentDisplayName(key);
+  closeFeeSuggest();
+  renderFeeRecord(key);
+}
+
+function buildFeeRecordHtml(key){
+  const student = feeLog[key];
+  if (!student) return '';
+  const displayName = studentDisplayName(key);
+  const parent = parentDirectory[key];
+
+  const totalAmount = student.items.reduce((sum, it) => sum + it.amount, 0);
+  const totalPaid = student.items.reduce((sum, it) => sum + it.paid, 0);
+  const totalBalance = totalAmount - totalPaid;
+  const anyOverdue = student.items.some(it => it.paid < it.amount && new Date(it.due) < new Date('Sept 13, 2026'));
+
+  const itemRows = student.items.map(it => {
+    const bal = it.amount - it.paid;
+    let statusClass = 'paid', statusLabel = 'Paid';
+    if (bal > 0){
+      const overdue = new Date(it.due) < new Date('Sept 13, 2026');
+      if (overdue){ statusClass = 'overdue'; statusLabel = 'Overdue'; }
+      else if (it.paid > 0){ statusClass = 'partial'; statusLabel = 'Partial'; }
+      else { statusClass = 'partial'; statusLabel = 'Pending'; }
+    }
+    return `<tr>
+      <td>${it.term}</td>
+      <td>${it.label}</td>
+      <td class="amt">${formatRs(it.amount)}</td>
+      <td class="amt">${formatRs(it.paid)}</td>
+      <td class="amt">${formatRs(bal)}</td>
+      <td>${it.due}</td>
+      <td><span class="fee-status ${statusClass}">${statusLabel}</span></td>
+    </tr>`;
+  }).join('');
+
+  const paymentRows = student.payments.length
+    ? student.payments.map(p => `<tr>
+        <td>${p.date}</td>
+        <td>${p.desc}</td>
+        <td class="amt">${formatRs(p.amount)}</td>
+        <td>${p.method}</td>
+        <td>${p.receipt}</td>
+      </tr>`).join('')
+    : `<tr><td colspan="5" style="color:var(--ink-faint);">No payments recorded yet this term.</td></tr>`;
+
+  let summaryStatus = 'paid', summaryLabel = 'Fully paid';
+  if (totalBalance > 0){
+    summaryStatus = anyOverdue ? 'overdue' : 'due';
+    summaryLabel = anyOverdue ? 'Overdue balance' : 'Balance due';
+  }
+
+  return `
+    <div class="fee-head-row">
+      <div class="fee-student-head">
+        <div class="mini-avatar" style="width:44px;height:44px;border-radius:12px;font-size:14px;background:${student.color}">${student.avatar}</div>
+        <div>
+          <div class="student-name" style="font-size:16px;">${displayName}</div>
+          <div class="student-id">${student.id} · ${student.year}</div>
+        </div>
+      </div>
+      <div class="fee-summary">
+        <span class="chip">${formatRs(totalPaid)} paid</span>
+        <span class="chip ${summaryStatus === 'overdue' ? 'overdue' : 'due'}">${formatRs(totalBalance)} balance</span>
+        <span class="fee-status ${summaryStatus === 'paid' ? 'paid' : summaryStatus}">${summaryLabel}</span>
+      </div>
+    </div>
+
+    <div class="fee-subhead">Fee breakdown — Fall 2026</div>
+    <div class="fee-table-scroll">
+      <table class="fee-table">
+        <thead><tr><th>Term</th><th>Item</th><th>Amount</th><th>Paid</th><th>Balance</th><th>Due date</th><th>Status</th></tr></thead>
+        <tbody>${itemRows}</tbody>
+      </table>
+    </div>
+
+    <div class="fee-subhead">Payment history</div>
+    <div class="fee-table-scroll">
+      <table class="fee-table">
+        <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Method</th><th>Receipt no.</th></tr></thead>
+        <tbody>${paymentRows}</tbody>
+      </table>
+    </div>
+
+    ${parent ? `
+    <div class="fee-actions">
+      <div class="fee-parent-line">Parent / guardian: <b>${parent.parent}</b> (${parent.relation})</div>
+      <button class="act-btn outline" onclick="openComposeModal('${parent.parent}','Fee balance for ${displayName}')">Message parent</button>
+      <button class="act-btn" onclick="openApptModal('${key}','Discuss outstanding fee balance for ${displayName}.')">Schedule meeting</button>
+    </div>` : ''}
+  `;
+}
+
+function renderFeeRecord(key){
+  if (!feeLog[key]) return;
+  setFeeResult(buildFeeRecordHtml(key));
+}
+
+/* ---------- Fee leaderboard: every registered student ranked by
+   outstanding balance, highest first — click a row for the full record ---------- */
+function computeFeeStanding(key){
+  const s = feeLog[key];
+  const totalAmount = s.items.reduce((sum, it) => sum + it.amount, 0);
+  const totalPaid = s.items.reduce((sum, it) => sum + it.paid, 0);
+  const balance = totalAmount - totalPaid;
+  const anyOverdue = s.items.some(it => it.paid < it.amount && new Date(it.due) < new Date('Sept 13, 2026'));
+  const pctUnpaid = totalAmount ? Math.round((balance / totalAmount) * 100) : 0;
+  return { key, s, totalAmount, totalPaid, balance, anyOverdue, pctUnpaid };
+}
+
+function renderFeeLeaderboard(){
+  const el = document.getElementById('feeLeaderboard');
+  if (!el) return;
+  const standings = Object.keys(feeLog).map(computeFeeStanding).sort((a, b) => b.balance - a.balance);
+
+  el.innerHTML = standings.map((r, i) => {
+    const rank = i + 1;
+    let statusClass = 'paid', statusLabel = 'Paid';
+    if (r.balance > 0){ statusClass = r.anyOverdue ? 'overdue' : 'partial'; statusLabel = r.anyOverdue ? 'Overdue' : 'Partial'; }
+    const rankClass = rank <= 3 ? ` top-${rank}` : '';
+    // Once a student is fully paid, this is no longer an "unpaid balance" entry worth
+    // naming publicly on the leaderboard — keep the row (so counts/ranking stay honest)
+    // but mask the identity.
+    const isPaid = statusClass === 'paid';
+    const nameHtml = isPaid ? 'Paid — name hidden' : studentDisplayName(r.key);
+    const subHtml = isPaid ? '&nbsp;' : `${r.s.id} · ${r.s.year}`;
+    const rowClickable = isPaid ? '' : ' role="button" tabindex="0"';
+    return `<div class="lb-row${rankClass}${isPaid ? ' lb-row-paid' : ''}" data-key="${r.key}"${rowClickable}>
+      <div class="lb-rank">${rank}</div>
+      <div class="mini-avatar" style="background:${r.s.color}">${isPaid ? '✓' : r.s.avatar}</div>
+      <div class="lb-info">
+        <div class="lb-name">${nameHtml}</div>
+        <div class="lb-sub">${subHtml}</div>
+      </div>
+      <div class="lb-bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:${r.pctUnpaid}%;background:${r.anyOverdue ? 'var(--brick)' : 'var(--amber)'}"></div></div></div>
+      <div class="lb-amount">${formatRs(r.balance)}</div>
+      <span class="fee-status ${statusClass}">${statusLabel}</span>
+    </div>`;
+  }).join('');
+}
+renderFeeLeaderboard();
+
+const feeLeaderboardEl = document.getElementById('feeLeaderboard');
+if (feeLeaderboardEl){
+  feeLeaderboardEl.addEventListener('click', (e) => {
+    const row = e.target.closest('.lb-row[data-key]');
+    if (row && !row.classList.contains('lb-row-paid')) openFeeDetailModal(row.dataset.key);
+  });
+  feeLeaderboardEl.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const row = e.target.closest('.lb-row[data-key]');
+    if (row && !row.classList.contains('lb-row-paid')){ e.preventDefault(); openFeeDetailModal(row.dataset.key); }
+  });
+}
+
+/* Clicking a leaderboard row opens the student's full fee record in a
+   modal "box" — same content the search flow builds, just presented as
+   a popup instead of an inline panel. */
+function openFeeDetailModal(key){
+  if (!feeLog[key]) return;
+  document.getElementById('feeDetailTitle').textContent = studentDisplayName(key) + "'s fee record";
+  document.getElementById('feeDetailBody').innerHTML = buildFeeRecordHtml(key);
+  document.getElementById('feeDetailModal').classList.add('open');
+  document.getElementById('feeDetailBackdrop').classList.add('open');
+}
+function closeFeeDetailModal(){
+  document.getElementById('feeDetailModal').classList.remove('open');
+  document.getElementById('feeDetailBackdrop').classList.remove('open');
+}
+document.getElementById('feeDetailClose').addEventListener('click', closeFeeDetailModal);
+document.getElementById('feeDetailBackdrop').addEventListener('click', closeFeeDetailModal);
+
+if (feeSearchInput){
+  feeSearchInput.addEventListener('input', (e) => renderFeeSuggestions(e.target.value));
+  feeSearchInput.addEventListener('focus', (e) => { if (e.target.value.trim()) renderFeeSuggestions(e.target.value); });
+  feeSearchInput.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    const q = e.target.value.trim().toLowerCase();
+    const matches = Object.keys(feeLog).filter(key => key.includes(q) || studentDisplayName(key).toLowerCase().includes(q));
+    if (matches.length === 1) selectFeeStudent(matches[0]);
+  });
+}
+if (feeSuggestEl){
+  feeSuggestEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.fee-suggest-item[data-key]');
+    if (btn) selectFeeStudent(btn.dataset.key);
+  });
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.fee-search-wrap')) closeFeeSuggest();
+});
+
+/* Generic active-class toggling for any .view-toggle group (the Performance
+   term switch below attaches its own extra handler on top of this one). */
 document.querySelectorAll('.view-toggle button').forEach(btn => {
   btn.addEventListener('click', () => {
     btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
@@ -2288,64 +2972,43 @@ document.querySelectorAll('.view-toggle button').forEach(btn => {
   });
 });
 
-/* Animated SVG bar chart: handled vs resolved */
-const chartData = [
-  { label:'Wk 1', handled:62, resolved:48 },
-  { label:'Wk 2', handled:71, resolved:55 },
-  { label:'Wk 3', handled:66, resolved:60 },
-  { label:'Wk 4', handled:84, resolved:70 },
-  { label:'Wk 5', handled:78, resolved:74 },
-  { label:'Wk 6', handled:91, resolved:82 },
-];
+/* ---------- Service performance: This term / Last term ---------- */
+/* Each term carries its own 6-week handled-vs-resolved series and its own
+   category resolution scores, so the toggle actually swaps the data shown
+   rather than just changing which button looks pressed. */
+const perfDatasets = {
+  thisTerm: {
+    period: 'Last 30 days',
+    chart: [
+      { label:'Wk 1', handled:62, resolved:48 },
+      { label:'Wk 2', handled:71, resolved:55 },
+      { label:'Wk 3', handled:66, resolved:60 },
+      { label:'Wk 4', handled:84, resolved:70 },
+      { label:'Wk 5', handled:78, resolved:74 },
+      { label:'Wk 6', handled:91, resolved:82 },
+    ],
+    categories: [91, 84, 88, 79, 95],
+  },
+  lastTerm: {
+    period: 'Spring 2026 term',
+    chart: [
+      { label:'Wk 1', handled:54, resolved:41 },
+      { label:'Wk 2', handled:59, resolved:47 },
+      { label:'Wk 3', handled:63, resolved:52 },
+      { label:'Wk 4', handled:58, resolved:49 },
+      { label:'Wk 5', handled:70, resolved:61 },
+      { label:'Wk 6', handled:75, resolved:68 },
+    ],
+    categories: [86, 77, 90, 72, 93],
+  },
+};
+let currentPerfTerm = 'thisTerm';
+
 const svgNS = 'http://www.w3.org/2000/svg';
 const chartEl = document.getElementById('perfChart');
 const W=540,H=220,padL=26,padB=26,padT=10,padR=6;
 const chartW=W-padL-padR, chartH=H-padT-padB;
-const maxVal = Math.max(...chartData.map(d=>Math.max(d.handled,d.resolved)))*1.15;
-const groupW = chartW/chartData.length;
 const barW = 15;
-function y(v){ return padT + chartH - (v/maxVal)*chartH; }
-
-[0,0.25,0.5,0.75,1].forEach(f=>{
-  const gy = padT + chartH*f;
-  const line = document.createElementNS(svgNS,'line');
-  line.setAttribute('x1',padL); line.setAttribute('x2',W-padR);
-  line.setAttribute('y1',gy); line.setAttribute('y2',gy);
-  line.setAttribute('stroke','#E7E9EE'); line.setAttribute('stroke-width','1');
-  chartEl.appendChild(line);
-});
-
-chartData.forEach((d,i)=>{
-  const cx = padL + groupW*i + groupW/2;
-  const pct = Math.round((d.resolved / d.handled) * 100);
-  [
-    { val:d.handled, color:'#5B6BC0', dx:-barW/2-3, type:'handled' },
-    { val:d.resolved, color:'#4E93C7', dx:3, type:'resolved' }
-  ].forEach(b=>{
-    const rect = document.createElementNS(svgNS,'rect');
-    const fullY = y(b.val), fullH = padT+chartH-fullY;
-    rect.setAttribute('x', cx+b.dx);
-    rect.setAttribute('width', barW);
-    rect.setAttribute('rx', 4);
-    rect.setAttribute('fill', b.color);
-    rect.setAttribute('class','bar-col');
-    rect.setAttribute('y', padT+chartH);
-    rect.setAttribute('height', 0);
-    chartEl.appendChild(rect);
-
-    const tooltipHtml = b.type === 'handled'
-      ? `<b>${d.label} · Handled</b><br>${d.handled} requests were picked up by staff this week.<br><span class="tt-pct">${pct}%</span> of those have been resolved so far.`
-      : `<b>${d.label} · Resolved</b><br>${d.resolved} of ${d.handled} handled requests were fully closed this week.<br>Resolution rate: <span class="tt-pct">${pct}%</span>`;
-    rect.addEventListener('mouseenter', (e) => showChartTooltip(tooltipHtml, e));
-    rect.addEventListener('mousemove', positionChartTooltip);
-    rect.addEventListener('mouseleave', hideChartTooltip);
-  });
-  const label = document.createElementNS(svgNS,'text');
-  label.setAttribute('x',cx); label.setAttribute('y',H-6); label.setAttribute('text-anchor','middle');
-  label.setAttribute('font-size','10.5'); label.setAttribute('fill','#8D95A3'); label.setAttribute('font-family','Inter, sans-serif');
-  label.textContent = d.label;
-  chartEl.appendChild(label);
-});
 
 /* ---------- Custom tooltip for the Requests handled vs. resolved chart ---------- */
 const chartTooltipEl = document.getElementById('chartTooltip');
@@ -2373,26 +3036,132 @@ function hideChartTooltip(){
   chartTooltipEl.classList.remove('show');
 }
 
-/* Hovering the legend itself explains the metric in general, using the
-   term's totals across all six weeks (not tied to one bar). */
-const totalHandled = chartData.reduce((sum, d) => sum + d.handled, 0);
-const totalResolved = chartData.reduce((sum, d) => sum + d.resolved, 0);
-const overallPct = Math.round((totalResolved / totalHandled) * 100);
+/* Draws (or redraws) the bar chart for whichever term's data is passed in.
+   animate=true plays the rise-in transition; used both on first load and
+   whenever the This term / Last term toggle is clicked. */
+function renderPerfChart(chartData, animate){
+  chartEl.innerHTML = '';
+  const maxVal = Math.max(...chartData.map(d=>Math.max(d.handled,d.resolved)))*1.15;
+  const groupW = chartW/chartData.length;
+  function y(v){ return padT + chartH - (v/maxVal)*chartH; }
 
+  [0,0.25,0.5,0.75,1].forEach(f=>{
+    const gy = padT + chartH*f;
+    const line = document.createElementNS(svgNS,'line');
+    line.setAttribute('x1',padL); line.setAttribute('x2',W-padR);
+    line.setAttribute('y1',gy); line.setAttribute('y2',gy);
+    line.setAttribute('stroke','#E7E9EE'); line.setAttribute('stroke-width','1');
+    chartEl.appendChild(line);
+  });
+
+  chartData.forEach((d,i)=>{
+    const cx = padL + groupW*i + groupW/2;
+    const pct = Math.round((d.resolved / d.handled) * 100);
+    [
+      { val:d.handled, color:'#5B6BC0', dx:-barW/2-3, type:'handled' },
+      { val:d.resolved, color:'#4E93C7', dx:3, type:'resolved' }
+    ].forEach(b=>{
+      const rect = document.createElementNS(svgNS,'rect');
+      const fullY = y(b.val), fullH = padT+chartH-fullY;
+      rect.setAttribute('x', cx+b.dx);
+      rect.setAttribute('width', barW);
+      rect.setAttribute('rx', 4);
+      rect.setAttribute('fill', b.color);
+      rect.setAttribute('class','bar-col');
+      if (animate){
+        rect.setAttribute('y', padT+chartH);
+        rect.setAttribute('height', 0);
+      } else {
+        rect.setAttribute('y', fullY);
+        rect.setAttribute('height', fullH);
+      }
+      chartEl.appendChild(rect);
+
+      const tooltipHtml = b.type === 'handled'
+        ? `<b>${d.label} · Handled</b><br>${d.handled} requests were picked up by staff this week.<br><span class="tt-pct">${pct}%</span> of those have been resolved so far.`
+        : `<b>${d.label} · Resolved</b><br>${d.resolved} of ${d.handled} handled requests were fully closed this week.<br>Resolution rate: <span class="tt-pct">${pct}%</span>`;
+      rect.addEventListener('mouseenter', (e) => showChartTooltip(tooltipHtml, e));
+      rect.addEventListener('mousemove', positionChartTooltip);
+      rect.addEventListener('mouseleave', hideChartTooltip);
+    });
+    const label = document.createElementNS(svgNS,'text');
+    label.setAttribute('x',cx); label.setAttribute('y',H-6); label.setAttribute('text-anchor','middle');
+    label.setAttribute('font-size','10.5'); label.setAttribute('fill','#8D95A3'); label.setAttribute('font-family','Inter, sans-serif');
+    label.textContent = d.label;
+    chartEl.appendChild(label);
+  });
+
+  if (animate){
+    requestAnimationFrame(() => {
+      let idx=0;
+      chartData.forEach((d,i)=>{
+        [d.handled,d.resolved].forEach(val=>{
+          const rect = chartEl.querySelectorAll('rect')[idx];
+          const fullY = y(val), fullH = padT+chartH-fullY;
+          rect.style.transition = `y .8s var(--ease) ${i*70}ms, height .8s var(--ease) ${i*70}ms`;
+          rect.setAttribute('y', fullY);
+          rect.setAttribute('height', fullH);
+          idx++;
+        });
+      });
+    });
+  }
+}
+
+/* Updates the "Resolution rate by category" bars for whichever term is active. */
+function renderPerfCategories(scores){
+  const rows = document.querySelectorAll('#categoryRows .cat-row');
+  rows.forEach((row, i) => {
+    const fill = row.querySelector('.bar-fill');
+    const scoreEl = row.querySelector('.score');
+    const w = scores[i];
+    fill.setAttribute('data-w', w);
+    fill.style.width = w + '%';
+    scoreEl.textContent = w;
+  });
+}
+
+/* Hovering the legend itself explains the metric in general, using
+   whichever term's totals are currently on screen. */
 const legendHandledEl = document.getElementById('legendHandled');
 const legendResolvedEl = document.getElementById('legendResolved');
+function perfLegendHtml(kind){
+  const data = perfDatasets[currentPerfTerm].chart;
+  const totalHandled = data.reduce((sum, d) => sum + d.handled, 0);
+  const totalResolved = data.reduce((sum, d) => sum + d.resolved, 0);
+  const overallPct = Math.round((totalResolved / totalHandled) * 100);
+  const termLabel = currentPerfTerm === 'thisTerm' ? 'this term' : 'last term';
+  if (kind === 'handled'){
+    return `<b>Handled</b><br>Requests a staff member has picked up and started working, whether or not they're closed yet.<br>${totalHandled} handled ${termLabel}.`;
+  }
+  return `<b>Resolved</b><br>Requests that have been fully closed out with the student or parent.<br>${totalResolved} of ${totalHandled} handled ${termLabel} — <span class="tt-pct">${overallPct}%</span> resolution rate.`;
+}
 if (legendHandledEl){
-  const html = `<b>Handled</b><br>Requests a staff member has picked up and started working, whether or not they're closed yet.<br>${totalHandled} handled this term.`;
-  legendHandledEl.addEventListener('mouseenter', (e) => showChartTooltip(html, e));
+  legendHandledEl.addEventListener('mouseenter', (e) => showChartTooltip(perfLegendHtml('handled'), e));
   legendHandledEl.addEventListener('mousemove', positionChartTooltip);
   legendHandledEl.addEventListener('mouseleave', hideChartTooltip);
 }
 if (legendResolvedEl){
-  const html = `<b>Resolved</b><br>Requests that have been fully closed out with the student or parent.<br>${totalResolved} of ${totalHandled} handled this term — <span class="tt-pct">${overallPct}%</span> resolution rate.`;
-  legendResolvedEl.addEventListener('mouseenter', (e) => showChartTooltip(html, e));
+  legendResolvedEl.addEventListener('mouseenter', (e) => showChartTooltip(perfLegendHtml('resolved'), e));
   legendResolvedEl.addEventListener('mousemove', positionChartTooltip);
   legendResolvedEl.addEventListener('mouseleave', hideChartTooltip);
 }
+
+/* This term / Last term buttons: swap both the chart and the category
+   scores to the selected term's data, on top of the generic active-state
+   toggle already wired above. */
+const categoryPeriodEl = document.getElementById('categoryPeriod');
+document.querySelectorAll('#perfTermToggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const term = btn.dataset.term;
+    if (term === currentPerfTerm) return;
+    currentPerfTerm = term;
+    const data = perfDatasets[term];
+    renderPerfChart(data.chart, true);
+    renderPerfCategories(data.categories);
+    if (categoryPeriodEl) categoryPeriodEl.textContent = data.period;
+  });
+});
 
 /* ---------- Live "time ago" for request rows & alerts ---------- */
 (function(){
@@ -2454,20 +3223,13 @@ document.addEventListener('click', (e) => {
   if (!e.target.closest('.info-dot')) hideCardTooltip();
 });
 
+/* Initial paint of the performance chart: bars start flat and rise in once
+   the card scrolls into view (or immediately, if it's already on screen). */
+renderPerfChart(perfDatasets.thisTerm.chart, true);
 const chartIO = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if (entry.isIntersecting){
-      let idx=0;
-      chartData.forEach((d,i)=>{
-        [d.handled,d.resolved].forEach(val=>{
-          const rect = chartEl.querySelectorAll('rect')[idx];
-          const fullY = y(val), fullH = padT+chartH-fullY;
-          rect.style.transition = `y .8s var(--ease) ${i*70}ms, height .8s var(--ease) ${i*70}ms`;
-          rect.setAttribute('y', fullY);
-          rect.setAttribute('height', fullH);
-          idx++;
-        });
-      });
+      renderPerfChart(perfDatasets[currentPerfTerm].chart, true);
       chartIO.disconnect();
     }
   });
