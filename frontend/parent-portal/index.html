@@ -603,7 +603,7 @@ const pageParts = [
 pageParts.forEach(({elements}) => elements.forEach(element => element.classList.add('page-part')));
 document.getElementById('appointments')?.parentElement.classList.add('page-layout');
 
-let currentPage = 'page-overview';
+let currentPage = null;
 let currentAnchor = null;
 function setActiveNav(){
   navItems.forEach(item => {
