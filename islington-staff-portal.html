@@ -32,7 +32,7 @@
   --radius-tab:10px;
   --shadow-card:0 1px 2px rgba(30,36,48,.06), 0 8px 20px -12px rgba(30,36,48,.15);
   --shadow-lift:0 14px 34px -14px rgba(30,36,48,.28);
-  --ease:cubic-bezier(.2,.7,.3,1);
+  --ease:cubic-bezier(.22,1,.36,1);
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -137,9 +137,15 @@ a{ color:inherit; text-decoration:none; }
 .topbar-right{ display:flex; align-items:center; gap:14px; }
 .profile-pill{
   display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--line);
-  border-radius:999px; padding:6px 14px 6px 6px; transition:box-shadow .25s var(--ease), transform .25s var(--ease);
+  border-radius:999px; padding:6px 14px 6px 6px; transition:transform .3s var(--ease);
+  position:relative;
 }
-.profile-pill:hover{ box-shadow:var(--shadow-lift); transform:translateY(-2px); }
+.profile-pill::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:var(--shadow-lift);
+  opacity:0; pointer-events:none; transition:opacity .3s var(--ease);
+}
+.profile-pill:hover{ transform:translateY(-2px); }
+.profile-pill:hover::after{ opacity:1; }
 .avatar{
   width:38px; height:38px; border-radius:50%; background:var(--marigold-tint); border:1.5px solid var(--marigold);
   display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; color:var(--teal-deep); font-size:13px;
@@ -208,12 +214,19 @@ a{ color:inherit; text-decoration:none; }
    shares this .card class, so the hover lift here keeps the pop-out effect
    consistent across every block on the page. */
 .card{
+  position:relative;
   background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
   padding:24px 26px; box-shadow:var(--shadow-card);
-  opacity:0; transform:translateY(14px); transition:opacity .55s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+  opacity:0; transform:translateY(14px); transition:opacity .55s var(--ease), transform .38s var(--ease), border-color .38s var(--ease);
+ 
+}
+.card::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:var(--shadow-lift);
+  opacity:0; pointer-events:none; transition:opacity .38s var(--ease);
 }
 .card.in-view{ opacity:1; transform:none; }
-.card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lift); border-color:#CBC5AF; }
+.card:hover{ transform:translateY(-5px); border-color:#CBC5AF; }
+.card:hover::after{ opacity:1; }
 .stat-card[data-nav]{ cursor:pointer; }
 .stat-card[data-nav]:hover{ border-color:var(--marigold); }
 .card-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px; gap:10px; }
@@ -401,13 +414,18 @@ a{ color:inherit; text-decoration:none; }
 
 .appt-item{
   border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  transition:transform .34s var(--ease), background .34s var(--ease);
   position:relative;
 }
+.appt-item::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:var(--shadow-lift);
+  opacity:0; pointer-events:none; transition:opacity .34s var(--ease); z-index:-1;
+}
 .appt-item:hover{
-  transform:scale(1.02) translateY(-3px); box-shadow:var(--shadow-lift);
+  transform:translateY(-3px);
   background:var(--paper); z-index:3;
 }
+.appt-item:hover::after{ opacity:1; }
 .appt-item .appt-row{ border-bottom:1px dashed var(--line); padding:14px 0; }
 .appt-item:last-child .appt-row{ border-bottom:none; }
 .appt-item:hover .appt-row{ border-bottom-color:transparent; }
@@ -433,13 +451,18 @@ a{ color:inherit; text-decoration:none; }
 
 .alert-item{
   border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  transition:transform .34s var(--ease), background .34s var(--ease);
   position:relative;
 }
+.alert-item::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:var(--shadow-lift);
+  opacity:0; pointer-events:none; transition:opacity .34s var(--ease); z-index:-1;
+}
 .alert-item:hover{
-  transform:scale(1.02) translateY(-3px); box-shadow:var(--shadow-lift);
+  transform:translateY(-3px);
   background:var(--paper); z-index:3;
 }
+.alert-item:hover::after{ opacity:1; }
 .alert-item .alert-row{ border-bottom:1px dashed var(--line); padding:14px 0; }
 .alert-item:last-child .alert-row{ border-bottom:none; }
 .alert-item:hover .alert-row{ border-bottom-color:transparent; }
@@ -469,13 +492,18 @@ a{ color:inherit; text-decoration:none; }
 
 .msg-item{
   border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  transition:transform .34s var(--ease), background .34s var(--ease);
   position:relative;
 }
+.msg-item::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:var(--shadow-lift);
+  opacity:0; pointer-events:none; transition:opacity .34s var(--ease); z-index:-1;
+}
 .msg-item:hover{
-  transform:scale(1.02) translateY(-3px); box-shadow:var(--shadow-lift);
+  transform:translateY(-3px);
   background:var(--paper); z-index:3;
 }
+.msg-item:hover::after{ opacity:1; }
 .msg-item .msg-row{ border-bottom:1px dashed var(--line); }
 .msg-item:hover .msg-row{ border-bottom-color:transparent; }
 .msg-item.is-done{ opacity:.5; }
@@ -499,11 +527,16 @@ a{ color:inherit; text-decoration:none; }
 .qa-card{
   display:flex; flex-direction:column; gap:10px; text-align:left; cursor:pointer;
   background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:22px;
-  transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
-  opacity:0; transform:translateY(14px);
+  transition:transform .32s var(--ease), border-color .32s var(--ease);
+  opacity:0; transform:translateY(14px); position:relative;
+}
+.qa-card::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:var(--shadow-lift);
+  opacity:0; pointer-events:none; transition:opacity .32s var(--ease);
 }
 .qa-card.in-view{ opacity:1; transform:none; }
-.qa-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lift); border-color:var(--marigold); }
+.qa-card:hover{ transform:translateY(-5px); border-color:var(--marigold); }
+.qa-card:hover::after{ opacity:1; }
 .qa-icon{ width:42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; background:var(--q-bg); color:var(--q-fg); transition:transform .3s var(--ease); }
 .qa-card:hover .qa-icon{ transform:scale(1.12) rotate(6deg); }
 .qa-card .qt{ font-size:14px; font-weight:700; font-family:'Fraunces',serif; }
@@ -541,8 +574,7 @@ a{ color:inherit; text-decoration:none; }
 }
 .info-dot:hover{ background:var(--ink); color:#fff; transform:scale(1.1); }
 .stat-top-right{ display:flex; align-items:center; gap:8px; }
-.qa-card{ position:relative; }
-.qa-card .info-dot{ position:absolute; top:16px; right:16px; }
+.qa-card .info-dot{ position:absolute; top:16px; right:16px; z-index:1; }
 .card-tooltip{
   position:fixed; z-index:90; background:var(--ink); color:#EDEEE7;
   padding:11px 14px; border-radius:10px; font-size:12.5px; line-height:1.55;
@@ -557,13 +589,18 @@ a{ color:inherit; text-decoration:none; }
    sized to a single-line feed row instead of a multi-field card. */
 .activity-item{
   border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  transition:transform .34s var(--ease), background .34s var(--ease);
   position:relative;
 }
+.activity-item::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:var(--shadow-lift);
+  opacity:0; pointer-events:none; transition:opacity .34s var(--ease); z-index:-1;
+}
 .activity-item:hover{
-  transform:scale(1.015) translateY(-2px); box-shadow:var(--shadow-lift);
+  transform:translateY(-3px);
   background:var(--paper); z-index:3;
 }
+.activity-item:hover::after{ opacity:1; }
 .activity-row{ display:flex; gap:12px; padding:11px 0; border-bottom:1px dashed var(--line); }
 .activity-item .activity-row{ padding:14px 0; }
 .activity-item:last-child .activity-row{ border-bottom:none; }
@@ -735,6 +772,15 @@ a{ color:inherit; text-decoration:none; }
   font-family:inherit; background:var(--paper); color:var(--ink); resize:vertical;
 }
 .modal-input:focus{ outline:none; border-color:var(--teal); box-shadow:0 0 0 4px var(--teal-tint); }
+select.modal-input{
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235B6472' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  background-size:14px 14px;
+  padding-right:36px;
+  cursor:pointer;
+}
 .modal-foot{ display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
 
 /* ---------- Toast ---------- */
