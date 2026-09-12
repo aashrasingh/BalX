@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Islington College — Parent Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img class="brand-logo" src="https://islington.edu.np/images/islington-white-logo.svg" alt="Islington College">
+    </div>
+
+    <div class="nav-label" id="sidebarStudentLabel">Degree Journey</div>
+    <nav class="nav" id="sideNav">
+      <a class="nav-item" data-target="overview" href="#overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12l8-8 8 8M6 10v10h12V10"/></svg>
+        Overview
+      </a>
+      <a class="nav-item" data-target="attendance" href="#attendance">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+        Attendance
+        <span class="nav-badge">2</span>
+      </a>
+      <a class="nav-item" data-target="fees" href="#fees">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Fees & Payments
+        <span class="nav-badge">1</span>
+      </a>
+      <a class="nav-item" data-target="grades" href="#grades">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg>
+        Grades & Progress
+      </a>
+      <a class="nav-item" data-target="student-services" href="#student-services">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a7 7 0 0 0-7 7v4a3 3 0 0 0 3 3h1v-6H6v-1a6 6 0 0 1 12 0v1h-3v6h1a3 3 0 0 0 3-3v-4a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg>
+        Support
+        <span class="nav-badge">2</span>
+      </a>
+      <a class="nav-item" data-target="updates" href="#updates">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        Recent Updates
+      </a>
+</nav>
+    <div class="sidebar-foot">Student Services<br>Islington College · Kathmandu</div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="eyebrow" id="topbarDate">Saturday, September 12</div>
+        <h1 id="topbarHeading">How your child is progressing</h1>
+      </div>
+
+      <div class="topbar-right">
+        <div id="childSwitcherWrap" hidden>
+          <select class="pill" id="childSwitcher" style="padding:9px 14px;"></select>
+        </div>
+        <div class="bell-wrap">
+          <button class="bell-btn" aria-label="Notifications" id="bellBtn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="bell-dot" id="bellCount" hidden></span>
+          </button>
+          <div class="bell-popover" id="bellPopover" hidden>
+            <div class="bell-popover-head">Notifications</div>
+            <div id="bellNotificationsList"></div>
+          </div>
+        </div>
+        <button class="login-btn" type="button" id="loginBtn" title="Sign out">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+          Log In
+        </button>
+      </div>
+    </div>
+
+    <div class="notice-banner" id="urgentBanner" role="status" aria-label="Urgent school notice">
+      <div class="notice-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+      <div class="notice-content"><div class="notice-title" id="urgentBannerTitle">No urgent message</div><div class="notice-copy" id="urgentBannerBody"></div></div>
+      <div class="notice-actions"><button class="text-btn" type="button" id="dismissBanner" hidden>Clear</button></div>
+    </div>
+
+    <!-- ============ HERO / OVERVIEW ============ -->
+    <section class="hero" id="overview">
+      <div class="hero-greeting">
+        <div class="display" id="heroName">Log in to see your child's updates</div>
+        <p id="heroSubtitle">Sign in with your registered phone number to see live attendance, clearance, and notices.</p>
+        <div class="hero-quote">"Stay connected to the Islington experience while your child develops the skills and confidence for an industry-ready future."</div>
+      </div>
+      <div class="ring-stat">
+        <div class="ring" id="ringAttendance" style="--pct:0"><span class="ring-value" id="ringAttendanceValue">—</span></div>
+        <div class="ring-label" id="ringAttendanceLabel">Attendance<br>lowest module</div>
+      </div>
+      <div class="ring-stat">
+        <div class="ring" id="ringModules" style="--pct:0"><span class="ring-value" id="ringModulesValue">—</span></div>
+        <div class="ring-label">Modules<br>on track</div>
+      </div>
+    </section>
+
+    <!-- STAT CARDS -->
+    <section class="section">
+      <div class="grid-4" id="statsGrid">
+        <div class="card stat-card" style="--s-bg:var(--azure-tint); --s-fg:var(--azure);">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></div>
+            <span class="stat-trend trend-up">▲ 2.1%</span>
+          </div>
+          <div class="stat-value" id="statAttendance">—%</div>
+          <div class="stat-label">Lowest-module attendance this term</div>
+        </div>
+        <!-- Fees are out of scope for this build (kept static/illustrative on purpose) -->
+        <div class="card stat-card" style="--s-bg:var(--brick-tint); --s-fg:var(--brick);">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <span class="stat-trend trend-down">8 days left</span>
+          </div>
+          <div class="stat-value">NPR 650k</div>
+          <div class="stat-label">College balance due Sept 20</div>
+        </div>
+        <!-- Grades are out of scope for this build (kept static/illustrative on purpose) -->
+        <div class="card stat-card" style="--s-bg:var(--teal-tint); --s-fg:var(--teal-deep);">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg></div>
+            <span class="stat-trend trend-up">▲ 3%</span>
+          </div>
+          <div class="stat-value">88%</div>
+          <div class="stat-label">Current module average</div>
+        </div>
+        <div class="card stat-card" style="--s-bg:var(--marigold-tint); --s-fg:#8a5f1e;">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+            <span class="stat-trend trend-down" id="statUpdatesTrend">Live</span>
+          </div>
+          <div class="stat-value" id="statUpdates">—</div>
+          <div class="stat-label">Active updates for your child</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ATTENDANCE ============ -->
+    <section class="section" id="attendance">
+      <div class="section-head">
+        <div>
+          <h2>Lecture attendance</h2>
+          <div class="meta" id="attendanceMeta">Log in to see live attendance</div>
+        </div>
+        <div class="pill-filters">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="present">Present</button>
+          <button class="pill" data-filter="absent">Absent</button>
+          <button class="pill" data-filter="late">Late</button>
+        </div>
+      </div>
+      <div class="card" id="moduleBreakdownCard" style="margin-bottom:16px;">
+        <div class="card-head"><h3>By subject</h3></div>
+        <div id="moduleBreakdownList"><div style="color:var(--ink-faint);font-size:13px;">Log in to see a subject-by-subject breakdown.</div></div>
+      </div>
+      <div class="card">
+        <div class="table-scroll attendance-history-scroll">
+        <table class="req-table">
+          <thead>
+            <tr><th>Module</th><th>Type</th><th>Date</th><th>Status</th><th>Lecturer</th><th>Note</th></tr>
+          </thead>
+          <tbody id="attendanceTableBody">
+            <tr><td colspan="6" style="text-align:center;color:var(--ink-faint);padding:24px;">Log in to see attendance records.</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="attendance-history-hint">Daily attendance history — scroll to see every day (most recent first).</div>
+      </div>
+    </section>
+
+    <!-- ============ FEES & PAYMENTS ============ -->
+    <section class="section" id="fees">
+      <div class="section-head">
+        <div>
+          <h2>Fees & payments</h2>
+          <div class="meta" id="feesMeta">Log in to see fees</div>
+        </div>
+        <div class="pill-filters" id="feesFilters">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="due">Due</button>
+          <button class="pill" data-filter="overdue">Overdue</button>
+          <button class="pill" data-filter="paid">Paid</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll">
+        <table class="req-table">
+          <thead>
+            <tr><th>Item</th><th>Amount</th><th>Due date</th><th>Status</th></tr>
+          </thead>
+          <tbody id="feesTableBody">
+            <tr><td colspan="4" style="text-align:center;color:var(--ink-faint);padding:24px;">Log in to see fees.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STUDENT SERVICES / SUPPORT & CLEARANCE ============ -->
+    <section class="section" id="student-services">
+      <div class="section-head"><div><h2>Support & clearance</h2><div class="meta">Everything you need before contacting Student Services</div></div></div>
+      <div class="card"><div class="card-head"><h3>Attendance risk check</h3><span class="tag overdue" id="riskTag">Needs attention</span></div><div class="risk-card"><div class="risk-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div><div><div class="risk-title" id="riskTitle">Log in to see attendance risk</div><div class="risk-copy" id="riskCopy">Once you're signed in, this shows the module most in need of attention.</div><div class="risk-actions"><button class="primary-btn" type="button" data-scroll-target="messages">Ask Student Services</button></div></div></div></div>
+    </section>
+
+    <section class="section" id="messages"><div class="section-head"><div><h2>Message Student Services</h2><div class="meta">Ask a question and keep the reply in one place</div></div><span class="tag ok">Replies in 1 business day</span></div><div class="service-layout"><div class="card"><form class="service-form" id="serviceForm"><label class="form-label">What do you need help with?<select id="serviceCategory" required><option value="">Choose a category</option><option>Attendance concern</option><option>Fees or clearance</option><option>Academic support</option><option>Urgent notice</option><option>Something else</option></select></label><label class="form-label">Priority<select id="servicePriority" required><option>Standard · Reply in 1 business day</option><option>Urgent · Contact me today</option></select></label><label class="form-label">Your message<textarea id="serviceMessage" required placeholder="Tell Student Services what would help..."></textarea></label><button class="primary-btn" type="submit">Create support request</button></form></div><div class="card"><div class="card-head"><h3>My requests</h3><span class="meta" id="ticketCount">2 open</span></div><div class="ticket-list" id="ticketList"><div class="ticket"><div class="ticket-top"><span class="tag due-soon">In review</span><span class="ticket-id">#SS-1048</span></div><div class="ticket-title">Professional Practice absence follow-up</div><div class="ticket-meta">Assigned to Attendance Team · Updated today</div></div><div class="ticket"><div class="ticket-top"><span class="tag ok">Resolved</span><span class="ticket-id">#SS-1031</span></div><div class="ticket-title">Midterm report card access</div><div class="ticket-meta">Closed Sept 9 · Reply available</div></div></div></div></div></section>
+
+    <!-- ============ GRADES & PROGRESS ============ -->
+    <section class="section" id="grades">
+      <div class="section-head">
+        <div>
+          <h2>Academic progress</h2>
+          <div class="meta">Based on real attendance history — no grades exist in this system, so none are shown here</div>
+        </div>
+        <div class="view-toggle" id="progressToggle">
+          <button class="active" data-term="thisTerm">This term</button>
+          <button data-term="lastTerm">Last term</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3 id="progressCardTitle">Attendance by subject — this term</h3></div>
+        <div id="progressList"><div style="color:var(--ink-faint);font-size:13px;">Log in to see academic progress.</div></div>
+      </div>
+    </section>
+
+    <!-- ============ RECENT UPDATES ============ -->
+    <section class="section" id="updates">
+      <div class="section-head"><h2>Recent updates</h2></div>
+      <div class="card">
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#4A4DA0,#25285F)">RM</div>
+          <div><div class="act-text"><b>Dr. Marlow</b> recorded Aarav as late to Web Application Development</div><div class="act-stamp">8 minutes ago</div></div>
+        </div>
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#70BE44,#438B25)">DC</div>
+          <div><div class="act-text">Professional Practice assessment graded: <b>85%</b></div><div class="act-stamp">41 minutes ago</div></div>
+        </div>
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#151A47,#090D29)">NPR</div>
+          <div><div class="act-text">Semester fee payment confirmed</div><div class="act-stamp">1 hour ago</div></div>
+        </div>
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#C43B52,#8E2639)">DC</div>
+          <div><div class="act-text"><b>Ms. Cole</b> flagged a missed Professional Practice session</div><div class="act-stamp">2 hours ago</div></div>
+        </div>
+        <div class="activity-row">
+          <div class="act-avatar" style="background:linear-gradient(135deg,#2A91B0,#176278)">NA</div>
+          <div><div class="act-text">Midterm report card is now available</div><div class="act-stamp">3 hours ago</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING STRIP ============ -->
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
