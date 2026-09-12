@@ -1,16 +1,69 @@
 /* Parent portal interactions and demo workflows. */
 const navItems = Array.from(document.querySelectorAll('#sideNav .nav-item'));
-const sections = navItems.map(item => document.getElementById(item.dataset.target)).filter(Boolean);
+const overviewNav = navItems.find(item => item.dataset.target === 'overview');
+const overviewSubTargets = new Set(['quick-actions', 'grades', 'updates', 'contacts']);
+const overviewSub = document.createElement('div');
+overviewSub.className = 'nav-sub';
+navItems.filter(item => overviewSubTargets.has(item.dataset.target)).forEach(item => {
+  overviewSub.appendChild(item);
+});
+overviewNav?.after(overviewSub);
+const pageForTarget = {
+  overview:'page-overview', attendance:'page-attendance', fees:'page-fees', grades:'page-grades',
+  appointments:'page-appointments', alerts:'page-alerts', 'student-services':'page-support',
+  'quick-actions':'page-quick-actions', updates:'page-updates', contacts:'page-contacts', settings:'page-settings'
+};
+const pageParts = [
+  ['page-overview', document.getElementById('overview'), document.getElementById('statsGrid')?.closest('.section')],
+  ['page-attendance', document.getElementById('attendance')], ['page-fees', document.getElementById('fees')],
+  ['page-appointments', document.getElementById('appointments')], ['page-alerts', document.getElementById('alerts')],
+  ['page-support', document.getElementById('student-services'), document.getElementById('messages')],
+  ['page-quick-actions', document.getElementById('quick-actions')], ['page-grades', document.getElementById('grades')],
+  ['page-updates', document.getElementById('updates')], ['page-contacts', document.getElementById('contacts')],
+  ['page-settings', document.getElementById('settings')]
+].map(([page, ...elements]) => ({page, elements:elements.filter(Boolean)}));
 
-function setActive(id){
-  navItems.forEach(item => item.classList.toggle('active', item.dataset.target === id));
+pageParts.forEach(({elements}) => elements.forEach(element => element.classList.add('page-part')));
+document.getElementById('appointments')?.parentElement.classList.add('page-layout');
+
+let currentPage = 'page-overview';
+let currentAnchor = null;
+function setActiveNav(){
+  navItems.forEach(item => {
+    const samePage = pageForTarget[item.dataset.target] === currentPage;
+    const sameAnchor = (item.dataset.target === currentAnchor);
+    item.classList.toggle('active', samePage && (currentAnchor ? sameAnchor : item.dataset.target === 'overview'));
+  });
+  overviewSub.classList.toggle('open', currentPage === 'page-overview' || currentAnchor !== null);
 }
-navItems.forEach(item => item.addEventListener('click', () => setActive(item.dataset.target)));
-const spy = new IntersectionObserver(entries => entries.forEach(entry => {
-  if (entry.isIntersecting) setActive(entry.target.id);
-}), {rootMargin:'-40% 0px -50% 0px', threshold:0});
-sections.forEach(section => spy.observe(section));
-setActive('overview');
+function goToPage(page, updateHash = true, anchor = null){
+  currentPage = page;
+  currentAnchor = anchor;
+  pageParts.forEach(({page: pageId, elements}) => elements.forEach(element => element.classList.toggle('page-active', pageId === page)));
+  document.querySelectorAll('.page-layout').forEach(layout => {
+    layout.classList.toggle('page-group-hidden', !layout.querySelector('.page-active'));
+  });
+  setActiveNav();
+  if (updateHash){
+    const target = anchor || Object.keys(pageForTarget).find(key => pageForTarget[key] === page) || 'overview';
+    history.replaceState(null, '', '#' + target);
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+  document.querySelectorAll('.page-active .card, .page-active .qa-card').forEach((element, index) => {
+    element.classList.add('in-view');
+    element.style.transitionDelay = (index % 4) * 60 + 'ms';
+  });
+}
+window.addEventListener('hashchange', () => {
+  const target = location.hash.slice(1);
+  goToPage(pageForTarget[target] || 'page-overview', false, overviewSubTargets.has(target) ? target : null);
+});
+navItems.forEach(item => item.addEventListener('click', event => {
+  event.preventDefault();
+  goToPage(pageForTarget[item.dataset.target] || 'page-overview', true, overviewSubTargets.has(item.dataset.target) ? item.dataset.target : null);
+}));
+const initialTarget = location.hash.slice(1);
+goToPage(pageForTarget[initialTarget] || 'page-overview', false, overviewSubTargets.has(initialTarget) ? initialTarget : null);
 
 const revealEls = document.querySelectorAll('.card, .qa-card');
 const revealIO = new IntersectionObserver(entries => entries.forEach(entry => {
