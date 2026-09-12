@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Islington College — Staff Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F5F7;
+  --paper:#FAFAFC;
+  --surface:#FFFFFF;
+  --tab:#E7E9EE;
+  --ink:#1E2430;
+  --ink-soft:#5B6472;
+  --ink-faint:#8D95A3;
+  --line:#DCE0E7;
+  --teal:#2E3192;
+  --teal-deep:#1F2266;
+  --teal-tint:#E4E4F5;
+  --marigold:#1B4C87;
+  --marigold-tint:#E4EBF5;
+  --brick:#2E3192;
+  --brick-tint:#E4E4F5;
+  --azure:#1B4C87;
+  --azure-tint:#E4EBF5;
+  --chart-1:#5B6BC0;
+  --chart-2:#4E93C7;
+  --radius-card:18px;
+  --radius-tab:10px;
+  --shadow-card:0 1px 2px rgba(30,36,48,.06), 0 8px 20px -12px rgba(30,36,48,.15);
+  --shadow-lift:0 14px 34px -14px rgba(30,36,48,.28);
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; line-height:1.5;
+}
+h1,h2,h3,.display{ font-family:'Fraunces',serif; font-weight:500; letter-spacing:-.01em; color:var(--ink); margin:0; }
+button{ font-family:inherit; }
+a{ color:inherit; text-decoration:none; }
+::-webkit-scrollbar{ width:9px; height:9px; }
+::-webkit-scrollbar-thumb{ background:#CFCABA; border-radius:8px; }
+
+/* ---------- Shell ---------- */
+.app{ display:grid; grid-template-columns:250px 1fr; min-height:100vh; }
+
+/* ---------- Sidebar ---------- */
+.sidebar{
+  background:var(--teal-deep); color:#EAF1EC;
+  padding:28px 0 20px; display:flex; flex-direction:column;
+  position:sticky; top:0; height:100vh;
+}
+.brand{
+  display:flex; flex-direction:column; align-items:flex-start; text-align:left; gap:12px;
+  padding:20px 22px 22px; border-bottom:1px solid rgba(255,255,255,.12); margin-bottom:14px;
+}
+.brand-logos{ display:flex; align-items:center; gap:10px; }
+.brand-college{
+  width:56px; height:56px; flex:0 0 56px; display:flex; align-items:center; justify-content:center;
+  padding:0; filter:drop-shadow(0 4px 8px rgba(12,23,62,.18));
+}
+.brand-college img{ width:100%; height:100%; object-fit:contain; display:block; }
+.brand-divider{ width:1px; height:38px; background:rgba(255,255,255,.22); flex:0 0 1px; }
+.brand-ing{
+  display:flex; align-items:center; justify-content:center; width:96px; height:36px; flex:0 0 96px;
+  background:transparent; border-radius:0; box-shadow:none; padding:0; transform:none;
+}
+.brand-ing img{ width:100%; height:100%; object-fit:contain; display:block; }
+.brand-name{ font-family:'Fraunces',serif; font-size:15.5px; line-height:1.25; }
+.brand-name span{ display:block; font-family:'Inter',sans-serif; font-size:11px; color:#AFC4B7; margin-top:2px; }
+
+.nav-label{
+  padding:16px 22px 8px; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+  color:#7FA08D; font-weight:700;
+}
+.nav{ display:flex; flex-direction:column; gap:2px; padding:0 12px; }
+.nav-item{
+  display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+  padding:10px 12px; border-radius:var(--radius-tab);
+  color:#CBDACF; font-size:14px; font-weight:500; border:none; background:transparent;
+  position:relative; transition:background .22s var(--ease), color .22s var(--ease), transform .22s var(--ease);
+}
+.nav-item svg{ flex:0 0 18px; width:18px; height:18px; opacity:.85; transition:opacity .22s var(--ease), transform .3s var(--ease); }
+.nav-item:hover{ background:rgba(255,255,255,.07); color:#fff; transform:translateX(2px); }
+.nav-item:hover svg{ opacity:1; transform:scale(1.08); }
+.nav-item.active{ background:var(--marigold); color:var(--teal-deep); font-weight:700; }
+.nav-item.active svg{ opacity:1; }
+.nav-badge{
+  margin-left:auto; font-size:10.5px; font-weight:700; background:rgba(190,80,57,.9); color:#fff;
+  padding:1.5px 7px; border-radius:20px;
+}
+.nav-item.active .nav-badge{ background:var(--brick); }
+
+.nav-sub{
+  display:flex; flex-direction:column; gap:1px; margin:0 8px 0 30px;
+  padding-left:12px; border-left:1px solid rgba(255,255,255,.14);
+  max-height:0; opacity:0; overflow:hidden; pointer-events:none;
+  transition:max-height .38s var(--ease), opacity .28s var(--ease), margin .38s var(--ease);
+}
+.nav-sub.open{ max-height:220px; opacity:1; pointer-events:auto; margin:2px 8px 8px 30px; }
+.nav-sub .nav-item{ padding:7px 10px; font-size:12.5px; color:#AFC4B7; }
+.nav-sub .nav-item svg{ width:14px; height:14px; flex:0 0 14px; }
+.nav-sub .nav-item:hover{ transform:translateX(1px); }
+.nav-sub .nav-item.active{ background:rgba(226,164,78,.16); color:#F4E3C6; font-weight:600; }
+.nav-sub .nav-item.active svg{ color:var(--marigold); opacity:1; }
+
+.sidebar-foot{
+  padding:16px 22px 0; margin-top:auto; border-top:1px solid rgba(255,255,255,.12);
+  font-size:12px; color:#9FB6A6; line-height:1.5;
+}
+
+/* ---------- Main ---------- */
+.main{ padding:32px 44px 80px; max-width:1360px; }
+
+.topbar{
+  display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:30px; flex-wrap:wrap;
+}
+.topbar-left .eyebrow{ font-size:13px; color:var(--ink-soft); }
+.topbar-left h1{ font-size:27px; margin-top:3px; }
+
+.search-pill{
+  display:flex; align-items:center; gap:9px; background:var(--surface);
+  border:1px solid var(--line); border-radius:999px; padding:10px 16px;
+  min-width:280px; transition:border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.search-pill:focus-within{ border-color:var(--teal); box-shadow:0 0 0 4px var(--teal-tint); }
+.search-pill svg{ color:var(--ink-faint); flex:0 0 auto; }
+.search-pill input{ border:none; outline:none; background:transparent; font-size:13.5px; width:100%; color:var(--ink); }
+.search-pill input::placeholder{ color:var(--ink-faint); }
+
+.topbar-right{ display:flex; align-items:center; gap:14px; }
+.profile-pill{
+  display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--line);
+  border-radius:999px; padding:6px 14px 6px 6px; transition:box-shadow .25s var(--ease), transform .25s var(--ease);
+}
+.profile-pill:hover{ box-shadow:var(--shadow-lift); transform:translateY(-2px); }
+.avatar{
+  width:38px; height:38px; border-radius:50%; background:var(--marigold-tint); border:1.5px solid var(--marigold);
+  display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; color:var(--teal-deep); font-size:13px;
+}
+.profile-text{ line-height:1.25; }
+.profile-text .pn{ font-size:13px; font-weight:600; }
+.profile-text .pr{ font-size:11px; color:var(--ink-faint); }
+
+/* ---------- Hero ---------- */
+.hero{
+  background:var(--teal);
+  background-image:radial-gradient(circle at 88% -10%, rgba(255,255,255,.10), transparent 55%);
+  border-radius:24px; padding:32px 36px; color:#EAF1EC;
+  display:grid; grid-template-columns:1.3fr auto auto auto; gap:30px; align-items:center;
+  margin-bottom:34px; opacity:0; transform:translateY(12px); animation:rise .65s var(--ease) forwards;
+  scroll-margin-top:100px;
+}
+@keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+.hero-greeting .display{ font-size:23px; color:#fff; }
+.hero-greeting p{ margin:9px 0 0; font-size:13.5px; color:#C7DBCC; max-width:44ch; }
+.hero-quote{
+  margin-top:16px; font-family:'Fraunces',serif; font-style:italic; font-size:13.5px; color:#DCE9DF;
+  border-left:2px solid var(--marigold); padding-left:12px;
+}
+.ring-stat{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+.ring{
+  width:92px; height:92px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:conic-gradient(var(--marigold) calc(var(--pct) * 1%), rgba(255,255,255,.18) 0);
+  position:relative; transition:background .5s var(--ease);
+}
+.ring::before{ content:""; position:absolute; inset:8px; border-radius:50%; background:var(--teal-deep); }
+.ring-value{ position:relative; font-family:'Fraunces',serif; font-size:19px; font-weight:600; color:#fff; transition:color .3s var(--ease); }
+.ring-label{ font-size:11.5px; color:#C7DBCC; text-align:center; }
+
+/* Performance rings: the arc + percentage text shift color with the score itself —
+   green once it's comfortably high, gold in the mid range, coral once it needs attention. */
+.ring.rate-high{ background:conic-gradient(#3DDC97 calc(var(--pct) * 1%), rgba(255,255,255,.18) 0); }
+.ring.rate-high .ring-value{ color:#3DDC97; }
+.ring.rate-mid{ background:conic-gradient(#F5C451 calc(var(--pct) * 1%), rgba(255,255,255,.18) 0); }
+.ring.rate-mid .ring-value{ color:#F5C451; }
+.ring.rate-low{ background:conic-gradient(#FF6B5E calc(var(--pct) * 1%), rgba(255,255,255,.18) 0); }
+.ring.rate-low .ring-value{ color:#FF6B5E; }
+.streak{
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:16px;
+  padding:16px 18px; text-align:center; min-width:108px;
+}
+.streak .num{ font-family:'Fraunces',serif; font-size:28px; color:var(--marigold); line-height:1; }
+.streak .lbl{ font-size:11.5px; color:#C7DBCC; margin-top:6px; }
+
+/* ---------- Sections & cards ---------- */
+.section{ margin-bottom:38px; scroll-margin-top:100px; }
+.section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
+.section-head h2{ font-size:20px; }
+.section-head .meta{ font-size:12.5px; color:var(--ink-faint); }
+.view-toggle{ display:flex; background:var(--tab); border-radius:999px; padding:4px; gap:2px; }
+.view-toggle button{
+  border:none; background:transparent; padding:8px 15px; border-radius:999px; font-size:12.5px; font-weight:600;
+  color:var(--ink-soft); cursor:pointer; transition:background .25s var(--ease), color .25s var(--ease);
+}
+.view-toggle button.active{ background:var(--teal); color:#fff; }
+
+.grid{ display:grid; grid-template-columns:1.2fr 1fr; gap:24px; align-items:start; }
+.grid-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+
+/* Every card (stats, tables, messages, alerts, performance, activity, directory)
+   shares this .card class, so the hover lift here keeps the pop-out effect
+   consistent across every block on the page. */
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+  padding:24px 26px; box-shadow:var(--shadow-card);
+  opacity:0; transform:translateY(14px); transition:opacity .55s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+.card.in-view{ opacity:1; transform:none; }
+.card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lift); border-color:#CBC5AF; }
+.stat-card[data-nav]{ cursor:pointer; }
+.stat-card[data-nav]:hover{ border-color:var(--marigold); }
+.card-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px; gap:10px; }
+.card-head h3{ font-size:16.5px; }
+.card-head .meta{ font-size:12.5px; color:var(--ink-faint); }
+
+/* stat cards */
+.stat-card{ padding:22px 24px; }
+.stat-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.stat-icon{
+  width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+  background:var(--s-bg); color:var(--s-fg); transition:transform .3s var(--ease);
+}
+.card:hover .stat-icon{ transform:scale(1.1) rotate(-4deg); }
+.stat-trend{ font-size:11.5px; font-weight:700; }
+.trend-up{ color:var(--teal); }
+.trend-down{ color:var(--brick); }
+.stat-value{ font-family:'Fraunces',serif; font-size:28px; font-weight:600; }
+.stat-label{ color:var(--ink-soft); font-size:12.5px; margin-top:3px; }
+
+/* Table */
+.table-scroll{ overflow-x:auto; }
+.req-table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px; }
+.req-group-row td{
+  padding:12px 14px 8px; border-bottom:none; font-family:'Fraunces',serif; font-weight:600;
+  font-size:12.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em;
+  background:var(--paper);
+}
+.req-group-row:first-child td{ padding-top:2px; }
+.req-table th{
+  text-align:left; font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-faint);
+  font-weight:700; padding:10px 14px; border-bottom:1px solid var(--line);
+}
+.req-table td{ padding:14px; border-bottom:1px dashed var(--line); vertical-align:middle; }
+.req-table tbody tr{ transition:background .2s var(--ease); }
+.req-table tbody tr:hover{ background:var(--teal-tint); }
+.req-table tbody tr:last-child td{ border-bottom:none; }
+
+/* Requests table — an expand-on-hover detail strip under each case row,
+   the same reveal used by the Appointments/Alerts timelines, adapted to a table row. */
+.req-row.has-more td{ border-bottom-style:solid; border-bottom-color:transparent; }
+.req-more-row td{ padding:0; border-bottom:1px dashed var(--line); }
+.req-more-row:last-child td{ border-bottom:none; }
+.req-more{
+  max-height:0; opacity:0; overflow:hidden; padding:0 14px;
+  transition:max-height .4s var(--ease), opacity .3s var(--ease), padding .4s var(--ease);
+  font-size:12.5px; color:var(--ink-soft); line-height:1.7;
+}
+.req-row.has-more:hover + .req-more-row .req-more,
+.req-more-row:hover .req-more{
+  max-height:60px; opacity:1; padding:12px 14px;
+}
+.req-more b{ color:var(--ink); font-weight:600; }
+.student-cell{ display:flex; align-items:center; gap:11px; }
+.mini-avatar{
+  width:32px; height:32px; border-radius:9px; flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+  font-size:11.5px; font-weight:700; color:#fff;
+}
+.student-name{ font-weight:600; }
+.student-id{ font-size:11px; color:var(--ink-faint); }
+.tag{ display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; white-space:nowrap; }
+.tag.ok{ background:var(--teal-tint); color:var(--teal-deep); }
+.tag.due-soon{ background:var(--azure-tint); color:var(--azure); }
+.tag.overdue{ background:var(--brick-tint); color:var(--brick); }
+.tag.pending{ background:var(--marigold-tint); color:#8a5f1e; }
+.priority-dot{ display:inline-flex; align-items:center; gap:6px; color:var(--ink-soft); }
+.priority-dot span{ width:7px; height:7px; border-radius:50%; }
+.row-action{
+  width:30px; height:30px; border-radius:8px; border:1px solid var(--line); background:var(--surface);
+  color:var(--ink-soft); display:inline-flex; align-items:center; justify-content:center; transition:all .2s var(--ease);
+}
+.row-action:hover{ background:var(--teal-deep); color:#fff; border-color:var(--teal-deep); }
+.pill-filters{ display:flex; gap:6px; flex-wrap:wrap; }
+.pill{ font-size:11.5px; font-weight:600; padding:6px 13px; border-radius:999px; border:1px solid var(--line); color:var(--ink-soft); background:var(--surface); transition:all .2s var(--ease); }
+.pill:hover{ border-color:var(--teal); color:var(--teal-deep); }
+.pill.active{ background:var(--teal); color:#fff; border-color:var(--teal); }
+
+/* attendance log lookup */
+.attendance-log-section{ scroll-margin-top:100px; }
+.attendance-log-card{ min-height:78vh; display:flex; flex-direction:column; gap:22px; }
+.attendance-search{ max-width:440px; }
+.attendance-result{ flex:1; display:flex; flex-direction:column; }
+.attendance-empty{ margin:auto; text-align:center; color:var(--ink-faint); font-size:13.5px; max-width:38ch; line-height:1.6; }
+.attendance-student-head{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.attendance-summary{ display:flex; gap:10px; flex-wrap:wrap; margin:0 0 18px auto; }
+.attendance-summary .chip{ background:#E3F3EA; color:#1E7A46; font-weight:700; font-size:12px; padding:7px 14px; border-radius:999px; white-space:nowrap; }
+.attendance-summary .chip.warn{ background:#FBE4E1; color:#B3261E; }
+.attendance-summary .chip.late{ background:#FDF3D8; color:#8a5f1e; }
+.attendance-log-head-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+
+/* attendance grid: dates down the first column, subjects across the header row */
+.attendance-grid-scroll{
+  overflow:auto; max-height:520px; border:1px solid var(--line); border-radius:14px;
+}
+.attendance-grid-table{ border-collapse:separate; border-spacing:0; }
+.attendance-grid-table th{
+  background:var(--paper); text-align:center; vertical-align:top; padding:12px 10px;
+  border-bottom:2px solid var(--line); border-right:1px dashed var(--line); font-size:12.5px;
+  position:sticky; top:0; z-index:2;
+}
+.attendance-grid-table th:first-child{ text-align:left; left:0; z-index:3; }
+.attendance-grid-table th:last-child{ border-right:none; }
+.grid-subject{ font-weight:700; color:var(--ink); white-space:nowrap; }
+.grid-instructor{ font-weight:500; color:var(--ink-faint); font-size:11px; margin-top:2px; white-space:nowrap; }
+.attendance-grid-table td{ border-bottom:1px dashed var(--line); border-right:1px dashed var(--line); padding:0; }
+.attendance-grid-table td:last-child{ border-right:none; }
+.attendance-grid-table tbody tr:last-child td{ border-bottom:none; }
+.grid-date{
+  padding:14px 14px !important; font-weight:700; font-size:13px; white-space:nowrap; vertical-align:middle;
+  position:sticky; left:0; background:var(--surface); z-index:1;
+}
+.grid-cell{ text-align:center; vertical-align:middle; min-width:96px; }
+.grid-cell-inner{ padding:10px 8px; margin:5px; border-radius:10px; }
+.grid-status{ font-weight:700; font-size:12px; }
+.grid-reason{ font-size:10.5px; margin-top:3px; line-height:1.35; font-weight:500; opacity:.9; }
+.grid-cell.present .grid-cell-inner{ background:#E3F3EA; color:#1E7A46; }
+.grid-cell.late .grid-cell-inner{ background:#FDF3D8; color:#8a5f1e; }
+.grid-cell.absent .grid-cell-inner{ background:#FBE4E1; color:#B3261E; }
+.grid-cell.empty{ color:var(--ink-faint); font-size:12px; }
+
+.grid-cell.clickable{ cursor:pointer; position:relative; }
+.grid-cell.clickable .grid-cell-inner{ transition:filter .15s var(--ease), box-shadow .15s var(--ease); }
+.grid-cell.clickable:hover .grid-cell-inner{ filter:brightness(.96); box-shadow:inset 0 0 0 1px rgba(0,0,0,.08); }
+
+.cell-popover{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:210px; background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  box-shadow:var(--shadow-lift); padding:12px 14px; text-align:left; z-index:40;
+  animation:popIn .15s var(--ease);
+}
+@keyframes popIn{ from{ opacity:0; transform:translate(-50%,-46%); } to{ opacity:1; transform:translate(-50%,-50%); } }
+.cell-popover-title{ font-size:10.5px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.03em; margin-bottom:6px; }
+.cell-popover-status{ font-size:13px; font-weight:700; margin-bottom:5px; }
+.cell-popover.late .cell-popover-status{ color:#8a5f1e; }
+.cell-popover.absent .cell-popover-status{ color:#B3261E; }
+.cell-popover-reason{ font-size:12px; color:var(--ink-soft); line-height:1.5; font-weight:500; }
+.attendance-legend{ display:flex; gap:16px; flex-wrap:wrap; margin-top:14px; font-size:12px; color:var(--ink-soft); }
+.attendance-legend .lg-item{ display:flex; align-items:center; gap:6px; }
+.attendance-legend .lg-dot{ width:10px; height:10px; border-radius:3px; display:inline-block; }
+
+/* Reply / resolve buttons */
+.act-btn{
+  font-size:11.5px; font-weight:700; padding:8px 15px; border-radius:999px; border:1px solid var(--teal);
+  background:var(--teal); color:#fff; cursor:pointer; transition:all .2s var(--ease); white-space:nowrap;
+}
+.act-btn:hover{ background:var(--teal-deep); border-color:var(--teal-deep); }
+.act-btn.outline{ background:transparent; color:var(--teal-deep); }
+.act-btn.outline:hover{ background:var(--teal-tint); }
+
+/* appointments / alerts */
+.appt-row{ display:grid; grid-template-columns:56px 22px 1fr auto; align-items:center; gap:12px; padding:11px 0; border-bottom:1px dashed var(--line); }
+.appt-row:last-child{ border-bottom:none; }
+.appt-time{ text-align:center; }
+.appt-time .t{ font-family:'Fraunces',serif; font-size:14px; font-weight:600; }
+.appt-time .m{ font-size:9.5px; color:var(--ink-faint); text-transform:uppercase; }
+.appt-rail{ width:2px; height:100%; background:var(--line); position:relative; justify-self:center; }
+.appt-rail::before{ content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:9px; height:9px; border-radius:50%; background:var(--marigold); box-shadow:0 0 0 3px var(--marigold-tint); }
+.appt-name{ font-weight:600; font-size:13.5px; }
+.appt-type{ font-size:12px; color:var(--ink-faint); margin-top:1px; }
+
+.alert-row{ display:flex; gap:12px; padding:12px 0; border-bottom:1px dashed var(--line); }
+.alert-row:last-child{ border-bottom:none; }
+.alert-icon{ width:34px; height:34px; border-radius:9px; flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
+.alert-icon.high{ background:var(--brick-tint); color:var(--brick); }
+.alert-icon.med{ background:var(--marigold-tint); color:#8a5f1e; }
+.alert-icon.low{ background:var(--azure-tint); color:var(--azure); }
+.alert-title{ font-size:13px; font-weight:600; }
+.alert-desc{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+.alert-time{ font-size:11px; color:var(--ink-faint); margin-top:4px; }
+.req-table .time-ago{ font-size:12px; color:var(--ink-faint); white-space:nowrap; }
+
+/* ---------- Expanded Appointments (Yesterday / Today / Tomorrow) ---------- */
+.appt-timeline{ display:flex; flex-direction:column; gap:26px; width:100%; }
+.appt-day .card{ padding:28px 30px; }
+.appt-day-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+.appt-day-head h3{ font-size:19px; }
+.appt-day-date{ font-size:12.5px; color:var(--ink-soft); }
+.appt-day-count{ margin-left:auto; font-size:12px; color:var(--ink-faint); }
+.appt-day-today .appt-day-head h3{ color:var(--teal-deep); }
+.appt-day-today .appt-day-head::before{
+  content:""; width:8px; height:8px; border-radius:50%; background:var(--teal);
+  box-shadow:0 0 0 4px var(--teal-tint); align-self:center;
+}
+.appt-day.appt-day-past .card{ opacity:.92; }
+
+.appt-item{
+  border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  position:relative;
+}
+.appt-item:hover{
+  transform:scale(1.02) translateY(-3px); box-shadow:var(--shadow-lift);
+  background:var(--paper); z-index:3;
+}
+.appt-item .appt-row{ border-bottom:1px dashed var(--line); padding:14px 0; }
+.appt-item:last-child .appt-row{ border-bottom:none; }
+.appt-item:hover .appt-row{ border-bottom-color:transparent; }
+.appt-more{
+  max-height:0; opacity:0; overflow:hidden; padding-left:78px;
+  transition:max-height .4s var(--ease), opacity .3s var(--ease), padding-bottom .4s var(--ease);
+  font-size:12.5px; color:var(--ink-soft); line-height:1.7;
+}
+.appt-item:hover .appt-more{ max-height:140px; opacity:1; padding-bottom:16px; }
+.appt-more b{ color:var(--ink); font-weight:600; }
+.tag.done{ background:#EAEBEF; color:var(--ink-faint); }
+
+/* ---------- Expanded Alerts (Urgent / Unchecked / Pending) ---------- */
+.alert-groups{ display:flex; flex-direction:column; gap:26px; width:100%; }
+.alert-group .card{ padding:28px 30px; }
+.alert-group-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.alert-group-head h3{ font-size:19px; }
+.alert-group-head .dot{ width:9px; height:9px; border-radius:50%; }
+.alert-group-head.urgent .dot{ background:var(--brick); box-shadow:0 0 0 4px var(--brick-tint); }
+.alert-group-head.unchecked .dot{ background:#C9971F; box-shadow:0 0 0 4px #FDF3D8; }
+.alert-group-head.pending .dot{ background:var(--azure); box-shadow:0 0 0 4px var(--azure-tint); }
+.alert-group-count{ margin-left:auto; font-size:12px; color:var(--ink-faint); }
+
+.alert-item{
+  border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  position:relative;
+}
+.alert-item:hover{
+  transform:scale(1.02) translateY(-3px); box-shadow:var(--shadow-lift);
+  background:var(--paper); z-index:3;
+}
+.alert-item .alert-row{ border-bottom:1px dashed var(--line); padding:14px 0; }
+.alert-item:last-child .alert-row{ border-bottom:none; }
+.alert-item:hover .alert-row{ border-bottom-color:transparent; }
+.alert-new-badge{
+  font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  background:#C9971F; color:#fff; padding:2px 8px; border-radius:999px; margin-left:8px;
+}
+.alert-more{
+  max-height:0; opacity:0; overflow:hidden; padding-left:46px;
+  transition:max-height .4s var(--ease), opacity .3s var(--ease), padding-bottom .4s var(--ease);
+  font-size:12.5px; color:var(--ink-soft); line-height:1.7;
+}
+.alert-item:hover .alert-more{ max-height:160px; opacity:1; padding-bottom:16px; }
+.alert-more b{ color:var(--ink); font-weight:600; }
+
+/* ---------- Expanded Parent Messages (Today / Yesterday) ----------
+   Same timeline shell as Appointments (.appt-timeline / .appt-day / .appt-day-head),
+   with a message-shaped row + hover-reveal of the full message body. */
+.msg-row{ display:grid; grid-template-columns:38px 1fr auto auto; align-items:center; gap:14px; padding:14px 0; border-bottom:1px dashed var(--line); }
+.msg-item:last-child .msg-row{ border-bottom:none; }
+.msg-who{ display:flex; align-items:center; gap:11px; }
+.msg-parent{ font-weight:600; font-size:13.5px; }
+.msg-student{ font-size:11.5px; color:var(--ink-faint); margin-top:1px; }
+.msg-subject{ font-size:13px; color:var(--ink); }
+.msg-meta{ display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+.msg-time{ font-size:11px; color:var(--ink-faint); white-space:nowrap; }
+
+.msg-item{
+  border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  position:relative;
+}
+.msg-item:hover{
+  transform:scale(1.02) translateY(-3px); box-shadow:var(--shadow-lift);
+  background:var(--paper); z-index:3;
+}
+.msg-item .msg-row{ border-bottom:1px dashed var(--line); }
+.msg-item:hover .msg-row{ border-bottom-color:transparent; }
+.msg-item.is-done{ opacity:.5; }
+.msg-more{
+  max-height:0; opacity:0; overflow:hidden; padding-left:59px;
+  transition:max-height .4s var(--ease), opacity .3s var(--ease), padding-bottom .4s var(--ease);
+  font-size:12.5px; color:var(--ink-soft); line-height:1.7;
+}
+.msg-item:hover .msg-more{ max-height:120px; opacity:1; padding-bottom:16px; }
+.msg-more b{ color:var(--ink); font-weight:600; }
+.msg-avatar{
+  width:34px; height:34px; border-radius:9px; flex:0 0 auto; color:#fff; display:flex;
+  align-items:center; justify-content:center; font-size:11.5px; font-weight:700;
+}
+
+/* attendance search result — the same rise-in the hero uses, replayed each time
+   a new student's record is looked up. */
+.attendance-result.result-in{ animation:rise .5s var(--ease); }
+
+/* quick actions */
+.qa-card{
+  display:flex; flex-direction:column; gap:10px; text-align:left; cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:22px;
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+  opacity:0; transform:translateY(14px);
+}
+.qa-card.in-view{ opacity:1; transform:none; }
+.qa-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lift); border-color:var(--marigold); }
+.qa-icon{ width:42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; background:var(--q-bg); color:var(--q-fg); transition:transform .3s var(--ease); }
+.qa-card:hover .qa-icon{ transform:scale(1.12) rotate(6deg); }
+.qa-card .qt{ font-size:14px; font-weight:700; font-family:'Fraunces',serif; }
+.qa-card .qd{ font-size:12px; color:var(--ink-faint); }
+
+/* performance */
+.cat-row{ display:grid; grid-template-columns:128px 1fr 36px; align-items:center; gap:12px; font-size:13px; margin-bottom:13px; }
+.cat-row .name{ color:var(--ink-soft); font-weight:500; }
+.bar-track{ height:8px; background:var(--tab); border-radius:6px; overflow:hidden; }
+.bar-fill{ height:100%; border-radius:6px; background:var(--chart-1); width:0; transition:width 1.1s var(--ease); }
+.cat-row .score{ text-align:right; font-weight:700; font-family:'Fraunces',serif; }
+.chart-legend{ display:flex; gap:16px; }
+.legend-item{ display:flex; align-items:center; gap:7px; font-size:12px; color:var(--ink-soft); cursor:pointer; }
+.legend-dot{ width:9px; height:9px; border-radius:3px; }
+.bar-col{ transition:transform .3s var(--ease); transform-origin:bottom; cursor:pointer; }
+.bar-col:hover{ filter:brightness(1.08); }
+.chart-tooltip{
+  position:fixed; z-index:80; background:var(--ink); color:#EDEEE7;
+  padding:10px 13px; border-radius:10px; font-size:12px; line-height:1.6;
+  max-width:220px; box-shadow:var(--shadow-lift);
+  opacity:0; transform:translateY(4px); pointer-events:none;
+  transition:opacity .15s var(--ease), transform .15s var(--ease);
+}
+.chart-tooltip.show{ opacity:1; transform:translateY(0); }
+.chart-tooltip b{ color:#fff; }
+.chart-tooltip .tt-pct{ color:#F5C451; font-weight:700; }
+
+/* meaning / purpose info icon — used on stat cards and quick-action cards */
+.info-dot{
+  width:19px; height:19px; border-radius:50%; flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(30,36,48,.06); color:var(--ink-faint);
+  font-family:'Fraunces',serif; font-style:italic; font-weight:600; font-size:12px;
+  cursor:help; transition:background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+}
+.info-dot:hover{ background:var(--ink); color:#fff; transform:scale(1.1); }
+.stat-top-right{ display:flex; align-items:center; gap:8px; }
+.qa-card{ position:relative; }
+.qa-card .info-dot{ position:absolute; top:16px; right:16px; }
+.card-tooltip{
+  position:fixed; z-index:90; background:var(--ink); color:#EDEEE7;
+  padding:11px 14px; border-radius:10px; font-size:12.5px; line-height:1.55;
+  max-width:240px; box-shadow:var(--shadow-lift);
+  opacity:0; transform:translateY(4px); pointer-events:none;
+  transition:opacity .15s var(--ease), transform .15s var(--ease);
+}
+.card-tooltip.show{ opacity:1; transform:translateY(0); }
+.card-tooltip b{ display:block; color:#fff; font-family:'Fraunces',serif; font-size:12.5px; margin-bottom:4px; }
+
+/* activity — same hover-lift + reveal pattern as the Appointments/Alerts timelines,
+   sized to a single-line feed row instead of a multi-field card. */
+.activity-item{
+  border-radius:14px; padding:8px 14px; margin:0 -14px; cursor:pointer;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  position:relative;
+}
+.activity-item:hover{
+  transform:scale(1.015) translateY(-2px); box-shadow:var(--shadow-lift);
+  background:var(--paper); z-index:3;
+}
+.activity-row{ display:flex; gap:12px; padding:11px 0; border-bottom:1px dashed var(--line); }
+.activity-item .activity-row{ padding:14px 0; }
+.activity-item:last-child .activity-row{ border-bottom:none; }
+.activity-item:hover .activity-row{ border-bottom-color:transparent; }
+.act-avatar{ width:32px; height:32px; border-radius:9px; flex:0 0 auto; color:#fff; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
+.act-text{ font-size:13px; line-height:1.5; }
+.act-text b{ font-weight:700; }
+.act-stamp{ font-size:11px; color:var(--ink-faint); margin-top:3px; }
+.activity-more{
+  max-height:0; opacity:0; overflow:hidden; padding-left:44px;
+  transition:max-height .4s var(--ease), opacity .3s var(--ease), padding-bottom .4s var(--ease);
+  font-size:12.5px; color:var(--ink-soft); line-height:1.7;
+}
+.activity-item:hover .activity-more{ max-height:80px; opacity:1; padding-bottom:16px; }
+.activity-more b{ color:var(--ink); font-weight:600; }
+
+/* directory */
+.grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.staff-card{ text-align:center; padding:24px 18px; overflow:hidden; }
+.staff-more{
+  max-height:0; opacity:0; overflow:hidden;
+  transition:max-height .4s var(--ease), opacity .3s var(--ease), margin-top .4s var(--ease);
+  font-size:11.5px; color:var(--ink-faint); line-height:1.6;
+}
+.staff-card:hover .staff-more{ max-height:60px; opacity:1; margin-top:10px; }
+.staff-avatar{
+  width:56px; height:56px; border-radius:50%; margin:0 auto 12px; display:flex; align-items:center; justify-content:center;
+  font-family:'Fraunces',serif; font-weight:700; font-size:18px; color:#fff;
+}
+.staff-name{ font-weight:700; font-size:14px; }
+.staff-role{ font-size:12px; color:var(--ink-faint); margin-top:2px; }
+.staff-stat{ margin-top:12px; font-size:11.5px; color:var(--ink-soft); background:var(--teal-tint); border-radius:999px; padding:5px 12px; display:inline-block; }
+
+
+/* closing strip */
+.review-strip{
+  background:var(--ink); color:#EDEEE7; border-radius:var(--radius-card); padding:26px 32px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.review-strip .display{ color:#fff; font-size:19px; }
+.review-strip p{ margin:5px 0 0; font-size:13px; color:#B9C2B6; }
+
+.site-footer{
+  margin-top:32px; padding-top:20px; border-top:1px solid var(--line);
+  text-align:center; font-size:12.5px; color:var(--ink-faint);
+  opacity:0; transform:translateY(14px);
+  transition:opacity .55s var(--ease), transform .5s var(--ease);
+}
+.site-footer.in-view{ opacity:1; transform:none; }
+.site-footer a{ color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; transition:color .2s var(--ease); }
+.site-footer a:hover{ color:var(--teal-deep); }
+.countdown{ display:flex; gap:10px; }
+.cd-box{ background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:11px 16px; text-align:center; min-width:64px; }
+.cd-num{ font-family:'Fraunces',serif; font-size:22px; font-weight:700; color:#F5C451; text-shadow:0 0 14px rgba(245,196,81,.45); }
+.cd-lbl{ font-size:10.5px; color:#B9C2B6; margin-top:2px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width:1180px){
+  .grid{ grid-template-columns:1fr; }
+  .grid-4{ grid-template-columns:repeat(2,1fr); }
+  .grid-3{ grid-template-columns:repeat(2,1fr); }
+  .hero{ grid-template-columns:1fr 1fr; }
+  .streak{ grid-column:1/-1; justify-self:start; }
+}
+@media (max-width:900px){
+  .main{ padding:28px 26px 90px; }
+  .hero{ grid-template-columns:1fr; text-align:left; }
+  .streak{ justify-self:start; }
+}
+@media (max-width:720px){
+  .app{ grid-template-columns:1fr; }
+  .sidebar{
+    position:fixed; bottom:0; left:0; right:0; top:auto; height:auto; z-index:30;
+    flex-direction:row; padding:8px 4px; border-top:1px solid rgba(255,255,255,.12);
+  }
+  .brand,.nav-label,.sidebar-foot{ display:none; }
+  .nav{ flex-direction:row; justify-content:space-around; padding:0; width:100%; overflow-x:auto; }
+  .nav-item{ flex-direction:column; gap:4px; font-size:9.5px; padding:7px 4px; }
+  .nav-badge{ position:absolute; top:2px; right:8px; margin:0; }
+  .main{ padding:22px 18px 96px; }
+  .topbar{ flex-direction:column; align-items:flex-start; }
+  .search-pill{ width:100%; min-width:0; }
+  .grid-4{ grid-template-columns:1fr 1fr; }
+  .grid-3{ grid-template-columns:1fr; }
+  .cat-row{ grid-template-columns:96px 1fr 30px; }
+}
+@media (max-width:480px){
+  .grid-4{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .hero{ animation:none; opacity:1; transform:none; }
+  .card,.qa-card{ opacity:1; transform:none; transition:none; }
+  .bar-fill{ transition:none; }
+}
+
+/* ---------- Multi-page views ---------- */
+.page-view[hidden]{ display:none !important; }
+.page-head-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+
+/* ---------- Parent cells in tables ---------- */
+.parent-cell{ display:flex; flex-direction:column; gap:1px; }
+.parent-link{ cursor:pointer; font-weight:600; color:var(--teal-deep); text-decoration:underline; text-underline-offset:2px; background:none; border:none; padding:0; font:inherit; }
+.parent-link:hover{ color:var(--teal); }
+.parent-cell .pn-tag{ font-size:11px; color:var(--ink-faint); }
+
+/* ---------- Inline parent-contact card (attendance lookup) ---------- */
+.parent-contact-inline{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;
+  margin-top:18px; padding:16px 18px; background:var(--paper); border:1px solid var(--line); border-radius:14px;
+}
+.pc-label{ font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.03em; font-weight:700; }
+.pc-name{ font-family:'Fraunces',serif; font-size:16px; margin-top:2px; }
+.pc-relation{ font-family:'Inter',sans-serif; font-size:12px; color:var(--ink-soft); font-weight:500; }
+
+/* ---------- Appointment row actions ---------- */
+.appt-row{ grid-template-columns:56px 22px 1fr auto auto !important; }
+.appt-actions{ display:flex; }
+.alert-row{ position:relative; }
+.alert-msg-btn{ margin-left:auto; align-self:center; }
+
+/* ---------- Parent contact slide-over panel ---------- */
+.panel-backdrop{
+  position:fixed; inset:0; background:rgba(20,28,22,.35); opacity:0; pointer-events:none;
+  transition:opacity .25s var(--ease); z-index:60;
+}
+.panel-backdrop.open{ opacity:1; pointer-events:auto; }
+.parent-panel{
+  position:fixed; top:0; right:0; height:100vh; width:360px; max-width:90vw;
+  background:var(--paper); border-left:1px solid var(--line); box-shadow:var(--shadow-lift);
+  transform:translateX(100%); transition:transform .3s var(--ease); z-index:61;
+  display:flex; flex-direction:column; padding:26px 24px; overflow-y:auto;
+}
+.parent-panel.open{ transform:translateX(0); }
+.parent-panel-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+.parent-panel-title{ font-family:'Fraunces',serif; font-size:17px; }
+.panel-close{
+  width:30px; height:30px; border-radius:8px; border:1px solid var(--line); background:var(--surface);
+  color:var(--ink-soft); cursor:pointer; font-size:13px; flex:0 0 auto;
+}
+.panel-close:hover{ background:var(--teal-deep); color:#fff; border-color:var(--teal-deep); }
+.parent-card-student{ font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; font-weight:700; }
+.parent-card-name{ font-family:'Fraunces',serif; font-size:20px; margin-top:4px; }
+.parent-card-relation{ font-size:12.5px; color:var(--ink-soft); margin-bottom:16px; }
+.parent-contact-row{ display:flex; align-items:center; gap:9px; font-size:13.5px; padding:10px 0; border-bottom:1px dashed var(--line); }
+.parent-contact-row svg{ color:var(--teal); flex:0 0 auto; }
+.parent-panel-actions{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+.parent-panel-actions .act-btn{ text-align:center; }
+
+/* ---------- Modals ---------- */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(20,28,22,.35); opacity:0; pointer-events:none;
+  transition:opacity .25s var(--ease); z-index:70;
+}
+.modal-backdrop.open{ opacity:1; pointer-events:auto; }
+.modal{
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-46%); width:440px; max-width:90vw;
+  background:var(--surface); border-radius:var(--radius-card); box-shadow:var(--shadow-lift);
+  padding:26px 26px 22px; opacity:0; pointer-events:none; transition:opacity .25s var(--ease), transform .25s var(--ease);
+  z-index:71; max-height:86vh; overflow-y:auto;
+}
+.modal.open{ opacity:1; pointer-events:auto; transform:translate(-50%,-50%); }
+.modal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.modal-head h3{ font-size:17px; }
+.modal-label{ display:block; font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--ink-faint); margin:14px 0 6px; }
+.modal-label:first-of-type{ margin-top:0; }
+.modal-input{
+  width:100%; border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-size:13.5px;
+  font-family:inherit; background:var(--paper); color:var(--ink); resize:vertical;
+}
+.modal-input:focus{ outline:none; border-color:var(--teal); box-shadow:0 0 0 4px var(--teal-tint); }
+.modal-foot{ display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed; bottom:26px; left:50%; transform:translate(-50%,14px); background:var(--teal-deep); color:#fff;
+  font-size:13px; font-weight:600; padding:12px 22px; border-radius:999px; box-shadow:var(--shadow-lift);
+  opacity:0; pointer-events:none; transition:opacity .25s var(--ease), transform .25s var(--ease); z-index:80;
+}
+.toast.show{ opacity:1; transform:translate(-50%,0); }
+
+@media (max-width:480px){
+  .parent-panel{ width:100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logos">
+        <div class="brand-college" aria-label="Islington College">
+          <img src="https://islington.edu.np/images/islington-logo.svg" alt="Islington College" />
+        </div>
+        <div class="brand-divider"></div>
+        <div class="brand-ing" aria-label="ING logo">
+          <img src="https://islington.edu.np/images/ing_logo.svg" alt="ING" />
+        </div>
+      </div>
+      <div class="brand-name">Islington<span>Staff Portal</span></div>
+    </div>
+
+    <div class="nav-label">Workspace</div>
+    <nav class="nav" id="sideNav">
+      <a class="nav-item" data-page="page-overview" href="#overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12l8-8 8 8M6 10v10h12V10"/></svg>
+        Overview
+      </a>
+      <div class="nav-sub">
+        <a class="nav-item" data-page="page-overview" data-anchor="quick-actions" href="#quick-actions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
+          Quick Actions
+        </a>
+        <a class="nav-item" data-page="page-overview" data-anchor="performance" href="#performance">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg>
+          Performance
+        </a>
+        <a class="nav-item" data-page="page-overview" data-anchor="activity" href="#activity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          Staff Activity
+        </a>
+        <a class="nav-item" data-page="page-overview" data-anchor="directory" href="#directory">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.2"/><path d="M4.5 20c1.2-4 4-6 7.5-6s6.3 2 7.5 6"/></svg>
+          Staff Directory
+        </a>
+      </div>
+      <a class="nav-item" data-page="page-requests" href="#requests">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h9l5 5v13H5z"/><path d="M14 3v5h5M8 13h8M8 17h8"/></svg>
+        Student Requests
+        <span class="nav-badge">12</span>
+      </a>
+      <a class="nav-item" data-page="page-attendance" href="#attendance-log">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="M8 14h2M8 17h5"/></svg>
+        Attendance Log
+      </a>
+      <a class="nav-item" data-page="page-messages" href="#parent-messages">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Parent Messages
+        <span class="nav-badge">5</span>
+      </a>
+      <a class="nav-item" data-page="page-appointments" href="#appointments-alerts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+        Appointments
+      </a>
+      <a class="nav-item" data-page="page-alerts" href="#alerts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg>
+        Alerts
+        <span class="nav-badge">4</span>
+      </a>
+    </nav>
+    <div class="sidebar-foot">Student Affairs Office<br>Islington College</div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="eyebrow">Saturday, September 12</div>
+        <h1>Good morning, Rina</h1>
+      </div>
+
+      <div class="topbar-right">
+        <div class="profile-pill">
+          <div class="avatar">RM</div>
+          <div class="profile-text">
+            <div class="pn">Rina Marlow</div>
+            <div class="pr">Student Affairs Lead</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PAGE: OVERVIEW ============ -->
+    <div class="page-view" id="page-overview">
+
+    <!-- ============ HERO / OVERVIEW ============ -->
+    <section class="hero" id="overview">
+      <div class="hero-greeting">
+        <div class="display">Student Services · Fall Term Operations</div>
+        <p>Case load is steady this week — response times are ahead of target. Five parent messages and four student alerts still need a follow-up before Friday's review.</p>
+        <div class="hero-quote">"Every case is a student and a family waiting on an answer — the faster we're clear, the faster they can move forward."</div>
+      </div>
+      <div class="ring-stat">
+        <div class="ring" style="--pct:87"><span class="ring-value">87%</span></div>
+        <div class="ring-label">Resolution rate<br>this term</div>
+      </div>
+      <div class="ring-stat">
+        <div class="ring" style="--pct:92"><span class="ring-value">92%</span></div>
+        <div class="ring-label">Parent<br>satisfaction</div>
+      </div>
+      <div class="streak">
+        <div class="num">14</div>
+        <div class="lbl">cases closed<br>today</div>
+      </div>
+    </section>
+
+    <!-- STAT CARDS -->
+    <section class="section">
+      <div class="grid-4" id="statsGrid">
+        <div class="card stat-card" data-nav="page-requests" style="--s-bg:var(--azure-tint); --s-fg:var(--azure);">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h9l5 5v13H5z"/><path d="M14 3v5h5"/></svg></div>
+            <div class="stat-top-right">
+              <span class="stat-trend trend-up">▲ 8.2%</span>
+              <span class="info-dot" data-tip="<b>Open student requests</b>Tickets from students still waiting on a resolution — transcripts, enrollment changes, general queries. The ▲8.2% shows the queue is growing week over week, a signal to add capacity to the desk.">i</span>
+            </div>
+          </div>
+          <div class="stat-value">128</div>
+          <div class="stat-label">Open student requests</div>
+        </div>
+        <div class="card stat-card" data-nav="page-messages" style="--s-bg:var(--teal-tint); --s-fg:var(--teal-deep);">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div class="stat-top-right">
+              <span class="stat-trend trend-up">▼ 9 min</span>
+              <span class="info-dot" data-tip="<b>Unread parent messages</b>Messages from parents sitting in the inbox. The ▼9 min is average reply time — it's dropped, meaning the team is answering faster, not that fewer messages are coming in.">i</span>
+            </div>
+          </div>
+          <div class="stat-value">42</div>
+          <div class="stat-label">Unread parent messages</div>
+        </div>
+        <div class="card stat-card" data-nav="page-appointments" style="--s-bg:var(--marigold-tint); --s-fg:#8a5f1e;">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></div>
+            <div class="stat-top-right">
+              <span class="stat-trend trend-up">▲ 5</span>
+              <span class="info-dot" data-tip="<b>Upcoming appointments</b>Scheduled meetings on the calendar — advising sessions, parent-teacher conferences, and the like. The ▲5 shows five more were booked since last period, a heads-up for a busier week ahead.">i</span>
+            </div>
+          </div>
+          <div class="stat-value">24</div>
+          <div class="stat-label">Upcoming appointments</div>
+        </div>
+        <div class="card stat-card" data-nav="page-alerts" style="--s-bg:var(--brick-tint); --s-fg:var(--brick);">
+          <div class="stat-top">
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+            <div class="stat-top-right">
+              <span class="stat-trend trend-down">▲ 2</span>
+              <span class="info-dot" data-tip="<b>Active student alerts</b>Students flagged for attention — attendance concerns, at-risk grades, or safeguarding notes. This is a risk metric, not a workload one; the ▲2 means two new flags went up, so check this card first each morning.">i</span>
+            </div>
+          </div>
+          <div class="stat-value">9</div>
+          <div class="stat-label">Active student alerts</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ QUICK ACTIONS ============ -->
+    <section class="section" id="quick-actions">
+      <div class="section-head"><h2>Quick actions</h2></div>
+      <div class="grid-4" id="qaGrid">
+        <button class="qa-card" onclick="goToPage('page-attendance')" style="--q-bg:var(--azure-tint); --q-fg:var(--azure);">
+          <span class="info-dot" data-tip="<b>Why it's here</b>Pulls one student's full attendance history as a file — the document most often needed for a parent meeting or a fee/visa-compliance check. Saves a trip through the full attendance module.">i</span>
+          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+          <div class="qt">Export attendance report</div>
+          <div class="qd">Download a student's full attendance log</div>
+        </button>
+        <button class="qa-card" onclick="openComposeModal(undefined, 'Upcoming balance reminder')" style="--q-bg:var(--marigold-tint); --q-fg:#8a5f1e;">
+          <span class="info-dot" data-tip="<b>Why it's here</b>Fires off a payment nudge to a parent directly, without opening the full billing module — the fastest way to chase an upcoming balance before it's overdue.">i</span>
+          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="qt">Send a fee reminder</div>
+          <div class="qd">Notify a parent about an upcoming balance</div>
+        </button>
+        <button class="qa-card" onclick="openComposeModal()" style="--q-bg:var(--brick-tint); --q-fg:var(--brick);">
+          <span class="info-dot" data-tip="<b>Why it's here</b>Opens a quick compose window for anything that doesn't need a report attached — a grade update, an attendance note, a quick fees question. The everyday shortcut for parent contact.">i</span>
+          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="qt">Message a parent</div>
+          <div class="qd">Reach out about grades, attendance, or fees</div>
+        </button>
+        <button class="qa-card" onclick="openApptModal()" style="--q-bg:var(--teal-tint); --q-fg:var(--teal-deep);">
+          <span class="info-dot" data-tip="<b>Why it's here</b>Jumps straight into booking a slot on the conference calendar, skipping the general scheduling screen — used to convert an appointment request into a confirmed slot in one step.">i</span>
+          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 14v4M10 16h4"/></svg></div>
+          <div class="qt">Schedule parent meeting</div>
+          <div class="qd">Book a parent-teacher conference slot</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ PERFORMANCE ============ -->
+    <section class="section" id="performance">
+      <div class="section-head">
+        <h2>Service performance</h2>
+        <div class="view-toggle">
+          <button class="active">This term</button>
+          <button>Last term</button>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-head">
+            <h3>Requests handled vs. resolved</h3>
+            <div class="chart-legend">
+              <div class="legend-item" id="legendHandled"><span class="legend-dot" style="background:var(--chart-1)"></span>Handled</div>
+              <div class="legend-item" id="legendResolved"><span class="legend-dot" style="background:var(--chart-2)"></span>Resolved</div>
+            </div>
+          </div>
+          <svg id="perfChart" viewBox="0 0 540 220" width="100%" height="220"></svg>
+          <div class="chart-tooltip" id="chartTooltip"></div>
+          <div class="card-tooltip" id="cardTooltip"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Resolution rate by category</h3><div class="meta">Last 30 days</div></div>
+          <div class="cat-row"><span class="name">Attendance</span><div class="bar-track"><div class="bar-fill" data-w="91" style="background:var(--chart-1)"></div></div><span class="score">91</span></div>
+          <div class="cat-row"><span class="name">Fees & Billing</span><div class="bar-track"><div class="bar-fill" data-w="84" style="background:var(--chart-1)"></div></div><span class="score">84</span></div>
+          <div class="cat-row"><span class="name">Academic Advising</span><div class="bar-track"><div class="bar-fill" data-w="88" style="background:var(--chart-1)"></div></div><span class="score">88</span></div>
+          <div class="cat-row"><span class="name">Parent Inquiries</span><div class="bar-track"><div class="bar-fill" data-w="79" style="background:var(--chart-1)"></div></div><span class="score">79</span></div>
+          <div class="cat-row"><span class="name">Records & IT</span><div class="bar-track"><div class="bar-fill" data-w="95" style="background:var(--chart-1)"></div></div><span class="score">95</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STAFF ACTIVITY ============ -->
+    <section class="section" id="activity">
+      <div class="section-head"><h2>Recent staff activity</h2></div>
+      <div class="card">
+        <div class="activity-item">
+          <div class="activity-row">
+            <div class="act-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">DC</div>
+            <div><div class="act-text"><b>Dana Cole</b> replied to Grace Ibarra about the tuition installment</div><div class="act-stamp">8 minutes ago</div></div>
+          </div>
+          <div class="activity-more"><b>Case:</b> Fee installment dispute — Maya Ibarra. Offered a split-payment plan; awaiting the parent's confirmation.</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-row">
+            <div class="act-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">RM</div>
+            <div><div class="act-text"><b>Rina Marlow</b> scheduled a parent-teacher conference for Leo Osei</div><div class="act-stamp">41 minutes ago</div></div>
+          </div>
+          <div class="activity-more"><b>Case:</b> Missed-class follow-up. Meeting booked for 1:15 PM today in Student Affairs, Room 204.</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-row">
+            <div class="act-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">NA</div>
+            <div><div class="act-text"><b>Noah Alvarez</b> logged an attendance note for Leo Osei's case</div><div class="act-stamp">1 hour ago</div></div>
+          </div>
+          <div class="activity-more"><b>Note:</b> Fourth consecutive missed session recorded; attendance threshold alert triggered automatically.</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-row">
+            <div class="act-avatar" style="background:linear-gradient(135deg,#BE5039,#8C3A28)">SP</div>
+            <div><div class="act-text"><b>Sofia Park</b> sent a fee reminder to Sunil Bhatt</div><div class="act-stamp">2 hours ago</div></div>
+          </div>
+          <div class="activity-more"><b>Case:</b> Scholarship verification. Reminder covered the outstanding balance ahead of today's interview.</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-row">
+            <div class="act-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">DC</div>
+            <div><div class="act-text"><b>Dana Cole</b> resent Hana Weiss's report card to her parent</div><div class="act-stamp">3 hours ago</div></div>
+          </div>
+          <div class="activity-more"><b>Case:</b> Report card re-send request. Parent confirmed receipt the same afternoon.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STAFF DIRECTORY ============ -->
+    <section class="section" id="directory">
+      <div class="section-head"><h2>Staff directory</h2><div class="meta">5 advisors on duty</div></div>
+      <div class="grid-3">
+        <div class="card staff-card">
+          <div class="staff-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">DC</div>
+          <div class="staff-name">Dana Cole</div>
+          <div class="staff-role">Billing & Records</div>
+          <div class="staff-stat">18 cases this week</div>
+          <div class="staff-more">Focus this week: tuition installment plans and report-card re-sends.</div>
+        </div>
+        <div class="card staff-card">
+          <div class="staff-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">RM</div>
+          <div class="staff-name">Rina Marlow</div>
+          <div class="staff-role">Student Affairs Lead</div>
+          <div class="staff-stat">22 cases this week</div>
+          <div class="staff-more">Focus this week: parent-teacher conferences and fee-dispute follow-ups.</div>
+        </div>
+        <div class="card staff-card">
+          <div class="staff-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">NA</div>
+          <div class="staff-name">Noah Alvarez</div>
+          <div class="staff-role">Attendance & Academic Advising</div>
+          <div class="staff-stat">15 cases this week</div>
+          <div class="staff-more">Focus this week: attendance threshold cases and advising check-ins.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING STRIP ============ -->
+    <div class="review-strip">
+      <div>
+        <div class="display">Weekly Service Review</div>
+        <p>Friday, 2:00 PM · Conference Room B · Bring open-case and parent-message summaries</p>
+      </div>
+      <div class="countdown">
+        <div class="cd-box"><div class="cd-num">128</div><div class="cd-lbl">open cases</div></div>
+        <div class="cd-box"><div class="cd-num">42</div><div class="cd-lbl">parent msgs</div></div>
+        <div class="cd-box"><div class="cd-num">5</div><div class="cd-lbl">staff on duty</div></div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      © 2026 Islington. <a href="https://app.mysecondteacher.com.np/copyright-policy" target="_blank" rel="noopener">Copyright</a>
+    </footer>
+
+    </div><!-- /page-overview -->
+
+    <!-- ============ PAGE: STUDENT REQUESTS ============ -->
+    <div class="page-view" id="page-requests" hidden>
+    <section class="section" id="requests">
+      <div class="section-head">
+        <div>
+          <h2>Student requests</h2>
+          <div class="meta">9 cases updated across today and yesterday</div>
+        </div>
+        <div class="pill-filters" id="requestsFilters">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="open">Open</button>
+          <button class="pill" data-filter="progress">In progress</button>
+          <button class="pill" data-filter="urgent">Urgent</button>
+          <button class="pill" data-filter="parent">Needs parent reply</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-scroll">
+        <table class="req-table" id="requestsTable">
+          <thead>
+            <tr><th>Student</th><th>Request</th><th>Parent</th><th>Priority</th><th>Status</th><th>Assigned</th><th>Updated</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr class="req-group-row"><td colspan="8">Today</td></tr>
+            <tr class="req-row has-more" data-status="urgent" data-parent-needed="true">
+              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">MI</div><div><div class="student-name">Maya Ibarra</div><div class="student-id">ID 20394 · Sophomore</div></div></div></td>
+              <td>Fee installment dispute</td>
+              <td><button class="parent-link" onclick="openParentPanel('maya ibarra')">Grace Ibarra</button></td>
+              <td><span class="priority-dot"><span style="background:var(--brick)"></span>High</span></td>
+              <td><span class="tag overdue">Urgent</span></td>
+              <td>D. Cole</td>
+              <td><span class="time-ago" data-ago-minutes="18">—</span></td>
+              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('maya ibarra')">☎</button></td>
+            </tr>
+            <tr class="req-more-row" data-status="urgent" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> Partial refund approved; a split-payment plan was offered and is awaiting the parent's confirmation.</div></td></tr>
+            <tr class="req-row has-more" data-status="progress" data-parent-needed="false">
+              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">JT</div><div><div class="student-name">Jonah Turner</div><div class="student-id">ID 18827 · Senior</div></div></div></td>
+              <td>Financial aid document review</td>
+              <td><button class="parent-link" onclick="openParentPanel('jonah turner')">Liam Turner</button></td>
+              <td><span class="priority-dot"><span style="background:var(--marigold)"></span>Medium</span></td>
+              <td><span class="tag due-soon">In progress</span></td>
+              <td>R. Marlow</td>
+              <td><span class="time-ago" data-ago-minutes="47">—</span></td>
+              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('jonah turner')">☎</button></td>
+            </tr>
+            <tr class="req-more-row" data-status="progress" data-parent-needed="false"><td colspan="8"><div class="req-more"><b>Last update:</b> Second consult this month — repeat-contact flag is active, documents under review.</div></td></tr>
+            <tr class="req-row has-more" data-status="open" data-parent-needed="true">
+              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">SK</div><div><div class="student-name">Sana Karimi</div><div class="student-id">ID 20981 · Freshman</div></div></div></td>
+              <td>Attendance concern raised by parent</td>
+              <td><button class="parent-link" onclick="openParentPanel('sana karimi')">Farah Karimi</button></td>
+              <td><span class="priority-dot"><span style="background:var(--azure)"></span>Low</span></td>
+              <td><span class="tag pending">Open</span></td>
+              <td>Unassigned</td>
+              <td><span class="time-ago" data-ago-minutes="120">—</span></td>
+              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('sana karimi')">☎</button></td>
+            </tr>
+            <tr class="req-more-row" data-status="open" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> First-term advising check-in went well; written summary due before Friday.</div></td></tr>
+            <tr class="req-row has-more" data-status="progress" data-parent-needed="true">
+              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#BE5039,#8C3A28)">LO</div><div><div class="student-name">Leo Osei</div><div class="student-id">ID 19502 · Junior</div></div></div></td>
+              <td>Missed-class follow-up</td>
+              <td><button class="parent-link" onclick="openParentPanel('leo osei')">Adjoa Osei</button></td>
+              <td><span class="priority-dot"><span style="background:var(--brick)"></span>High</span></td>
+              <td><span class="tag due-soon">In progress</span></td>
+              <td>N. Alvarez</td>
+              <td><span class="time-ago" data-ago-minutes="9">—</span></td>
+              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('leo osei')">☎</button></td>
+            </tr>
+            <tr class="req-more-row" data-status="progress" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> Attendance threshold reached — parent-teacher conference scheduled for today at 1:15 PM.</div></td></tr>
+            <tr class="req-row has-more" data-status="resolved" data-parent-needed="false">
+              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">HW</div><div><div class="student-name">Hana Weiss</div><div class="student-id">ID 21044 · Sophomore</div></div></div></td>
+              <td>Report card re-send request</td>
+              <td><button class="parent-link" onclick="openParentPanel('hana weiss')">Tomas Weiss</button></td>
+              <td><span class="priority-dot"><span style="background:var(--azure)"></span>Low</span></td>
+              <td><span class="tag ok">Resolved</span></td>
+              <td>D. Cole</td>
+              <td><span class="time-ago" data-ago-minutes="1320">—</span></td>
+              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('hana weiss')">☎</button></td>
+            </tr>
+            <tr class="req-more-row" data-status="resolved" data-parent-needed="false"><td colspan="8"><div class="req-more"><b>Last update:</b> Re-sent and confirmed received; case closed.</div></td></tr>
+            <tr class="req-row has-more" data-status="open" data-parent-needed="true">
+              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">PB</div><div><div class="student-name">Priya Bhatt</div><div class="student-id">ID 20117 · Senior</div></div></div></td>
+              <td>Scholarship verification</td>
+              <td><button class="parent-link" onclick="openParentPanel('priya bhatt')">Sunil Bhatt</button></td>
+              <td><span class="priority-dot"><span style="background:var(--marigold)"></span>Medium</span></td>
+              <td><span class="tag pending">Open</span></td>
+              <td>Unassigned</td>
+              <td><span class="time-ago" data-ago-minutes="300">—</span></td>
+              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('priya bhatt')">☎</button></td>
+            </tr>
+            <tr class="req-more-row" data-status="open" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> Financial hold on the account is under review with finance ahead of the scholarship interview.</div></td></tr>
+
+            <tr class="req-group-row"><td colspan="8">Yesterday</td></tr>
+            <tr class="req-row has-more" data-status="progress" data-parent-needed="false">
+              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#7A5CB0,#4E3A78)">OH</div><div><div class="student-name">Omar Haddad</div><div class="student-id">ID 20655 · Junior</div></div></div></td>
+              <td>Course withdrawal request</td>
+              <td><button class="parent-link" onclick="openParentPanel('omar haddad')">Nadia Haddad</button></td>
+              <td><span class="priority-dot"><span style="background:var(--marigold)"></span>Medium</span></td>
+              <td><span class="tag due-soon">In progress</span></td>
+              <td>R. Marlow</td>
+              <td><span class="time-ago" data-ago-minutes="1500">—</span></td>
+              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('omar haddad')">☎</button></td>
+            </tr>
+            <tr class="req-more-row" data-status="progress" data-parent-needed="false"><td colspan="8"><div class="req-more"><b>Last update:</b> Advisor sign-off received; registrar is processing the drop before the add/drop deadline.</div></td></tr>
+            <tr class="req-row has-more" data-status="urgent" data-parent-needed="true">
+              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">ID</div><div><div class="student-name">Ines Dubois</div><div class="student-id">ID 19864 · Sophomore</div></div></div></td>
+              <td>Housing complaint follow-up</td>
+              <td><button class="parent-link" onclick="openParentPanel('ines dubois')">Marc Dubois</button></td>
+              <td><span class="priority-dot"><span style="background:var(--brick)"></span>High</span></td>
+              <td><span class="tag overdue">Urgent</span></td>
+              <td>D. Cole</td>
+              <td><span class="time-ago" data-ago-minutes="1800">—</span></td>
+              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('ines dubois')">☎</button></td>
+            </tr>
+            <tr class="req-more-row" data-status="urgent" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> Maintenance inspected the room; parent asked for a written resolution timeline before Monday.</div></td></tr>
+            <tr class="req-row has-more" data-status="resolved" data-parent-needed="false">
+              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">RS</div><div><div class="student-name">Ravi Shah</div><div class="student-id">ID 20233 · Freshman</div></div></div></td>
+              <td>Late fee waiver appeal</td>
+              <td><button class="parent-link" onclick="openParentPanel('ravi shah')">Anjali Shah</button></td>
+              <td><span class="priority-dot"><span style="background:var(--azure)"></span>Low</span></td>
+              <td><span class="tag ok">Resolved</span></td>
+              <td>N. Alvarez</td>
+              <td><span class="time-ago" data-ago-minutes="2200">—</span></td>
+              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('ravi shah')">☎</button></td>
+            </tr>
+            <tr class="req-more-row" data-status="resolved" data-parent-needed="false"><td colspan="8"><div class="req-more"><b>Last update:</b> Waiver approved for the first late fee; confirmation email sent to the parent.</div></td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+    </div><!-- /page-requests -->
+
+    <!-- ============ PAGE: ATTENDANCE LOG ============ -->
+    <div class="page-view" id="page-attendance" hidden>
+    <section class="section attendance-log-section" id="attendance-log">
+      <div class="section-head">
+        <div>
+          <h2>Attendance log lookup</h2>
+          <div class="meta">Search any student to pull up their full attendance history and reach their parent directly</div>
+        </div>
+      </div>
+      <div class="card attendance-log-card">
+        <div class="search-pill attendance-search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="attendanceSearch" placeholder="Type a student's full name…" autocomplete="off">
+        </div>
+        <div id="attendanceResult" class="attendance-result">
+          <div class="attendance-empty">Start typing a student's name above to pull up their full attendance record.</div>
+        </div>
+      </div>
+    </section>
+    </div><!-- /page-attendance -->
+
+    <!-- ============ PAGE: PARENT MESSAGES ============ -->
+    <div class="page-view" id="page-messages" hidden>
+    <section class="section" id="parent-messages">
+      <div class="section-head">
+        <div>
+          <h2>Parent messages</h2>
+          <div class="meta">5 awaiting a reply</div>
+        </div>
+        <div class="pill-filters" id="messagesFilters">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="needs-reply">Unread</button>
+          <button class="pill" data-filter="attendance">Attendance</button>
+          <button class="pill" data-filter="fees">Fees</button>
+        </div>
+        <div class="page-head-actions">
+          <button class="act-btn" onclick="openComposeModal()">+ New message</button>
+        </div>
+      </div>
+      <div class="appt-timeline" id="messagesTable">
+
+        <section class="appt-day appt-day-today">
+          <div class="appt-day-head"><h3>Today</h3><span class="appt-day-date">Sat, Sept 12</span><span class="appt-day-count">3 messages</span></div>
+          <div class="card">
+            <div class="msg-item" data-topic="fees" data-needs-reply="true">
+              <div class="msg-row">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">GI</div>
+                <div>
+                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('maya ibarra')">Grace Ibarra</button> <span class="msg-student">— parent of Maya Ibarra</span></div>
+                  <div class="msg-subject">Question about the second tuition installment</div>
+                </div>
+                <span class="tag due-soon">Fees</span>
+                <div class="msg-meta">
+                  <span class="msg-time">32 min ago</span>
+                  <button class="act-btn" onclick="openComposeModal('Grace Ibarra','Re: Question about the second tuition installment')">Reply</button>
+                </div>
+              </div>
+              <div class="msg-more"><b>Message:</b> Hi, could you confirm when the second tuition installment is due and whether a split payment is possible this term?</div>
+            </div>
+            <div class="msg-item" data-topic="attendance" data-needs-reply="true">
+              <div class="msg-row">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">FK</div>
+                <div>
+                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('sana karimi')">Farah Karimi</button> <span class="msg-student">— parent of Sana Karimi</span></div>
+                  <div class="msg-subject">Asking why Sana was marked late twice this week</div>
+                </div>
+                <span class="tag pending">Attendance</span>
+                <div class="msg-meta">
+                  <span class="msg-time">1 hour ago</span>
+                  <button class="act-btn" onclick="openComposeModal('Farah Karimi','Re: Sana\'s attendance this week')">Reply</button>
+                </div>
+              </div>
+              <div class="msg-more"><b>Message:</b> I noticed two late marks for Sana this week — she says the bus schedule changed. Can you check the times logged?</div>
+            </div>
+            <div class="msg-item" data-topic="attendance" data-needs-reply="true">
+              <div class="msg-row">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#BE5039,#8C3A28)">AO</div>
+                <div>
+                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('leo osei')">Adjoa Osei</button> <span class="msg-student">— parent of Leo Osei</span></div>
+                  <div class="msg-subject">Requesting an update on the missed-lab follow-up</div>
+                </div>
+                <span class="tag overdue">Attendance</span>
+                <div class="msg-meta">
+                  <span class="msg-time">2 hours ago</span>
+                  <button class="act-btn" onclick="openComposeModal('Adjoa Osei','Re: Missed-lab follow-up')">Reply</button>
+                </div>
+              </div>
+              <div class="msg-more"><b>Message:</b> Following up on the missed-lab session from last week — has a make-up session been arranged for Leo yet?</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="appt-day appt-day-past">
+          <div class="appt-day-head"><h3>Yesterday</h3><span class="appt-day-date">Fri, Sept 11</span><span class="appt-day-count">2 messages</span></div>
+          <div class="card">
+            <div class="msg-item" data-topic="general" data-needs-reply="false">
+              <div class="msg-row">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">TW</div>
+                <div>
+                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('hana weiss')">Tomas Weiss</button> <span class="msg-student">— parent of Hana Weiss</span></div>
+                  <div class="msg-subject">Thanks for the report card, confirming receipt</div>
+                </div>
+                <span class="tag ok">General</span>
+                <div class="msg-meta">
+                  <span class="msg-time">Yesterday</span>
+                  <button class="act-btn outline" data-mark-done>Mark done</button>
+                </div>
+              </div>
+              <div class="msg-more"><b>Message:</b> Got the resent report card, thank you — everything looks good on our end.</div>
+            </div>
+            <div class="msg-item" data-topic="academic" data-needs-reply="true">
+              <div class="msg-row">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">SB</div>
+                <div>
+                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('priya bhatt')">Sunil Bhatt</button> <span class="msg-student">— parent of Priya Bhatt</span></div>
+                  <div class="msg-subject">Asking about scholarship verification timeline</div>
+                </div>
+                <span class="tag due-soon">Academic</span>
+                <div class="msg-meta">
+                  <span class="msg-time">Yesterday</span>
+                  <button class="act-btn" onclick="openComposeModal('Sunil Bhatt','Re: Scholarship verification timeline')">Reply</button>
+                </div>
+              </div>
+              <div class="msg-more"><b>Message:</b> Just checking in — when should we expect the scholarship verification to be finalized ahead of the interview?</div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+    </div><!-- /page-messages -->
+
+    <!-- ============ PAGE: APPOINTMENTS ============ -->
+    <div class="page-view" id="page-appointments" hidden>
+    <div class="section-head">
+      <div>
+        <h2>Appointments</h2>
+        <div class="meta">Yesterday, today, and tomorrow's scheduled meetings with parents and students</div>
+      </div>
+      <div class="page-head-actions">
+        <button class="act-btn" onclick="openApptModal()">+ Schedule appointment</button>
+      </div>
+    </div>
+
+    <div class="appt-timeline">
+
+      <section class="appt-day appt-day-past">
+        <div class="appt-day-head"><h3>Yesterday</h3><span class="appt-day-date">Fri, Sept 11</span><span class="appt-day-count">3 appointments</span></div>
+        <div class="card">
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">10:00</div><div class="m">AM</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Farah Karimi</div><div class="appt-type">Advising follow-up · Sana Karimi</div></div>
+              <span class="tag done">Completed</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('sana karimi')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Advising Office, Room 112 &nbsp;·&nbsp; <b>Notes:</b> First-term check-in went well; no further action needed this month.</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">1:30</div><div class="m">PM</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Adaeze Weiss</div><div class="appt-type">Course withdrawal discussion · Hana Weiss</div></div>
+              <span class="tag done">Completed</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('hana weiss')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Video call &nbsp;·&nbsp; <b>Notes:</b> Withdrawal form signed; registrar copied on the summary email.</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">4:00</div><div class="m">PM</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Grace Ibarra</div><div class="appt-type">Fee dispute follow-up · Maya Ibarra</div></div>
+              <span class="tag done">Completed</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('maya ibarra')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Student Affairs, Room 204 &nbsp;·&nbsp; <b>Notes:</b> Partial refund approved; finance office processing this week.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="appt-day appt-day-today">
+        <div class="appt-day-head"><h3>Today</h3><span class="appt-day-date">Sat, Sept 12</span><span class="appt-day-count">4 appointments</span></div>
+        <div class="card" id="today-appt-card">
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">9:30</div><div class="m">AM</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Grace Ibarra</div><div class="appt-type">Parent meeting · fee dispute · Maya Ibarra</div></div>
+              <span class="tag ok">In-person</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('maya ibarra')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Student Affairs, Room 204 &nbsp;·&nbsp; <b>Notes:</b> Bring the refund breakdown from Wednesday's finance email.</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">11:00</div><div class="m">AM</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Liam Turner</div><div class="appt-type">Financial aid consult · Jonah Turner</div></div>
+              <span class="tag due-soon">Video</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('jonah turner')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Video call &nbsp;·&nbsp; <b>Notes:</b> Second consult this month — check in on the repeat-contact flag before the call.</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">1:15</div><div class="m">PM</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Adjoa Osei</div><div class="appt-type">Parent-teacher conference · Leo Osei</div></div>
+              <span class="tag ok">In-person</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('leo osei')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Student Affairs, Room 204 &nbsp;·&nbsp; <b>Notes:</b> Attendance threshold alert is active for this student — lead with that.</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">3:45</div><div class="m">PM</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Sunil Bhatt</div><div class="appt-type">Scholarship interview · Priya Bhatt</div></div>
+              <span class="tag due-soon">Video</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('priya bhatt')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Video call &nbsp;·&nbsp; <b>Notes:</b> Confirm the outstanding balance is resolved before the interview starts.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="appt-day">
+        <div class="appt-day-head"><h3>Tomorrow</h3><span class="appt-day-date">Sun, Sept 13</span><span class="appt-day-count">2 appointments</span></div>
+        <div class="card">
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">9:00</div><div class="m">AM</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Liam Turner</div><div class="appt-type">Financial aid follow-up · Jonah Turner</div></div>
+              <span class="tag due-soon">Video</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('jonah turner')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Video call &nbsp;·&nbsp; <b>Notes:</b> Follow-up to today's consult; bring the updated aid offer.</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">11:30</div><div class="m">AM</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Sunil Bhatt</div><div class="appt-type">Scholarship interview, part 2 · Priya Bhatt</div></div>
+              <span class="tag ok">In-person</span>
+              <button class="row-action" title="Parent contact" onclick="openParentPanel('priya bhatt')">☎</button>
+            </div>
+            <div class="appt-more"><b>Location:</b> Student Affairs, Room 204 &nbsp;·&nbsp; <b>Notes:</b> Final round — panel decision expected by end of week.</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    </div><!-- /page-appointments -->
+
+    <!-- ============ PAGE: ALERTS ============ -->
+    <div class="page-view" id="page-alerts" hidden>
+    <div class="section-head">
+      <div>
+        <h2>Student alerts</h2>
+        <div class="meta">Urgent items first, then unchecked, then pending follow-ups</div>
+      </div>
+    </div>
+
+    <div class="alert-groups">
+
+      <section class="alert-group">
+        <div class="alert-group-head urgent"><span class="dot"></span><h3>Urgent</h3><span class="alert-group-count">1 needs immediate action</span></div>
+        <div class="card">
+          <div class="alert-item">
+            <div class="alert-row">
+              <div class="alert-icon high"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+              <div><div class="alert-title">Attendance threshold reached</div><div class="alert-desc">Leo Osei has missed 4 consecutive sessions — parent notified.</div><div class="alert-time time-ago" data-ago-minutes="32">32 minutes ago</div></div>
+              <button class="act-btn outline alert-msg-btn" onclick="openComposeModal('Adjoa Osei','Re: Attendance threshold reached')">Message parent</button>
+            </div>
+            <div class="alert-more"><b>Recommended action:</b> Confirm with the parent-teacher conference at 1:15 PM today; escalate to advising if attendance doesn't improve by Friday.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="alert-group">
+        <div class="alert-group-head unchecked"><span class="dot"></span><h3>Unchecked</h3><span class="alert-group-count">2 not yet reviewed</span></div>
+        <div class="card">
+          <div class="alert-item">
+            <div class="alert-row">
+              <div class="alert-icon med"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+              <div><div class="alert-title">Financial hold pending<span class="alert-new-badge">New</span></div><div class="alert-desc">Priya Bhatt's account has an unresolved balance; parent inquiring.</div><div class="alert-time time-ago" data-ago-minutes="60">1 hour ago</div></div>
+              <button class="act-btn outline alert-msg-btn" onclick="openComposeModal('Sunil Bhatt','Re: Financial hold on account')">Message parent</button>
+            </div>
+            <div class="alert-more"><b>Recommended action:</b> Verify the hold with finance before the 3:45 PM scholarship interview today.</div>
+          </div>
+          <div class="alert-item">
+            <div class="alert-row">
+              <div class="alert-icon med"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+              <div><div class="alert-title">Repeat parent contact flag<span class="alert-new-badge">New</span></div><div class="alert-desc">Jonah Turner's family has opened 3 requests this month.</div><div class="alert-time time-ago" data-ago-minutes="1560">Yesterday</div></div>
+              <button class="act-btn outline alert-msg-btn" onclick="openComposeModal('Liam Turner','Re: Recent requests this month')">Message parent</button>
+            </div>
+            <div class="alert-more"><b>Recommended action:</b> Review the request history before today's 11:00 AM financial aid consult to avoid repeating past answers.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="alert-group">
+        <div class="alert-group-head pending"><span class="dot"></span><h3>Pending</h3><span class="alert-group-count">1 awaiting follow-up</span></div>
+        <div class="card">
+          <div class="alert-item">
+            <div class="alert-row">
+              <div class="alert-icon low"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
+              <div><div class="alert-title">Advising check-in due</div><div class="alert-desc">Sana Karimi's first-term review is due Friday.</div><div class="alert-time time-ago" data-ago-minutes="180">3 hours ago</div></div>
+              <button class="act-btn outline alert-msg-btn" onclick="openComposeModal('Farah Karimi','Re: First-term advising check-in')">Message parent</button>
+            </div>
+            <div class="alert-more"><b>Recommended action:</b> Yesterday's advising follow-up covered the basics — just confirm the written summary before Friday.</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    </div><!-- /page-alerts -->
+
+  </main>
+</div>
+
+<!-- ============ PARENT CONTACT PANEL ============ -->
+<div class="panel-backdrop" id="parentBackdrop"></div>
+<aside class="parent-panel" id="parentPanel">
+  <div class="parent-panel-head">
+    <div class="parent-panel-title">Parent contact</div>
+    <button class="panel-close" id="parentPanelClose">✕</button>
+  </div>
+  <div class="parent-panel-body" id="parentPanelBody"></div>
+</aside>
+
+<!-- ============ COMPOSE MESSAGE MODAL ============ -->
+<div class="modal-backdrop" id="composeBackdrop"></div>
+<div class="modal" id="composeModal">
+  <div class="modal-head"><h3>New message to parent</h3><button class="panel-close" id="composeClose">✕</button></div>
+  <div class="modal-body">
+    <label class="modal-label">Parent</label>
+    <select class="modal-input" id="composeParent"></select>
+    <label class="modal-label">Subject</label>
+    <input class="modal-input" id="composeSubject" type="text" placeholder="e.g. Attendance update">
+    <label class="modal-label">Message</label>
+    <textarea class="modal-input" id="composeMessage" rows="5" placeholder="Write your message…"></textarea>
+  </div>
+  <div class="modal-foot">
+    <button class="act-btn outline" id="composeCancel">Cancel</button>
+    <button class="act-btn" id="composeSend">Send message</button>
+  </div>
+</div>
+
+<!-- ============ SCHEDULE APPOINTMENT MODAL ============ -->
+<div class="modal-backdrop" id="apptBackdrop"></div>
+<div class="modal" id="apptModal">
+  <div class="modal-head"><h3>Schedule appointment</h3><button class="panel-close" id="apptClose">✕</button></div>
+  <div class="modal-body">
+    <label class="modal-label">Parent / student</label>
+    <select class="modal-input" id="apptParent"></select>
+    <label class="modal-label">Type</label>
+    <select class="modal-input" id="apptType"><option>In-person</option><option>Video</option></select>
+    <label class="modal-label">Date</label>
+    <input class="modal-input" id="apptDate" type="date">
+    <label class="modal-label">Time</label>
+    <input class="modal-input" id="apptTime" type="time">
+    <label class="modal-label">Notes</label>
+    <textarea class="modal-input" id="apptNotes" rows="3" placeholder="Purpose of the meeting…"></textarea>
+  </div>
+  <div class="modal-foot">
+    <button class="act-btn outline" id="apptCancel">Cancel</button>
+    <button class="act-btn" id="apptSave">Save appointment</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- Performance rings: color by score band ---------- */
+/* High (green) / Mid (gold) / Low (coral) — thresholds tuned for
+   resolution-rate / satisfaction style percentages. */
+function classifyRing(el){
+  const pct = parseFloat(getComputedStyle(el).getPropertyValue('--pct'));
+  el.classList.remove('rate-high', 'rate-mid', 'rate-low');
+  if (isNaN(pct)) return;
+  if (pct >= 85) el.classList.add('rate-high');
+  else if (pct >= 65) el.classList.add('rate-mid');
+  else el.classList.add('rate-low');
+}
+document.querySelectorAll('.ring[style*="--pct"]').forEach(classifyRing);
+
+/* ---------- Multi-page sidebar navigation ---------- */
+const navItems = Array.from(document.querySelectorAll('#sideNav .nav-item'));
+let currentPage = 'page-overview';
+let currentAnchor = null;
+
+function setActiveNav(){
+  navItems.forEach(n => {
+    const samePage = n.dataset.page === currentPage;
+    const sameAnchor = (n.dataset.anchor || null) === currentAnchor;
+    n.classList.toggle('active', samePage && sameAnchor);
+  });
+  const navSub = document.querySelector('.nav-sub');
+  if (navSub){
+    const subShouldBeOpen = currentPage === 'page-overview' && currentAnchor !== null;
+    navSub.classList.toggle('open', subShouldBeOpen);
+  }
+}
+
+function goToPage(pageId, anchorId){
+  currentPage = pageId;
+  currentAnchor = anchorId || null;
+  document.querySelectorAll('.page-view').forEach(p => { p.hidden = (p.id !== pageId); });
+  setActiveNav();
+  window.scrollTo({ top: 0, behavior: 'auto' });
+  if (anchorId){
+    requestAnimationFrame(() => {
+      const target = document.getElementById(anchorId);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+}
+
+navItems.forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    goToPage(item.dataset.page, item.dataset.anchor);
+  });
+});
+
+goToPage('page-overview', null);
+
+/* Stat cards on the overview jump straight to the matching page */
+document.querySelectorAll('.stat-card[data-nav]').forEach(card => {
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('.info-dot')) return; // info icon just shows the tooltip, doesn't navigate
+    goToPage(card.dataset.nav);
+  });
+});
+
+/* Scroll-spy: while on the Overview page, highlight the sub-nav item
+   for whichever section (Quick Actions / Performance / Staff Activity /
+   Staff Directory / the hero itself) is currently in view. */
+const overviewSpyTargets = ['overview', 'quick-actions', 'performance', 'activity', 'directory']
+  .map(id => document.getElementById(id))
+  .filter(Boolean);
+
+const overviewSpy = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting || currentPage !== 'page-overview') return;
+    currentAnchor = entry.target.id === 'overview' ? null : entry.target.id;
+    setActiveNav();
+  });
+}, { rootMargin: '0px 0px -65% 0px', threshold: 0 });
+overviewSpyTargets.forEach(sec => overviewSpy.observe(sec));
+
+/* Safety net: whatever the observer bands say, being back at the very top
+   of the page always means we're looking at the Overview hero itself. */
+window.addEventListener('scroll', () => {
+  if (currentPage !== 'page-overview') return;
+  if (window.scrollY < 40 && currentAnchor !== null){
+    currentAnchor = null;
+    setActiveNav();
+  }
+}, { passive: true });
+
+/* ---------- Parent directory (shared across every page) ---------- */
+const parentDirectory = {
+  'maya ibarra':   { parent:'Grace Ibarra', relation:'Mother', phone:'+977 984-102-2314', email:'grace.ibarra@example.com' },
+  'jonah turner':  { parent:'Liam Turner',  relation:'Father', phone:'+977 985-107-7213', email:'liam.turner@example.com' },
+  'sana karimi':   { parent:'Farah Karimi', relation:'Mother', phone:'+977 982-205-5871', email:'farah.karimi@example.com' },
+  'leo osei':      { parent:'Adjoa Osei',   relation:'Mother', phone:'+977 981-309-0042', email:'adjoa.osei@example.com' },
+  'hana weiss':    { parent:'Tomas Weiss',  relation:'Father', phone:'+977 986-504-1187', email:'tomas.weiss@example.com' },
+  'priya bhatt':   { parent:'Sunil Bhatt',  relation:'Father', phone:'+977 980-406-3359', email:'sunil.bhatt@example.com' },
+  'omar haddad':   { parent:'Nadia Haddad', relation:'Mother', phone:'+977 983-611-2298', email:'nadia.haddad@example.com' },
+  'ines dubois':   { parent:'Marc Dubois',  relation:'Father', phone:'+977 987-720-4415', email:'marc.dubois@example.com' },
+  'ravi shah':     { parent:'Anjali Shah',  relation:'Mother', phone:'+977 984-833-6602', email:'anjali.shah@example.com' },
+};
+
+function studentDisplayName(key){
+  return key.replace(/\b\w/g, c => c.toUpperCase());
+}
+
+const parentOptionsHtml = Object.entries(parentDirectory).map(([key, info]) =>
+  `<option value="${key}">${info.parent} — parent of ${studentDisplayName(key)}</option>`
+).join('');
+document.getElementById('composeParent').innerHTML = parentOptionsHtml;
+document.getElementById('apptParent').innerHTML = parentOptionsHtml;
+
+/* ---------- Parent contact slide-over panel ---------- */
+function openParentPanel(studentKey){
+  const key = studentKey.toLowerCase();
+  const info = parentDirectory[key];
+  if (!info) return;
+  const displayName = studentDisplayName(key);
+  const telHref = 'tel:' + info.phone.replace(/[^\d+]/g, '');
+  document.getElementById('parentPanelBody').innerHTML = `
+    <div class="parent-card-student">${displayName}'s parent</div>
+    <div class="parent-card-name">${info.parent}</div>
+    <div class="parent-card-relation">${info.relation}</div>
+    <div class="parent-contact-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.11 4.18 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.78.66 2.61a2 2 0 0 1-.45 2.11L8.09 9.63a16 16 0 0 0 6.28 6.28l1.19-1.19a2 2 0 0 1 2.11-.45c.83.32 1.71.54 2.61.66A2 2 0 0 1 22 16.92z"/></svg>${info.phone}</div>
+    <div class="parent-contact-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg>${info.email}</div>
+    <div class="parent-panel-actions">
+      <a class="act-btn" href="${telHref}">Call</a>
+      <a class="act-btn outline" href="mailto:${info.email}">Email</a>
+      <button class="act-btn outline" onclick="openComposeModal('${info.parent}')">Message</button>
+    </div>`;
+  document.getElementById('parentPanel').classList.add('open');
+  document.getElementById('parentBackdrop').classList.add('open');
+}
+function closeParentPanel(){
+  document.getElementById('parentPanel').classList.remove('open');
+  document.getElementById('parentBackdrop').classList.remove('open');
+}
+document.getElementById('parentPanelClose').addEventListener('click', closeParentPanel);
+document.getElementById('parentBackdrop').addEventListener('click', closeParentPanel);
+
+/* ---------- Toast ---------- */
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+/* ---------- Compose message modal ---------- */
+function openComposeModal(parentName, subject){
+  if (parentName){
+    const key = Object.keys(parentDirectory).find(k => parentDirectory[k].parent === parentName);
+    if (key) document.getElementById('composeParent').value = key;
+  }
+  document.getElementById('composeSubject').value = subject || '';
+  document.getElementById('composeMessage').value = '';
+  document.getElementById('composeModal').classList.add('open');
+  document.getElementById('composeBackdrop').classList.add('open');
+}
+function closeComposeModal(){
+  document.getElementById('composeModal').classList.remove('open');
+  document.getElementById('composeBackdrop').classList.remove('open');
+}
+document.getElementById('composeClose').addEventListener('click', closeComposeModal);
+document.getElementById('composeCancel').addEventListener('click', closeComposeModal);
+document.getElementById('composeBackdrop').addEventListener('click', closeComposeModal);
+document.getElementById('composeSend').addEventListener('click', () => {
+  const key = document.getElementById('composeParent').value;
+  const info = parentDirectory[key];
+  closeComposeModal();
+  showToast(`Message sent to ${info ? info.parent : 'parent'}`);
+});
+
+/* ---------- Schedule appointment modal ---------- */
+function openApptModal(){
+  document.getElementById('apptDate').value = '';
+  document.getElementById('apptTime').value = '';
+  document.getElementById('apptNotes').value = '';
+  document.getElementById('apptModal').classList.add('open');
+  document.getElementById('apptBackdrop').classList.add('open');
+}
+function closeApptModal(){
+  document.getElementById('apptModal').classList.remove('open');
+  document.getElementById('apptBackdrop').classList.remove('open');
+}
+document.getElementById('apptClose').addEventListener('click', closeApptModal);
+document.getElementById('apptCancel').addEventListener('click', closeApptModal);
+document.getElementById('apptBackdrop').addEventListener('click', closeApptModal);
+document.getElementById('apptSave').addEventListener('click', () => {
+  const key = document.getElementById('apptParent').value;
+  const info = parentDirectory[key];
+  const type = document.getElementById('apptType').value;
+  const date = document.getElementById('apptDate').value;
+  const time = document.getElementById('apptTime').value;
+  if (!info || !date || !time){ showToast('Add a date and time to save the appointment'); return; }
+  const displayName = studentDisplayName(key);
+  let [h, m] = time.split(':');
+  let hour = parseInt(h, 10);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  hour = hour % 12; if (hour === 0) hour = 12;
+  const list = document.getElementById('today-appt-card');
+  const item = document.createElement('div');
+  item.className = 'appt-item';
+  item.innerHTML = `
+    <div class="appt-row">
+      <div class="appt-time"><div class="t">${hour}:${m}</div><div class="m">${ampm}</div></div>
+      <div class="appt-rail"></div>
+      <div><div class="appt-name">${info.parent}</div><div class="appt-type">${type} · ${displayName}</div></div>
+      <span class="tag ${type === 'Video' ? 'due-soon' : 'ok'}">${type}</span>
+      <button class="row-action" title="Parent contact" onclick="openParentPanel('${key}')">☎</button>
+    </div>
+    <div class="appt-more"><b>Notes:</b> Newly scheduled — add location and prep notes once confirmed.</div>`;
+  if (list) list.prepend(item);
+  closeApptModal();
+  showToast(`Appointment scheduled with ${info.parent}`);
+});
+
+/* ---------- Student requests: working filters ---------- */
+const requestsFilters = document.getElementById('requestsFilters');
+if (requestsFilters){
+  requestsFilters.querySelectorAll('.pill').forEach(p => {
+    p.addEventListener('click', () => {
+      requestsFilters.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      const f = p.dataset.filter;
+      document.querySelectorAll('#requestsTable tbody tr').forEach(row => {
+        if (row.classList.contains('req-group-row')){ row.style.display = ''; return; }
+        if (f === 'all') row.style.display = '';
+        else if (f === 'parent') row.style.display = row.dataset.parentNeeded === 'true' ? '' : 'none';
+        else row.style.display = row.dataset.status === f ? '' : 'none';
+      });
+    });
+  });
+}
+
+/* ---------- Parent messages: working filters + mark done ---------- */
+const messagesFilters = document.getElementById('messagesFilters');
+if (messagesFilters){
+  messagesFilters.querySelectorAll('.pill').forEach(p => {
+    p.addEventListener('click', () => {
+      messagesFilters.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      const f = p.dataset.filter;
+      document.querySelectorAll('#messagesTable .msg-item').forEach(item => {
+        let show;
+        if (f === 'all') show = true;
+        else if (f === 'needs-reply') show = item.dataset.needsReply === 'true';
+        else show = item.dataset.topic === f;
+        item.style.display = show ? '' : 'none';
+      });
+      document.querySelectorAll('#messagesTable .appt-day').forEach(day => {
+        const anyVisible = Array.from(day.querySelectorAll('.msg-item')).some(i => i.style.display !== 'none');
+        day.style.display = anyVisible ? '' : 'none';
+      });
+    });
+  });
+}
+document.querySelectorAll('#messagesTable [data-mark-done]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.msg-item');
+    item.classList.add('is-done');
+    btn.textContent = 'Done ✓';
+    btn.disabled = true;
+  });
+});
+
+/* Reveal cards (and footer) on scroll */
+const revealEls = document.querySelectorAll('.card, .qa-card, .site-footer');
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      revealIO.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+revealEls.forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 60 + 'ms';
+  revealIO.observe(el);
+});
+
+/* Animate performance bars in when visible */
+const bars = document.querySelectorAll('.bar-fill');
+const barIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.style.width = entry.target.getAttribute('data-w') + '%';
+      barIO.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+bars.forEach(b => barIO.observe(b));
+
+/* Attendance log lookup: search a student's name, show their full attendance record */
+const attendanceLog = {
+  'maya ibarra': {
+    id: 'ID 20394', year: 'Sophomore',
+    avatar: 'MI', color: 'linear-gradient(135deg,#3B6E91,#294E68)',
+    records: [
+      { date:'Sept 11, 2026', cls:'Calculus II', status:'Late (12 min)', tag:'due-soon', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 11, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 11, 2026', cls:'Studio Art', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 10, 2026', cls:'Organic Chemistry Lab', status:'Absent', tag:'overdue', instructor:'Prof. D. Cole', note:'Flagged for follow-up' },
+      { date:'Sept 10, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 10, 2026', cls:'Intro Psychology', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 9, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 9, 2026', cls:'Organic Chemistry Lab', status:'Absent', tag:'overdue', instructor:'Prof. D. Cole', note:'Second missed lab this month' },
+      { date:'Sept 9, 2026', cls:'Financial Literacy Seminar', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 8, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 8, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 8, 2026', cls:'Studio Art', status:'Late (6 min)', tag:'due-soon', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 5, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 5, 2026', cls:'Intro Psychology', status:'Absent', tag:'overdue', instructor:'Prof. N. Alvarez', note:'Sick note on file' },
+      { date:'Sept 4, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 4, 2026', cls:'Organic Chemistry Lab', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 3, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 2, 2026', cls:'Financial Literacy Seminar', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 1, 2026', cls:'Studio Art', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Aug 29, 2026', cls:'World Literature', status:'Late (4 min)', tag:'due-soon', instructor:'Prof. N. Alvarez', note:'—' },
+    ]
+  },
+  'jonah turner': {
+    id: 'ID 18827', year: 'Senior',
+    avatar: 'JT', color: 'linear-gradient(135deg,#E2A44E,#A6753A)',
+    records: [
+      { date:'Sept 11, 2026', cls:'Financial Literacy Seminar', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 11, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 10, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 10, 2026', cls:'Public Speaking', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 9, 2026', cls:'Financial Literacy Seminar', status:'Late (7 min)', tag:'due-soon', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 9, 2026', cls:'Capstone Project', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 8, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 8, 2026', cls:'Public Speaking', status:'Absent', tag:'overdue', instructor:'Prof. S. Park', note:'No note submitted' },
+      { date:'Sept 5, 2026', cls:'Financial Literacy Seminar', status:'Absent', tag:'overdue', instructor:'Prof. S. Park', note:'Parent notified' },
+      { date:'Sept 5, 2026', cls:'Capstone Project', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 4, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 3, 2026', cls:'Public Speaking', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 2, 2026', cls:'Capstone Project', status:'Late (9 min)', tag:'due-soon', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 1, 2026', cls:'Financial Literacy Seminar', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Aug 28, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+    ]
+  },
+  'sana karimi': {
+    id: 'ID 20981', year: 'Freshman',
+    avatar: 'SK', color: 'linear-gradient(135deg,#34614F,#1F4438)',
+    records: [
+      { date:'Sept 11, 2026', cls:'Intro Psychology', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 11, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 10, 2026', cls:'Studio Art', status:'Late (12 min)', tag:'due-soon', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 10, 2026', cls:'Intro Psychology', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 10, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 9, 2026', cls:'Studio Art', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 9, 2026', cls:'World Literature', status:'Absent', tag:'overdue', instructor:'Prof. N. Alvarez', note:'Family emergency — excused' },
+      { date:'Sept 8, 2026', cls:'Intro Psychology', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 8, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 5, 2026', cls:'Studio Art', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 4, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 3, 2026', cls:'Intro Psychology', status:'Late (3 min)', tag:'due-soon', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 2, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 1, 2026', cls:'Studio Art', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+    ]
+  },
+  'leo osei': {
+    id: 'ID 19502', year: 'Junior',
+    avatar: 'LO', color: 'linear-gradient(135deg,#BE5039,#8C3A28)',
+    records: [
+      { date:'Sept 11, 2026', cls:'Organic Chemistry Lab', status:'Absent', tag:'overdue', instructor:'Prof. D. Cole', note:'4th consecutive miss — parent notified' },
+      { date:'Sept 11, 2026', cls:'World Literature', status:'Absent', tag:'overdue', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 10, 2026', cls:'World Literature', status:'Absent', tag:'overdue', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 10, 2026', cls:'Advanced Economics', status:'Late (15 min)', tag:'due-soon', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 9, 2026', cls:'Organic Chemistry Lab', status:'Absent', tag:'overdue', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 9, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 8, 2026', cls:'World Literature', status:'Absent', tag:'overdue', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 8, 2026', cls:'Public Speaking', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 5, 2026', cls:'Organic Chemistry Lab', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 4, 2026', cls:'Advanced Economics', status:'Absent', tag:'overdue', instructor:'Prof. R. Marlow', note:'No note submitted' },
+      { date:'Sept 3, 2026', cls:'Public Speaking', status:'Late (10 min)', tag:'due-soon', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 2, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 1, 2026', cls:'Organic Chemistry Lab', status:'Absent', tag:'overdue', instructor:'Prof. D. Cole', note:'—' },
+    ]
+  },
+  'hana weiss': {
+    id: 'ID 21044', year: 'Sophomore',
+    avatar: 'HW', color: 'linear-gradient(135deg,#3B6E91,#294E68)',
+    records: [
+      { date:'Sept 11, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 11, 2026', cls:'Studio Art', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 10, 2026', cls:'Intro Psychology', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 10, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 9, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 8, 2026', cls:'Intro Psychology', status:'Late (5 min)', tag:'due-soon', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 8, 2026', cls:'Studio Art', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 5, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 4, 2026', cls:'Calculus II', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 3, 2026', cls:'Intro Psychology', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+      { date:'Sept 2, 2026', cls:'Studio Art', status:'Absent', tag:'overdue', instructor:'Prof. D. Cole', note:'Doctor appointment — excused' },
+      { date:'Sept 1, 2026', cls:'World Literature', status:'Present', tag:'ok', instructor:'Prof. N. Alvarez', note:'—' },
+    ]
+  },
+  'priya bhatt': {
+    id: 'ID 20117', year: 'Senior',
+    avatar: 'PB', color: 'linear-gradient(135deg,#E2A44E,#A6753A)',
+    records: [
+      { date:'Sept 11, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 11, 2026', cls:'Capstone Project', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 10, 2026', cls:'Financial Literacy Seminar', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 10, 2026', cls:'Public Speaking', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 9, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 8, 2026', cls:'Financial Literacy Seminar', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 8, 2026', cls:'Capstone Project', status:'Late (8 min)', tag:'due-soon', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 5, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+      { date:'Sept 4, 2026', cls:'Public Speaking', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 3, 2026', cls:'Financial Literacy Seminar', status:'Present', tag:'ok', instructor:'Prof. S. Park', note:'—' },
+      { date:'Sept 2, 2026', cls:'Capstone Project', status:'Present', tag:'ok', instructor:'Prof. D. Cole', note:'—' },
+      { date:'Sept 1, 2026', cls:'Advanced Economics', status:'Present', tag:'ok', instructor:'Prof. R. Marlow', note:'—' },
+    ]
+  },
+};
+
+const attendanceSearchInput = document.getElementById('attendanceSearch');
+const attendanceResultEl = document.getElementById('attendanceResult');
+
+/* Replays the hero's rise-in animation every time the result panel's
+   content changes, so a new search feels like it's landing on the page. */
+function setAttendanceResult(html){
+  attendanceResultEl.innerHTML = html;
+  attendanceResultEl.classList.remove('result-in');
+  void attendanceResultEl.offsetWidth; // restart the animation
+  attendanceResultEl.classList.add('result-in');
+}
+
+function renderAttendanceLog(query){
+  const q = query.trim().toLowerCase();
+
+  if (!q){
+    setAttendanceResult('<div class="attendance-empty">Start typing a student\'s name above to pull up their full attendance record.</div>');
+    return;
+  }
+
+  const matchKey = Object.keys(attendanceLog).find(name => name.includes(q));
+
+  if (!matchKey){
+    setAttendanceResult(`<div class="attendance-empty">No student found matching "${query}". Check the spelling or try their full name.</div>`);
+    return;
+  }
+
+  const student = attendanceLog[matchKey];
+  const displayName = matchKey.replace(/\b\w/g, c => c.toUpperCase());
+  const present = student.records.filter(r => r.tag === 'ok').length;
+  const absent = student.records.filter(r => r.tag === 'overdue').length;
+  const late = student.records.filter(r => r.tag === 'due-soon').length;
+
+  // Subjects become columns (in first-seen order), each remembers its instructor for the header
+  const subjectInstructor = new Map();
+  student.records.forEach(r => { if (!subjectInstructor.has(r.cls)) subjectInstructor.set(r.cls, r.instructor); });
+  const subjects = [...subjectInstructor.keys()];
+
+  // Dates become rows (in first-seen order, most recent first as stored)
+  const dates = [...new Set(student.records.map(r => r.date))];
+
+  // Quick lookup: "date|subject" -> record
+  const byDateSubject = {};
+  student.records.forEach(r => { byDateSubject[`${r.date}|${r.cls}`] = r; });
+
+  const headHtml = `
+    <tr>
+      <th>Date</th>
+      ${subjects.map(s => `<th><div class="grid-subject">${s}</div><div class="grid-instructor">${subjectInstructor.get(s)}</div></th>`).join('')}
+    </tr>`;
+
+  const bodyHtml = dates.map(d => {
+    const cells = subjects.map(s => {
+      const r = byDateSubject[`${d}|${s}`];
+      if (!r) return `<td class="grid-cell empty">—</td>`;
+      let statusClass = 'present', label = 'Present';
+      if (r.status.startsWith('Late')) { statusClass = 'late'; label = r.status; }
+      else if (r.status === 'Absent') { statusClass = 'absent'; label = 'Absent'; }
+
+      if (statusClass === 'present') {
+        return `<td class="grid-cell present"><div class="grid-cell-inner"><div class="grid-status">${label}</div></div></td>`;
+      }
+      // Late / Absent cells are clickable — reveal the reason in a popover on click
+      const reasonText = (r.note && r.note !== '—') ? r.note : 'No reason logged';
+      const esc = str => String(str).replace(/"/g, '&quot;');
+      return `<td class="grid-cell ${statusClass} clickable"
+                  data-subject="${esc(s)}" data-date="${esc(d)}" data-status="${esc(label)}" data-reason="${esc(reasonText)}">
+                <div class="grid-cell-inner"><div class="grid-status">${label}</div></div>
+              </td>`;
+    }).join('');
+    return `<tr><td class="grid-date">${d}</td>${cells}</tr>`;
+  }).join('');
+
+  setAttendanceResult(`
+    <div class="attendance-log-head-row">
+      <div class="attendance-student-head">
+        <div class="mini-avatar" style="width:44px;height:44px;border-radius:12px;font-size:14px;background:${student.color}">${student.avatar}</div>
+        <div>
+          <div class="student-name" style="font-size:16px;">${displayName}</div>
+          <div class="student-id">${student.id} · ${student.year}</div>
+        </div>
+      </div>
+      <div class="attendance-summary">
+        <span class="chip">${present} present</span>
+        <span class="chip late">${late} late</span>
+        <span class="chip warn">${absent} absent</span>
+      </div>
+    </div>
+    <div class="attendance-grid-scroll">
+      <table class="req-table attendance-grid-table">
+        <thead>${headHtml}</thead>
+        <tbody>${bodyHtml}</tbody>
+      </table>
+    </div>
+    <div class="attendance-legend">
+      <span class="lg-item"><span class="lg-dot" style="background:#E3F3EA;border:1px solid #1E7A46"></span>Present</span>
+      <span class="lg-item"><span class="lg-dot" style="background:#FDF3D8;border:1px solid #C9971F"></span>Late</span>
+      <span class="lg-item"><span class="lg-dot" style="background:#FBE4E1;border:1px solid #B3261E"></span>Absent</span>
+    </div>
+    ${(() => {
+      const info = parentDirectory[matchKey];
+      if (!info) return '';
+      const telHref = 'tel:' + info.phone.replace(/[^\d+]/g, '');
+      return `
+        <div class="parent-contact-inline">
+          <div>
+            <div class="pc-label">Parent / guardian</div>
+            <div class="pc-name">${info.parent} <span class="pc-relation">(${info.relation})</span></div>
+          </div>
+          <div class="parent-panel-actions">
+            <a class="act-btn" href="${telHref}">Call</a>
+            <a class="act-btn outline" href="mailto:${info.email}">Email</a>
+            <button class="act-btn outline" onclick="openComposeModal('${info.parent}','Attendance summary for ${displayName}')">Send summary</button>
+          </div>
+        </div>`;
+    })()}`);
+}
+
+if (attendanceSearchInput){
+  attendanceSearchInput.addEventListener('input', (e) => renderAttendanceLog(e.target.value));
+}
+
+/* Click a Late/Absent cell to reveal why, in a small popover in front of the cell */
+function closeAttendancePopover(){
+  const existing = document.querySelector('.cell-popover');
+  if (existing) existing.remove();
+}
+
+document.addEventListener('click', (e) => {
+  const cell = e.target.closest('.grid-cell.clickable');
+  const wasOpenOnThisCell = cell && cell.querySelector('.cell-popover');
+
+  closeAttendancePopover();
+
+  if (!cell || wasOpenOnThisCell) return;
+
+  const pop = document.createElement('div');
+  pop.className = `cell-popover ${cell.classList.contains('late') ? 'late' : 'absent'}`;
+  pop.innerHTML = `
+    <div class="cell-popover-title">${cell.dataset.subject} · ${cell.dataset.date}</div>
+    <div class="cell-popover-status">${cell.dataset.status}</div>
+    <div class="cell-popover-reason">${cell.dataset.reason}</div>`;
+  cell.appendChild(pop);
+  e.stopPropagation();
+});
+
+document.querySelectorAll('.view-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+/* Animated SVG bar chart: handled vs resolved */
+const chartData = [
+  { label:'Wk 1', handled:62, resolved:48 },
+  { label:'Wk 2', handled:71, resolved:55 },
+  { label:'Wk 3', handled:66, resolved:60 },
+  { label:'Wk 4', handled:84, resolved:70 },
+  { label:'Wk 5', handled:78, resolved:74 },
+  { label:'Wk 6', handled:91, resolved:82 },
+];
+const svgNS = 'http://www.w3.org/2000/svg';
+const chartEl = document.getElementById('perfChart');
+const W=540,H=220,padL=26,padB=26,padT=10,padR=6;
+const chartW=W-padL-padR, chartH=H-padT-padB;
+const maxVal = Math.max(...chartData.map(d=>Math.max(d.handled,d.resolved)))*1.15;
+const groupW = chartW/chartData.length;
+const barW = 15;
+function y(v){ return padT + chartH - (v/maxVal)*chartH; }
+
+[0,0.25,0.5,0.75,1].forEach(f=>{
+  const gy = padT + chartH*f;
+  const line = document.createElementNS(svgNS,'line');
+  line.setAttribute('x1',padL); line.setAttribute('x2',W-padR);
+  line.setAttribute('y1',gy); line.setAttribute('y2',gy);
+  line.setAttribute('stroke','#E7E9EE'); line.setAttribute('stroke-width','1');
+  chartEl.appendChild(line);
+});
+
+chartData.forEach((d,i)=>{
+  const cx = padL + groupW*i + groupW/2;
+  const pct = Math.round((d.resolved / d.handled) * 100);
+  [
+    { val:d.handled, color:'#5B6BC0', dx:-barW/2-3, type:'handled' },
+    { val:d.resolved, color:'#4E93C7', dx:3, type:'resolved' }
+  ].forEach(b=>{
+    const rect = document.createElementNS(svgNS,'rect');
+    const fullY = y(b.val), fullH = padT+chartH-fullY;
+    rect.setAttribute('x', cx+b.dx);
+    rect.setAttribute('width', barW);
+    rect.setAttribute('rx', 4);
+    rect.setAttribute('fill', b.color);
+    rect.setAttribute('class','bar-col');
+    rect.setAttribute('y', padT+chartH);
+    rect.setAttribute('height', 0);
+    chartEl.appendChild(rect);
+
+    const tooltipHtml = b.type === 'handled'
+      ? `<b>${d.label} · Handled</b><br>${d.handled} requests were picked up by staff this week.<br><span class="tt-pct">${pct}%</span> of those have been resolved so far.`
+      : `<b>${d.label} · Resolved</b><br>${d.resolved} of ${d.handled} handled requests were fully closed this week.<br>Resolution rate: <span class="tt-pct">${pct}%</span>`;
+    rect.addEventListener('mouseenter', (e) => showChartTooltip(tooltipHtml, e));
+    rect.addEventListener('mousemove', positionChartTooltip);
+    rect.addEventListener('mouseleave', hideChartTooltip);
+  });
+  const label = document.createElementNS(svgNS,'text');
+  label.setAttribute('x',cx); label.setAttribute('y',H-6); label.setAttribute('text-anchor','middle');
+  label.setAttribute('font-size','10.5'); label.setAttribute('fill','#8D95A3'); label.setAttribute('font-family','Inter, sans-serif');
+  label.textContent = d.label;
+  chartEl.appendChild(label);
+});
+
+/* ---------- Custom tooltip for the Requests handled vs. resolved chart ---------- */
+const chartTooltipEl = document.getElementById('chartTooltip');
+/* Move it out from inside .card: that card lifts on hover via a CSS transform,
+   and a transformed ancestor turns position:fixed into "fixed relative to that
+   ancestor" instead of the viewport — which is why the tooltip was landing far
+   from the cursor. Re-parenting to <body> keeps it truly viewport-fixed. */
+document.body.appendChild(chartTooltipEl);
+function showChartTooltip(html, evt){
+  chartTooltipEl.innerHTML = html;
+  chartTooltipEl.classList.add('show');
+  positionChartTooltip(evt);
+}
+function positionChartTooltip(evt){
+  const pad = 16;
+  const ttRect = chartTooltipEl.getBoundingClientRect();
+  let left = evt.clientX + pad;
+  let top = evt.clientY + pad;
+  if (left + ttRect.width > window.innerWidth - 10) left = evt.clientX - ttRect.width - pad;
+  if (top + ttRect.height > window.innerHeight - 10) top = evt.clientY - ttRect.height - pad;
+  chartTooltipEl.style.left = left + 'px';
+  chartTooltipEl.style.top = top + 'px';
+}
+function hideChartTooltip(){
+  chartTooltipEl.classList.remove('show');
+}
+
+/* Hovering the legend itself explains the metric in general, using the
+   term's totals across all six weeks (not tied to one bar). */
+const totalHandled = chartData.reduce((sum, d) => sum + d.handled, 0);
+const totalResolved = chartData.reduce((sum, d) => sum + d.resolved, 0);
+const overallPct = Math.round((totalResolved / totalHandled) * 100);
+
+const legendHandledEl = document.getElementById('legendHandled');
+const legendResolvedEl = document.getElementById('legendResolved');
+if (legendHandledEl){
+  const html = `<b>Handled</b><br>Requests a staff member has picked up and started working, whether or not they're closed yet.<br>${totalHandled} handled this term.`;
+  legendHandledEl.addEventListener('mouseenter', (e) => showChartTooltip(html, e));
+  legendHandledEl.addEventListener('mousemove', positionChartTooltip);
+  legendHandledEl.addEventListener('mouseleave', hideChartTooltip);
+}
+if (legendResolvedEl){
+  const html = `<b>Resolved</b><br>Requests that have been fully closed out with the student or parent.<br>${totalResolved} of ${totalHandled} handled this term — <span class="tt-pct">${overallPct}%</span> resolution rate.`;
+  legendResolvedEl.addEventListener('mouseenter', (e) => showChartTooltip(html, e));
+  legendResolvedEl.addEventListener('mousemove', positionChartTooltip);
+  legendResolvedEl.addEventListener('mouseleave', hideChartTooltip);
+}
+
+/* ---------- Live "time ago" for request rows & alerts ---------- */
+(function(){
+  const els = Array.from(document.querySelectorAll('.time-ago[data-ago-minutes]'));
+  // Anchor each element to a real timestamp once, based on how long ago it happened from right now.
+  els.forEach(el => { el.dataset.ts = Date.now() - parseFloat(el.dataset.agoMinutes) * 60000; });
+
+  function formatAgo(ts){
+    const diffSec = Math.floor((Date.now() - ts) / 1000);
+    if (diffSec < 45) return 'Just now';
+    if (diffSec < 3600){ const m = Math.max(1, Math.round(diffSec / 60)); return `${m} minute${m === 1 ? '' : 's'} ago`; }
+    if (diffSec < 86400){ const h = Math.round(diffSec / 3600); return `${h} hour${h === 1 ? '' : 's'} ago`; }
+    if (diffSec < 172800) return 'Yesterday';
+    const d = Math.round(diffSec / 86400);
+    return `${d} days ago`;
+  }
+  function tickTimeAgo(){
+    els.forEach(el => { el.textContent = formatAgo(Number(el.dataset.ts)); });
+  }
+  tickTimeAgo();
+  setInterval(tickTimeAgo, 30000); // recompute every 30s so times keep advancing while the page stays open
+})();
+
+/* ---------- Info-dot tooltips on stat cards & quick actions ---------- */
+const cardTooltipEl = document.getElementById('cardTooltip');
+document.body.appendChild(cardTooltipEl); // same reason as chartTooltip: escape any transformed ancestor
+function showCardTooltip(html, evt){
+  cardTooltipEl.innerHTML = html;
+  cardTooltipEl.classList.add('show');
+  positionCardTooltip(evt);
+}
+function positionCardTooltip(evt){
+  const pad = 14;
+  const ttRect = cardTooltipEl.getBoundingClientRect();
+  let left = evt.clientX + pad;
+  let top = evt.clientY + pad;
+  if (left + ttRect.width > window.innerWidth - 10) left = evt.clientX - ttRect.width - pad;
+  if (top + ttRect.height > window.innerHeight - 10) top = evt.clientY - ttRect.height - pad;
+  cardTooltipEl.style.left = left + 'px';
+  cardTooltipEl.style.top = top + 'px';
+}
+function hideCardTooltip(){
+  cardTooltipEl.classList.remove('show');
+}
+document.querySelectorAll('.info-dot').forEach(dot => {
+  const tip = dot.getAttribute('data-tip');
+  dot.addEventListener('mouseenter', (e) => showCardTooltip(tip, e));
+  dot.addEventListener('mousemove', positionCardTooltip);
+  dot.addEventListener('mouseleave', hideCardTooltip);
+  // tap-to-toggle for touch devices, and stop it from triggering the parent qa-card button
+  dot.addEventListener('click', (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (cardTooltipEl.classList.contains('show')) { hideCardTooltip(); }
+    else { showCardTooltip(tip, e); }
+  });
+});
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.info-dot')) hideCardTooltip();
+});
+
+const chartIO = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if (entry.isIntersecting){
+      let idx=0;
+      chartData.forEach((d,i)=>{
+        [d.handled,d.resolved].forEach(val=>{
+          const rect = chartEl.querySelectorAll('rect')[idx];
+          const fullY = y(val), fullH = padT+chartH-fullY;
+          rect.style.transition = `y .8s var(--ease) ${i*70}ms, height .8s var(--ease) ${i*70}ms`;
+          rect.setAttribute('y', fullY);
+          rect.setAttribute('height', fullH);
+          idx++;
+        });
+      });
+      chartIO.disconnect();
+    }
+  });
+}, { threshold:0.2 });
+chartIO.observe(chartEl);
+</script>
+</body>
+</html>
