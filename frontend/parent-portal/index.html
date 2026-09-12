@@ -60,9 +60,97 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
 .page-part{display:none}.page-part.page-active{display:block;animation:pageIn .42s var(--ease) both}.page-part.page-active.hero{display:grid}.page-layout.page-group-hidden{display:none}.page-layout:not(.page-group-hidden){margin-bottom:24px}.page-layout>.page-part.page-active{grid-column:1/-1}@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .grid{align-items:start}.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card);padding:28px 30px;box-shadow:var(--shadow-card);opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .38s var(--ease),box-shadow .38s var(--ease),border-color .38s var(--ease)}.card::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .38s var(--ease)}.card.in-view{opacity:1;transform:none}.card:hover{transform:translateY(-5px);border-color:var(--marigold)}.card:hover::after{opacity:1}.card-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;gap:10px}.card-head h3{font-size:16.5px}.card-head .meta{font-size:12.5px;color:var(--ink-faint)}
 .stat-card{padding:22px 24px}.stat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.stat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--s-bg);color:var(--s-fg);transition:transform .3s var(--ease)}.card:hover .stat-icon{transform:scale(1.1) rotate(-4deg)}.stat-trend{font-size:11.5px;font-weight:700}.trend-up{color:var(--teal)}.trend-down{color:var(--brick)}.stat-value{font-family:'Fraunces',serif;font-size:28px;font-weight:600}.stat-label{color:var(--ink-soft);font-size:12.5px;margin-top:3px}
+.stat-card{cursor:pointer}.stat-top-right{display:flex;align-items:center;gap:7px}.stat-chevron{color:var(--ink-faint);transition:transform .32s var(--ease)}.stat-card.expanded .stat-chevron{transform:rotate(180deg);color:var(--ink-soft)}
+.stat-detail{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .38s var(--ease),opacity .3s var(--ease),margin-top .38s var(--ease)}
+.stat-card.expanded .stat-detail{max-height:400px;opacity:1;margin-top:16px}
+.stat-detail-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px;padding:7px 0;border-top:1px dashed var(--line)}
+.stat-detail-row:first-child{border-top:none;padding-top:2px}
+.stat-detail-row .k{color:var(--ink-soft)}.stat-detail-row .v{font-weight:700;color:var(--ink);white-space:nowrap}
+.stat-detail-note{font-size:11.5px;color:var(--ink-faint);line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.stat-detail-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:700;color:var(--teal);background:none;border:none;padding:0;cursor:pointer;font-family:inherit}
+.stat-detail-link svg{transition:transform .22s var(--ease)}.stat-detail-link:hover{color:var(--teal-deep)}.stat-detail-link:hover svg{transform:translateX(3px)}
 .table-scroll{overflow-x:auto}.req-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}.req-table th{text-align:left;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;padding:10px 14px;border-bottom:1px solid var(--line)}.req-table td{padding:14px;border-bottom:1px dashed var(--line);vertical-align:middle}.req-table tbody tr{transition:background .2s var(--ease)}.req-table tbody tr:hover{background:var(--teal-tint)}.req-table tbody tr:last-child td{border-bottom:none}.student-cell{display:flex;align-items:center;gap:11px}.mini-avatar{width:32px;height:32px;border-radius:9px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff}.student-name{font-weight:600}.student-id{font-size:11px;color:var(--ink-faint)}.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}.tag.ok{background:var(--teal-tint);color:var(--teal-deep)}.tag.due-soon{background:var(--azure-tint);color:var(--azure)}.tag.overdue{background:var(--brick-tint);color:var(--brick)}.tag.pending{background:var(--marigold-tint);color:#8a5f1e}.priority-dot{display:inline-flex;align-items:center;gap:6px;color:var(--ink-soft)}.priority-dot span{width:7px;height:7px;border-radius:50%}.row-action{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;transition:all .2s var(--ease)}.row-action:hover{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}.pill-filters{display:flex;gap:6px;flex-wrap:wrap}.pill{font-size:11.5px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft);background:var(--surface);transition:all .2s var(--ease)}.pill:hover{border-color:var(--teal);color:var(--teal-deep)}.pill.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.attn-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.attn-stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
+.attn-stat:hover{transform:translateY(-2px);box-shadow:var(--shadow-card);border-color:transparent}
+.attn-stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;background:var(--s-bg);color:var(--s-fg)}
+.attn-stat-num{font-family:'Fraunces',serif;font-size:19px;font-weight:600;line-height:1}
+.attn-stat-lbl{font-size:11px;color:var(--ink-faint);margin-top:2px}
+.attn-empty{text-align:center;color:var(--ink-faint);padding:26px 14px;font-size:12.5px}
+.req-table tbody tr.row-hidden{display:none}
 .pay-btn{font-size:11.5px;font-weight:700;padding:8px 15px;border-radius:999px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer;transition:all .2s var(--ease);white-space:nowrap}.pay-btn:hover{background:var(--teal-deep);border-color:var(--teal-deep)}.pay-btn.outline{background:transparent;color:var(--teal-deep)}.pay-btn.outline:hover{background:var(--teal-tint)}
+
+/* ============ FINANCIAL CLARITY: payment plan, reminders, receipts ============ */
+.plan-card{display:flex;flex-direction:column;gap:18px}
+.plan-card .card-head h3{font-size:19px}
+.plan-card>p{font-size:15px!important}
+.plan-simple{display:flex;flex-direction:column;gap:12px;padding:4px 0 2px}
+.plan-simple-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.plan-simple-pct{font-family:'Fraunces',serif;font-size:44px;font-weight:600;color:var(--teal-deep);line-height:1}
+.plan-simple-caption{font-size:17px;color:var(--ink-soft)}
+.plan-track-simple{width:100%;height:20px;border-radius:999px;overflow:hidden;background:var(--tab)}
+.plan-track-simple-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--teal) 0%,var(--teal-deep) 100%);transition:width 1.2s var(--ease)}
+.plan-simple-sub{font-size:15.5px;color:var(--ink-soft)}
+.plan-simple-sub strong{color:var(--ink);font-weight:700}
+.plan-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(152px,1fr));gap:14px;margin-top:2px}
+.plan-stat{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:transform .3s var(--ease),border-color .3s var(--ease);position:relative}
+.plan-stat:hover{transform:translateY(-3px);border-color:var(--marigold)}
+.plan-stat.highlight{background:var(--azure);border-color:var(--azure);box-shadow:var(--shadow-lift);animation:highlightGlow 2.4s var(--ease) infinite;transform:scale(1.045);z-index:1}
+.plan-stat.highlight:hover{transform:scale(1.045) translateY(-3px);border-color:var(--azure)}
+.plan-stat.highlight .k{color:rgba(255,255,255,.85);padding-right:66px}
+.plan-stat.highlight .v{color:#fff;font-size:21px}
+.plan-stat.highlight .sub{color:rgba(255,255,255,.85)}
+.plan-stat .badge{position:absolute;top:12px;right:12px;font-size:9.5px;font-weight:700;letter-spacing:.02em;background:var(--azure);color:#fff;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.plan-stat.highlight .badge{background:#fff;color:var(--azure)}
+@keyframes highlightGlow{0%{box-shadow:var(--shadow-lift),0 0 0 0 rgba(42,145,176,.45)}70%{box-shadow:var(--shadow-lift),0 0 0 11px rgba(42,145,176,0)}100%{box-shadow:var(--shadow-lift),0 0 0 0 rgba(42,145,176,0)}}
+.plan-stat .k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);font-weight:700}
+.plan-stat .v{font-family:'Fraunces',serif;font-size:19px;margin-top:5px}
+.plan-stat .sub{font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+
+.reminder-rail-wrap{position:relative;padding:8px 4px 0}
+.reminder-rail{position:absolute;left:26px;right:26px;top:22px;height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.reminder-rail-fill{position:absolute;left:0;top:0;height:100%;width:0;background:var(--teal);transition:width 1.3s var(--ease)}
+.reminder-steps{position:relative;display:flex;justify-content:space-between;gap:4px}
+.reminder-step{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;flex:1;min-width:0}
+.reminder-dot{width:15px;height:15px;border-radius:50%;background:var(--surface);border:3px solid var(--line);position:relative;z-index:1;transition:border-color .3s var(--ease),background .3s var(--ease)}
+.reminder-step.done .reminder-dot{background:var(--teal);border-color:var(--teal)}
+.reminder-step.next .reminder-dot{background:var(--marigold);border-color:var(--marigold);animation:reminderPulse 1.8s var(--ease) infinite}
+@keyframes reminderPulse{0%{box-shadow:0 0 0 0 rgba(89,114,199,.5)}70%{box-shadow:0 0 0 9px rgba(89,114,199,0)}100%{box-shadow:0 0 0 0 rgba(89,114,199,0)}}
+.reminder-when{font-size:11px;font-weight:700;color:var(--ink-faint)}
+.reminder-step.next .reminder-when{color:var(--marigold)}
+.reminder-label{font-size:12px;font-weight:600;line-height:1.3;padding:0 2px}
+.reminder-channel{font-size:10.5px;color:var(--ink-faint);padding:0 2px}
+
+.receipt-row{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px dashed var(--line);opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.receipt-row.in-view{opacity:1;transform:none}
+.receipt-row:last-child{border-bottom:none}
+.receipt-icon{width:38px;height:38px;border-radius:10px;background:var(--teal-tint);color:var(--teal-deep);display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:transform .3s var(--ease)}
+.receipt-row:hover .receipt-icon{transform:scale(1.08) rotate(-4deg)}
+.receipt-info{flex:1;min-width:0}
+.receipt-title{font-size:13px;font-weight:700}
+.receipt-meta{font-size:11.5px;color:var(--ink-faint);margin-top:2px}
+.receipt-amount{font-family:'Fraunces',serif;font-size:14.5px;white-space:nowrap}
+.receipt-view{font-size:11.5px;font-weight:700;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--teal-deep);cursor:pointer;transition:all .2s var(--ease);white-space:nowrap}
+.receipt-view:hover{border-color:var(--teal);background:var(--teal-tint)}
+
+.receipt-detail{display:grid;gap:2px;margin-bottom:18px}
+.receipt-detail-row{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:10px 0;border-bottom:1px dashed var(--line);opacity:0;transform:translateX(-6px);animation:receiptRowIn .4s var(--ease) forwards}
+.receipt-detail-row:last-child{border-bottom:none}
+.receipt-detail-row .k{color:var(--ink-faint)}
+.receipt-detail-row .v{font-weight:700}
+@keyframes receiptRowIn{to{opacity:1;transform:none}}
 .appt-row{display:grid;grid-template-columns:56px 22px 1fr auto;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);transition:transform .34s var(--ease),background .34s var(--ease),padding .34s var(--ease)}.appt-row:last-child{border-bottom:none}.appt-row:hover{transform:translateY(-3px);background:var(--paper);padding-left:10px;padding-right:10px;z-index:3}.appt-time{text-align:center}.appt-time .t{font-family:'Fraunces',serif;font-size:14px;font-weight:600}.appt-time .m{font-size:9.5px;color:var(--ink-faint);text-transform:uppercase}.appt-rail{width:2px;height:100%;background:var(--line);position:relative;justify-self:center}.appt-rail::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:var(--marigold);box-shadow:0 0 0 3px var(--marigold-tint)}.appt-name{font-weight:600;font-size:13.5px}.appt-type{font-size:12px;color:var(--ink-faint);margin-top:1px}.alert-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);transition:transform .34s var(--ease),background .34s var(--ease),padding .34s var(--ease)}.alert-row:last-child{border-bottom:none}.alert-row:hover{transform:translateY(-3px);background:var(--paper);padding-left:10px;padding-right:10px;z-index:3}.alert-icon{width:34px;height:34px;border-radius:9px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}.alert-icon.high{background:var(--brick-tint);color:var(--brick)}.alert-icon.med{background:var(--marigold-tint);color:#8a5f1e}.alert-icon.low{background:var(--azure-tint);color:var(--azure)}.alert-title{font-size:13px;font-weight:600}.alert-desc{font-size:12px;color:var(--ink-soft);margin-top:2px}.alert-time{font-size:11px;color:var(--ink-faint);margin-top:4px}
+.tag.done{background:var(--tab);color:var(--ink-faint)}
+.appt-day-panel{display:none}.appt-day-panel.day-active{display:block;animation:pageIn .38s var(--ease) both}
+.appt-empty{padding:22px 4px;text-align:center;color:var(--ink-faint);font-size:12.5px}
+.alert-why{display:flex;gap:7px;align-items:flex-start;margin-top:7px;padding:9px 11px;background:var(--bg);border-radius:10px}
+.alert-why svg{flex:0 0 13px;width:13px;height:13px;margin-top:1.5px;color:var(--ink-faint)}
+.alert-why-label{font-weight:700;color:var(--ink-soft)}
+.alert-why-text{font-size:11.5px;color:var(--ink-soft);line-height:1.45}
+.alert-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:middle}
+.alert-badge.high{background:var(--brick-tint);color:var(--brick)}
+.alert-badge.med{background:var(--marigold-tint);color:#8a5f1e}
+.alert-badge.low{background:var(--azure-tint);color:var(--azure)}
 .qa-card{position:relative;display:flex;flex-direction:column;gap:10px;text-align:left;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card);padding:22px;transition:transform .32s var(--ease),box-shadow .32s var(--ease),border-color .32s var(--ease);opacity:0;transform:translateY(14px)}.qa-card::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .32s var(--ease)}.qa-card.in-view{opacity:1;transform:none}.qa-card:hover{transform:translateY(-5px);border-color:var(--marigold)}.qa-card:hover::after{opacity:1}.qa-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--q-bg);color:var(--q-fg);transition:transform .3s var(--ease)}.qa-card:hover .qa-icon{transform:scale(1.12) rotate(6deg)}.qa-card .qt{font-size:14px;font-weight:700;font-family:'Fraunces',serif}.qa-card .qd{font-size:12px;color:var(--ink-faint)}
 .cat-row{display:grid;grid-template-columns:128px 1fr 36px;align-items:center;gap:12px;font-size:13px;margin-bottom:13px}.cat-row .name{color:var(--ink-soft);font-weight:500}.bar-track{height:8px;background:var(--tab);border-radius:6px;overflow:hidden}.bar-fill{height:100%;border-radius:6px;background:var(--teal);width:0;transition:width 1.1s var(--ease)}.cat-row .score{text-align:right;font-weight:700;font-family:'Fraunces',serif}.chart-legend{display:flex;gap:16px}.legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-soft)}.legend-dot{width:9px;height:9px;border-radius:3px}.bar-col{transition:transform .3s var(--ease);transform-origin:bottom}.bar-col:hover{filter:brightness(1.08)}
 .activity-row{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);transition:transform .34s var(--ease),background .34s var(--ease),padding .34s var(--ease)}.activity-row:last-child{border-bottom:none}.activity-row:hover{transform:translateY(-3px);background:var(--paper);padding-left:10px;padding-right:10px;z-index:3}.act-avatar{width:32px;height:32px;border-radius:9px;flex:0 0 auto;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.act-text{font-size:13px;line-height:1.5}.act-text b{font-weight:700}.act-stamp{font-size:11px;color:var(--ink-faint);margin-top:3px}
@@ -76,7 +164,7 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
 @media (max-width:900px){.hero{grid-template-columns:1fr;text-align:left}.streak{justify-self:start}}
 @media (max-width:720px){.brand,.nav-label,.sidebar-foot{display:none}.nav{flex-direction:row;justify-content:space-around;padding:0;width:100%;overflow-x:auto}.nav-item{flex-direction:column;gap:4px;font-size:9.5px;padding:7px 4px}.nav-badge{position:absolute;top:2px;right:8px;margin:0}.cat-row{grid-template-columns:96px 1fr 30px}.notice-banner{flex-wrap:wrap}.notice-actions{width:100%;padding-left:29px}}
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero{animation:none;opacity:1;transform:none}.page-part.page-active{animation:none}.nav-sub{transition:none}.card,.qa-card{opacity:1;transform:none;transition:none}.card::after,.qa-card::after,.appt-row,.alert-row,.activity-row{transition:none}.bar-fill{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero{animation:none;opacity:1;transform:none}.page-part.page-active{animation:none}.nav-sub{transition:none}.card,.qa-card{opacity:1;transform:none;transition:none}.card::after,.qa-card::after,.appt-row,.alert-row,.activity-row{transition:none}.bar-fill{transition:none}.plan-seg,.reminder-rail-fill,.plan-track-simple-fill{transition:none}.reminder-step.next .reminder-dot{animation:none}.receipt-row{opacity:1;transform:none;transition:none}.receipt-detail-row{opacity:1;transform:none;animation:none}.plan-stat.highlight{animation:none}}
 </style>
 </head>
 <body>
@@ -194,37 +282,79 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
     <!-- STAT CARDS -->
     <section class="section">
       <div class="grid-4 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6" id="statsGrid">
-        <div class="card stat-card" style="--s-bg:var(--azure-tint); --s-fg:var(--azure);">
+        <div class="card stat-card" data-stat="attendance" style="--s-bg:var(--azure-tint); --s-fg:var(--azure);" role="button" tabindex="0" aria-expanded="false">
           <div class="stat-top">
             <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></div>
-            <span class="stat-trend trend-up">▲ 2.1%</span>
+            <div class="stat-top-right">
+              <span class="stat-trend trend-up">▲ 2.1%</span>
+              <svg class="stat-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
           </div>
           <div class="stat-value">94%</div>
           <div class="stat-label">Lecture attendance this term</div>
+          <div class="stat-detail">
+            <div class="stat-detail-row"><span class="k">Present</span><span class="v">11 sessions</span></div>
+            <div class="stat-detail-row"><span class="k">Absent</span><span class="v">2 sessions</span></div>
+            <div class="stat-detail-row"><span class="k">Late</span><span class="v">2 sessions</span></div>
+            <div class="stat-detail-note">Up 2.1% from last month. The two Professional Practice absences already triggered a follow-up alert with Student Services.</div>
+            <button class="stat-detail-link" type="button" data-nav-target="attendance">View full attendance log <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
         </div>
-        <div class="card stat-card" style="--s-bg:var(--brick-tint); --s-fg:var(--brick);">
+        <div class="card stat-card" data-stat="fees" style="--s-bg:var(--brick-tint); --s-fg:var(--brick);" role="button" tabindex="0" aria-expanded="false">
           <div class="stat-top">
             <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <span class="stat-trend trend-down">8 days left</span>
+            <div class="stat-top-right">
+              <span class="stat-trend trend-down">8 days left</span>
+              <svg class="stat-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
           </div>
           <div class="stat-value">NPR 650k</div>
           <div class="stat-label">College balance due Sept 20</div>
+          <div class="stat-detail">
+            <div class="stat-detail-row"><span class="k">Tuition installment 2</span><span class="v">NPR 450,000</span></div>
+            <div class="stat-detail-row"><span class="k">Lab fee</span><span class="v">NPR 200,000</span></div>
+            <div class="stat-detail-row"><span class="k">Due date</span><span class="v">Sept 20, 2026</span></div>
+            <div class="stat-detail-note">Settle before the due date to avoid a late fee — unpaid balances past Sept 20 can also put exam registration on hold.</div>
+            <button class="stat-detail-link" type="button" data-nav-target="fees">View fees &amp; payments <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
         </div>
-        <div class="card stat-card" style="--s-bg:var(--teal-tint); --s-fg:var(--teal-deep);">
+        <div class="card stat-card" data-stat="grades" style="--s-bg:var(--teal-tint); --s-fg:var(--teal-deep);" role="button" tabindex="0" aria-expanded="false">
           <div class="stat-top">
             <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg></div>
-            <span class="stat-trend trend-up">▲ 3%</span>
+            <div class="stat-top-right">
+              <span class="stat-trend trend-up">▲ 3%</span>
+              <svg class="stat-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
           </div>
           <div class="stat-value">88%</div>
           <div class="stat-label">Current module average</div>
+          <div class="stat-detail">
+            <div class="stat-detail-row"><span class="k">Studio Art</span><span class="v">94</span></div>
+            <div class="stat-detail-row"><span class="k">Database Systems</span><span class="v">91</span></div>
+            <div class="stat-detail-row"><span class="k">Intro Psychology</span><span class="v">89</span></div>
+            <div class="stat-detail-row"><span class="k">Professional Practice</span><span class="v">85</span></div>
+            <div class="stat-detail-row"><span class="k">Web Applications</span><span class="v">82</span></div>
+            <div class="stat-detail-note">Up 3% from last term, led by strong Studio Art and Database Systems results.</div>
+            <button class="stat-detail-link" type="button" data-nav-target="grades">View grades &amp; progress <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
         </div>
-        <div class="card stat-card" style="--s-bg:var(--marigold-tint); --s-fg:#8a5f1e;">
+        <div class="card stat-card" data-stat="updates" style="--s-bg:var(--marigold-tint); --s-fg:#8a5f1e;" role="button" tabindex="0" aria-expanded="false">
           <div class="stat-top">
             <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
-            <span class="stat-trend trend-down">▲ 1 new</span>
+            <div class="stat-top-right">
+              <span class="stat-trend trend-down">▲ 1 new</span>
+              <svg class="stat-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
           </div>
           <div class="stat-value">3</div>
           <div class="stat-label">Active updates for Aarav</div>
+          <div class="stat-detail">
+            <div class="stat-detail-row"><span class="k">Repeated module absence · High priority</span><span class="v">Today</span></div>
+            <div class="stat-detail-row"><span class="k">Fee payment due · Action needed</span><span class="v">2d ago</span></div>
+            <div class="stat-detail-row"><span class="k">Advising check-in · FYI</span><span class="v">3d ago</span></div>
+            <div class="stat-detail-note">1 new update since yesterday — the repeated absence alert was added this morning.</div>
+            <button class="stat-detail-link" type="button" data-nav-target="alerts">View all updates <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
         </div>
       </div>
     </section>
@@ -236,62 +366,146 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
           <h2>Lecture attendance</h2>
           <div class="meta">Last updated today at 8:10 AM · Student Services sync</div>
         </div>
-        <div class="pill-filters">
-          <button class="pill active">All</button>
-          <button class="pill">Present</button>
-          <button class="pill">Absent</button>
-          <button class="pill">Late</button>
+        <div class="pill-filters" id="attnFilters">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="present">Present</button>
+          <button class="pill" data-filter="absent">Absent</button>
+          <button class="pill" data-filter="late">Late</button>
         </div>
       </div>
+
+      <div class="attn-stats">
+        <div class="attn-stat" style="--s-bg:var(--teal-tint); --s-fg:var(--teal-deep);">
+          <div class="attn-stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <div><div class="attn-stat-num" id="attnCountPresent">11</div><div class="attn-stat-lbl">Present</div></div>
+        </div>
+        <div class="attn-stat" style="--s-bg:var(--brick-tint); --s-fg:var(--brick);">
+          <div class="attn-stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+          <div><div class="attn-stat-num" id="attnCountAbsent">2</div><div class="attn-stat-lbl">Absent</div></div>
+        </div>
+        <div class="attn-stat" style="--s-bg:var(--azure-tint); --s-fg:var(--azure);">
+          <div class="attn-stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><div class="attn-stat-num" id="attnCountLate">2</div><div class="attn-stat-lbl">Late</div></div>
+        </div>
+        <div class="attn-stat" style="--s-bg:var(--marigold-tint); --s-fg:#8a5f1e;">
+          <div class="attn-stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8M21 7v4h-4"/></svg></div>
+          <div><div class="attn-stat-num" id="attnCountRate">87%</div><div class="attn-stat-lbl">Attendance rate (shown)</div></div>
+        </div>
+      </div>
+
       <div class="card">
         <div class="table-scroll">
         <table class="req-table">
           <thead>
             <tr><th>Module</th><th>Date</th><th>Status</th><th>Lecturer</th><th>Note</th></tr>
           </thead>
-          <tbody>
-            <tr>
+          <tbody id="attnTableBody">
+            <tr data-status="late">
               <td><div class="student-name">Web Application Development</div></td>
               <td>Sept 11, 2026</td>
               <td><span class="tag due-soon">Late (12 min)</span></td>
               <td>Dr. R. Marlow</td>
               <td>—</td>
             </tr>
-            <tr>
+            <tr data-status="present">
               <td><div class="student-name">Database Systems</div></td>
               <td>Sept 11, 2026</td>
               <td><span class="tag ok">Present</span></td>
               <td>Dr. N. Alvarez</td>
               <td>—</td>
             </tr>
-            <tr>
+            <tr data-status="absent">
               <td><div class="student-name">Professional Practice</div></td>
               <td>Sept 10, 2026</td>
               <td><span class="tag overdue">Absent</span></td>
               <td>Ms. D. Cole</td>
               <td>Flagged for follow-up</td>
             </tr>
-            <tr>
+            <tr data-status="present">
               <td><div class="student-name">Web Application Development</div></td>
               <td>Sept 10, 2026</td>
               <td><span class="tag ok">Present</span></td>
               <td>Dr. R. Marlow</td>
               <td>—</td>
             </tr>
-            <tr>
+            <tr data-status="present">
               <td><div class="student-name">Database Systems</div></td>
               <td>Sept 9, 2026</td>
               <td><span class="tag ok">Present</span></td>
               <td>Dr. N. Alvarez</td>
               <td>—</td>
             </tr>
-            <tr>
+            <tr data-status="absent">
               <td><div class="student-name">Professional Practice</div></td>
               <td>Sept 9, 2026</td>
               <td><span class="tag overdue">Absent</span></td>
               <td>Ms. D. Cole</td>
               <td>Second missed lab this month</td>
             </tr>
+            <tr data-status="present">
+              <td><div class="student-name">Studio Art</div></td>
+              <td>Sept 8, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Mr. T. Gurung</td>
+              <td>—</td>
+            </tr>
+            <tr data-status="present">
+              <td><div class="student-name">Intro Psychology</div></td>
+              <td>Sept 8, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Dr. L. Shah</td>
+              <td>—</td>
+            </tr>
+            <tr data-status="present">
+              <td><div class="student-name">Web Application Development</div></td>
+              <td>Sept 4, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Dr. R. Marlow</td>
+              <td>—</td>
+            </tr>
+            <tr data-status="late">
+              <td><div class="student-name">Database Systems</div></td>
+              <td>Sept 4, 2026</td>
+              <td><span class="tag due-soon">Late (5 min)</span></td>
+              <td>Dr. N. Alvarez</td>
+              <td>Arrived after roll call</td>
+            </tr>
+            <tr data-status="present">
+              <td><div class="student-name">Professional Practice</div></td>
+              <td>Sept 3, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Ms. D. Cole</td>
+              <td>—</td>
+            </tr>
+            <tr data-status="present">
+              <td><div class="student-name">Studio Art</div></td>
+              <td>Sept 3, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Mr. T. Gurung</td>
+              <td>—</td>
+            </tr>
+            <tr data-status="present">
+              <td><div class="student-name">Intro Psychology</div></td>
+              <td>Sept 2, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Dr. L. Shah</td>
+              <td>—</td>
+            </tr>
+            <tr data-status="present">
+              <td><div class="student-name">Database Systems</div></td>
+              <td>Sept 1, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Dr. N. Alvarez</td>
+              <td>—</td>
+            </tr>
+            <tr data-status="present">
+              <td><div class="student-name">Web Application Development</div></td>
+              <td>Sept 1, 2026</td>
+              <td><span class="tag ok">Present</span></td>
+              <td>Dr. R. Marlow</td>
+              <td>—</td>
+            </tr>
+            <tr id="attnEmptyRow" style="display:none"><td colspan="5" class="attn-empty">No sessions match this filter.</td></tr>
           </tbody>
         </table>
         </div>
@@ -303,57 +517,156 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
       <div class="section-head">
         <div>
           <h2>Fees & payments</h2>
-          <div class="meta">Balance due: NPR 650,000</div>
-        </div>
-        <div class="pill-filters">
-          <button class="pill active">All</button>
-          <button class="pill">Due</button>
-          <button class="pill">Overdue</button>
-          <button class="pill">Paid</button>
+          <div class="meta">NPR 259,200 due by Sept 20 · you're all set otherwise</div>
         </div>
       </div>
-      <div class="card">
+
+      <!-- Payment plan progress -->
+      <div class="card plan-card">
+        <div class="card-head"><h3>How Aarav's fees are looking</h3><span class="meta">Term 2 · 2026</span></div>
+        <p style="margin:0;font-size:13px;color:var(--ink-soft);line-height:1.6">A simple picture of how much of this term's fees are paid, and what's still to come.</p>
+        <div class="plan-simple">
+          <div class="plan-simple-top">
+            <div class="plan-simple-pct">33%</div>
+            <div class="plan-simple-caption">of this term's fees paid so far</div>
+          </div>
+          <div class="plan-track-simple">
+            <div class="plan-track-simple-fill" data-w="33"></div>
+          </div>
+          <div class="plan-simple-sub"><strong>NPR 247,500</strong> paid · <strong>NPR 499,200</strong> left to pay this term</div>
+        </div>
+        <div class="plan-stats">
+          <div class="plan-stat"><div class="k">Total fees this term</div><div class="v">NPR 746,700</div><div class="sub">Everything for Term 2</div></div>
+          <div class="plan-stat"><div class="k">Paid so far</div><div class="v">NPR 247,500</div><div class="sub">2 payments made</div></div>
+          <div class="plan-stat highlight"><span class="badge">8 days left</span><div class="k">Due by Sept 20</div><div class="v">NPR 259,200</div><div class="sub">Tuition + lab fee</div></div>
+          <div class="plan-stat"><div class="k">Next payment</div><div class="v">NPR 240,000</div><div class="sub">Not due until Nov 15</div></div>
+        </div>
+      </div>
+
+      <!-- Reminder schedule + Receipts archive -->
+      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8" style="margin-top:24px">
+        <div class="card">
+          <div class="card-head"><h3>When you'll hear from us</h3><span class="meta">About the Sept 20 payment</span></div>
+          <p style="margin:0 0 4px;font-size:13px;color:var(--ink-soft);line-height:1.6">We reach out well ahead of any due date, so nothing catches you by surprise.</p>
+          <div class="reminder-rail-wrap">
+            <div class="reminder-rail"><div class="reminder-rail-fill" data-w="15"></div></div>
+            <div class="reminder-steps">
+              <div class="reminder-step done">
+                <div class="reminder-dot"></div>
+                <div class="reminder-when">Sep 6</div>
+                <div class="reminder-label">2 weeks ahead</div>
+                <div class="reminder-channel">Already sent by email</div>
+              </div>
+              <div class="reminder-step next">
+                <div class="reminder-dot"></div>
+                <div class="reminder-when">Sep 13</div>
+                <div class="reminder-label">1 week ahead</div>
+                <div class="reminder-channel">Email & app · arrives tomorrow</div>
+              </div>
+              <div class="reminder-step">
+                <div class="reminder-dot"></div>
+                <div class="reminder-when">Sep 18</div>
+                <div class="reminder-label">2 days ahead</div>
+                <div class="reminder-channel">Text message</div>
+              </div>
+              <div class="reminder-step">
+                <div class="reminder-dot"></div>
+                <div class="reminder-when">Sep 20</div>
+                <div class="reminder-label">Payment due</div>
+                <div class="reminder-channel">Email & text</div>
+              </div>
+              <div class="reminder-step">
+                <div class="reminder-dot"></div>
+                <div class="reminder-when">Sep 23</div>
+                <div class="reminder-label">If it's still open</div>
+                <div class="reminder-channel">We'll call and loop in an advisor</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Your payment history</h3><span class="meta" id="receiptCount">4 receipts saved</span></div>
+          <p style="margin:0 0 4px;font-size:13px;color:var(--ink-soft);line-height:1.6">Every payment Aarav's made, in one place. Tap any one to view or save a copy.</p>
+          <div id="receiptList">
+            <div class="receipt-row">
+              <div class="receipt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4M9 12h6M9 16h6M9 8h2"/></svg></div>
+              <div class="receipt-info"><div class="receipt-title">Tuition Installment 1</div><div class="receipt-meta">Paid Aug 15, 2026 · Card •• 4821</div></div>
+              <div class="receipt-amount">NPR 240,000</div>
+              <button class="receipt-view" data-receipt data-item="Tuition Installment 1" data-amount="NPR 240,000" data-date="Aug 15, 2026" data-method="Card •• 4821" data-txn="TXN-88213">View receipt</button>
+            </div>
+            <div class="receipt-row">
+              <div class="receipt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4M9 12h6M9 16h6M9 8h2"/></svg></div>
+              <div class="receipt-info"><div class="receipt-title">Student Activity Fee</div><div class="receipt-meta">Paid Aug 15, 2026 · Card •• 4821</div></div>
+              <div class="receipt-amount">NPR 7,500</div>
+              <button class="receipt-view" data-receipt data-item="Student Activity Fee" data-amount="NPR 7,500" data-date="Aug 15, 2026" data-method="Card •• 4821" data-txn="TXN-88214">View receipt</button>
+            </div>
+            <div class="receipt-row">
+              <div class="receipt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4M9 12h6M9 16h6M9 8h2"/></svg></div>
+              <div class="receipt-info"><div class="receipt-title">Tuition Installment 4 (Term 1)</div><div class="receipt-meta">Paid Mar 14, 2026 · Card •• 4821</div></div>
+              <div class="receipt-amount">NPR 235,000</div>
+              <button class="receipt-view" data-receipt data-item="Tuition Installment 4 (Term 1)" data-amount="NPR 235,000" data-date="Mar 14, 2026" data-method="Card •• 4821" data-txn="TXN-74102">View receipt</button>
+            </div>
+            <div class="receipt-row">
+              <div class="receipt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4M9 12h6M9 16h6M9 8h2"/></svg></div>
+              <div class="receipt-info"><div class="receipt-title">Registration &amp; Orientation Fee</div><div class="receipt-meta">Paid Jan 20, 2026 · Bank transfer</div></div>
+              <div class="receipt-amount">NPR 12,000</div>
+              <button class="receipt-view" data-receipt data-item="Registration & Orientation Fee" data-amount="NPR 12,000" data-date="Jan 20, 2026" data-method="Bank transfer" data-txn="TXN-61050">View receipt</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:24px">
+        <div class="card-head"><h3>Everything, at a glance</h3><span class="meta" id="feesTableCount">5 items this term</span></div>
+        <div class="pill-filters" id="feesFilters" style="margin-bottom:16px">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="due">Due</button>
+          <button class="pill" data-filter="overdue">Overdue</button>
+          <button class="pill" data-filter="paid">Paid</button>
+        </div>
         <div class="table-scroll">
         <table class="req-table">
           <thead>
             <tr><th>Item</th><th>Amount</th><th>Due date</th><th>Status</th><th></th></tr>
           </thead>
-          <tbody>
-            <tr>
+          <tbody id="feesTableBody">
+            <tr data-status="due">
               <td><div class="student-name">Tuition Installment 2</div></td>
               <td>NPR 240,000</td>
               <td>Sept 20, 2026</td>
               <td><span class="tag due-soon">Due</span></td>
               <td><button class="pay-btn">Pay Now</button></td>
             </tr>
-            <tr>
+            <tr data-status="due">
               <td><div class="student-name">Computing Lab Fee</div></td>
               <td>NPR 18,000</td>
               <td>Sept 20, 2026</td>
               <td><span class="tag due-soon">Due</span></td>
               <td><button class="pay-btn">Pay Now</button></td>
             </tr>
-            <tr>
+            <tr data-status="overdue">
               <td><div class="student-name">Library Fine</div></td>
               <td>NPR 1,200</td>
               <td>Sept 5, 2026</td>
               <td><span class="tag overdue">Overdue</span></td>
               <td><button class="pay-btn">Pay Now</button></td>
             </tr>
-            <tr>
+            <tr data-status="paid">
               <td><div class="student-name">Tuition Installment 1</div></td>
               <td>NPR 240,000</td>
               <td>Aug 15, 2026</td>
               <td><span class="tag ok">Paid</span></td>
-              <td><button class="pay-btn outline">Receipt</button></td>
+              <td><button class="pay-btn outline" data-receipt data-item="Tuition Installment 1" data-amount="NPR 240,000" data-date="Aug 15, 2026" data-method="Card •• 4821" data-txn="TXN-88213">Receipt</button></td>
             </tr>
-            <tr>
+            <tr data-status="paid">
               <td><div class="student-name">Student Activity Fee</div></td>
               <td>NPR 7,500</td>
               <td>Aug 15, 2026</td>
               <td><span class="tag ok">Paid</span></td>
-              <td><button class="pay-btn outline">Receipt</button></td>
+              <td><button class="pay-btn outline" data-receipt data-item="Student Activity Fee" data-amount="NPR 7,500" data-date="Aug 15, 2026" data-method="Card •• 4821" data-txn="TXN-88214">Receipt</button></td>
             </tr>
+            <tr id="feesEmptyRow" style="display:none"><td colspan="5" style="text-align:center;color:var(--ink-faint);padding:24px 14px">Nothing in this category right now.</td></tr>
           </tbody>
         </table>
         </div>
@@ -363,19 +676,44 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
     <!-- ============ APPOINTMENTS + ALERTS ============ -->
     <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8">
       <section class="section" id="appointments" style="margin-bottom:0;">
-        <div class="section-head"><h2>Upcoming meetings</h2><div class="meta">2 scheduled</div></div>
-        <div class="card">
-          <div class="appt-row">
-            <div class="appt-time"><div class="t">3:00</div><div class="m">FRI</div></div>
-            <div class="appt-rail"></div>
-            <div><div class="appt-name">Academic advising check-in</div><div class="appt-type">Dr. R. Marlow · Computing Faculty</div></div>
-            <span class="tag ok">In-person</span>
+        <div class="section-head">
+          <h2>Meetings</h2>
+          <div class="view-toggle" id="apptToggle">
+            <button data-day="yesterday">Yesterday</button>
+            <button class="active" data-day="today">Today</button>
+            <button data-day="tomorrow">Tomorrow</button>
           </div>
-          <div class="appt-row">
-            <div class="appt-time"><div class="t">10:00</div><div class="m">MON</div></div>
-            <div class="appt-rail"></div>
-            <div><div class="appt-name">Academic Advising Check-in</div><div class="appt-type">Ms. D. Cole</div></div>
-            <span class="tag due-soon">Video</span>
+        </div>
+        <div class="card">
+          <div class="appt-day-panel" data-panel="yesterday">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">11:00</div><div class="m">WED</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Financial aid consultation</div><div class="appt-type">Ms. R. Patel · Bursary Office</div></div>
+              <span class="tag done">Completed</span>
+            </div>
+          </div>
+          <div class="appt-day-panel day-active" data-panel="today">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">4:30</div><div class="m">TODAY</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Attendance follow-up call</div><div class="appt-type">Mr. K. Owusu · Student Services</div></div>
+              <span class="tag due-soon">Phone</span>
+            </div>
+          </div>
+          <div class="appt-day-panel" data-panel="tomorrow">
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">3:00</div><div class="m">FRI</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Academic advising check-in</div><div class="appt-type">Dr. R. Marlow · Computing Faculty</div></div>
+              <span class="tag ok">In-person</span>
+            </div>
+            <div class="appt-row">
+              <div class="appt-time"><div class="t">10:00</div><div class="m">MON</div></div>
+              <div class="appt-rail"></div>
+              <div><div class="appt-name">Academic Advising Check-in</div><div class="appt-type">Ms. D. Cole</div></div>
+              <span class="tag due-soon">Video</span>
+            </div>
           </div>
         </div>
       </section>
@@ -385,15 +723,39 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
         <div class="card">
           <div class="alert-row">
             <div class="alert-icon high"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
-            <div><div class="alert-title">Repeated module absence</div><div class="alert-desc">Aarav missed Professional Practice for the second time this month.</div><div class="alert-time">Today</div></div>
+            <div style="flex:1">
+              <div class="alert-title">Repeated module absence<span class="alert-badge high">High priority</span></div>
+              <div class="alert-desc">Aarav missed Professional Practice for the second time this month.</div>
+              <div class="alert-why">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                <div class="alert-why-text"><span class="alert-why-label">Why you're seeing this: </span>College policy flags a module automatically once a student reaches 2 unexplained absences within 30 days. This is Aarav's second Professional Practice absence this month, so the module tutor and attendance office have both been notified.</div>
+              </div>
+              <div class="alert-time">Today</div>
+            </div>
           </div>
           <div class="alert-row">
             <div class="alert-icon med"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
-            <div><div class="alert-title">Fee payment due</div><div class="alert-desc">Tuition installment 2 and the lab fee are due Sept 20.</div><div class="alert-time">2 days ago</div></div>
+            <div style="flex:1">
+              <div class="alert-title">Fee payment due<span class="alert-badge med">Action needed</span></div>
+              <div class="alert-desc">Tuition installment 2 and the lab fee are due Sept 20.</div>
+              <div class="alert-why">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                <div class="alert-why-text"><span class="alert-why-label">Why you're seeing this: </span>This is a reminder sent 8 days before the due date. Balances left unpaid after Sept 20 accrue a late fee and can put Aarav's exam registration on hold, so it's flagged as needing action rather than just an FYI.</div>
+              </div>
+              <div class="alert-time">2 days ago</div>
+            </div>
           </div>
           <div class="alert-row">
             <div class="alert-icon low"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
-            <div><div class="alert-title">Academic advising check-in</div><div class="alert-desc">Aarav's academic advising meeting is scheduled for Friday at 3:00 PM.</div><div class="alert-time">3 days ago</div></div>
+            <div style="flex:1">
+              <div class="alert-title">Academic advising check-in<span class="alert-badge low">FYI</span></div>
+              <div class="alert-desc">Aarav's academic advising meeting is scheduled for Friday at 3:00 PM.</div>
+              <div class="alert-why">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                <div class="alert-why-text"><span class="alert-why-label">Why you're seeing this: </span>This is a courtesy reminder for an upcoming meeting already on the calendar. No action is required from you — it's shown so you know where Aarav will be and who he's meeting with.</div>
+              </div>
+              <div class="alert-time">3 days ago</div>
+            </div>
           </div>
         </div>
       </section>
@@ -572,6 +934,14 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
     <div class="otp-step" id="otpStep" hidden><div class="demo-hint">Demo mode: use <strong>2040</strong> as the verification code.</div><label class="form-label">4-digit verification code<input class="otp-input" id="otpCode" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="one-time-code" required></label><button class="primary-btn" type="button" id="verifyOtp">Verify and continue</button><button class="text-btn" type="button" id="changePhone">Use a different number</button><div class="modal-status" id="otpStatus" aria-live="polite"></div></div>
   </div>
 </div>
+
+<div class="modal-backdrop" id="receiptModal" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
+  <div class="modal">
+    <div class="modal-head"><div><h2 id="receiptTitle">Payment receipt</h2><div class="modal-copy">Keep this for your records — it's proof the payment went through.</div></div><button class="close-btn" type="button" data-close-receipt aria-label="Close receipt">×</button></div>
+    <div class="receipt-detail" id="receiptDetail"></div>
+    <button class="primary-btn" type="button" id="downloadReceipt" style="width:100%">Save as PDF</button>
+  </div>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -701,14 +1071,82 @@ const barIO = new IntersectionObserver(entries => entries.forEach(entry => {
 }), {threshold:.3});
 bars.forEach(bar => barIO.observe(bar));
 
+// Payment plan bar + reminder rail: same reveal-on-scroll pattern as the bars above
+const planFills = document.querySelectorAll('.plan-seg, .reminder-rail-fill, .plan-track-simple-fill');
+const planIO = new IntersectionObserver(entries => entries.forEach(entry => {
+  if (entry.isIntersecting){ entry.target.style.width = entry.target.getAttribute('data-w') + '%'; planIO.unobserve(entry.target); }
+}), {threshold:.3});
+planFills.forEach((el, index) => { el.style.transitionDelay = (index % 4) * 110 + 'ms'; planIO.observe(el); });
+
+// Receipt rows fade in individually as they scroll into view
+const receiptRows = document.querySelectorAll('.receipt-row');
+const receiptIO = new IntersectionObserver(entries => entries.forEach(entry => {
+  if (entry.isIntersecting){ entry.target.classList.add('in-view'); receiptIO.unobserve(entry.target); }
+}), {threshold:.2});
+receiptRows.forEach((row, index) => { row.style.transitionDelay = (index % 4) * 70 + 'ms'; receiptIO.observe(row); });
+
 document.querySelectorAll('.pill-filters .pill').forEach(pill => pill.addEventListener('click', () => {
   pill.parentElement.querySelectorAll('.pill').forEach(item => item.classList.remove('active'));
   pill.classList.add('active');
 }));
+
+// Attendance pill filters actually filter the lecture attendance table by status
+const attnFilters = document.getElementById('attnFilters');
+const attnRows = Array.from(document.querySelectorAll('#attnTableBody tr[data-status]'));
+const attnEmptyRow = document.getElementById('attnEmptyRow');
+if (attnFilters){
+  attnFilters.addEventListener('click', event => {
+    const button = event.target.closest('[data-filter]');
+    if (!button) return;
+    const filter = button.dataset.filter;
+    let visible = 0;
+    attnRows.forEach(row => {
+      const match = filter === 'all' || row.dataset.status === filter;
+      row.classList.toggle('row-hidden', !match);
+      if (match) visible++;
+    });
+    if (attnEmptyRow) attnEmptyRow.style.display = visible ? 'none' : '';
+  });
+}
+
+// Fees pill filters actually filter the transactions table by status
+const feesFilters = document.getElementById('feesFilters');
+const feesRows = Array.from(document.querySelectorAll('#feesTableBody tr[data-status]'));
+const feesEmptyRow = document.getElementById('feesEmptyRow');
+const feesTableCount = document.getElementById('feesTableCount');
+if (feesFilters){
+  feesFilters.addEventListener('click', event => {
+    const button = event.target.closest('[data-filter]');
+    if (!button) return;
+    const filter = button.dataset.filter;
+    let visible = 0;
+    feesRows.forEach(row => {
+      const match = filter === 'all' || row.dataset.status === filter;
+      row.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    if (feesEmptyRow) feesEmptyRow.style.display = visible ? 'none' : '';
+    if (feesTableCount){
+      feesTableCount.textContent = filter === 'all'
+        ? visible + (visible === 1 ? ' item' : ' items') + ' this term'
+        : visible + (visible === 1 ? ' item' : ' items') + ' · ' + button.textContent.trim();
+    }
+  });
+}
 document.querySelectorAll('.view-toggle button').forEach(button => button.addEventListener('click', () => {
   button.parentElement.querySelectorAll('button').forEach(item => item.classList.remove('active'));
   button.classList.add('active');
 }));
+
+const apptToggle = document.getElementById('apptToggle');
+if (apptToggle){
+  apptToggle.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
+    const day = button.dataset.day;
+    document.querySelectorAll('.appt-day-panel').forEach(panel => {
+      panel.classList.toggle('day-active', panel.dataset.panel === day);
+    });
+  }));
+}
 
 const toast = document.getElementById('toast');
 let toastTimer;
@@ -720,6 +1158,23 @@ function showToast(message){
 }
 document.querySelectorAll('[data-toast]').forEach(button => button.addEventListener('click', () => showToast(button.dataset.toast)));
 document.querySelectorAll('[data-scroll-target]').forEach(button => button.addEventListener('click', () => document.getElementById(button.dataset.scrollTarget)?.scrollIntoView({behavior:'smooth', block:'start'})));
+
+// Overview stat cards expand in place to show a detail breakdown
+document.querySelectorAll('.stat-card[data-stat]').forEach(card => {
+  function toggle(){
+    const expanded = card.classList.toggle('expanded');
+    card.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  }
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', event => {
+    if (event.target.closest('.stat-detail-link')) return;
+    if (event.key === 'Enter' || event.key === ' '){ event.preventDefault(); toggle(); }
+  });
+});
+document.querySelectorAll('.stat-detail-link[data-nav-target]').forEach(link => link.addEventListener('click', event => {
+  event.stopPropagation();
+  document.querySelector('.nav-item[data-target="' + link.dataset.navTarget + '"]')?.click();
+}));
 
 const loginModal = document.getElementById('loginModal');
 const phoneStep = document.getElementById('phoneStep');
@@ -743,6 +1198,24 @@ document.getElementById('verifyOtp').addEventListener('click', () => {
   loginModal.classList.remove('open');
   document.querySelector('.login-btn').innerHTML = '<span aria-hidden="true">✓</span> Signed in';
   showToast('You are securely signed in for this demo.');
+});
+
+const receiptModal = document.getElementById('receiptModal');
+const receiptDetail = document.getElementById('receiptDetail');
+let activeReceiptLabel = '';
+document.querySelectorAll('[data-receipt]').forEach(button => button.addEventListener('click', () => {
+  const {item, amount, date, method, txn} = button.dataset;
+  activeReceiptLabel = item;
+  receiptDetail.innerHTML = [
+    ['What it was for', item], ['Amount', amount], ['Paid on', date], ['How it was paid', method], ['Reference number', txn], ['Status', 'Paid in full ✓']
+  ].map(([key, value], index) => `<div class="receipt-detail-row" style="animation-delay:${index * 45}ms"><span class="k">${key}</span><span class="v">${value}</span></div>`).join('');
+  receiptModal.classList.add('open');
+}));
+document.querySelector('[data-close-receipt]').addEventListener('click', () => receiptModal.classList.remove('open'));
+receiptModal.addEventListener('click', event => { if (event.target === receiptModal) receiptModal.classList.remove('open'); });
+document.getElementById('downloadReceipt').addEventListener('click', () => {
+  receiptModal.classList.remove('open');
+  showToast('Saved — the ' + activeReceiptLabel + ' receipt is ready for your records.');
 });
 
 const serviceForm = document.getElementById('serviceForm');
