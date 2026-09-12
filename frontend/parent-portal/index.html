@@ -48,18 +48,18 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
 .brand{display:flex;align-items:center;gap:11px;padding:0 22px 24px;border-bottom:1px solid rgba(255,255,255,.16);margin-bottom:14px}
 .brand-logo{width:128px;height:auto;display:block}
 .nav-label{padding:16px 22px 8px;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#7FA08D;font-weight:700}
-.nav{display:flex;flex-direction:column;gap:2px;padding:0 12px}.nav-item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:10px 12px;border-radius:var(--radius-tab);color:#CBDACF;font-size:14px;font-weight:500;border:none;background:transparent;position:relative;transition:background .22s var(--ease),color .22s var(--ease),transform .22s var(--ease)}
+.nav{display:flex;flex-direction:column;gap:2px;padding:0}.nav-item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:10px 22px;border-radius:0;color:#CBDACF;font-size:14px;font-weight:500;border:none;background:transparent;position:relative;transition:background .22s var(--ease),color .22s var(--ease),transform .22s var(--ease)}
 .nav-item svg{flex:0 0 18px;width:18px;height:18px;opacity:.85;transition:opacity .22s var(--ease),transform .3s var(--ease)}.nav-item:hover{background:rgba(255,255,255,.07);color:#fff;transform:translateX(2px)}.nav-item:hover svg{opacity:1;transform:scale(1.08)}.nav-item.active{background:var(--marigold);color:var(--teal-deep);font-weight:700}.nav-item.active svg{opacity:1}.nav-badge{margin-left:auto;font-size:10.5px;font-weight:700;background:rgba(190,80,57,.9);color:#fff;padding:1.5px 7px;border-radius:20px}.nav-item.active .nav-badge{background:var(--brick)}
 .nav-sub{display:flex;flex-direction:column;gap:1px;margin:0 8px 0 30px;padding-left:12px;border-left:1px solid rgba(255,255,255,.14);max-height:0;opacity:0;overflow:hidden;pointer-events:none;transition:max-height .38s var(--ease),opacity .28s var(--ease),margin .38s var(--ease)}.nav-sub.open,.nav:hover .nav-sub,.nav:focus-within .nav-sub{max-height:260px;opacity:1;pointer-events:auto;margin:2px 8px 8px 30px}.nav-sub .nav-item{padding:7px 10px;font-size:12.5px;color:#AFC4B7}.nav-sub .nav-item svg{width:14px;height:14px;flex:0 0 14px}.nav-sub .nav-item:hover{transform:translateX(1px)}.nav-sub .nav-item.active{background:rgba(226,164,78,.16);color:#F4E3C6;font-weight:600}.nav-sub .nav-item.active svg{color:var(--marigold);opacity:1}
 .sidebar-foot{padding:16px 22px 0;margin-top:auto;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#9FB6A6;line-height:1.5}
 .main{max-width:1480px}.topbar{gap:24px;margin-bottom:34px;flex-wrap:wrap}.topbar-left .eyebrow{font-size:13px;color:var(--ink-soft)}.topbar-left h1{font-size:27px;margin-top:3px}
 .topbar-right{display:flex;align-items:center;gap:14px}.bell-btn{position:relative;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--ink-soft);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}.bell-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);border-color:var(--marigold)}.bell-dot{position:absolute;top:-2px;right:-2px;width:16px;height:16px;border-radius:50%;background:var(--brick);color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
-.login-btn{display:flex;align-items:center;gap:9px;background:var(--teal);color:#fff;border:none;border-radius:999px;padding:11px 22px 11px 20px;font-size:13.5px;font-weight:700;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease)}.login-btn svg{flex:0 0 auto}.login-btn:hover{background:var(--teal-deep);transform:translateY(-2px);box-shadow:var(--shadow-lift)}
-.hero{background:var(--teal);background-image:radial-gradient(circle at 88% -10%,rgba(255,255,255,.10),transparent 55%);border-radius:24px;padding:32px 36px;color:#EAF1EC;display:grid;grid-template-columns:1.3fr auto auto auto;gap:30px;align-items:center;margin-bottom:34px;opacity:0;transform:translateY(12px);animation:rise .65s var(--ease) forwards;scroll-margin-top:100px}@keyframes rise{to{opacity:1;transform:translateY(0)}}.hero-greeting .display{font-size:23px;color:#fff}.hero-greeting p{margin:9px 0 0;font-size:13.5px;color:#C7DBCC;max-width:44ch}.hero-quote{margin-top:16px;font-family:'Fraunces',serif;font-style:italic;font-size:13.5px;color:#DCE9DF;border-left:2px solid var(--marigold);padding-left:12px}.ring-stat{display:flex;flex-direction:column;align-items:center;gap:10px}.ring{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--marigold) calc(var(--pct) * 1%),rgba(255,255,255,.18) 0);position:relative}.ring::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--teal-deep)}.ring-value{position:relative;font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:#fff}.ring-label{font-size:11.5px;color:#C7DBCC;text-align:center}.streak{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:16px 18px;text-align:center;min-width:108px}.streak .num{font-family:'Fraunces',serif;font-size:28px;color:var(--marigold);line-height:1}.streak .lbl{font-size:11.5px;color:#C7DBCC;margin-top:6px}
+
+.hero{background:var(--teal);background-image:radial-gradient(circle at 88% -10%,rgba(255,255,255,.10),transparent 55%);border-radius:24px;padding:32px 36px;color:#EAF1EC;display:grid;grid-template-columns:1.3fr auto auto auto;gap:30px;align-items:center;margin-bottom:34px;opacity:0;transform:translateY(12px);animation:rise .65s var(--ease) forwards;scroll-margin-top:100px}@keyframes rise{to{opacity:1;transform:translateY(0)}}.hero-greeting .display{font-size:23px;color:#fff}.hero-greeting p{margin:9px 0 0;font-size:13.5px;color:#C7DBCC;max-width:44ch}.hero-quote{margin-top:16px;font-family:'Fraunces',serif;font-style:italic;font-size:13.5px;color:#DCE9DF;border-left:2px solid var(--marigold);padding-left:12px}.ring-stat{display:flex;flex-direction:column;align-items:center;gap:10px}.ring{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--ring-color,var(--marigold)) calc(var(--pct) * 1%),rgba(255,255,255,.18) 0);position:relative}.ring::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--teal-deep)}.ring-value{position:relative;font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:#fff}.ring-label{font-size:11.5px;color:#C7DBCC;text-align:center}.streak{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:16px 18px;text-align:center;min-width:108px}.streak .num{font-family:'Fraunces',serif;font-size:28px;color:var(--marigold);line-height:1}.streak .lbl{font-size:11.5px;color:#C7DBCC;margin-top:6px}
 .section{margin-bottom:56px;scroll-margin-top:100px}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin-bottom:20px;flex-wrap:wrap}.section-head h2{font-size:20px}.section-head .meta{font-size:12.5px;color:var(--ink-faint)}.view-toggle{display:flex;background:var(--tab);border-radius:999px;padding:4px;gap:2px}.view-toggle button{border:none;background:transparent;padding:8px 15px;border-radius:999px;font-size:12.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:background .25s var(--ease),color .25s var(--ease)}.view-toggle button.active{background:var(--teal);color:#fff}
-.page-part{display:none}.page-part.page-active{display:block;animation:pageIn .42s var(--ease) both}.page-part.page-active.hero{display:grid}.page-layout.page-group-hidden{display:none}.page-layout:not(.page-group-hidden){margin-bottom:24px}.page-layout>.page-part.page-active{grid-column:1/-1}@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.page-part{display:none}.page-part.page-active{display:block;animation:pageIn .42s var(--ease) both}.page-part.page-active.hero{display:grid}.page-part.page-active.notice-stack{display:flex}.page-layout.page-group-hidden{display:none}.page-layout:not(.page-group-hidden){margin-bottom:24px}.page-layout>.page-part.page-active{grid-column:1/-1}@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .grid{align-items:start}.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card);padding:28px 30px;box-shadow:var(--shadow-card);opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .38s var(--ease),box-shadow .38s var(--ease),border-color .38s var(--ease)}.card::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .38s var(--ease)}.card.in-view{opacity:1;transform:none}.card:hover{transform:translateY(-5px);border-color:var(--marigold)}.card:hover::after{opacity:1}.card-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;gap:10px}.card-head h3{font-size:16.5px}.card-head .meta{font-size:12.5px;color:var(--ink-faint)}
-.stat-card{padding:22px 24px}.stat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.stat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--s-bg);color:var(--s-fg);transition:transform .3s var(--ease)}.card:hover .stat-icon{transform:scale(1.1) rotate(-4deg)}.stat-trend{font-size:11.5px;font-weight:700}.trend-up{color:var(--teal)}.trend-down{color:var(--brick)}.stat-value{font-family:'Fraunces',serif;font-size:28px;font-weight:600}.stat-label{color:var(--ink-soft);font-size:12.5px;margin-top:3px}
+.stat-card{padding:30px 26px 34px;min-height:196px;display:flex;flex-direction:column}.stat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--s-bg);color:var(--s-fg);transition:transform .3s var(--ease)}.card:hover .stat-icon{transform:scale(1.1) rotate(-4deg)}.stat-trend{font-size:11.5px;font-weight:700}.trend-up{color:var(--teal)}.trend-down{color:var(--brick)}.stat-value{font-family:'Fraunces',serif;font-size:33px;font-weight:600}.stat-label{color:var(--ink-soft);font-size:13px;margin-top:6px}
 .stat-card{cursor:pointer}.stat-top-right{display:flex;align-items:center;gap:7px}.stat-chevron{color:var(--ink-faint);transition:transform .32s var(--ease)}.stat-card.expanded .stat-chevron{transform:rotate(180deg);color:var(--ink-soft)}
 .stat-detail{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .38s var(--ease),opacity .3s var(--ease),margin-top .38s var(--ease)}
 .stat-card.expanded .stat-detail{max-height:400px;opacity:1;margin-top:16px}
@@ -69,7 +69,7 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
 .stat-detail-note{font-size:11.5px;color:var(--ink-faint);line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 .stat-detail-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:700;color:var(--teal);background:none;border:none;padding:0;cursor:pointer;font-family:inherit}
 .stat-detail-link svg{transition:transform .22s var(--ease)}.stat-detail-link:hover{color:var(--teal-deep)}.stat-detail-link:hover svg{transform:translateX(3px)}
-.table-scroll{overflow-x:auto}.req-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}.req-table th{text-align:left;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;padding:10px 14px;border-bottom:1px solid var(--line)}.req-table td{padding:14px;border-bottom:1px dashed var(--line);vertical-align:middle}.req-table tbody tr{transition:background .2s var(--ease)}.req-table tbody tr:hover{background:var(--teal-tint)}.req-table tbody tr:last-child td{border-bottom:none}.student-cell{display:flex;align-items:center;gap:11px}.mini-avatar{width:32px;height:32px;border-radius:9px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff}.student-name{font-weight:600}.student-id{font-size:11px;color:var(--ink-faint)}.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}.tag.ok{background:var(--teal-tint);color:var(--teal-deep)}.tag.due-soon{background:var(--azure-tint);color:var(--azure)}.tag.overdue{background:var(--brick-tint);color:var(--brick)}.tag.pending{background:var(--marigold-tint);color:#8a5f1e}.priority-dot{display:inline-flex;align-items:center;gap:6px;color:var(--ink-soft)}.priority-dot span{width:7px;height:7px;border-radius:50%}.row-action{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;transition:all .2s var(--ease)}.row-action:hover{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}.pill-filters{display:flex;gap:6px;flex-wrap:wrap}.pill{font-size:11.5px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft);background:var(--surface);transition:all .2s var(--ease)}.pill:hover{border-color:var(--teal);color:var(--teal-deep)}.pill.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.table-scroll{overflow-x:auto}.req-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}.req-table th{text-align:left;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;padding:10px 14px;border-bottom:1px solid var(--line)}.req-table td{padding:14px;border-bottom:1px dashed var(--line);vertical-align:middle}.req-table tbody tr{transition:background .2s var(--ease)}.req-table tbody tr:hover{background:var(--teal-tint)}.req-table tbody tr:last-child td{border-bottom:none}.student-cell{display:flex;align-items:center;gap:11px}.mini-avatar{width:32px;height:32px;border-radius:9px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff}.student-name{font-weight:600}.student-id{font-size:11px;color:var(--ink-faint)}.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}.tag.ok{background:var(--teal-tint);color:var(--teal-deep)}.tag.due-soon{background:var(--azure-tint);color:var(--azure)}.tag.overdue{background:var(--brick-tint);color:var(--brick)}.tag.pending{background:var(--marigold-tint);color:#8a5f1e}.tag.cat-attendance{background:var(--azure-tint);color:var(--azure)}.tag.cat-fees{background:var(--brick-tint);color:var(--brick)}.tag.cat-academic{background:#EDEBFB;color:#5B4FA0}.priority-dot{display:inline-flex;align-items:center;gap:6px;color:var(--ink-soft)}.priority-dot span{width:7px;height:7px;border-radius:50%}.row-action{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;transition:all .2s var(--ease)}.row-action:hover{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}.pill-filters{display:flex;gap:6px;flex-wrap:wrap}.pill{font-size:11.5px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft);background:var(--surface);transition:all .2s var(--ease)}.pill:hover{border-color:var(--teal);color:var(--teal-deep)}.pill.active{background:var(--teal);color:#fff;border-color:var(--teal)}
 .attn-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
 .attn-stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
 .attn-stat:hover{transform:translateY(-2px);box-shadow:var(--shadow-card);border-color:transparent}
@@ -139,15 +139,25 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
 .receipt-detail-row .k{color:var(--ink-faint)}
 .receipt-detail-row .v{font-weight:700}
 @keyframes receiptRowIn{to{opacity:1;transform:none}}
-.appt-row{display:grid;grid-template-columns:56px 22px 1fr auto;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);transition:transform .34s var(--ease),background .34s var(--ease),padding .34s var(--ease)}.appt-row:last-child{border-bottom:none}.appt-row:hover{transform:translateY(-3px);background:var(--paper);padding-left:10px;padding-right:10px;z-index:3}.appt-time{text-align:center}.appt-time .t{font-family:'Fraunces',serif;font-size:14px;font-weight:600}.appt-time .m{font-size:9.5px;color:var(--ink-faint);text-transform:uppercase}.appt-rail{width:2px;height:100%;background:var(--line);position:relative;justify-self:center}.appt-rail::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:var(--marigold);box-shadow:0 0 0 3px var(--marigold-tint)}.appt-name{font-weight:600;font-size:13.5px}.appt-type{font-size:12px;color:var(--ink-faint);margin-top:1px}.alert-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);transition:transform .34s var(--ease),background .34s var(--ease),padding .34s var(--ease)}.alert-row:last-child{border-bottom:none}.alert-row:hover{transform:translateY(-3px);background:var(--paper);padding-left:10px;padding-right:10px;z-index:3}.alert-icon{width:34px;height:34px;border-radius:9px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}.alert-icon.high{background:var(--brick-tint);color:var(--brick)}.alert-icon.med{background:var(--marigold-tint);color:#8a5f1e}.alert-icon.low{background:var(--azure-tint);color:var(--azure)}.alert-title{font-size:13px;font-weight:600}.alert-desc{font-size:12px;color:var(--ink-soft);margin-top:2px}.alert-time{font-size:11px;color:var(--ink-faint);margin-top:4px}
+.alerts-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.alerts-sort{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);white-space:nowrap}
+.alerts-sort select{border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:600;background:var(--surface);color:var(--ink-soft);cursor:pointer;transition:border-color .2s var(--ease)}
+.alerts-sort select:hover,.alerts-sort select:focus{border-color:var(--teal)}
+.alerts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:16px;align-items:start}
+.alert-card{padding:20px 20px 18px;display:flex;flex-direction:column;gap:9px}
+.alert-card:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.alert-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.alert-card-tags{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.alert-icon{width:34px;height:34px;border-radius:9px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}.alert-icon.high{background:var(--brick-tint);color:var(--brick)}.alert-icon.med{background:var(--marigold-tint);color:#8a5f1e}.alert-icon.low{background:var(--azure-tint);color:var(--azure)}.alert-title{font-size:13.5px;font-weight:700}.alert-desc{font-size:12px;color:var(--ink-soft)}.alert-time{font-size:11px;color:var(--ink-faint);margin-top:2px}
 .tag.done{background:var(--tab);color:var(--ink-faint)}
-.appt-day-panel{display:none}.appt-day-panel.day-active{display:block;animation:pageIn .38s var(--ease) both}
-.appt-empty{padding:22px 4px;text-align:center;color:var(--ink-faint);font-size:12.5px}
-.alert-why{display:flex;gap:7px;align-items:flex-start;margin-top:7px;padding:9px 11px;background:var(--bg);border-radius:10px}
-.alert-why svg{flex:0 0 13px;width:13px;height:13px;margin-top:1.5px;color:var(--ink-faint)}
-.alert-why-label{font-weight:700;color:var(--ink-soft)}
-.alert-why-text{font-size:11.5px;color:var(--ink-soft);line-height:1.45}
-.alert-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:middle}
+details.alert-why{margin-top:2px;padding:9px 11px;background:var(--bg);border-radius:10px}
+details.alert-why summary{font-size:11.5px;font-weight:700;color:var(--teal-deep);cursor:pointer;list-style:none;display:flex;align-items:center;gap:5px}
+details.alert-why summary::-webkit-details-marker{display:none}
+details.alert-why summary::before{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s var(--ease)}
+details.alert-why[open] summary::before{transform:rotate(45deg)}
+details.alert-why summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+.alert-why-text{font-size:11.5px;color:var(--ink-soft);line-height:1.45;margin-top:7px}
+.alert-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:middle}
 .alert-badge.high{background:var(--brick-tint);color:var(--brick)}
 .alert-badge.med{background:var(--marigold-tint);color:#8a5f1e}
 .alert-badge.low{background:var(--azure-tint);color:var(--azure)}
@@ -155,19 +165,46 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
 .cat-row{display:grid;grid-template-columns:128px 1fr 36px;align-items:center;gap:12px;font-size:13px;margin-bottom:13px}.cat-row .name{color:var(--ink-soft);font-weight:500}.bar-track{height:8px;background:var(--tab);border-radius:6px;overflow:hidden}.bar-fill{height:100%;border-radius:6px;background:var(--teal);width:0;transition:width 1.1s var(--ease)}.cat-row .score{text-align:right;font-weight:700;font-family:'Fraunces',serif}.chart-legend{display:flex;gap:16px}.legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-soft)}.legend-dot{width:9px;height:9px;border-radius:3px}.bar-col{transition:transform .3s var(--ease);transform-origin:bottom}.bar-col:hover{filter:brightness(1.08)}
 .activity-row{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);transition:transform .34s var(--ease),background .34s var(--ease),padding .34s var(--ease)}.activity-row:last-child{border-bottom:none}.activity-row:hover{transform:translateY(-3px);background:var(--paper);padding-left:10px;padding-right:10px;z-index:3}.act-avatar{width:32px;height:32px;border-radius:9px;flex:0 0 auto;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.act-text{font-size:13px;line-height:1.5}.act-text b{font-weight:700}.act-stamp{font-size:11px;color:var(--ink-faint);margin-top:3px}
 .staff-card{text-align:center;padding:24px 18px}.staff-avatar{width:56px;height:56px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:18px;color:#fff}.staff-name{font-weight:700;font-size:14px}.staff-role{font-size:12px;color:var(--ink-faint);margin-top:2px}.staff-stat{margin-top:12px;font-size:11.5px;color:var(--ink-soft);background:var(--teal-tint);border-radius:999px;padding:5px 12px;display:inline-block}.staff-msg-btn{margin-top:12px;font-size:12px;font-weight:700;color:#fff;background:var(--teal);border:none;border-radius:999px;padding:8px 18px;cursor:pointer;transition:background .2s var(--ease)}.staff-msg-btn:hover{background:var(--teal-deep)}
-.setting-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px dashed var(--line);gap:16px}.setting-row:last-child{border-bottom:none}.setting-title{font-size:13.5px;font-weight:600}.setting-desc{font-size:12px;color:var(--ink-faint);margin-top:2px}.notice-banner{display:flex;align-items:flex-start;gap:13px;background:var(--brick-tint);color:var(--ink);border:1px solid #E9B8AA;border-left:4px solid var(--brick);border-radius:14px;padding:17px 20px;margin-bottom:34px;box-shadow:var(--shadow-card)}.notice-banner .notice-icon{color:var(--brick);flex:0 0 auto;margin-top:2px}.notice-content{flex:1}.notice-title{font-size:13.5px;font-weight:700}.notice-copy{color:var(--ink-soft);font-size:12.5px;margin-top:3px}.notice-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.text-btn{border:0;background:transparent;color:var(--teal-deep);font-size:12px;font-weight:700;cursor:pointer;padding:6px 0}.text-btn:hover{color:var(--brick)}
+.lecturer-drawer-overlay{position:fixed;inset:0;background:rgba(18,26,45,.4);opacity:0;pointer-events:none;transition:opacity .32s var(--ease);z-index:70}
+.lecturer-drawer-overlay.open{opacity:1;pointer-events:auto}
+.lecturer-drawer{position:fixed;top:0;right:0;height:100%;width:380px;max-width:88vw;background:var(--surface);box-shadow:-18px 0 40px -14px rgba(18,26,45,.32);transform:translateX(100%);transition:transform .38s var(--ease);z-index:71;overflow-y:auto}
+.lecturer-drawer.open{transform:translateX(0)}
+.lecturer-drawer-close{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s var(--ease),color .2s var(--ease)}.lecturer-drawer-close:hover{background:var(--teal-tint);color:var(--teal-deep)}
+.lecturer-drawer-body{padding:64px 28px 32px}
+.lecturer-drawer-avatar{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:23px;color:#fff;margin-bottom:16px}
+.lecturer-drawer-name{font-family:'Fraunces',serif;font-size:20px;color:var(--ink)}
+.lecturer-drawer-role{font-size:13px;color:var(--ink-faint);margin-top:3px}
+.lecturer-drawer-section{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.lecturer-drawer-row{display:flex;flex-direction:column;gap:2px}
+.lecturer-drawer-row .k{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+.lecturer-drawer-row .v{font-size:13.5px;color:var(--ink);font-weight:600}
+.lecturer-drawer-email-btn{margin-top:26px;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:999px;border:none;background:var(--teal);color:#fff;font-weight:700;font-size:13.5px;cursor:pointer;transition:background .2s var(--ease)}
+.lecturer-drawer-email-btn:hover{background:var(--teal-deep)}
+@media (max-width:520px){.lecturer-drawer{width:100%;max-width:100%}}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px dashed var(--line);gap:16px}.setting-row:last-child{border-bottom:none}.setting-title{font-size:13.5px;font-weight:600}.setting-desc{font-size:12px;color:var(--ink-faint);margin-top:2px}.notice-banner{display:flex;align-items:flex-start;gap:13px;background:var(--brick-tint);color:var(--ink);border:1px solid #E9B8AA;border-left:4px solid var(--brick);border-radius:14px;padding:17px 20px;box-shadow:var(--shadow-card)}.notice-banner .notice-icon{color:var(--brick);flex:0 0 auto;margin-top:2px}.notice-content{flex:1}.notice-title{font-size:13.5px;font-weight:700}.notice-copy{color:var(--ink-soft);font-size:12.5px;margin-top:3px}.notice-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.text-btn{border:0;background:transparent;color:var(--teal-deep);font-size:12px;font-weight:700;cursor:pointer;padding:6px 0}.text-btn:hover{color:var(--brick)}.notice-stack{display:flex;flex-direction:column;gap:14px}.notice-stack:not(:empty){margin-bottom:34px}.notice-stack.page-part{display:none}.notice-stack.page-part.page-active{display:flex}
 .risk-card{display:flex;align-items:flex-start;gap:15px}.risk-icon{width:42px;height:42px;border-radius:11px;background:var(--brick-tint);color:var(--brick);display:flex;align-items:center;justify-content:center;flex:0 0 auto}.risk-title{font-size:14px;font-weight:700}.risk-copy{color:var(--ink-soft);font-size:12.5px;margin-top:4px}.risk-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.primary-btn,.secondary-btn{border-radius:999px;padding:9px 15px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s var(--ease)}.primary-btn{border:1px solid var(--teal);background:var(--teal);color:#fff}.primary-btn:hover{background:var(--teal-deep);border-color:var(--teal-deep)}.secondary-btn{border:1px solid var(--line);background:var(--surface);color:var(--teal-deep)}.secondary-btn:hover{border-color:var(--teal);background:var(--teal-tint)}.clearance-list{display:grid;gap:10px}.clearance-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line)}.clearance-row:last-child{border-bottom:none}.clearance-name{font-size:13px;font-weight:600}.clearance-meta{font-size:11.5px;color:var(--ink-faint);margin-top:2px}.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}.status-dot.good{background:var(--teal)}.status-dot.pending{background:var(--marigold)}
 .service-layout{align-items:start}.service-form{display:grid;gap:16px}.form-label{display:grid;gap:7px;color:var(--ink-soft);font-size:12px;font-weight:700}.form-label select,.form-label textarea,.form-label input{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);padding:11px 12px;font:inherit;font-size:13px;outline:none}.form-label textarea{resize:vertical;min-height:108px}.form-label select:focus,.form-label textarea:focus,.form-label input:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-tint)}.ticket-list{display:grid;gap:13px}.ticket{border:1px solid var(--line);border-radius:12px;padding:14px 15px;background:var(--paper)}.ticket-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.ticket-id{font-size:11px;color:var(--ink-faint);font-weight:700}.ticket-title{font-size:13px;font-weight:700;margin-top:6px}.ticket-meta{font-size:11.5px;color:var(--ink-soft);margin-top:4px}
 .modal-backdrop{position:fixed;inset:0;z-index:50;background:rgba(31,68,56,.42);display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.open{display:flex}.modal{width:min(100%,430px);background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:25px;box-shadow:0 24px 70px rgba(31,68,56,.25)}.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:18px}.modal-head h2{font-size:22px}.modal-copy{color:var(--ink-soft);font-size:12.5px;margin-top:5px}.close-btn{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink-soft);cursor:pointer;font-size:18px;line-height:1}.otp-step{display:grid;gap:13px}.otp-input{letter-spacing:.3em;text-align:center;font-size:20px!important;font-weight:700}.demo-hint{background:var(--teal-tint);color:var(--teal-deep);border-radius:9px;padding:9px 11px;font-size:11.5px}.modal-status{min-height:18px;color:var(--brick);font-size:12px}.toast{position:fixed;right:22px;bottom:22px;z-index:60;background:var(--ink);color:#fff;border-radius:10px;padding:12px 15px;font-size:12.5px;box-shadow:var(--shadow-lift);opacity:0;transform:translateY(12px);pointer-events:none;transition:all .25s var(--ease)}.toast.show{opacity:1;transform:none}.switch{position:relative;width:42px;height:24px;border-radius:999px;background:var(--tab);flex:0 0 auto;cursor:pointer;transition:background .25s var(--ease)}.switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .25s var(--ease)}.switch.on{background:var(--teal)}.switch.on::after{transform:translateX(18px)}
 .review-strip{background:var(--ink);color:#EDEEE7;border-radius:var(--radius-card);padding:26px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}.review-strip .display{color:#fff;font-size:19px}.review-strip p{margin:5px 0 0;font-size:13px;color:#B9C2B6}.countdown{display:flex;gap:10px}.cd-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:11px 16px;text-align:center;min-width:64px}.cd-num{font-family:'Fraunces',serif;font-size:20px;color:var(--marigold)}.cd-lbl{font-size:10.5px;color:#B9C2B6;margin-top:2px}
 @media (max-width:1180px){.hero{grid-template-columns:1fr 1fr}.streak{grid-column:1/-1;justify-self:start}}
 @media (max-width:900px){.hero{grid-template-columns:1fr;text-align:left}.streak{justify-self:start}}
-@media (max-width:720px){.brand,.nav-label,.sidebar-foot{display:none}.nav{flex-direction:row;justify-content:space-around;padding:0;width:100%;overflow-x:auto}.nav-item{flex-direction:column;gap:4px;font-size:9.5px;padding:7px 4px}.nav-badge{position:absolute;top:2px;right:8px;margin:0}.cat-row{grid-template-columns:96px 1fr 30px}.notice-banner{flex-wrap:wrap}.notice-actions{width:100%;padding-left:29px}}
+@media (max-width:720px){.brand,.nav-label,.sidebar-foot{display:none}.nav{flex-direction:row;justify-content:space-around;padding:0;width:100%;overflow-x:auto}.nav-item{flex-direction:column;gap:4px;font-size:9.5px;padding:7px 4px;border-radius:var(--radius-tab)}.nav-badge{position:absolute;top:2px;right:8px;margin:0}.cat-row{grid-template-columns:96px 1fr 30px}.notice-banner{flex-wrap:wrap}.notice-actions{width:100%;padding-left:29px}}
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero{animation:none;opacity:1;transform:none}.page-part.page-active{animation:none}.nav-sub{transition:none}.card,.qa-card{opacity:1;transform:none;transition:none}.card::after,.qa-card::after,.appt-row,.alert-row,.activity-row{transition:none}.bar-fill{transition:none}.plan-seg,.reminder-rail-fill,.plan-track-simple-fill{transition:none}.reminder-step.next .reminder-dot{animation:none}.receipt-row{opacity:1;transform:none;transition:none}.receipt-detail-row{opacity:1;transform:none;animation:none}.plan-stat.highlight{animation:none}}
+.loading-screen{position:fixed;inset:0;z-index:9999;background:var(--teal-deep);display:flex;align-items:center;justify-content:center;transition:opacity .4s var(--ease),visibility .4s var(--ease)}
+.loading-screen img{width:150px;height:auto;animation:loadingPulse 1.3s ease-in-out infinite}
+.loading-screen.loading-hide{opacity:0;visibility:hidden;pointer-events:none}
+@keyframes loadingPulse{0%,100%{opacity:.55;transform:scale(.94)}50%{opacity:1;transform:scale(1)}}
+body.is-loading{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.loading-screen img{animation:none}}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero{animation:none;opacity:1;transform:none}.page-part.page-active{animation:none}.nav-sub{transition:none}.card,.qa-card{opacity:1;transform:none;transition:none}.card::after,.qa-card::after,.alert-row,.activity-row{transition:none}.bar-fill{transition:none}.plan-seg,.reminder-rail-fill,.plan-track-simple-fill{transition:none}.reminder-step.next .reminder-dot{animation:none}.receipt-row{opacity:1;transform:none;transition:none}.receipt-detail-row{opacity:1;transform:none;animation:none}.plan-stat.highlight{animation:none}}
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+<div class="loading-screen" id="loadingScreen">
+  <img src="https://islington.edu.np/images/islington-white-logo.svg" alt="Islington College">
+</div>
 
 <div class="app grid grid-cols-1 sm:grid-cols-[250px_1fr] min-h-screen">
 
@@ -193,22 +230,14 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
         Fees & Payments
         <span class="nav-badge">1</span>
       </a>
-      <a class="nav-item" data-target="grades" href="#grades">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg>
-        Grades & Progress
-      </a>
-      <a class="nav-item" data-target="appointments" href="#appointments">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
-        Appointments
-      </a>
       <a class="nav-item" data-target="alerts" href="#alerts">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg>
         Alerts
-        <span class="nav-badge">3</span>
+        <span class="nav-badge">4</span>
       </a>
-      <a class="nav-item" data-target="student-services" href="#student-services">
+      <a class="nav-item" data-target="student-services" href="#messages">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a7 7 0 0 0-7 7v4a3 3 0 0 0 3 3h1v-6H6v-1a6 6 0 0 1 12 0v1h-3v6h1a3 3 0 0 0 3-3v-4a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg>
-        Support
+        Message SSD
         <span class="nav-badge">2</span>
       </a>
       <a class="nav-item" data-target="quick-actions" href="#quick-actions">
@@ -245,18 +274,10 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="bell-dot">3</span>
         </button>
-        <button class="login-btn" type="button">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
-          Log In
-        </button>
       </div>
     </div>
 
-    <div class="notice-banner" role="status" aria-label="Urgent school notice">
-      <div class="notice-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
-      <div class="notice-content"><div class="notice-title">Urgent notice · Student Services office hours changed</div><div class="notice-copy">The office will close at 3:00 PM on Monday for staff training. Online support remains available.</div></div>
-      <div class="notice-actions"><button class="text-btn" type="button" data-toast="Notice marked as read">Mark as read</button><button class="text-btn" type="button" data-toast="Notice details opened">View details</button></div>
-    </div>
+    <div class="notice-stack" id="urgentNoticeStack"></div>
 
     <!-- ============ HERO / OVERVIEW ============ -->
     <section class="hero" id="overview">
@@ -266,40 +287,18 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
         <div class="hero-quote">"Stay connected to the Islington experience while Aarav develops the skills and confidence for an industry-ready future."</div>
       </div>
       <div class="ring-stat">
-        <div class="ring" style="--pct:94"><span class="ring-value">94%</span></div>
+        <div class="ring" id="attendanceRing" style="--pct:94"><span class="ring-value">94%</span></div>
         <div class="ring-label">Attendance<br>this term</div>
       </div>
-      <div class="ring-stat">
-        <div class="ring" style="--pct:88"><span class="ring-value">88%</span></div>
-        <div class="ring-label">Overall<br>average grade</div>
-      </div>
       <div class="streak">
-        <div class="num">18</div>
+        <div class="num" id="daysPresentStat">18</div>
         <div class="lbl">days present<br>this month</div>
       </div>
     </section>
 
     <!-- STAT CARDS -->
     <section class="section">
-      <div class="grid-4 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6" id="statsGrid">
-        <div class="card stat-card" data-stat="attendance" style="--s-bg:var(--azure-tint); --s-fg:var(--azure);" role="button" tabindex="0" aria-expanded="false">
-          <div class="stat-top">
-            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></div>
-            <div class="stat-top-right">
-              <span class="stat-trend trend-up">▲ 2.1%</span>
-              <svg class="stat-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-          </div>
-          <div class="stat-value">94%</div>
-          <div class="stat-label">Lecture attendance this term</div>
-          <div class="stat-detail">
-            <div class="stat-detail-row"><span class="k">Present</span><span class="v">11 sessions</span></div>
-            <div class="stat-detail-row"><span class="k">Absent</span><span class="v">2 sessions</span></div>
-            <div class="stat-detail-row"><span class="k">Late</span><span class="v">2 sessions</span></div>
-            <div class="stat-detail-note">Up 2.1% from last month. The two Professional Practice absences already triggered a follow-up alert with Student Services.</div>
-            <button class="stat-detail-link" type="button" data-nav-target="attendance">View full attendance log <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          </div>
-        </div>
+      <div class="grid-4 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-6" id="statsGrid">
         <div class="card stat-card" data-stat="fees" style="--s-bg:var(--brick-tint); --s-fg:var(--brick);" role="button" tabindex="0" aria-expanded="false">
           <div class="stat-top">
             <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
@@ -318,24 +317,22 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
             <button class="stat-detail-link" type="button" data-nav-target="fees">View fees &amp; payments <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
         </div>
-        <div class="card stat-card" data-stat="grades" style="--s-bg:var(--teal-tint); --s-fg:var(--teal-deep);" role="button" tabindex="0" aria-expanded="false">
+        <div class="card stat-card" data-stat="attendance" style="--s-bg:var(--azure-tint); --s-fg:var(--azure);" role="button" tabindex="0" aria-expanded="false">
           <div class="stat-top">
-            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg></div>
+            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg></div>
             <div class="stat-top-right">
-              <span class="stat-trend trend-up">▲ 3%</span>
+              <span class="stat-trend trend-up">▲ 2.1%</span>
               <svg class="stat-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
             </div>
           </div>
-          <div class="stat-value">88%</div>
-          <div class="stat-label">Current module average</div>
+          <div class="stat-value">94%</div>
+          <div class="stat-label">Lecture attendance this term</div>
           <div class="stat-detail">
-            <div class="stat-detail-row"><span class="k">Studio Art</span><span class="v">94</span></div>
-            <div class="stat-detail-row"><span class="k">Database Systems</span><span class="v">91</span></div>
-            <div class="stat-detail-row"><span class="k">Intro Psychology</span><span class="v">89</span></div>
-            <div class="stat-detail-row"><span class="k">Professional Practice</span><span class="v">85</span></div>
-            <div class="stat-detail-row"><span class="k">Web Applications</span><span class="v">82</span></div>
-            <div class="stat-detail-note">Up 3% from last term, led by strong Studio Art and Database Systems results.</div>
-            <button class="stat-detail-link" type="button" data-nav-target="grades">View grades &amp; progress <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <div class="stat-detail-row"><span class="k">Present</span><span class="v">11 sessions</span></div>
+            <div class="stat-detail-row"><span class="k">Absent</span><span class="v">2 sessions</span></div>
+            <div class="stat-detail-row"><span class="k">Late</span><span class="v">2 sessions</span></div>
+            <div class="stat-detail-note">Up 2.1% from last month. The two Professional Practice absences already triggered a follow-up alert with Student Services.</div>
+            <button class="stat-detail-link" type="button" data-nav-target="attendance">View full attendance log <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
         </div>
         <div class="card stat-card" data-stat="updates" style="--s-bg:var(--marigold-tint); --s-fg:#8a5f1e;" role="button" tabindex="0" aria-expanded="false">
@@ -346,10 +343,11 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
               <svg class="stat-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
             </div>
           </div>
-          <div class="stat-value">3</div>
+          <div class="stat-value">6</div>
           <div class="stat-label">Active updates for Aarav</div>
           <div class="stat-detail">
             <div class="stat-detail-row"><span class="k">Repeated module absence · High priority</span><span class="v">Today</span></div>
+            <div class="stat-detail-row"><span class="k">Late arrival recorded · Action needed</span><span class="v">Yesterday</span></div>
             <div class="stat-detail-row"><span class="k">Fee payment due · Action needed</span><span class="v">2d ago</span></div>
             <div class="stat-detail-row"><span class="k">Advising check-in · FYI</span><span class="v">3d ago</span></div>
             <div class="stat-detail-note">1 new update since yesterday — the repeated absence alert was added this morning.</div>
@@ -521,7 +519,7 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- Payment plan progress -->
+      <!-- Payment plan progress (moved to top) -->
       <div class="card plan-card">
         <div class="card-head"><h3>How Aarav's fees are looking</h3><span class="meta">Term 2 · 2026</span></div>
         <p style="margin:0;font-size:13px;color:var(--ink-soft);line-height:1.6">A simple picture of how much of this term's fees are paid, and what's still to come.</p>
@@ -543,75 +541,42 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- Reminder schedule + Receipts archive -->
-      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8" style="margin-top:24px">
-        <div class="card">
-          <div class="card-head"><h3>When you'll hear from us</h3><span class="meta">About the Sept 20 payment</span></div>
-          <p style="margin:0 0 4px;font-size:13px;color:var(--ink-soft);line-height:1.6">We reach out well ahead of any due date, so nothing catches you by surprise.</p>
-          <div class="reminder-rail-wrap">
-            <div class="reminder-rail"><div class="reminder-rail-fill" data-w="15"></div></div>
-            <div class="reminder-steps">
-              <div class="reminder-step done">
-                <div class="reminder-dot"></div>
-                <div class="reminder-when">Sep 6</div>
-                <div class="reminder-label">2 weeks ahead</div>
-                <div class="reminder-channel">Already sent by email</div>
-              </div>
-              <div class="reminder-step next">
-                <div class="reminder-dot"></div>
-                <div class="reminder-when">Sep 13</div>
-                <div class="reminder-label">1 week ahead</div>
-                <div class="reminder-channel">Email & app · arrives tomorrow</div>
-              </div>
-              <div class="reminder-step">
-                <div class="reminder-dot"></div>
-                <div class="reminder-when">Sep 18</div>
-                <div class="reminder-label">2 days ahead</div>
-                <div class="reminder-channel">Text message</div>
-              </div>
-              <div class="reminder-step">
-                <div class="reminder-dot"></div>
-                <div class="reminder-when">Sep 20</div>
-                <div class="reminder-label">Payment due</div>
-                <div class="reminder-channel">Email & text</div>
-              </div>
-              <div class="reminder-step">
-                <div class="reminder-dot"></div>
-                <div class="reminder-when">Sep 23</div>
-                <div class="reminder-label">If it's still open</div>
-                <div class="reminder-channel">We'll call and loop in an advisor</div>
-              </div>
+      <!-- Reminder schedule -->
+      <div class="card" style="margin-top:24px">
+        <div class="card-head"><h3>When you'll hear from us</h3><span class="meta">About the Sept 20 payment</span></div>
+        <p style="margin:0 0 4px;font-size:13px;color:var(--ink-soft);line-height:1.6">We reach out well ahead of any due date, so nothing catches you by surprise.</p>
+        <div class="reminder-rail-wrap">
+          <div class="reminder-rail"><div class="reminder-rail-fill" data-w="15"></div></div>
+          <div class="reminder-steps">
+            <div class="reminder-step done">
+              <div class="reminder-dot"></div>
+              <div class="reminder-when">Sep 6</div>
+              <div class="reminder-label">2 weeks ahead</div>
+              <div class="reminder-channel">Already sent by email</div>
             </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head"><h3>Your payment history</h3><span class="meta" id="receiptCount">4 receipts saved</span></div>
-          <p style="margin:0 0 4px;font-size:13px;color:var(--ink-soft);line-height:1.6">Every payment Aarav's made, in one place. Tap any one to view or save a copy.</p>
-          <div id="receiptList">
-            <div class="receipt-row">
-              <div class="receipt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4M9 12h6M9 16h6M9 8h2"/></svg></div>
-              <div class="receipt-info"><div class="receipt-title">Tuition Installment 1</div><div class="receipt-meta">Paid Aug 15, 2026 · Card •• 4821</div></div>
-              <div class="receipt-amount">NPR 240,000</div>
-              <button class="receipt-view" data-receipt data-item="Tuition Installment 1" data-amount="NPR 240,000" data-date="Aug 15, 2026" data-method="Card •• 4821" data-txn="TXN-88213">View receipt</button>
+            <div class="reminder-step next">
+              <div class="reminder-dot"></div>
+              <div class="reminder-when">Sep 13</div>
+              <div class="reminder-label">1 week ahead</div>
+              <div class="reminder-channel">Email & app · arrives tomorrow</div>
             </div>
-            <div class="receipt-row">
-              <div class="receipt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4M9 12h6M9 16h6M9 8h2"/></svg></div>
-              <div class="receipt-info"><div class="receipt-title">Student Activity Fee</div><div class="receipt-meta">Paid Aug 15, 2026 · Card •• 4821</div></div>
-              <div class="receipt-amount">NPR 7,500</div>
-              <button class="receipt-view" data-receipt data-item="Student Activity Fee" data-amount="NPR 7,500" data-date="Aug 15, 2026" data-method="Card •• 4821" data-txn="TXN-88214">View receipt</button>
+            <div class="reminder-step">
+              <div class="reminder-dot"></div>
+              <div class="reminder-when">Sep 18</div>
+              <div class="reminder-label">2 days ahead</div>
+              <div class="reminder-channel">Text message</div>
             </div>
-            <div class="receipt-row">
-              <div class="receipt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4M9 12h6M9 16h6M9 8h2"/></svg></div>
-              <div class="receipt-info"><div class="receipt-title">Tuition Installment 4 (Term 1)</div><div class="receipt-meta">Paid Mar 14, 2026 · Card •• 4821</div></div>
-              <div class="receipt-amount">NPR 235,000</div>
-              <button class="receipt-view" data-receipt data-item="Tuition Installment 4 (Term 1)" data-amount="NPR 235,000" data-date="Mar 14, 2026" data-method="Card •• 4821" data-txn="TXN-74102">View receipt</button>
+            <div class="reminder-step">
+              <div class="reminder-dot"></div>
+              <div class="reminder-when">Sep 20</div>
+              <div class="reminder-label">Payment due</div>
+              <div class="reminder-channel">Email & text</div>
             </div>
-            <div class="receipt-row">
-              <div class="receipt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4M9 12h6M9 16h6M9 8h2"/></svg></div>
-              <div class="receipt-info"><div class="receipt-title">Registration &amp; Orientation Fee</div><div class="receipt-meta">Paid Jan 20, 2026 · Bank transfer</div></div>
-              <div class="receipt-amount">NPR 12,000</div>
-              <button class="receipt-view" data-receipt data-item="Registration & Orientation Fee" data-amount="NPR 12,000" data-date="Jan 20, 2026" data-method="Bank transfer" data-txn="TXN-61050">View receipt</button>
+            <div class="reminder-step">
+              <div class="reminder-dot"></div>
+              <div class="reminder-when">Sep 23</div>
+              <div class="reminder-label">If it's still open</div>
+              <div class="reminder-channel">We'll call and loop in an advisor</div>
             </div>
           </div>
         </div>
@@ -628,7 +593,7 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
         <div class="table-scroll">
         <table class="req-table">
           <thead>
-            <tr><th>Item</th><th>Amount</th><th>Due date</th><th>Status</th><th></th></tr>
+            <tr><th>Item</th><th>Amount</th><th>Due date</th><th>Status</th></tr>
           </thead>
           <tbody id="feesTableBody">
             <tr data-status="due">
@@ -636,138 +601,160 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
               <td>NPR 240,000</td>
               <td>Sept 20, 2026</td>
               <td><span class="tag due-soon">Due</span></td>
-              <td><button class="pay-btn">Pay Now</button></td>
             </tr>
             <tr data-status="due">
               <td><div class="student-name">Computing Lab Fee</div></td>
               <td>NPR 18,000</td>
               <td>Sept 20, 2026</td>
               <td><span class="tag due-soon">Due</span></td>
-              <td><button class="pay-btn">Pay Now</button></td>
             </tr>
             <tr data-status="overdue">
               <td><div class="student-name">Library Fine</div></td>
               <td>NPR 1,200</td>
               <td>Sept 5, 2026</td>
               <td><span class="tag overdue">Overdue</span></td>
-              <td><button class="pay-btn">Pay Now</button></td>
             </tr>
             <tr data-status="paid">
               <td><div class="student-name">Tuition Installment 1</div></td>
               <td>NPR 240,000</td>
               <td>Aug 15, 2026</td>
               <td><span class="tag ok">Paid</span></td>
-              <td><button class="pay-btn outline" data-receipt data-item="Tuition Installment 1" data-amount="NPR 240,000" data-date="Aug 15, 2026" data-method="Card •• 4821" data-txn="TXN-88213">Receipt</button></td>
             </tr>
             <tr data-status="paid">
               <td><div class="student-name">Student Activity Fee</div></td>
               <td>NPR 7,500</td>
               <td>Aug 15, 2026</td>
               <td><span class="tag ok">Paid</span></td>
-              <td><button class="pay-btn outline" data-receipt data-item="Student Activity Fee" data-amount="NPR 7,500" data-date="Aug 15, 2026" data-method="Card •• 4821" data-txn="TXN-88214">Receipt</button></td>
             </tr>
-            <tr id="feesEmptyRow" style="display:none"><td colspan="5" style="text-align:center;color:var(--ink-faint);padding:24px 14px">Nothing in this category right now.</td></tr>
+            <tr id="feesEmptyRow" style="display:none"><td colspan="4" style="text-align:center;color:var(--ink-faint);padding:24px 14px">Nothing in this category right now.</td></tr>
           </tbody>
         </table>
         </div>
       </div>
     </section>
 
-    <!-- ============ APPOINTMENTS + ALERTS ============ -->
-    <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8">
-      <section class="section" id="appointments" style="margin-bottom:0;">
+    <!-- ============ ALERTS ============ -->
+    <section class="section" id="alerts" style="margin-bottom:0;">
         <div class="section-head">
-          <h2>Meetings</h2>
-          <div class="view-toggle" id="apptToggle">
-            <button data-day="yesterday">Yesterday</button>
-            <button class="active" data-day="today">Today</button>
-            <button data-day="tomorrow">Tomorrow</button>
+          <h2>Updates for Aarav</h2>
+          <div class="meta">4 need your attention</div>
+        </div>
+        <div class="alerts-toolbar">
+          <div class="pill-filters" id="alertsFilters" role="group" aria-label="Filter updates by category">
+            <button class="pill active" data-filter="all" aria-pressed="true">All</button>
+            <button class="pill" data-filter="attendance" aria-pressed="false">Attendance</button>
+            <button class="pill" data-filter="fees" aria-pressed="false">Fees</button>
+            <button class="pill" data-filter="academic" aria-pressed="false">Academic</button>
+          </div>
+          <label class="alerts-sort" for="alertsSort">Sort by
+            <select id="alertsSort">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="priority">Priority · high to low</option>
+              <option value="category">Category · A–Z</option>
+            </select>
+          </label>
+        </div>
+        <div class="alerts-grid" id="alertsList" role="list">
+          <div class="card alert-card" role="listitem" data-category="attendance" data-priority="3" data-days="0" tabindex="0">
+            <div class="alert-card-top">
+              <div class="alert-icon high"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+              <div class="alert-card-tags">
+                <span class="tag cat-attendance">Attendance</span>
+                <span class="alert-badge high">High priority</span>
+              </div>
+            </div>
+            <div class="alert-title">Repeated module absence</div>
+            <div class="alert-desc">Aarav missed Professional Practice for the second time this month.</div>
+            <details class="alert-why">
+              <summary>Why you're seeing this</summary>
+              <div class="alert-why-text">College policy flags a module automatically once a student reaches 2 unexplained absences within 30 days. This is Aarav's second Professional Practice absence this month, so the module tutor and attendance office have both been notified.</div>
+            </details>
+            <div class="alert-time">Today</div>
+          </div>
+          <div class="card alert-card" role="listitem" data-category="fees" data-priority="2" data-days="2" tabindex="0">
+            <div class="alert-card-top">
+              <div class="alert-icon med"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+              <div class="alert-card-tags">
+                <span class="tag cat-fees">Fees</span>
+                <span class="alert-badge med">Action needed</span>
+              </div>
+            </div>
+            <div class="alert-title">Fee payment due</div>
+            <div class="alert-desc">Tuition installment 2 and the lab fee are due Sept 20.</div>
+            <details class="alert-why">
+              <summary>Why you're seeing this</summary>
+              <div class="alert-why-text">This is a reminder sent 8 days before the due date. Balances left unpaid after Sept 20 accrue a late fee and can put Aarav's exam registration on hold, so it's flagged as needing action rather than just an FYI.</div>
+            </details>
+            <div class="alert-time">2 days ago</div>
+          </div>
+          <div class="card alert-card" role="listitem" data-category="academic" data-priority="1" data-days="3" tabindex="0">
+            <div class="alert-card-top">
+              <div class="alert-icon low"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
+              <div class="alert-card-tags">
+                <span class="tag cat-academic">Academic</span>
+                <span class="alert-badge low">FYI</span>
+              </div>
+            </div>
+            <div class="alert-title">Academic advising check-in</div>
+            <div class="alert-desc">Aarav's academic advising meeting is scheduled for Friday at 3:00 PM.</div>
+            <details class="alert-why">
+              <summary>Why you're seeing this</summary>
+              <div class="alert-why-text">This is a courtesy reminder for an upcoming meeting already on the calendar. No action is required from you — it's shown so you know where Aarav will be and who he's meeting with.</div>
+            </details>
+            <div class="alert-time">3 days ago</div>
+          </div>
+          <div class="card alert-card" role="listitem" data-category="attendance" data-priority="2" data-days="1" tabindex="0">
+            <div class="alert-card-top">
+              <div class="alert-icon med"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+              <div class="alert-card-tags">
+                <span class="tag cat-attendance">Attendance</span>
+                <span class="alert-badge med">Action needed</span>
+              </div>
+            </div>
+            <div class="alert-title">Late arrival recorded</div>
+            <div class="alert-desc">Dr. Marlow marked Aarav late to Web Application Development.</div>
+            <details class="alert-why">
+              <summary>Why you're seeing this</summary>
+              <div class="alert-why-text">Lecturers log arrivals more than 10 minutes after the start time as late. A pattern of lateness in one module can affect the attendance percentage used for academic standing, so it's worth a quick check-in with Aarav.</div>
+            </details>
+            <div class="alert-time">Yesterday</div>
+          </div>
+          <div class="card alert-card" role="listitem" data-category="academic" data-priority="3" data-days="4" tabindex="0">
+            <div class="alert-card-top">
+              <div class="alert-icon high"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+              <div class="alert-card-tags">
+                <span class="tag cat-academic">Academic</span>
+                <span class="alert-badge high">High priority</span>
+              </div>
+            </div>
+            <div class="alert-title">Assignment resubmission required</div>
+            <div class="alert-desc">Aarav's Database Systems coursework needs a resubmission by Sept 22.</div>
+            <details class="alert-why">
+              <summary>Why you're seeing this</summary>
+              <div class="alert-why-text">The original submission was flagged for a formatting issue by the module tutor. A resubmission window is open until Sept 22 — after that the grade is locked in as submitted, so this is flagged as high priority.</div>
+            </details>
+            <div class="alert-time">4 days ago</div>
+          </div>
+          <div class="card alert-card" role="listitem" data-category="fees" data-priority="1" data-days="5" tabindex="0">
+            <div class="alert-card-top">
+              <div class="alert-icon low"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
+              <div class="alert-card-tags">
+                <span class="tag cat-fees">Fees</span>
+                <span class="alert-badge low">FYI</span>
+              </div>
+            </div>
+            <div class="alert-title">Payment confirmed</div>
+            <div class="alert-desc">Aarav's semester fee payment for Term 2 has been received and confirmed.</div>
+            <details class="alert-why">
+              <summary>Why you're seeing this</summary>
+              <div class="alert-why-text">This is a receipt confirmation shown for your records once a payment clears. No action is needed — it's here so you always know the latest status of Aarav's account.</div>
+            </details>
+            <div class="alert-time">5 days ago</div>
           </div>
         </div>
-        <div class="card">
-          <div class="appt-day-panel" data-panel="yesterday">
-            <div class="appt-row">
-              <div class="appt-time"><div class="t">11:00</div><div class="m">WED</div></div>
-              <div class="appt-rail"></div>
-              <div><div class="appt-name">Financial aid consultation</div><div class="appt-type">Ms. R. Patel · Bursary Office</div></div>
-              <span class="tag done">Completed</span>
-            </div>
-          </div>
-          <div class="appt-day-panel day-active" data-panel="today">
-            <div class="appt-row">
-              <div class="appt-time"><div class="t">4:30</div><div class="m">TODAY</div></div>
-              <div class="appt-rail"></div>
-              <div><div class="appt-name">Attendance follow-up call</div><div class="appt-type">Mr. K. Owusu · Student Services</div></div>
-              <span class="tag due-soon">Phone</span>
-            </div>
-          </div>
-          <div class="appt-day-panel" data-panel="tomorrow">
-            <div class="appt-row">
-              <div class="appt-time"><div class="t">3:00</div><div class="m">FRI</div></div>
-              <div class="appt-rail"></div>
-              <div><div class="appt-name">Academic advising check-in</div><div class="appt-type">Dr. R. Marlow · Computing Faculty</div></div>
-              <span class="tag ok">In-person</span>
-            </div>
-            <div class="appt-row">
-              <div class="appt-time"><div class="t">10:00</div><div class="m">MON</div></div>
-              <div class="appt-rail"></div>
-              <div><div class="appt-name">Academic Advising Check-in</div><div class="appt-type">Ms. D. Cole</div></div>
-              <span class="tag due-soon">Video</span>
-            </div>
-          </div>
-        </div>
+        <div id="alertsEmptyRow" style="display:none;text-align:center;color:var(--ink-faint);padding:24px 14px">Nothing in this category right now.</div>
       </section>
-
-      <section class="section" id="alerts" style="margin-bottom:0;">
-        <div class="section-head"><h2>Updates for Aarav</h2><div class="meta">3 need your attention</div></div>
-        <div class="card">
-          <div class="alert-row">
-            <div class="alert-icon high"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
-            <div style="flex:1">
-              <div class="alert-title">Repeated module absence<span class="alert-badge high">High priority</span></div>
-              <div class="alert-desc">Aarav missed Professional Practice for the second time this month.</div>
-              <div class="alert-why">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                <div class="alert-why-text"><span class="alert-why-label">Why you're seeing this: </span>College policy flags a module automatically once a student reaches 2 unexplained absences within 30 days. This is Aarav's second Professional Practice absence this month, so the module tutor and attendance office have both been notified.</div>
-              </div>
-              <div class="alert-time">Today</div>
-            </div>
-          </div>
-          <div class="alert-row">
-            <div class="alert-icon med"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
-            <div style="flex:1">
-              <div class="alert-title">Fee payment due<span class="alert-badge med">Action needed</span></div>
-              <div class="alert-desc">Tuition installment 2 and the lab fee are due Sept 20.</div>
-              <div class="alert-why">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                <div class="alert-why-text"><span class="alert-why-label">Why you're seeing this: </span>This is a reminder sent 8 days before the due date. Balances left unpaid after Sept 20 accrue a late fee and can put Aarav's exam registration on hold, so it's flagged as needing action rather than just an FYI.</div>
-              </div>
-              <div class="alert-time">2 days ago</div>
-            </div>
-          </div>
-          <div class="alert-row">
-            <div class="alert-icon low"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
-            <div style="flex:1">
-              <div class="alert-title">Academic advising check-in<span class="alert-badge low">FYI</span></div>
-              <div class="alert-desc">Aarav's academic advising meeting is scheduled for Friday at 3:00 PM.</div>
-              <div class="alert-why">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                <div class="alert-why-text"><span class="alert-why-label">Why you're seeing this: </span>This is a courtesy reminder for an upcoming meeting already on the calendar. No action is required from you — it's shown so you know where Aarav will be and who he's meeting with.</div>
-              </div>
-              <div class="alert-time">3 days ago</div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <section class="section" id="student-services">
-      <div class="section-head"><div><h2>Support & clearance</h2><div class="meta">Everything you need before contacting Student Services</div></div></div>
-      <div class="service-layout grid grid-cols-1 md:grid-cols-[1.05fr_0.95fr] gap-8">
-        <div class="card"><div class="card-head"><h3>Attendance risk check</h3><span class="tag overdue">Needs attention</span></div><div class="risk-card"><div class="risk-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div><div><div class="risk-title">Two missed Professional Practice sessions</div><div class="risk-copy">Aarav's attendance is still 94%, but repeated absences may affect module completion. We recommend checking in with Student Services this week.</div><div class="risk-actions"><button class="primary-btn" type="button" data-scroll-target="messages">Ask Student Services</button><button class="secondary-btn" type="button" data-toast="Suggested action saved">Save suggested action</button></div></div></div></div>
-        <div class="card" id="clearance"><div class="card-head"><h3>Student clearance</h3><span class="tag pending">1 pending</span></div><div class="clearance-list"><div class="clearance-row"><div><div class="clearance-name">Library account</div><div class="clearance-meta">No outstanding items</div></div><span class="tag ok"><span class="status-dot good"></span>Clear</span></div><div class="clearance-row"><div><div class="clearance-name">Finance office</div><div class="clearance-meta">NPR 650,000 due Sept 20</div></div><span class="tag pending"><span class="status-dot pending"></span>Review</span></div><div class="clearance-row"><div><div class="clearance-name">Student records</div><div class="clearance-meta">Documents are up to date</div></div><span class="tag ok"><span class="status-dot good"></span>Clear</span></div></div></div>
-      </div>
-    </section>
 
     <section class="section" id="messages"><div class="section-head"><div><h2>Message Student Services</h2><div class="meta">Ask a question and keep the reply in one place</div></div><span class="tag ok">Replies in 1 business day</span></div><div class="service-layout grid grid-cols-1 md:grid-cols-[1.05fr_0.95fr] gap-8"><div class="card"><form class="service-form" id="serviceForm"><label class="form-label">What do you need help with?<select id="serviceCategory" required><option value="">Choose a category</option><option>Attendance concern</option><option>Fees or clearance</option><option>Academic support</option><option>Urgent notice</option><option>Something else</option></select></label><label class="form-label">Priority<select id="servicePriority" required><option>Standard · Reply in 1 business day</option><option>Urgent · Contact me today</option></select></label><label class="form-label">Your message<textarea id="serviceMessage" required placeholder="Tell Student Services what would help..."></textarea></label><button class="primary-btn" type="submit">Create support request</button></form></div><div class="card"><div class="card-head"><h3>My requests</h3><span class="meta" id="ticketCount">2 open</span></div><div class="ticket-list" id="ticketList"><div class="ticket"><div class="ticket-top"><span class="tag due-soon">In review</span><span class="ticket-id">#SS-1048</span></div><div class="ticket-title">Professional Practice absence follow-up</div><div class="ticket-meta">Assigned to Attendance Team · Updated today</div></div><div class="ticket"><div class="ticket-top"><span class="tag ok">Resolved</span><span class="ticket-id">#SS-1031</span></div><div class="ticket-title">Midterm report card access</div><div class="ticket-meta">Closed Sept 9 · Reply available</div></div></div></div></div></section>
 
@@ -775,57 +762,26 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
     <section class="section" id="quick-actions">
       <div class="section-head"><h2>Quick actions</h2></div>
       <div class="grid-4 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6" id="qaGrid">
-        <button class="qa-card" style="--q-bg:var(--azure-tint); --q-fg:var(--azure);">
+        <button class="qa-card" data-nav-target="fees" style="--q-bg:var(--azure-tint); --q-fg:var(--azure);">
           <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
           <div class="qt">Pay fees now</div>
           <div class="qd">Settle Aarav's college balance</div>
         </button>
-        <button class="qa-card" style="--q-bg:var(--marigold-tint); --q-fg:#8a5f1e;">
+        <button class="qa-card" data-nav-target="attendance" style="--q-bg:var(--marigold-tint); --q-fg:#8a5f1e;">
           <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
           <div class="qt">View attendance report</div>
           <div class="qd">See Aarav's full lecture history</div>
         </button>
-        <button class="qa-card" style="--q-bg:var(--brick-tint); --q-fg:var(--brick);">
+        <button class="qa-card" data-nav-target="contacts" style="--q-bg:var(--brick-tint); --q-fg:var(--brick);">
           <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <div class="qt">Message a lecturer</div>
+          <div class="qt">Email a lecturer</div>
           <div class="qd">Reach out to Aarav's faculty directly</div>
         </button>
-        <button class="qa-card" style="--q-bg:var(--teal-tint); --q-fg:var(--teal-deep);">
-          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 14v4M10 16h4"/></svg></div>
-          <div class="qt">Schedule a meeting</div>
-          <div class="qd">Book time with an academic advisor</div>
+        <button class="qa-card" data-nav-target="student-services" style="--q-bg:var(--teal-tint); --q-fg:var(--teal);">
+          <div class="qa-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a7 7 0 0 0-7 7v4a3 3 0 0 0 3 3h1v-6H6v-1a6 6 0 0 1 12 0v1h-3v6h1a3 3 0 0 0 3-3v-4a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg></div>
+          <div class="qt">Message SSD</div>
+          <div class="qd">Send Student Services a quick question</div>
         </button>
-      </div>
-    </section>
-
-    <!-- ============ GRADES & PROGRESS ============ -->
-    <section class="section" id="grades">
-      <div class="section-head">
-        <h2>Academic progress</h2>
-        <div class="view-toggle">
-          <button class="active">This term</button>
-          <button>Last term</button>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8">
-        <div class="card">
-          <div class="card-head">
-            <h3>Grade trend by week</h3>
-            <div class="chart-legend">
-              <div class="legend-item"><span class="legend-dot" style="background:var(--teal)"></span>Aarav's average</div>
-              <div class="legend-item"><span class="legend-dot" style="background:var(--marigold)"></span>Cohort average</div>
-            </div>
-          </div>
-          <svg id="perfChart" viewBox="0 0 540 220" width="100%" height="220"></svg>
-        </div>
-        <div class="card">
-          <div class="card-head"><h3>Grades by subject</h3><div class="meta">Current term</div></div>
-          <div class="cat-row"><span class="name">Web Applications</span><div class="bar-track"><div class="bar-fill" data-w="82" style="background:var(--teal)"></div></div><span class="score">82</span></div>
-          <div class="cat-row"><span class="name">Database Systems</span><div class="bar-track"><div class="bar-fill" data-w="91" style="background:var(--teal)"></div></div><span class="score">91</span></div>
-          <div class="cat-row"><span class="name">Professional Practice</span><div class="bar-track"><div class="bar-fill" data-w="85" style="background:var(--teal)"></div></div><span class="score">85</span></div>
-          <div class="cat-row"><span class="name">Studio Art</span><div class="bar-track"><div class="bar-fill" data-w="94" style="background:var(--teal)"></div></div><span class="score">94</span></div>
-          <div class="cat-row"><span class="name">Intro Psychology</span><div class="bar-track"><div class="bar-fill" data-w="89" style="background:var(--teal)"></div></div><span class="score">89</span></div>
-        </div>
       </div>
     </section>
 
@@ -860,26 +816,26 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
     <section class="section" id="contacts">
       <div class="section-head"><h2>Aarav's lecturers & advisors</h2><div class="meta">3 faculty contacts this term</div></div>
       <div class="grid-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="card staff-card">
+        <div class="card staff-card" data-email="rina.marlow@islington.edu.np" data-module="Web Application Development">
           <div class="staff-avatar" style="background:linear-gradient(135deg,#4A4DA0,#25285F)">RM</div>
           <div class="staff-name">Dr. Rina Marlow</div>
           <div class="staff-role">Computing Faculty</div>
           <div class="staff-stat">Office hours Tue/Thu 2–4 PM</div>
-          <div><button class="staff-msg-btn">Message</button></div>
+          <div><button class="staff-msg-btn" type="button">Email</button></div>
         </div>
-        <div class="card staff-card">
+        <div class="card staff-card" data-email="dana.cole@islington.edu.np" data-module="Professional Practice">
           <div class="staff-avatar" style="background:linear-gradient(135deg,#70BE44,#438B25)">DC</div>
           <div class="staff-name">Ms. Dana Cole</div>
           <div class="staff-role">Professional Practice</div>
           <div class="staff-stat">Office hours Mon/Wed 10–12 PM</div>
-          <div><button class="staff-msg-btn">Message</button></div>
+          <div><button class="staff-msg-btn" type="button">Email</button></div>
         </div>
-        <div class="card staff-card">
+        <div class="card staff-card" data-email="noah.alvarez@islington.edu.np" data-module="Database Systems">
           <div class="staff-avatar" style="background:linear-gradient(135deg,#2A91B0,#176278)">NA</div>
           <div class="staff-name">Dr. Noah Alvarez</div>
           <div class="staff-role">Database Systems</div>
           <div class="staff-stat">Office hours Fri 1–3 PM</div>
-          <div><button class="staff-msg-btn">Message</button></div>
+          <div><button class="staff-msg-btn" type="button">Email</button></div>
         </div>
       </div>
     </section>
@@ -901,7 +857,7 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
           <div class="switch on" onclick="this.classList.toggle('on')"></div>
         </div>
         <div class="setting-row">
-          <div><div class="setting-title">Messages from lecturers</div><div class="setting-desc">Notify me when a faculty member sends a message</div></div>
+          <div><div class="setting-title">Messages from staff</div><div class="setting-desc">Notify me when a staff member sends a message</div></div>
           <div class="switch" onclick="this.classList.toggle('on')"></div>
         </div>
         <div class="setting-row">
@@ -911,142 +867,140 @@ button{font-family:inherit}a{color:inherit;text-decoration:none}
       </div>
     </section>
 
-    <!-- ============ CLOSING STRIP ============ -->
-    <div class="review-strip">
-      <div>
-        <div class="display">Academic advising check-in</div>
-        <p>Friday, 3:00 PM · Computing Faculty · Review Aarav's term progress</p>
-      </div>
-      <div class="countdown">
-        <div class="cd-box"><div class="cd-num">94%</div><div class="cd-lbl">attendance</div></div>
-        <div class="cd-box"><div class="cd-num">NPR 650k</div><div class="cd-lbl">fees due</div></div>
-        <div class="cd-box"><div class="cd-num">88%</div><div class="cd-lbl">avg. grade</div></div>
-      </div>
-    </div>
-
   </main>
 </div>
 
-<div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-  <div class="modal">
-    <div class="modal-head"><div><h2 id="loginTitle">Welcome back</h2><div class="modal-copy" id="loginCopy">Use your verified phone number to securely access Aarav's updates.</div></div><button class="close-btn" type="button" data-close-login aria-label="Close login">×</button></div>
-    <div class="otp-step" id="phoneStep"><label class="form-label">Parent phone number<input id="parentPhone" type="tel" placeholder="+1 555 010 2040" autocomplete="tel" required></label><button class="primary-btn" type="button" id="sendOtp">Send verification code</button><div class="modal-status" id="loginStatus" aria-live="polite"></div></div>
-    <div class="otp-step" id="otpStep" hidden><div class="demo-hint">Demo mode: use <strong>2040</strong> as the verification code.</div><label class="form-label">4-digit verification code<input class="otp-input" id="otpCode" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="one-time-code" required></label><button class="primary-btn" type="button" id="verifyOtp">Verify and continue</button><button class="text-btn" type="button" id="changePhone">Use a different number</button><div class="modal-status" id="otpStatus" aria-live="polite"></div></div>
-  </div>
-</div>
+<!-- ============ LECTURER EMAIL DRAWER ============ -->
+<div class="lecturer-drawer-overlay" id="lecturerDrawerOverlay"></div>
+<aside class="lecturer-drawer" id="lecturerDrawer" role="dialog" aria-modal="true" aria-labelledby="lecturerDrawerName">
+  <button class="lecturer-drawer-close" id="lecturerDrawerClose" aria-label="Close">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <div class="lecturer-drawer-body" id="lecturerDrawerBody"></div>
+</aside>
 
-<div class="modal-backdrop" id="receiptModal" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
-  <div class="modal">
-    <div class="modal-head"><div><h2 id="receiptTitle">Payment receipt</h2><div class="modal-copy">Keep this for your records — it's proof the payment went through.</div></div><button class="close-btn" type="button" data-close-receipt aria-label="Close receipt">×</button></div>
-    <div class="receipt-detail" id="receiptDetail"></div>
-    <button class="primary-btn" type="button" id="downloadReceipt" style="width:100%">Save as PDF</button>
-  </div>
-</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+/* Loading screen: sidebar-colored splash with the college logo, shown for a
+   total of 2 seconds before the app fades in underneath it. */
+window.setTimeout(() => {
+  document.getElementById('loadingScreen')?.classList.add('loading-hide');
+  document.body.classList.remove('is-loading');
+}, 2000);
+
 /* Parent portal interactions and demo workflows. */
 const navItems = Array.from(document.querySelectorAll('#sideNav .nav-item'));
 const overviewNav = navItems.find(item => item.dataset.target === 'overview');
-const overviewSubTargets = new Set(['quick-actions', 'grades', 'updates', 'contacts']);
+// Ordered to match the actual top-to-bottom order of these sections on the
+// Overview page itself, so the sidebar list and the scroll order agree.
+const overviewSubOrder = ['quick-actions', 'updates', 'contacts'];
+const overviewSubTargets = new Set(overviewSubOrder);
 const overviewSub = document.createElement('div');
 overviewSub.className = 'nav-sub';
-navItems.filter(item => overviewSubTargets.has(item.dataset.target)).forEach(item => {
-  overviewSub.appendChild(item);
+overviewSubOrder.forEach(target => {
+  const item = navItems.find(navItem => navItem.dataset.target === target);
+  if (item) overviewSub.appendChild(item);
 });
 overviewNav?.after(overviewSub);
 const pageForTarget = {
-  overview:'page-overview', attendance:'page-attendance', fees:'page-fees', grades:'page-grades',
-  appointments:'page-appointments', alerts:'page-alerts', 'student-services':'page-support',
-  'quick-actions':'page-quick-actions', updates:'page-updates', contacts:'page-contacts', settings:'page-settings'
+  overview:'page-overview', attendance:'page-attendance', fees:'page-fees',
+  alerts:'page-alerts', 'student-services':'page-support',
+  'quick-actions':'page-overview', updates:'page-overview', contacts:'page-overview', settings:'page-settings'
 };
 const pageParts = [
-  ['page-overview', document.getElementById('overview'), document.getElementById('statsGrid')?.closest('.section')],
+  ['page-overview', document.getElementById('overview'), document.getElementById('statsGrid')?.closest('.section'), document.getElementById('urgentNoticeStack'),
+    document.getElementById('quick-actions'), document.getElementById('updates'), document.getElementById('contacts')],
   ['page-attendance', document.getElementById('attendance')], ['page-fees', document.getElementById('fees')],
-  ['page-appointments', document.getElementById('appointments')], ['page-alerts', document.getElementById('alerts')],
+  ['page-alerts', document.getElementById('alerts')],
   ['page-support', document.getElementById('student-services'), document.getElementById('messages')],
-  ['page-quick-actions', document.getElementById('quick-actions')], ['page-grades', document.getElementById('grades')],
-  ['page-updates', document.getElementById('updates')], ['page-contacts', document.getElementById('contacts')],
   ['page-settings', document.getElementById('settings')]
 ].map(([page, ...elements]) => ({page, elements:elements.filter(Boolean)}));
 
 pageParts.forEach(({elements}) => elements.forEach(element => element.classList.add('page-part')));
-document.getElementById('appointments')?.parentElement.classList.add('page-layout');
 
 let currentPage = null;
 let currentAnchor = null;
 function setActiveNav(){
   navItems.forEach(item => {
-    const samePage = pageForTarget[item.dataset.target] === currentPage;
-    const sameAnchor = (item.dataset.target === currentAnchor);
-    // Fixed: previously any top-level item other than "overview" (Attendance, Fees,
-    // Appointments, Alerts, Support, Settings) could never receive the active
-    // highlight, because the condition required item.dataset.target === 'overview'
-    // whenever there was no anchor. Highlight whichever item matches the current
-    // anchor when one is set, otherwise whichever item matches the current page.
+    const target = item.dataset.target;
+    // Overview's sub-sections (Quick Actions, Recent Updates, Lecturers &
+    // Advisors) now live on the same page as Overview itself, so they
+    // can only ever be highlighted by matching the current scroll anchor -- never
+    // by "same page", since every one of them shares the same page id.
+    const isOverviewSub = overviewSubTargets.has(target);
+    const samePage = pageForTarget[target] === currentPage && !isOverviewSub;
+    const sameAnchor = (target === currentAnchor);
     item.classList.toggle('active', currentAnchor ? sameAnchor : samePage);
   });
   overviewSub.classList.toggle('open', currentPage === 'page-overview' || currentAnchor !== null);
 }
 
-// --- Navigation lock -------------------------------------------------------
-// Bug fix: rapid/"jitter" clicking across sidebar items used to re-run the full
-// page-switch routine (DOM class writes on every card, a fresh smooth scroll-to-top,
-// and a history update) on every single click with no guard at all. A burst of
-// clicks fired off a pile of overlapping smooth-scroll animations and forced style
-// recalculations on the same tick, which could pin the main thread and made the
-// sidebar/page appear frozen and unclickable for several seconds.
+// --- Navigation ------------------------------------------------------------
+// Previous bug: a rapid burst of sidebar clicks locked navigation for 220ms
+// after each one and silently queued/dropped anything that arrived during
+// that window, only applying the *last* queued click once the lock expired.
+// That's exactly what made fast clicking feel "frozen" — the sidebar visibly
+// stopped responding to taps for stretches at a time even though it was
+// technically still "working" underneath.
 //
-// The fixes below:
-//   1. Clicking the already-active destination is a no-op (only the URL hash is
-//      synced) instead of re-running the whole transition.
-//   2. A short lock serializes transitions so only one is ever in flight; extra
-//      clicks that arrive mid-transition are coalesced into a single pending
-//      request (the latest one) instead of being dropped or stacked.
-//   3. The lock is released in a `finally` block, so even if something throws
-//      partway through, the sidebar can never end up permanently unresponsive.
-let navLocked = false;
-let pendingNav = null;
+// Fix: every click now switches pages immediately and synchronously — no
+// lock, no queue, nothing ever gets dropped or delayed. The only per-click
+// cost that could pile up on a burst of clicks (the staggered card reveal
+// animation + smooth scroll) is tagged with a version number and simply
+// skipped if a newer navigation has already taken over by the time its
+// requestAnimationFrame callback runs, so old, superseded work never stacks
+// up or fights with the latest click.
+let navVersion = 0;
 
 function syncHash(page, anchor){
   const target = anchor || Object.keys(pageForTarget).find(key => pageForTarget[key] === page) || 'overview';
   if (location.hash.slice(1) !== target) history.replaceState(null, '', '#' + target);
 }
 
-function goToPage(page, updateHash = true, anchor = null){
-  if (navLocked){
-    pendingNav = {page, updateHash, anchor};
-    return;
+// Scroll to the right spot for a given page/anchor combo: a specific Overview
+// sub-section scrolls that section into view; anything else scrolls to the top.
+function scrollToDestination(page, anchor){
+  const el = (page === 'page-overview' && anchor) ? document.getElementById(anchor) : null;
+  if (el){
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+  } else {
+    window.scrollTo({top:0, behavior:'smooth'});
   }
+}
+
+function goToPage(page, updateHash = true, anchor = null){
   if (page === currentPage && anchor === currentAnchor){
     if (updateHash) syncHash(page, anchor);
     return;
   }
-  navLocked = true;
-  try {
-    currentPage = page;
+  // Moving between Overview's own sub-sections: everything is already visible
+  // on screen (it's one continuous page now), so just update the highlighted
+  // nav item and smooth-scroll -- no show/hide transition needed.
+  if (page === currentPage){
     currentAnchor = anchor;
-    pageParts.forEach(({page: pageId, elements}) => elements.forEach(element => element.classList.toggle('page-active', pageId === page)));
-    document.querySelectorAll('.page-layout').forEach(layout => {
-      layout.classList.toggle('page-group-hidden', !layout.querySelector('.page-active'));
-    });
     setActiveNav();
     if (updateHash) syncHash(page, anchor);
-    window.scrollTo({top:0, behavior:'smooth'});
+    scrollToDestination(page, anchor);
+    return;
+  }
+  currentPage = page;
+  currentAnchor = anchor;
+  const myNavVersion = ++navVersion;
+  pageParts.forEach(({page: pageId, elements}) => elements.forEach(element => element.classList.toggle('page-active', pageId === page)));
+  document.querySelectorAll('.page-layout').forEach(layout => {
+    layout.classList.toggle('page-group-hidden', !layout.querySelector('.page-active'));
+  });
+  setActiveNav();
+  if (updateHash) syncHash(page, anchor);
+  requestAnimationFrame(() => {
+    if (myNavVersion !== navVersion) return; // superseded by a later click — skip this stale animation pass
     document.querySelectorAll('.page-active .card, .page-active .qa-card').forEach((element, index) => {
       element.classList.add('in-view');
       element.style.transitionDelay = (index % 4) * 60 + 'ms';
     });
-  } finally {
-    window.setTimeout(() => {
-      navLocked = false;
-      if (pendingNav){
-        const next = pendingNav;
-        pendingNav = null;
-        goToPage(next.page, next.updateHash, next.anchor);
-      }
-    }, 220);
-  }
+    scrollToDestination(page, anchor);
+  });
 }
 window.addEventListener('hashchange', () => {
   const target = location.hash.slice(1);
@@ -1058,6 +1012,41 @@ navItems.forEach(item => item.addEventListener('click', event => {
 }));
 const initialTarget = location.hash.slice(1);
 goToPage(pageForTarget[initialTarget] || 'page-overview', false, overviewSubTargets.has(initialTarget) ? initialTarget : null);
+
+// Scroll-spy: while the Overview page is open, keep the sidebar's highlighted
+// sub-item in sync with whichever section (Quick Actions / Recent Updates /
+// Lecturers & Advisors) is actually in view as the parent
+// scrolls up or down the page -- not just when they click a sidebar link.
+const overviewScrollSections = ['quick-actions', 'updates', 'contacts']
+  .map(key => ({key, el: document.getElementById(key)}))
+  .filter(section => section.el);
+const SCROLL_SPY_OFFSET = 150;
+function updateOverviewScrollSpy(){
+  if (currentPage !== 'page-overview') return;
+  let active = null;
+  overviewScrollSections.forEach(section => {
+    if (section.el.getBoundingClientRect().top - SCROLL_SPY_OFFSET <= 0) active = section.key;
+  });
+  // Near the very bottom of the page, always credit the last section. If it's
+  // shorter than the viewport, its top may never cross the offset line before
+  // we run out of page to scroll -- so the offset check above can get stuck on
+  // the previous section even though the last one is the one on screen.
+  const atBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 2;
+  if (atBottom && overviewScrollSections.length){
+    active = overviewScrollSections[overviewScrollSections.length - 1].key;
+  }
+  if (active !== currentAnchor){
+    currentAnchor = active;
+    setActiveNav();
+    syncHash('page-overview', active);
+  }
+}
+let scrollSpyTicking = false;
+window.addEventListener('scroll', () => {
+  if (scrollSpyTicking) return;
+  scrollSpyTicking = true;
+  window.requestAnimationFrame(() => { updateOverviewScrollSpy(); scrollSpyTicking = false; });
+}, {passive:true});
 
 const revealEls = document.querySelectorAll('.card, .qa-card');
 const revealIO = new IntersectionObserver(entries => entries.forEach(entry => {
@@ -1078,16 +1067,10 @@ const planIO = new IntersectionObserver(entries => entries.forEach(entry => {
 }), {threshold:.3});
 planFills.forEach((el, index) => { el.style.transitionDelay = (index % 4) * 110 + 'ms'; planIO.observe(el); });
 
-// Receipt rows fade in individually as they scroll into view
-const receiptRows = document.querySelectorAll('.receipt-row');
-const receiptIO = new IntersectionObserver(entries => entries.forEach(entry => {
-  if (entry.isIntersecting){ entry.target.classList.add('in-view'); receiptIO.unobserve(entry.target); }
-}), {threshold:.2});
-receiptRows.forEach((row, index) => { row.style.transitionDelay = (index % 4) * 70 + 'ms'; receiptIO.observe(row); });
-
 document.querySelectorAll('.pill-filters .pill').forEach(pill => pill.addEventListener('click', () => {
-  pill.parentElement.querySelectorAll('.pill').forEach(item => item.classList.remove('active'));
+  pill.parentElement.querySelectorAll('.pill').forEach(item => { item.classList.remove('active'); item.setAttribute('aria-pressed', 'false'); });
   pill.classList.add('active');
+  pill.setAttribute('aria-pressed', 'true');
 }));
 
 // Attendance pill filters actually filter the lecture attendance table by status
@@ -1138,14 +1121,40 @@ document.querySelectorAll('.view-toggle button').forEach(button => button.addEve
   button.classList.add('active');
 }));
 
-const apptToggle = document.getElementById('apptToggle');
-if (apptToggle){
-  apptToggle.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
-    const day = button.dataset.day;
-    document.querySelectorAll('.appt-day-panel').forEach(panel => {
-      panel.classList.toggle('day-active', panel.dataset.panel === day);
+// Alerts pill filters filter the update cards by category
+const alertsFilters = document.getElementById('alertsFilters');
+const alertsList = document.getElementById('alertsList');
+const alertCards = alertsList ? Array.from(alertsList.querySelectorAll('.alert-card[data-category]')) : [];
+const alertsEmptyRow = document.getElementById('alertsEmptyRow');
+if (alertsFilters){
+  alertsFilters.addEventListener('click', event => {
+    const button = event.target.closest('[data-filter]');
+    if (!button) return;
+    const filter = button.dataset.filter;
+    let visible = 0;
+    alertCards.forEach(card => {
+      const match = filter === 'all' || card.dataset.category === filter;
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
     });
-  }));
+    if (alertsEmptyRow) alertsEmptyRow.style.display = visible ? 'none' : '';
+  });
+}
+
+// Sort control reorders the cards in place by newest/oldest, priority, or category
+const alertsSort = document.getElementById('alertsSort');
+if (alertsSort && alertsList){
+  alertsSort.addEventListener('change', () => {
+    const mode = alertsSort.value;
+    const sorted = [...alertCards].sort((a, b) => {
+      if (mode === 'newest') return Number(a.dataset.days) - Number(b.dataset.days);
+      if (mode === 'oldest') return Number(b.dataset.days) - Number(a.dataset.days);
+      if (mode === 'priority') return Number(b.dataset.priority) - Number(a.dataset.priority);
+      if (mode === 'category') return a.dataset.category.localeCompare(b.dataset.category);
+      return 0;
+    });
+    sorted.forEach(card => alertsList.appendChild(card));
+  });
 }
 
 const toast = document.getElementById('toast');
@@ -1157,7 +1166,128 @@ function showToast(message){
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
 }
 document.querySelectorAll('[data-toast]').forEach(button => button.addEventListener('click', () => showToast(button.dataset.toast)));
+
+/* Quick action cards jump straight to their matching page, same pattern as the stat cards */
+document.querySelectorAll('.qa-card[data-nav-target]').forEach(card => card.addEventListener('click', () => {
+  document.querySelector('.nav-item[data-target="' + card.dataset.navTarget + '"]')?.click();
+}));
+
+/* ---------- Attendance-derived stats & colour-coding ---------- */
+const MONTH_ABBR = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,sept:8,oct:9,nov:10,dec:11};
+function parseCollegeDate(text){
+  if (!text) return null;
+  const match = text.trim().match(/^([A-Za-z]+)\.?\s+(\d{1,2}),?\s*(\d{4})$/);
+  if (!match) return null;
+  const key = match[1].toLowerCase();
+  const month = MONTH_ABBR[key.slice(0,4)] ?? MONTH_ABBR[key.slice(0,3)];
+  if (month === undefined) return null;
+  return new Date(parseInt(match[3],10), month, parseInt(match[2],10));
+}
+const TODAY = new Date(2026, 8, 12); // matches "Saturday, September 12" in the topbar
+
+// "Days present this month" is derived from the same attendance log the Attendance
+// page shows (rather than a hardcoded number), so it always matches what's on screen.
+function updateDaysPresent(){
+  const streakEl = document.getElementById('daysPresentStat');
+  if (!streakEl) return;
+  const presentDays = new Set();
+  document.querySelectorAll('#attnTableBody tr[data-status]').forEach(row => {
+    const date = parseCollegeDate(row.children[1]?.textContent);
+    if (!date || date.getMonth() !== TODAY.getMonth() || date.getFullYear() !== TODAY.getFullYear()) return;
+    if (row.dataset.status === 'present' || row.dataset.status === 'late') presentDays.add(date.toDateString());
+  });
+  streakEl.textContent = presentDays.size;
+}
+
+/* ---------- Urgent notices: only the specific issue that's actually urgent gets shown ---------- */
+const NOTICE_THRESHOLDS = { attendance:70, consecutiveAbsentDays:3 };
+const dismissedNotices = new Set();
+
+function getMaxConsecutiveAbsentDays(){
+  const byDate = new Map();
+  document.querySelectorAll('#attnTableBody tr[data-status]').forEach(row => {
+    const date = parseCollegeDate(row.children[1]?.textContent);
+    if (!date) return;
+    const key = date.getTime();
+    const entry = byDate.get(key) || {absent:false, present:false};
+    if (row.dataset.status === 'absent') entry.absent = true;
+    if (row.dataset.status === 'present' || row.dataset.status === 'late') entry.present = true;
+    byDate.set(key, entry);
+  });
+  const absentDays = Array.from(byDate.entries()).filter(([, v]) => v.absent && !v.present).map(([k]) => k).sort((a, b) => a - b);
+  let run = 0, max = 0, prev = null;
+  absentDays.forEach(time => {
+    run = (prev !== null && time - prev === 86400000) ? run + 1 : 1;
+    max = Math.max(max, run);
+    prev = time;
+  });
+  return max;
+}
+
+function getUrgentNotices(){
+  const notices = [];
+
+  const attendanceValue = parseInt(document.querySelector('.stat-card[data-stat="attendance"] .stat-value')?.textContent, 10);
+  if (!isNaN(attendanceValue) && attendanceValue < NOTICE_THRESHOLDS.attendance){
+    notices.push({ key:'attendance-low', nav:'attendance',
+      title:`Urgent · Attendance is ${attendanceValue}%, below the 70% minimum`,
+      copy:'Lecture attendance has dropped below the college minimum. Please get in touch with Student Services as soon as possible.' });
+  }
+
+  const overdueFees = Array.from(document.querySelectorAll('#feesTableBody tr[data-status="overdue"]'));
+  if (overdueFees.length){
+    const names = overdueFees.map(row => row.querySelector('.student-name')?.textContent.trim()).filter(Boolean);
+    notices.push({ key:'fees-overdue', nav:'fees',
+      title:`Urgent · Fee overdue — ${names.join(', ')}`,
+      copy:`${names.length > 1 ? 'These items are' : (names[0] || 'A payment is')} overdue. Settle the balance to avoid a late fee or a hold on Aarav's records.` });
+  }
+
+  const consecutiveAbsences = getMaxConsecutiveAbsentDays();
+  if (consecutiveAbsences >= NOTICE_THRESHOLDS.consecutiveAbsentDays){
+    notices.push({ key:'consecutive-absences', nav:'attendance',
+      title:`Urgent · Absent ${consecutiveAbsences} days in a row`,
+      copy:'Aarav has been marked absent for several days in a row. Please check in with the attendance office.' });
+  }
+
+  return notices.filter(notice => !dismissedNotices.has(notice.key));
+}
+
+function renderUrgentNotices(){
+  const stack = document.getElementById('urgentNoticeStack');
+  if (!stack) return;
+  const notices = getUrgentNotices();
+  stack.innerHTML = notices.map(notice => `
+    <div class="notice-banner" role="status" data-notice-key="${notice.key}">
+      <div class="notice-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+      <div class="notice-content"><div class="notice-title">${notice.title}</div><div class="notice-copy">${notice.copy}</div></div>
+      <div class="notice-actions">
+        <button class="text-btn" type="button" data-dismiss-notice="${notice.key}">Mark as read</button>
+        <button class="text-btn" type="button" data-nav-notice="${notice.nav}">View details</button>
+      </div>
+    </div>`).join('');
+  stack.querySelectorAll('[data-dismiss-notice]').forEach(button => button.addEventListener('click', () => {
+    dismissedNotices.add(button.dataset.dismissNotice);
+    renderUrgentNotices();
+    showToast('Notice marked as read');
+  }));
+  stack.querySelectorAll('[data-nav-notice]').forEach(button => button.addEventListener('click', () => {
+    document.querySelector('.nav-item[data-target="' + button.dataset.navNotice + '"]')?.click();
+  }));
+}
+
+updateDaysPresent();
+renderUrgentNotices();
 document.querySelectorAll('[data-scroll-target]').forEach(button => button.addEventListener('click', () => document.getElementById(button.dataset.scrollTarget)?.scrollIntoView({behavior:'smooth', block:'start'})));
+
+// "Why you're seeing this" — clicking one only expands that card; any other
+// open one closes on its own, so only a single explanation is open at a time.
+const alertWhyDetails = Array.from(document.querySelectorAll('details.alert-why'));
+alertWhyDetails.forEach(detail => {
+  detail.addEventListener('toggle', () => {
+    if (!detail.open) return;
+    alertWhyDetails.forEach(other => { if (other !== detail) other.open = false; });
+  });
+});
 
 // Overview stat cards expand in place to show a detail breakdown
 document.querySelectorAll('.stat-card[data-stat]').forEach(card => {
@@ -1176,47 +1306,46 @@ document.querySelectorAll('.stat-detail-link[data-nav-target]').forEach(link => 
   document.querySelector('.nav-item[data-target="' + link.dataset.navTarget + '"]')?.click();
 }));
 
-const loginModal = document.getElementById('loginModal');
-const phoneStep = document.getElementById('phoneStep');
-const otpStep = document.getElementById('otpStep');
-const loginStatus = document.getElementById('loginStatus');
-const otpStatus = document.getElementById('otpStatus');
-document.querySelector('.login-btn').addEventListener('click', () => { loginModal.classList.add('open'); document.getElementById('parentPhone').focus(); });
-document.querySelector('[data-close-login]').addEventListener('click', () => loginModal.classList.remove('open'));
-loginModal.addEventListener('click', event => { if (event.target === loginModal) loginModal.classList.remove('open'); });
-document.getElementById('sendOtp').addEventListener('click', () => {
-  const phone = document.getElementById('parentPhone').value.trim();
-  if (phone.length < 7){ loginStatus.textContent = 'Enter a valid phone number to continue.'; return; }
-  loginStatus.textContent = '';
-  phoneStep.hidden = true;
-  otpStep.hidden = false;
-  document.getElementById('otpCode').focus();
-});
-document.getElementById('changePhone').addEventListener('click', () => { otpStep.hidden = true; phoneStep.hidden = false; otpStatus.textContent = ''; });
-document.getElementById('verifyOtp').addEventListener('click', () => {
-  if (document.getElementById('otpCode').value.trim() !== '2040'){ otpStatus.textContent = 'That code did not match. Try the demo code above.'; return; }
-  loginModal.classList.remove('open');
-  document.querySelector('.login-btn').innerHTML = '<span aria-hidden="true">✓</span> Signed in';
-  showToast('You are securely signed in for this demo.');
-});
+// Lecturer email drawer: clicking "Email" on a lecturer card slides in a
+// right-hand panel with that lecturer's contact info.
+const lecturerDrawer = document.getElementById('lecturerDrawer');
+const lecturerDrawerOverlay = document.getElementById('lecturerDrawerOverlay');
+const lecturerDrawerBody = document.getElementById('lecturerDrawerBody');
+const lecturerDrawerClose = document.getElementById('lecturerDrawerClose');
 
-const receiptModal = document.getElementById('receiptModal');
-const receiptDetail = document.getElementById('receiptDetail');
-let activeReceiptLabel = '';
-document.querySelectorAll('[data-receipt]').forEach(button => button.addEventListener('click', () => {
-  const {item, amount, date, method, txn} = button.dataset;
-  activeReceiptLabel = item;
-  receiptDetail.innerHTML = [
-    ['What it was for', item], ['Amount', amount], ['Paid on', date], ['How it was paid', method], ['Reference number', txn], ['Status', 'Paid in full ✓']
-  ].map(([key, value], index) => `<div class="receipt-detail-row" style="animation-delay:${index * 45}ms"><span class="k">${key}</span><span class="v">${value}</span></div>`).join('');
-  receiptModal.classList.add('open');
-}));
-document.querySelector('[data-close-receipt]').addEventListener('click', () => receiptModal.classList.remove('open'));
-receiptModal.addEventListener('click', event => { if (event.target === receiptModal) receiptModal.classList.remove('open'); });
-document.getElementById('downloadReceipt').addEventListener('click', () => {
-  receiptModal.classList.remove('open');
-  showToast('Saved — the ' + activeReceiptLabel + ' receipt is ready for your records.');
+function openLecturerDrawer(card){
+  const name = card.querySelector('.staff-name').textContent;
+  const role = card.querySelector('.staff-role').textContent;
+  const hours = card.querySelector('.staff-stat').textContent;
+  const avatarEl = card.querySelector('.staff-avatar');
+  const email = card.dataset.email || '';
+  const module = card.dataset.module || role;
+  lecturerDrawerBody.innerHTML = `
+    <div class="lecturer-drawer-avatar" style="${avatarEl.getAttribute('style')}">${avatarEl.textContent}</div>
+    <div id="lecturerDrawerName" class="lecturer-drawer-name">${name}</div>
+    <div class="lecturer-drawer-role">${role}</div>
+    <div class="lecturer-drawer-section">
+      <div class="lecturer-drawer-row"><span class="k">Module</span><span class="v">${module}</span></div>
+      <div class="lecturer-drawer-row"><span class="k">Office hours</span><span class="v">${hours}</span></div>
+      <div class="lecturer-drawer-row"><span class="k">Email</span><span class="v">${email}</span></div>
+    </div>
+    <button class="lecturer-drawer-email-btn" type="button" onclick="window.location.href='mailto:${email}'">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+      Email ${name.split(' ').slice(-1)[0]}
+    </button>`;
+  lecturerDrawer.classList.add('open');
+  lecturerDrawerOverlay.classList.add('open');
+}
+function closeLecturerDrawer(){
+  lecturerDrawer.classList.remove('open');
+  lecturerDrawerOverlay.classList.remove('open');
+}
+document.querySelectorAll('.staff-card .staff-msg-btn').forEach(button => {
+  button.addEventListener('click', () => openLecturerDrawer(button.closest('.staff-card')));
 });
+lecturerDrawerClose.addEventListener('click', closeLecturerDrawer);
+lecturerDrawerOverlay.addEventListener('click', closeLecturerDrawer);
+document.addEventListener('keydown', event => { if (event.key === 'Escape') closeLecturerDrawer(); });
 
 const serviceForm = document.getElementById('serviceForm');
 serviceForm.addEventListener('submit', event => {
@@ -1236,45 +1365,6 @@ serviceForm.addEventListener('submit', event => {
   showToast('Request ' + ticketNumber + ' created and routed to the right team.');
 });
 
-const chartData = [
-  {label:'Wk 1', student:78, cohortAvg:74}, {label:'Wk 2', student:82, cohortAvg:76}, {label:'Wk 3', student:85, cohortAvg:78},
-  {label:'Wk 4', student:88, cohortAvg:80}, {label:'Wk 5', student:90, cohortAvg:81}, {label:'Wk 6', student:91, cohortAvg:83}
-];
-const svgNS = 'http://www.w3.org/2000/svg';
-const chartEl = document.getElementById('perfChart');
-const W=540,H=220,padL=26,padB=26,padT=10,padR=6;
-const chartW=W-padL-padR, chartH=H-padT-padB;
-const maxVal = Math.max(...chartData.map(data => Math.max(data.student, data.cohortAvg))) * 1.15;
-const groupW = chartW / chartData.length, barW = 15;
-function y(value){ return padT + chartH - (value / maxVal) * chartH; }
-[0,.25,.5,.75,1].forEach(fraction => {
-  const gridY = padT + chartH * fraction;
-  const line = document.createElementNS(svgNS, 'line');
-  line.setAttribute('x1', padL); line.setAttribute('x2', W-padR); line.setAttribute('y1', gridY); line.setAttribute('y2', gridY); line.setAttribute('stroke', '#E9E4D3'); line.setAttribute('stroke-width', '1'); chartEl.appendChild(line);
-});
-chartData.forEach((data, index) => {
-  const center = padL + groupW * index + groupW / 2;
-  [{value:data.student,color:'#4A4DA0',offset:-barW/2-3},{value:data.cohortAvg,color:'#70BE44',offset:3}].forEach(bar => {
-    const rect = document.createElementNS(svgNS, 'rect');
-    const fullY = y(bar.value), fullHeight = padT + chartH - fullY;
-    rect.setAttribute('x', center + bar.offset); rect.setAttribute('width', barW); rect.setAttribute('rx', 4); rect.setAttribute('fill', bar.color); rect.setAttribute('class', 'bar-col'); rect.setAttribute('y', padT + chartH); rect.setAttribute('height', 0); chartEl.appendChild(rect);
-    const title = document.createElementNS(svgNS, 'title'); title.textContent = data.label + ': ' + bar.value; rect.appendChild(title);
-  });
-  const label = document.createElementNS(svgNS, 'text'); label.setAttribute('x', center); label.setAttribute('y', H-6); label.setAttribute('text-anchor', 'middle'); label.setAttribute('font-size', '10.5'); label.setAttribute('fill', '#8A9389'); label.setAttribute('font-family', 'Inter, sans-serif'); label.textContent = data.label; chartEl.appendChild(label);
-});
-const chartIO = new IntersectionObserver(entries => entries.forEach(entry => {
-  if (entry.isIntersecting){
-    let index = 0;
-    chartData.forEach((data, week) => [data.student, data.cohortAvg].forEach(value => {
-      const rect = chartEl.querySelectorAll('rect')[index];
-      const fullY = y(value), fullHeight = padT + chartH - fullY;
-      rect.style.transition = `y .8s var(--ease) ${week*70}ms, height .8s var(--ease) ${week*70}ms`;
-      rect.setAttribute('y', fullY); rect.setAttribute('height', fullHeight); index++;
-    }));
-    chartIO.disconnect();
-  }
-}), {threshold:.2});
-chartIO.observe(chartEl);
 </script>
 </body>
 </html>
