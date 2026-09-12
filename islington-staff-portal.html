@@ -324,6 +324,12 @@ a{ color:inherit; text-decoration:none; }
 .tag.due-soon{ background:var(--azure-tint); color:var(--azure); }
 .tag.overdue{ background:var(--brick-tint); color:var(--brick); }
 .tag.pending{ background:var(--marigold-tint); color:#8a5f1e; }
+.tag.urgent{ background:#B42318; color:#fff; }
+.tag.high{ background:var(--brick-tint); color:var(--brick); }
+.tag.normal{ background:var(--marigold-tint); color:#8a5f1e; }
+.tag.low{ background:var(--teal-tint); color:var(--teal-deep); }
+.msg-tags{ display:flex; align-items:center; gap:6px; }
+.msg-tags .tag{ min-width:60px; justify-content:center; }
 .priority-dot{ display:inline-flex; align-items:center; gap:6px; color:var(--ink-soft); }
 .priority-dot span{ width:7px; height:7px; border-radius:50%; }
 .row-action{
@@ -943,6 +949,12 @@ select.modal-input{
   cursor:pointer;
 }
 .modal-foot{ display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
+.msg-detail-meta{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; font-size:13.5px; }
+.msg-detail-meta b{ font-weight:600; }
+.msg-detail-meta .msg-student{ font-size:12px; color:var(--ink-faint); margin-left:4px; }
+#messageDetailModal .msg-tags{ margin-bottom:14px; }
+.msg-detail-text{ font-size:13.5px; color:var(--ink-soft); line-height:1.7; background:var(--paper); border-radius:12px; padding:14px 16px; margin:0; }
+.msg-detail-text b{ color:var(--ink); font-weight:600; }
 
 /* ---------- Toast ---------- */
 .toast{
@@ -998,10 +1010,6 @@ select.modal-input{
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
           Quick Actions
         </a>
-        <a class="nav-item" data-page="page-overview" data-anchor="performance" href="#performance">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg>
-          Performance
-        </a>
         <a class="nav-item" data-page="page-overview" data-anchor="activity" href="#activity">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           Staff Activity
@@ -1011,11 +1019,6 @@ select.modal-input{
           Staff Directory
         </a>
       </div>
-      <a class="nav-item" data-page="page-requests" href="#requests">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h9l5 5v13H5z"/><path d="M14 3v5h5M8 13h8M8 17h8"/></svg>
-        Student Requests
-        <span class="nav-badge">12</span>
-      </a>
       <a class="nav-item" data-page="page-attendance" href="#attendance-log">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="M8 14h2M8 17h5"/></svg>
         Attendance Log
@@ -1089,18 +1092,7 @@ select.modal-input{
 
     <!-- STAT CARDS -->
     <section class="section">
-      <div class="grid-4" id="statsGrid">
-        <div class="card stat-card" data-nav="page-requests" style="--s-bg:var(--azure-tint); --s-fg:var(--azure);">
-          <div class="stat-top">
-            <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h9l5 5v13H5z"/><path d="M14 3v5h5"/></svg></div>
-            <div class="stat-top-right">
-              <span class="stat-trend trend-up">▲ 8.2%</span>
-              <span class="info-dot" data-tip="<b>Open student requests</b>Tickets from students still waiting on a resolution — transcripts, enrollment changes, general queries. The ▲8.2% shows the queue is growing week over week, a signal to add capacity to the desk.">i</span>
-            </div>
-          </div>
-          <div class="stat-value">128</div>
-          <div class="stat-label">Open student requests</div>
-        </div>
+      <div class="grid-3" id="statsGrid">
         <div class="card stat-card" data-nav="page-messages" style="--s-bg:var(--teal-tint); --s-fg:var(--teal-deep);">
           <div class="stat-top">
             <div class="stat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
@@ -1168,260 +1160,39 @@ select.modal-input{
       </div>
     </section>
 
-    <!-- ============ PERFORMANCE ============ -->
-    <section class="section" id="performance">
-      <div class="section-head">
-        <h2>Service performance</h2>
-        <div class="view-toggle" id="perfTermToggle">
-          <button class="active" data-term="thisTerm">This term</button>
-          <button data-term="lastTerm">Last term</button>
-        </div>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <div class="card-head">
-            <h3>Requests handled vs. resolved</h3>
-            <div class="chart-legend">
-              <div class="legend-item" id="legendHandled"><span class="legend-dot" style="background:var(--chart-1)"></span>Handled</div>
-              <div class="legend-item" id="legendResolved"><span class="legend-dot" style="background:var(--chart-2)"></span>Resolved</div>
-            </div>
-          </div>
-          <svg id="perfChart" viewBox="0 0 540 220" width="100%" height="220"></svg>
-          <div class="chart-tooltip" id="chartTooltip"></div>
-          <div class="card-tooltip" id="cardTooltip"></div>
-        </div>
-        <div class="card">
-          <div class="card-head"><h3>Resolution rate by category</h3><div class="meta" id="categoryPeriod">Last 30 days</div></div>
-          <div id="categoryRows">
-          <div class="cat-row"><span class="name">Attendance</span><div class="bar-track"><div class="bar-fill" data-w="91" style="background:var(--chart-1)"></div></div><span class="score">91</span></div>
-          <div class="cat-row"><span class="name">Fees & Billing</span><div class="bar-track"><div class="bar-fill" data-w="84" style="background:var(--chart-1)"></div></div><span class="score">84</span></div>
-          <div class="cat-row"><span class="name">Academic Advising</span><div class="bar-track"><div class="bar-fill" data-w="88" style="background:var(--chart-1)"></div></div><span class="score">88</span></div>
-          <div class="cat-row"><span class="name">Parent Inquiries</span><div class="bar-track"><div class="bar-fill" data-w="79" style="background:var(--chart-1)"></div></div><span class="score">79</span></div>
-          <div class="cat-row"><span class="name">Records & IT</span><div class="bar-track"><div class="bar-fill" data-w="95" style="background:var(--chart-1)"></div></div><span class="score">95</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ STAFF ACTIVITY ============ -->
     <section class="section" id="activity">
       <div class="section-head"><h2>Recent staff activity</h2></div>
       <div class="card">
         <div class="activity-item">
           <div class="activity-row">
-            <div class="act-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">DC</div>
-            <div><div class="act-text"><b>Dana Cole</b> replied to Grace Ibarra about the tuition installment</div><div class="act-stamp">8 minutes ago</div></div>
+            <div class="act-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">SS</div>
+            <div><div class="act-text"><b>Student Services</b> replied to Grace Ibarra about the tuition installment</div><div class="act-stamp">8 minutes ago</div></div>
           </div>
           <div class="activity-more"><b>Case:</b> Fee installment dispute — Maya Ibarra. Offered a split-payment plan; awaiting the parent's confirmation.</div>
-        </div>
-        <div class="activity-item">
-          <div class="activity-row">
-            <div class="act-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">RM</div>
-            <div><div class="act-text"><b>Rina Marlow</b> scheduled a parent-teacher conference for Leo Osei</div><div class="act-stamp">41 minutes ago</div></div>
-          </div>
-          <div class="activity-more"><b>Case:</b> Missed-class follow-up. Meeting booked for 1:15 PM today in Student Affairs, Room 204.</div>
-        </div>
-        <div class="activity-item">
-          <div class="activity-row">
-            <div class="act-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">NA</div>
-            <div><div class="act-text"><b>Noah Alvarez</b> logged an attendance note for Leo Osei's case</div><div class="act-stamp">1 hour ago</div></div>
-          </div>
-          <div class="activity-more"><b>Note:</b> Fourth consecutive missed session recorded; attendance threshold alert triggered automatically.</div>
-        </div>
-        <div class="activity-item">
-          <div class="activity-row">
-            <div class="act-avatar" style="background:linear-gradient(135deg,#BE5039,#8C3A28)">SP</div>
-            <div><div class="act-text"><b>Sofia Park</b> sent a fee reminder to Sunil Bhatt</div><div class="act-stamp">2 hours ago</div></div>
-          </div>
-          <div class="activity-more"><b>Case:</b> Scholarship verification. Reminder covered the outstanding balance ahead of today's interview.</div>
-        </div>
-        <div class="activity-item">
-          <div class="activity-row">
-            <div class="act-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">DC</div>
-            <div><div class="act-text"><b>Dana Cole</b> resent Hana Weiss's report card to her parent</div><div class="act-stamp">3 hours ago</div></div>
-          </div>
-          <div class="activity-more"><b>Case:</b> Report card re-send request. Parent confirmed receipt the same afternoon.</div>
         </div>
       </div>
     </section>
 
     <!-- ============ STAFF DIRECTORY ============ -->
     <section class="section" id="directory">
-      <div class="section-head"><h2>Staff directory</h2><div class="meta">5 advisors on duty</div></div>
+      <div class="section-head"><h2>Staff directory</h2><div class="meta">1 team on duty</div></div>
       <div class="grid-3">
         <div class="card staff-card">
-          <div class="staff-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">DC</div>
-          <div class="staff-name">Dana Cole</div>
-          <div class="staff-role">Billing & Records</div>
-          <div class="staff-stat">18 cases this week</div>
-          <div class="staff-more">Focus this week: tuition installment plans and report-card re-sends.</div>
-        </div>
-        <div class="card staff-card">
-          <div class="staff-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">RM</div>
-          <div class="staff-name">Rina Marlow</div>
-          <div class="staff-role">Student Affairs Lead</div>
-          <div class="staff-stat">22 cases this week</div>
-          <div class="staff-more">Focus this week: parent-teacher conferences and fee-dispute follow-ups.</div>
-        </div>
-        <div class="card staff-card">
-          <div class="staff-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">NA</div>
-          <div class="staff-name">Noah Alvarez</div>
-          <div class="staff-role">Attendance & Academic Advising</div>
-          <div class="staff-stat">15 cases this week</div>
-          <div class="staff-more">Focus this week: attendance threshold cases and advising check-ins.</div>
+          <div class="staff-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">SS</div>
+          <div class="staff-name">Student Services</div>
+          <div class="staff-role">Student Affairs Office</div>
+          <div class="staff-stat">55 cases this week</div>
+          <div class="staff-more">Focus this week: tuition installment plans, parent-teacher conferences, and attendance follow-ups.</div>
         </div>
       </div>
     </section>
-
-    <!-- ============ CLOSING STRIP ============ -->
-    <div class="review-strip">
-      <div>
-        <div class="display">Weekly Service Review</div>
-        <p>Friday, 2:00 PM · Conference Room B · Bring open-case and parent-message summaries</p>
-      </div>
-      <div class="countdown">
-        <div class="cd-box" data-nav="page-alerts"><div class="cd-num">128</div><div class="cd-lbl">open cases</div></div>
-        <div class="cd-box" data-nav="page-messages"><div class="cd-num">42</div><div class="cd-lbl">parent msgs</div></div>
-      </div>
-    </div>
 
     <footer class="site-footer">
       © 2026 Islington. <a href="https://app.mysecondteacher.com.np/copyright-policy" target="_blank" rel="noopener">Copyright</a>
     </footer>
 
     </div><!-- /page-overview -->
-
-    <!-- ============ PAGE: STUDENT REQUESTS ============ -->
-    <div class="page-view" id="page-requests" hidden>
-    <section class="section" id="requests">
-      <div class="section-head">
-        <div>
-          <h2>Student requests</h2>
-          <div class="meta">9 cases updated across today and yesterday</div>
-        </div>
-        <div class="pill-filters" id="requestsFilters">
-          <button class="pill active" data-filter="all">All</button>
-          <button class="pill" data-filter="open">Open</button>
-          <button class="pill" data-filter="progress">In progress</button>
-          <button class="pill" data-filter="urgent">Urgent</button>
-          <button class="pill" data-filter="parent">Needs parent reply</button>
-        </div>
-      </div>
-      <div class="card">
-        <div class="table-scroll">
-        <table class="req-table" id="requestsTable">
-          <thead>
-            <tr><th>Student</th><th>Request</th><th>Parent</th><th>Priority</th><th>Status</th><th>Assigned</th><th>Updated</th><th></th></tr>
-          </thead>
-          <tbody>
-            <tr class="req-group-row"><td colspan="8">Today</td></tr>
-            <tr class="req-row has-more" data-status="urgent" data-parent-needed="true">
-              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">MI</div><div><div class="student-name">Maya Ibarra</div><div class="student-id">ID 20394 · Sophomore</div></div></div></td>
-              <td>Fee installment dispute</td>
-              <td><button class="parent-link" onclick="openParentPanel('maya ibarra')">Grace Ibarra</button></td>
-              <td><span class="priority-dot"><span style="background:var(--brick)"></span>High</span></td>
-              <td><span class="tag overdue">Urgent</span></td>
-              <td>D. Cole</td>
-              <td><span class="time-ago" data-ago-minutes="18">—</span></td>
-              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('maya ibarra')">☎</button></td>
-            </tr>
-            <tr class="req-more-row" data-status="urgent" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> Partial refund approved; a split-payment plan was offered and is awaiting the parent's confirmation.</div></td></tr>
-            <tr class="req-row has-more" data-status="progress" data-parent-needed="false">
-              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">JT</div><div><div class="student-name">Jonah Turner</div><div class="student-id">ID 18827 · Senior</div></div></div></td>
-              <td>Financial aid document review</td>
-              <td><button class="parent-link" onclick="openParentPanel('jonah turner')">Liam Turner</button></td>
-              <td><span class="priority-dot"><span style="background:var(--marigold)"></span>Medium</span></td>
-              <td><span class="tag due-soon">In progress</span></td>
-              <td>R. Marlow</td>
-              <td><span class="time-ago" data-ago-minutes="47">—</span></td>
-              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('jonah turner')">☎</button></td>
-            </tr>
-            <tr class="req-more-row" data-status="progress" data-parent-needed="false"><td colspan="8"><div class="req-more"><b>Last update:</b> Second consult this month — repeat-contact flag is active, documents under review.</div></td></tr>
-            <tr class="req-row has-more" data-status="open" data-parent-needed="true">
-              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">SK</div><div><div class="student-name">Sana Karimi</div><div class="student-id">ID 20981 · Freshman</div></div></div></td>
-              <td>Attendance concern raised by parent</td>
-              <td><button class="parent-link" onclick="openParentPanel('sana karimi')">Farah Karimi</button></td>
-              <td><span class="priority-dot"><span style="background:var(--azure)"></span>Low</span></td>
-              <td><span class="tag pending">Open</span></td>
-              <td>Unassigned</td>
-              <td><span class="time-ago" data-ago-minutes="120">—</span></td>
-              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('sana karimi')">☎</button></td>
-            </tr>
-            <tr class="req-more-row" data-status="open" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> First-term advising check-in went well; written summary due before Friday.</div></td></tr>
-            <tr class="req-row has-more" data-status="progress" data-parent-needed="true">
-              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#BE5039,#8C3A28)">LO</div><div><div class="student-name">Leo Osei</div><div class="student-id">ID 19502 · Junior</div></div></div></td>
-              <td>Missed-class follow-up</td>
-              <td><button class="parent-link" onclick="openParentPanel('leo osei')">Adjoa Osei</button></td>
-              <td><span class="priority-dot"><span style="background:var(--brick)"></span>High</span></td>
-              <td><span class="tag due-soon">In progress</span></td>
-              <td>N. Alvarez</td>
-              <td><span class="time-ago" data-ago-minutes="9">—</span></td>
-              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('leo osei')">☎</button></td>
-            </tr>
-            <tr class="req-more-row" data-status="progress" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> Attendance threshold reached — parent-teacher conference scheduled for today at 1:15 PM.</div></td></tr>
-            <tr class="req-row has-more" data-status="resolved" data-parent-needed="false">
-              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">HW</div><div><div class="student-name">Hana Weiss</div><div class="student-id">ID 21044 · Sophomore</div></div></div></td>
-              <td>Report card re-send request</td>
-              <td><button class="parent-link" onclick="openParentPanel('hana weiss')">Tomas Weiss</button></td>
-              <td><span class="priority-dot"><span style="background:var(--azure)"></span>Low</span></td>
-              <td><span class="tag ok">Resolved</span></td>
-              <td>D. Cole</td>
-              <td><span class="time-ago" data-ago-minutes="1320">—</span></td>
-              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('hana weiss')">☎</button></td>
-            </tr>
-            <tr class="req-more-row" data-status="resolved" data-parent-needed="false"><td colspan="8"><div class="req-more"><b>Last update:</b> Re-sent and confirmed received; case closed.</div></td></tr>
-            <tr class="req-row has-more" data-status="open" data-parent-needed="true">
-              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">PB</div><div><div class="student-name">Priya Bhatt</div><div class="student-id">ID 20117 · Senior</div></div></div></td>
-              <td>Scholarship verification</td>
-              <td><button class="parent-link" onclick="openParentPanel('priya bhatt')">Sunil Bhatt</button></td>
-              <td><span class="priority-dot"><span style="background:var(--marigold)"></span>Medium</span></td>
-              <td><span class="tag pending">Open</span></td>
-              <td>Unassigned</td>
-              <td><span class="time-ago" data-ago-minutes="300">—</span></td>
-              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('priya bhatt')">☎</button></td>
-            </tr>
-            <tr class="req-more-row" data-status="open" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> Financial hold on the account is under review with finance ahead of the scholarship interview.</div></td></tr>
-
-            <tr class="req-group-row"><td colspan="8">Yesterday</td></tr>
-            <tr class="req-row has-more" data-status="progress" data-parent-needed="false">
-              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#7A5CB0,#4E3A78)">OH</div><div><div class="student-name">Omar Haddad</div><div class="student-id">ID 20655 · Junior</div></div></div></td>
-              <td>Course withdrawal request</td>
-              <td><button class="parent-link" onclick="openParentPanel('omar haddad')">Nadia Haddad</button></td>
-              <td><span class="priority-dot"><span style="background:var(--marigold)"></span>Medium</span></td>
-              <td><span class="tag due-soon">In progress</span></td>
-              <td>R. Marlow</td>
-              <td><span class="time-ago" data-ago-minutes="1500">—</span></td>
-              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('omar haddad')">☎</button></td>
-            </tr>
-            <tr class="req-more-row" data-status="progress" data-parent-needed="false"><td colspan="8"><div class="req-more"><b>Last update:</b> Advisor sign-off received; registrar is processing the drop before the add/drop deadline.</div></td></tr>
-            <tr class="req-row has-more" data-status="urgent" data-parent-needed="true">
-              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">ID</div><div><div class="student-name">Ines Dubois</div><div class="student-id">ID 19864 · Sophomore</div></div></div></td>
-              <td>Housing complaint follow-up</td>
-              <td><button class="parent-link" onclick="openParentPanel('ines dubois')">Marc Dubois</button></td>
-              <td><span class="priority-dot"><span style="background:var(--brick)"></span>High</span></td>
-              <td><span class="tag overdue">Urgent</span></td>
-              <td>D. Cole</td>
-              <td><span class="time-ago" data-ago-minutes="1800">—</span></td>
-              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('ines dubois')">☎</button></td>
-            </tr>
-            <tr class="req-more-row" data-status="urgent" data-parent-needed="true"><td colspan="8"><div class="req-more"><b>Last update:</b> Maintenance inspected the room; parent asked for a written resolution timeline before Monday.</div></td></tr>
-            <tr class="req-row has-more" data-status="resolved" data-parent-needed="false">
-              <td><div class="student-cell"><div class="mini-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">RS</div><div><div class="student-name">Ravi Shah</div><div class="student-id">ID 20233 · Freshman</div></div></div></td>
-              <td>Late fee waiver appeal</td>
-              <td><button class="parent-link" onclick="openParentPanel('ravi shah')">Anjali Shah</button></td>
-              <td><span class="priority-dot"><span style="background:var(--azure)"></span>Low</span></td>
-              <td><span class="tag ok">Resolved</span></td>
-              <td>N. Alvarez</td>
-              <td><span class="time-ago" data-ago-minutes="2200">—</span></td>
-              <td><button class="row-action" title="Contact parent" onclick="openParentPanel('ravi shah')">☎</button></td>
-            </tr>
-            <tr class="req-more-row" data-status="resolved" data-parent-needed="false"><td colspan="8"><div class="req-more"><b>Last update:</b> Waiver approved for the first late fee; confirmation email sent to the parent.</div></td></tr>
-          </tbody>
-        </table>
-        </div>
-      </div>
-    </section>
-    </div><!-- /page-requests -->
 
     <!-- ============ PAGE: ATTENDANCE LOG ============ -->
     <div class="page-view" id="page-attendance" hidden>
@@ -1502,44 +1273,14 @@ select.modal-input{
         <section class="appt-day appt-day-today">
           <div class="appt-day-head"><h3>Today</h3><span class="appt-day-date">Sat, Sept 12</span><span class="appt-day-count">3 messages</span></div>
           <div class="card">
-            <div class="msg-item" data-topic="fees" data-needs-reply="true">
-              <div class="msg-row">
-                <div class="msg-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">GI</div>
-                <div>
-                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('maya ibarra')">Grace Ibarra</button> <span class="msg-student">— parent of Maya Ibarra</span></div>
-                  <div class="msg-subject">Question about the second tuition installment</div>
-                </div>
-                <span class="tag due-soon">Fees</span>
-                <div class="msg-meta">
-                  <span class="msg-time">32 min ago</span>
-                  <button class="act-btn" onclick="openComposeModal('Grace Ibarra','Re: Question about the second tuition installment')">Reply</button>
-                </div>
-              </div>
-              <div class="msg-more"><b>Message:</b> Hi, could you confirm when the second tuition installment is due and whether a split payment is possible this term?</div>
-            </div>
-            <div class="msg-item" data-topic="attendance" data-needs-reply="true">
-              <div class="msg-row">
-                <div class="msg-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">FK</div>
-                <div>
-                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('sana karimi')">Farah Karimi</button> <span class="msg-student">— parent of Sana Karimi</span></div>
-                  <div class="msg-subject">Asking why Sana was marked late twice this week</div>
-                </div>
-                <span class="tag pending">Attendance</span>
-                <div class="msg-meta">
-                  <span class="msg-time">1 hour ago</span>
-                  <button class="act-btn" onclick="openComposeModal('Farah Karimi','Re: Sana\'s attendance this week')">Reply</button>
-                </div>
-              </div>
-              <div class="msg-more"><b>Message:</b> I noticed two late marks for Sana this week — she says the bus schedule changed. Can you check the times logged?</div>
-            </div>
-            <div class="msg-item" data-topic="attendance" data-needs-reply="true">
+            <div class="msg-item" data-topic="attendance" data-needs-reply="true" data-priority="urgent">
               <div class="msg-row">
                 <div class="msg-avatar" style="background:linear-gradient(135deg,#BE5039,#8C3A28)">AO</div>
                 <div>
                   <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('leo osei')">Adjoa Osei</button> <span class="msg-student">— parent of Leo Osei</span></div>
                   <div class="msg-subject">Requesting an update on the missed-lab follow-up</div>
                 </div>
-                <span class="tag overdue">Attendance</span>
+                <div class="msg-tags"><span class="tag urgent">Urgent</span><span class="tag overdue">Attendance</span></div>
                 <div class="msg-meta">
                   <span class="msg-time">2 hours ago</span>
                   <button class="act-btn" onclick="openComposeModal('Adjoa Osei','Re: Missed-lab follow-up')">Reply</button>
@@ -1547,41 +1288,71 @@ select.modal-input{
               </div>
               <div class="msg-more"><b>Message:</b> Following up on the missed-lab session from last week — has a make-up session been arranged for Leo yet?</div>
             </div>
+            <div class="msg-item" data-topic="fees" data-needs-reply="true" data-priority="high">
+              <div class="msg-row">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">GI</div>
+                <div>
+                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('maya ibarra')">Grace Ibarra</button> <span class="msg-student">— parent of Maya Ibarra</span></div>
+                  <div class="msg-subject">Question about the second tuition installment</div>
+                </div>
+                <div class="msg-tags"><span class="tag high">High</span><span class="tag due-soon">Fees</span></div>
+                <div class="msg-meta">
+                  <span class="msg-time">32 min ago</span>
+                  <button class="act-btn" onclick="openComposeModal('Grace Ibarra','Re: Question about the second tuition installment')">Reply</button>
+                </div>
+              </div>
+              <div class="msg-more"><b>Message:</b> Hi, could you confirm when the second tuition installment is due and whether a split payment is possible this term?</div>
+            </div>
+            <div class="msg-item" data-topic="attendance" data-needs-reply="true" data-priority="normal">
+              <div class="msg-row">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#34614F,#1F4438)">FK</div>
+                <div>
+                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('sana karimi')">Farah Karimi</button> <span class="msg-student">— parent of Sana Karimi</span></div>
+                  <div class="msg-subject">Asking why Sana was marked late twice this week</div>
+                </div>
+                <div class="msg-tags"><span class="tag normal">Normal</span><span class="tag pending">Attendance</span></div>
+                <div class="msg-meta">
+                  <span class="msg-time">1 hour ago</span>
+                  <button class="act-btn" onclick="openComposeModal('Farah Karimi','Re: Sana\'s attendance this week')">Reply</button>
+                </div>
+              </div>
+              <div class="msg-more"><b>Message:</b> I noticed two late marks for Sana this week — she says the bus schedule changed. Can you check the times logged?</div>
+            </div>
           </div>
         </section>
 
         <section class="appt-day appt-day-past">
           <div class="appt-day-head"><h3>Yesterday</h3><span class="appt-day-date">Fri, Sept 11</span><span class="appt-day-count">2 messages</span></div>
           <div class="card">
-            <div class="msg-item" data-topic="general" data-needs-reply="false">
-              <div class="msg-row">
-                <div class="msg-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">TW</div>
-                <div>
-                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('hana weiss')">Tomas Weiss</button> <span class="msg-student">— parent of Hana Weiss</span></div>
-                  <div class="msg-subject">Thanks for the report card, confirming receipt</div>
-                </div>
-                <span class="tag ok">General</span>
-                <div class="msg-meta">
-                  <span class="msg-time">Yesterday</span>
-                  <button class="act-btn outline" data-mark-done>Mark done</button>
-                </div>
-              </div>
-              <div class="msg-more"><b>Message:</b> Got the resent report card, thank you — everything looks good on our end.</div>
-            </div>
-            <div class="msg-item" data-topic="academic" data-needs-reply="true">
+            <div class="msg-item" data-topic="academic" data-needs-reply="true" data-priority="high">
               <div class="msg-row">
                 <div class="msg-avatar" style="background:linear-gradient(135deg,#E2A44E,#A6753A)">SB</div>
                 <div>
                   <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('priya bhatt')">Sunil Bhatt</button> <span class="msg-student">— parent of Priya Bhatt</span></div>
                   <div class="msg-subject">Asking about scholarship verification timeline</div>
                 </div>
-                <span class="tag due-soon">Academic</span>
+                <div class="msg-tags"><span class="tag high">High</span><span class="tag due-soon">Academic</span></div>
                 <div class="msg-meta">
                   <span class="msg-time">Yesterday</span>
                   <button class="act-btn" onclick="openComposeModal('Sunil Bhatt','Re: Scholarship verification timeline')">Reply</button>
                 </div>
               </div>
               <div class="msg-more"><b>Message:</b> Just checking in — when should we expect the scholarship verification to be finalized ahead of the interview?</div>
+            </div>
+            <div class="msg-item" data-topic="general" data-needs-reply="false" data-priority="low">
+              <div class="msg-row">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#3B6E91,#294E68)">TW</div>
+                <div>
+                  <div class="msg-parent"><button class="parent-link" onclick="openParentPanel('hana weiss')">Tomas Weiss</button> <span class="msg-student">— parent of Hana Weiss</span></div>
+                  <div class="msg-subject">Thanks for the report card, confirming receipt</div>
+                </div>
+                <div class="msg-tags"><span class="tag low">Low</span><span class="tag ok">General</span></div>
+                <div class="msg-meta">
+                  <span class="msg-time">Yesterday</span>
+                  <button class="act-btn outline" data-mark-done>Mark done</button>
+                </div>
+              </div>
+              <div class="msg-more"><b>Message:</b> Got the resent report card, thank you — everything looks good on our end.</div>
             </div>
           </div>
         </section>
@@ -1810,6 +1581,8 @@ select.modal-input{
   </main>
 </div>
 
+<div class="card-tooltip" id="cardTooltip"></div>
+
 <!-- ============ PARENT CONTACT PANEL ============ -->
 <div class="panel-backdrop" id="parentBackdrop"></div>
 <aside class="parent-panel" id="parentPanel">
@@ -1839,6 +1612,24 @@ select.modal-input{
   <div class="modal-foot">
     <button class="act-btn outline" id="composeCancel">Cancel</button>
     <button class="act-btn" id="composeSend">Send message</button>
+  </div>
+</div>
+
+<!-- ============ PARENT MESSAGE DETAIL MODAL ============ -->
+<div class="modal-backdrop" id="messageDetailBackdrop"></div>
+<div class="modal" id="messageDetailModal">
+  <div class="modal-head"><h3 id="mdmSubject">Subject</h3><button class="panel-close" id="messageDetailClose">✕</button></div>
+  <div class="modal-body">
+    <div class="msg-detail-meta">
+      <span id="mdmParent"></span>
+      <span class="msg-time" id="mdmTime"></span>
+    </div>
+    <div class="msg-tags" id="mdmTags"></div>
+    <p class="msg-detail-text" id="mdmText"></p>
+  </div>
+  <div class="modal-foot">
+    <button class="act-btn outline" id="mdmMarkDone">Mark done</button>
+    <button class="act-btn" id="mdmReply">Reply</button>
   </div>
 </div>
 
@@ -1992,18 +1783,11 @@ document.querySelectorAll('.stat-card[data-nav]').forEach(card => {
   });
 });
 
-/* Weekly Service Review strip: open cases -> Alerts, parent msgs -> Parent Messages */
-document.querySelectorAll('.cd-box[data-nav]').forEach(box => {
-  box.addEventListener('click', () => {
-    hideSiteLoaderNow();
-    goToPage(box.dataset.nav);
-  });
-});
 
 /* Scroll-spy: while on the Overview page, highlight the sub-nav item
    for whichever section (Quick Actions / Performance / Staff Activity /
    Staff Directory / the hero itself) is currently in view. */
-const overviewSpyTargets = ['overview', 'quick-actions', 'performance', 'activity', 'directory']
+const overviewSpyTargets = ['overview', 'quick-actions', 'activity', 'directory']
   .map(id => document.getElementById(id))
   .filter(Boolean);
 
@@ -2265,24 +2049,6 @@ document.getElementById('apptSave').addEventListener('click', () => {
   showToast(isReschedule ? `Appointment rescheduled with ${info.parent}` : `Appointment scheduled with ${info.parent}`);
 });
 
-/* ---------- Student requests: working filters ---------- */
-const requestsFilters = document.getElementById('requestsFilters');
-if (requestsFilters){
-  requestsFilters.querySelectorAll('.pill').forEach(p => {
-    p.addEventListener('click', () => {
-      requestsFilters.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
-      p.classList.add('active');
-      const f = p.dataset.filter;
-      document.querySelectorAll('#requestsTable tbody tr').forEach(row => {
-        if (row.classList.contains('req-group-row')){ row.style.display = ''; return; }
-        if (f === 'all') row.style.display = '';
-        else if (f === 'parent') row.style.display = row.dataset.parentNeeded === 'true' ? '' : 'none';
-        else row.style.display = row.dataset.status === f ? '' : 'none';
-      });
-    });
-  });
-}
-
 /* ---------- Parent messages: working filters + mark done ---------- */
 const messagesFilters = document.getElementById('messagesFilters');
 if (messagesFilters){
@@ -2311,6 +2077,66 @@ document.querySelectorAll('#messagesTable [data-mark-done]').forEach(btn => {
     item.classList.add('is-done');
     btn.textContent = 'Done ✓';
     btn.disabled = true;
+  });
+});
+
+/* ---------- Parent messages: order by priority, urgent first ---------- */
+const messagePriorityOrder = { urgent: 0, high: 1, normal: 2, low: 3 };
+document.querySelectorAll('#messagesTable .card').forEach(card => {
+  Array.from(card.querySelectorAll('.msg-item'))
+    .sort((a, b) => (messagePriorityOrder[a.dataset.priority] ?? 99) - (messagePriorityOrder[b.dataset.priority] ?? 99))
+    .forEach(item => card.appendChild(item));
+});
+
+/* ---------- Parent messages: click a message to see the full matter in a popup ---------- */
+const messageDetailBackdrop = document.getElementById('messageDetailBackdrop');
+const messageDetailModal = document.getElementById('messageDetailModal');
+let mdmCurrentItem = null;
+function openMessageDetail(item){
+  mdmCurrentItem = item;
+  const parentBtn = item.querySelector('.parent-link');
+  const studentLine = item.querySelector('.msg-student');
+  const subject = item.querySelector('.msg-subject')?.textContent || '';
+  const tagsHtml = item.querySelector('.msg-tags')?.innerHTML || '';
+  const moreHtml = (item.querySelector('.msg-more')?.innerHTML || '').replace(/^<b>Message:<\/b>\s*/, '');
+  const time = item.querySelector('.msg-time')?.textContent || '';
+  document.getElementById('mdmSubject').textContent = subject;
+  document.getElementById('mdmParent').innerHTML = `<b>${parentBtn ? parentBtn.textContent : ''}</b><span class="msg-student">${studentLine ? studentLine.textContent : ''}</span>`;
+  document.getElementById('mdmTime').textContent = time;
+  document.getElementById('mdmTags').innerHTML = tagsHtml;
+  document.getElementById('mdmText').innerHTML = moreHtml;
+  const markBtn = item.querySelector('[data-mark-done]');
+  const mdmMarkDone = document.getElementById('mdmMarkDone');
+  mdmMarkDone.style.display = markBtn ? '' : 'none';
+  mdmMarkDone.disabled = markBtn ? markBtn.disabled : false;
+  mdmMarkDone.textContent = markBtn && markBtn.disabled ? 'Done ✓' : 'Mark done';
+  messageDetailModal.dataset.parent = parentBtn ? parentBtn.textContent : '';
+  messageDetailModal.dataset.subject = subject;
+  messageDetailModal.classList.add('open');
+  messageDetailBackdrop.classList.add('open');
+}
+function closeMessageDetail(){
+  messageDetailModal.classList.remove('open');
+  messageDetailBackdrop.classList.remove('open');
+  mdmCurrentItem = null;
+}
+messageDetailBackdrop.addEventListener('click', closeMessageDetail);
+document.getElementById('messageDetailClose').addEventListener('click', closeMessageDetail);
+document.getElementById('mdmReply').addEventListener('click', () => {
+  const parent = messageDetailModal.dataset.parent;
+  const subject = messageDetailModal.dataset.subject;
+  closeMessageDetail();
+  openComposeModal(parent, 'Re: ' + subject);
+});
+document.getElementById('mdmMarkDone').addEventListener('click', () => {
+  const btn = mdmCurrentItem && mdmCurrentItem.querySelector('[data-mark-done]');
+  if (btn && !btn.disabled) btn.click();
+  closeMessageDetail();
+});
+document.querySelectorAll('#messagesTable .msg-item').forEach(item => {
+  item.addEventListener('click', (e) => {
+    if (e.target.closest('button') || e.target.closest('a')) return;
+    openMessageDetail(item);
   });
 });
 
@@ -2963,206 +2789,6 @@ document.addEventListener('click', (e) => {
   if (!e.target.closest('.fee-search-wrap')) closeFeeSuggest();
 });
 
-/* Generic active-class toggling for any .view-toggle group (the Performance
-   term switch below attaches its own extra handler on top of this one). */
-document.querySelectorAll('.view-toggle button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
-
-/* ---------- Service performance: This term / Last term ---------- */
-/* Each term carries its own 6-week handled-vs-resolved series and its own
-   category resolution scores, so the toggle actually swaps the data shown
-   rather than just changing which button looks pressed. */
-const perfDatasets = {
-  thisTerm: {
-    period: 'Last 30 days',
-    chart: [
-      { label:'Wk 1', handled:62, resolved:48 },
-      { label:'Wk 2', handled:71, resolved:55 },
-      { label:'Wk 3', handled:66, resolved:60 },
-      { label:'Wk 4', handled:84, resolved:70 },
-      { label:'Wk 5', handled:78, resolved:74 },
-      { label:'Wk 6', handled:91, resolved:82 },
-    ],
-    categories: [91, 84, 88, 79, 95],
-  },
-  lastTerm: {
-    period: 'Spring 2026 term',
-    chart: [
-      { label:'Wk 1', handled:54, resolved:41 },
-      { label:'Wk 2', handled:59, resolved:47 },
-      { label:'Wk 3', handled:63, resolved:52 },
-      { label:'Wk 4', handled:58, resolved:49 },
-      { label:'Wk 5', handled:70, resolved:61 },
-      { label:'Wk 6', handled:75, resolved:68 },
-    ],
-    categories: [86, 77, 90, 72, 93],
-  },
-};
-let currentPerfTerm = 'thisTerm';
-
-const svgNS = 'http://www.w3.org/2000/svg';
-const chartEl = document.getElementById('perfChart');
-const W=540,H=220,padL=26,padB=26,padT=10,padR=6;
-const chartW=W-padL-padR, chartH=H-padT-padB;
-const barW = 15;
-
-/* ---------- Custom tooltip for the Requests handled vs. resolved chart ---------- */
-const chartTooltipEl = document.getElementById('chartTooltip');
-/* Move it out from inside .card: that card lifts on hover via a CSS transform,
-   and a transformed ancestor turns position:fixed into "fixed relative to that
-   ancestor" instead of the viewport — which is why the tooltip was landing far
-   from the cursor. Re-parenting to <body> keeps it truly viewport-fixed. */
-document.body.appendChild(chartTooltipEl);
-function showChartTooltip(html, evt){
-  chartTooltipEl.innerHTML = html;
-  chartTooltipEl.classList.add('show');
-  positionChartTooltip(evt);
-}
-function positionChartTooltip(evt){
-  const pad = 16;
-  const ttRect = chartTooltipEl.getBoundingClientRect();
-  let left = evt.clientX + pad;
-  let top = evt.clientY + pad;
-  if (left + ttRect.width > window.innerWidth - 10) left = evt.clientX - ttRect.width - pad;
-  if (top + ttRect.height > window.innerHeight - 10) top = evt.clientY - ttRect.height - pad;
-  chartTooltipEl.style.left = left + 'px';
-  chartTooltipEl.style.top = top + 'px';
-}
-function hideChartTooltip(){
-  chartTooltipEl.classList.remove('show');
-}
-
-/* Draws (or redraws) the bar chart for whichever term's data is passed in.
-   animate=true plays the rise-in transition; used both on first load and
-   whenever the This term / Last term toggle is clicked. */
-function renderPerfChart(chartData, animate){
-  chartEl.innerHTML = '';
-  const maxVal = Math.max(...chartData.map(d=>Math.max(d.handled,d.resolved)))*1.15;
-  const groupW = chartW/chartData.length;
-  function y(v){ return padT + chartH - (v/maxVal)*chartH; }
-
-  [0,0.25,0.5,0.75,1].forEach(f=>{
-    const gy = padT + chartH*f;
-    const line = document.createElementNS(svgNS,'line');
-    line.setAttribute('x1',padL); line.setAttribute('x2',W-padR);
-    line.setAttribute('y1',gy); line.setAttribute('y2',gy);
-    line.setAttribute('stroke','#E7E9EE'); line.setAttribute('stroke-width','1');
-    chartEl.appendChild(line);
-  });
-
-  chartData.forEach((d,i)=>{
-    const cx = padL + groupW*i + groupW/2;
-    const pct = Math.round((d.resolved / d.handled) * 100);
-    [
-      { val:d.handled, color:'#5B6BC0', dx:-barW/2-3, type:'handled' },
-      { val:d.resolved, color:'#4E93C7', dx:3, type:'resolved' }
-    ].forEach(b=>{
-      const rect = document.createElementNS(svgNS,'rect');
-      const fullY = y(b.val), fullH = padT+chartH-fullY;
-      rect.setAttribute('x', cx+b.dx);
-      rect.setAttribute('width', barW);
-      rect.setAttribute('rx', 4);
-      rect.setAttribute('fill', b.color);
-      rect.setAttribute('class','bar-col');
-      if (animate){
-        rect.setAttribute('y', padT+chartH);
-        rect.setAttribute('height', 0);
-      } else {
-        rect.setAttribute('y', fullY);
-        rect.setAttribute('height', fullH);
-      }
-      chartEl.appendChild(rect);
-
-      const tooltipHtml = b.type === 'handled'
-        ? `<b>${d.label} · Handled</b><br>${d.handled} requests were picked up by staff this week.<br><span class="tt-pct">${pct}%</span> of those have been resolved so far.`
-        : `<b>${d.label} · Resolved</b><br>${d.resolved} of ${d.handled} handled requests were fully closed this week.<br>Resolution rate: <span class="tt-pct">${pct}%</span>`;
-      rect.addEventListener('mouseenter', (e) => showChartTooltip(tooltipHtml, e));
-      rect.addEventListener('mousemove', positionChartTooltip);
-      rect.addEventListener('mouseleave', hideChartTooltip);
-    });
-    const label = document.createElementNS(svgNS,'text');
-    label.setAttribute('x',cx); label.setAttribute('y',H-6); label.setAttribute('text-anchor','middle');
-    label.setAttribute('font-size','10.5'); label.setAttribute('fill','#8D95A3'); label.setAttribute('font-family','Inter, sans-serif');
-    label.textContent = d.label;
-    chartEl.appendChild(label);
-  });
-
-  if (animate){
-    requestAnimationFrame(() => {
-      let idx=0;
-      chartData.forEach((d,i)=>{
-        [d.handled,d.resolved].forEach(val=>{
-          const rect = chartEl.querySelectorAll('rect')[idx];
-          const fullY = y(val), fullH = padT+chartH-fullY;
-          rect.style.transition = `y .8s var(--ease) ${i*70}ms, height .8s var(--ease) ${i*70}ms`;
-          rect.setAttribute('y', fullY);
-          rect.setAttribute('height', fullH);
-          idx++;
-        });
-      });
-    });
-  }
-}
-
-/* Updates the "Resolution rate by category" bars for whichever term is active. */
-function renderPerfCategories(scores){
-  const rows = document.querySelectorAll('#categoryRows .cat-row');
-  rows.forEach((row, i) => {
-    const fill = row.querySelector('.bar-fill');
-    const scoreEl = row.querySelector('.score');
-    const w = scores[i];
-    fill.setAttribute('data-w', w);
-    fill.style.width = w + '%';
-    scoreEl.textContent = w;
-  });
-}
-
-/* Hovering the legend itself explains the metric in general, using
-   whichever term's totals are currently on screen. */
-const legendHandledEl = document.getElementById('legendHandled');
-const legendResolvedEl = document.getElementById('legendResolved');
-function perfLegendHtml(kind){
-  const data = perfDatasets[currentPerfTerm].chart;
-  const totalHandled = data.reduce((sum, d) => sum + d.handled, 0);
-  const totalResolved = data.reduce((sum, d) => sum + d.resolved, 0);
-  const overallPct = Math.round((totalResolved / totalHandled) * 100);
-  const termLabel = currentPerfTerm === 'thisTerm' ? 'this term' : 'last term';
-  if (kind === 'handled'){
-    return `<b>Handled</b><br>Requests a staff member has picked up and started working, whether or not they're closed yet.<br>${totalHandled} handled ${termLabel}.`;
-  }
-  return `<b>Resolved</b><br>Requests that have been fully closed out with the student or parent.<br>${totalResolved} of ${totalHandled} handled ${termLabel} — <span class="tt-pct">${overallPct}%</span> resolution rate.`;
-}
-if (legendHandledEl){
-  legendHandledEl.addEventListener('mouseenter', (e) => showChartTooltip(perfLegendHtml('handled'), e));
-  legendHandledEl.addEventListener('mousemove', positionChartTooltip);
-  legendHandledEl.addEventListener('mouseleave', hideChartTooltip);
-}
-if (legendResolvedEl){
-  legendResolvedEl.addEventListener('mouseenter', (e) => showChartTooltip(perfLegendHtml('resolved'), e));
-  legendResolvedEl.addEventListener('mousemove', positionChartTooltip);
-  legendResolvedEl.addEventListener('mouseleave', hideChartTooltip);
-}
-
-/* This term / Last term buttons: swap both the chart and the category
-   scores to the selected term's data, on top of the generic active-state
-   toggle already wired above. */
-const categoryPeriodEl = document.getElementById('categoryPeriod');
-document.querySelectorAll('#perfTermToggle button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const term = btn.dataset.term;
-    if (term === currentPerfTerm) return;
-    currentPerfTerm = term;
-    const data = perfDatasets[term];
-    renderPerfChart(data.chart, true);
-    renderPerfCategories(data.categories);
-    if (categoryPeriodEl) categoryPeriodEl.textContent = data.period;
-  });
-});
-
 /* ---------- Live "time ago" for request rows & alerts ---------- */
 (function(){
   const els = Array.from(document.querySelectorAll('.time-ago[data-ago-minutes]'));
@@ -3187,7 +2813,7 @@ document.querySelectorAll('#perfTermToggle button').forEach(btn => {
 
 /* ---------- Info-dot tooltips on stat cards & quick actions ---------- */
 const cardTooltipEl = document.getElementById('cardTooltip');
-document.body.appendChild(cardTooltipEl); // same reason as chartTooltip: escape any transformed ancestor
+document.body.appendChild(cardTooltipEl); // re-parented to <body> so position:fixed isn't affected by a transformed ancestor card
 function showCardTooltip(html, evt){
   cardTooltipEl.innerHTML = html;
   cardTooltipEl.classList.add('show');
@@ -3223,18 +2849,6 @@ document.addEventListener('click', (e) => {
   if (!e.target.closest('.info-dot')) hideCardTooltip();
 });
 
-/* Initial paint of the performance chart: bars start flat and rise in once
-   the card scrolls into view (or immediately, if it's already on screen). */
-renderPerfChart(perfDatasets.thisTerm.chart, true);
-const chartIO = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if (entry.isIntersecting){
-      renderPerfChart(perfDatasets[currentPerfTerm].chart, true);
-      chartIO.disconnect();
-    }
-  });
-}, { threshold:0.2 });
-chartIO.observe(chartEl);
 </script>
 </body>
 </html>
