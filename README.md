@@ -429,3 +429,4 @@ tests/                        Real-DOM + real-email-delivery tests (need `npm in
 .env                          Real credentials (Supabase, Gmail, partial Twilio) — DO NOT COMMIT
 .gitignore                    Keeps .env and node_modules out of version control
 ```
+Ai tools used: Claude, chatgpt, opencode, github copilot
