@@ -1,0 +1,128 @@
+/* staff-extra.css — components unique to the staff portal.
+   Everything here uses the SAME CSS variables defined in styles.css
+   (--teal, --brick, --marigold, etc.), so it automatically follows
+   whatever color scheme styles.css defines. No color literals here. */
+
+/* ---------- Sidebar brand mark (staff uses a text logo, not an image) ---------- */
+.brand-mark{
+  width:36px; height:36px; flex:0 0 36px; border-radius:9px;
+  background:var(--marigold); display:flex; align-items:center; justify-content:center;
+  font-family:'Fraunces',serif; font-weight:700; color:var(--teal-deep); font-size:16px;
+}
+.brand-name{ font-family:'Fraunces',serif; font-size:15.5px; line-height:1.25; }
+.brand-name span{ display:block; font-family:'Inter',sans-serif; font-size:11px; color:var(--ink-faint); margin-top:2px; }
+
+/* ---------- Topbar search + profile ---------- */
+.search-pill{
+  display:flex; align-items:center; gap:9px; background:var(--surface);
+  border:1px solid var(--line); border-radius:999px; padding:10px 16px;
+  min-width:280px; transition:border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.search-pill:focus-within{ border-color:var(--teal); box-shadow:0 0 0 4px var(--teal-tint); }
+.search-pill svg{ color:var(--ink-faint); flex:0 0 auto; }
+.search-pill input{ border:none; outline:none; background:transparent; font-size:13.5px; width:100%; color:var(--ink); }
+.search-pill input::placeholder{ color:var(--ink-faint); }
+
+.profile-pill{
+  display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--line);
+  border-radius:999px; padding:6px 14px 6px 6px; transition:box-shadow .25s var(--ease), transform .25s var(--ease);
+}
+.profile-pill:hover{ box-shadow:var(--shadow-lift); transform:translateY(-2px); }
+.avatar{
+  width:38px; height:38px; border-radius:50%; background:var(--marigold-tint); border:1.5px solid var(--marigold);
+  display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; color:var(--teal-deep); font-size:13px;
+}
+.profile-text{ line-height:1.25; }
+.profile-text .pn{ font-size:13px; font-weight:600; }
+.profile-text .pr{ font-size:11px; color:var(--ink-faint); }
+
+/* ---------- Attendance log lookup ---------- */
+.attendance-log-section{ scroll-margin-top:100px; }
+.attendance-log-card{ min-height:78vh; display:flex; flex-direction:column; gap:22px; }
+.attendance-search{ max-width:440px; }
+.attendance-result{ flex:1; display:flex; flex-direction:column; }
+.attendance-empty{ margin:auto; text-align:center; color:var(--ink-faint); font-size:13.5px; max-width:38ch; line-height:1.6; }
+.attendance-student-head{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.attendance-summary{ display:flex; gap:10px; flex-wrap:wrap; margin:0 0 18px auto; }
+.attendance-summary .chip{ background:var(--teal-tint); color:var(--teal-deep); font-weight:700; font-size:12px; padding:7px 14px; border-radius:999px; white-space:nowrap; }
+.attendance-summary .chip.warn{ background:var(--brick-tint); color:var(--brick); }
+.attendance-summary .chip.late{ background:var(--marigold-tint); color:#8a5f1e; }
+.attendance-log-head-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+
+/* attendance grid: dates down the first column, subjects across the header row */
+.attendance-grid-scroll{
+  overflow:auto; max-height:520px; border:1px solid var(--line); border-radius:14px;
+}
+.attendance-grid-table{ border-collapse:separate; border-spacing:0; }
+.attendance-grid-table th{
+  background:var(--paper); text-align:center; vertical-align:top; padding:12px 10px;
+  border-bottom:2px solid var(--line); border-right:1px dashed var(--line); font-size:12.5px;
+  position:sticky; top:0; z-index:2;
+}
+.attendance-grid-table th:first-child{ text-align:left; left:0; z-index:3; }
+.attendance-grid-table th:last-child{ border-right:none; }
+.grid-subject{ font-weight:700; color:var(--ink); white-space:nowrap; }
+.grid-instructor{ font-weight:500; color:var(--ink-faint); font-size:11px; margin-top:2px; white-space:nowrap; }
+.attendance-grid-table td{ border-bottom:1px dashed var(--line); border-right:1px dashed var(--line); padding:0; }
+.attendance-grid-table td:last-child{ border-right:none; }
+.attendance-grid-table tbody tr:last-child td{ border-bottom:none; }
+.grid-date{
+  padding:14px 14px !important; font-weight:700; font-size:13px; white-space:nowrap; vertical-align:middle;
+  position:sticky; left:0; background:var(--surface); z-index:1;
+}
+.grid-cell{ text-align:center; vertical-align:middle; min-width:96px; }
+.grid-cell-inner{ padding:10px 8px; margin:5px; border-radius:10px; }
+.grid-status{ font-weight:700; font-size:12px; }
+.grid-reason{ font-size:10.5px; margin-top:3px; line-height:1.35; font-weight:500; opacity:.9; }
+.grid-cell.present .grid-cell-inner{ background:var(--teal-tint); color:var(--teal-deep); }
+.grid-cell.late .grid-cell-inner{ background:var(--marigold-tint); color:#8a5f1e; }
+.grid-cell.absent .grid-cell-inner{ background:var(--brick-tint); color:var(--brick); }
+.grid-cell.empty{ color:var(--ink-faint); font-size:12px; }
+
+.grid-cell.clickable{ cursor:pointer; position:relative; }
+.grid-cell.clickable .grid-cell-inner{ transition:filter .15s var(--ease), box-shadow .15s var(--ease); }
+.grid-cell.clickable:hover .grid-cell-inner{ filter:brightness(.96); box-shadow:inset 0 0 0 1px rgba(0,0,0,.08); }
+
+.cell-popover{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:210px; background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  box-shadow:var(--shadow-lift); padding:12px 14px; text-align:left; z-index:40;
+  animation:popIn .15s var(--ease);
+}
+@keyframes popIn{ from{ opacity:0; transform:translate(-50%,-46%); } to{ opacity:1; transform:translate(-50%,-50%); } }
+.cell-popover-title{ font-size:10.5px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.03em; margin-bottom:6px; }
+.cell-popover-status{ font-size:13px; font-weight:700; margin-bottom:5px; }
+.cell-popover.late .cell-popover-status{ color:#8a5f1e; }
+.cell-popover.absent .cell-popover-status{ color:var(--brick); }
+.cell-popover-reason{ font-size:12px; color:var(--ink-soft); line-height:1.5; font-weight:500; }
+.attendance-legend{ display:flex; gap:16px; flex-wrap:wrap; margin-top:14px; font-size:12px; color:var(--ink-soft); }
+.attendance-legend .lg-item{ display:flex; align-items:center; gap:6px; }
+.attendance-legend .lg-dot{ width:10px; height:10px; border-radius:3px; display:inline-block; }
+
+/* ---------- Ticket status dropdown (student requests table) ---------- */
+.status-select{
+  border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink);
+  font-size:12px; font-weight:600; padding:6px 8px; cursor:pointer;
+}
+
+/* ---------- Compose-notice mini form ---------- */
+.notice-compose-form{ display:grid; gap:12px; }
+.notice-compose-form input[type="text"], .notice-compose-form textarea{
+  width:100%; border:1px solid var(--line); border-radius:10px; background:var(--paper);
+  color:var(--ink); padding:10px 12px; font:inherit; font-size:13px; outline:none;
+}
+.notice-compose-form textarea{ resize:vertical; min-height:70px; }
+.notice-urgent-row{ display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-soft); }
+
+@media (max-width:900px){
+  .search-pill{ width:100%; min-width:0; }
+}
+
+/* Student Requests: shorter section with its own internal scroll, so it
+   doesn't dominate the page as the ticket count grows. */
+.requests-scroll{ max-height:420px; overflow-y:auto; }
+.requests-scroll thead th{ position:sticky; top:0; background:var(--surface); z-index:1; }
+
+/* Recent Staff Activity: show roughly 3 items, rest reachable by scrolling
+   inside the card rather than growing the whole page. */
+.activity-scroll{ max-height:330px; overflow-y:auto; }
